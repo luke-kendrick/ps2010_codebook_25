@@ -1,0 +1,34 @@
+\usepackage{booktabs}  
+\usepackage{float}     
+\let\cleardoublepage\clearpage  
+
+% Fix table of contents blank pages
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\tableofcontents}{\cleardoublepage}{\clearpage}{}{}
+\makeatother
+
+% Ensure headings do not appear alone at the bottom of a page
+\usepackage{titlesec}
+\usepackage{needspace}
+\usepackage{lmodern}  
+
+% Keep section headings with at least 5 lines of content
+\let\oldsection\section
+\renewcommand{\section}{\needspace{5\baselineskip}\oldsection}
+
+\let\oldsubsection\subsection
+\renewcommand{\subsection}{\needspace{3\baselineskip}\oldsubsection}  % Move only if less than 3 lines fit
+
+\let\oldsubsubsection\subsubsection
+\renewcommand{\subsubsection}{\needspace{2\baselineskip}\oldsubsubsection}  % Smallest headings need 2 lines
+
+% Prevents 'titlesec' errors if the package is missing
+\ifdefined\titleformat
+  % titlesec is loaded
+\else
+  \usepackage{titlesec}
+\fi
+
+\usepackage{fancyhdr}
+\pagestyle{plain}  % Removes headers, keeps page numbers at the bottom

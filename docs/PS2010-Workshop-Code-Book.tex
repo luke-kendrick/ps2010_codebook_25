@@ -1,0 +1,916 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}  
+\usepackage{float}     
+\let\cleardoublepage\clearpage  
+
+% Fix table of contents blank pages
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\tableofcontents}{\cleardoublepage}{\clearpage}{}{}
+\makeatother
+
+% Ensure headings do not appear alone at the bottom of a page
+\usepackage{titlesec}
+\usepackage{needspace}
+\usepackage{lmodern}  
+
+% Keep section headings with at least 5 lines of content
+\let\oldsection\section
+\renewcommand{\section}{\needspace{5\baselineskip}\oldsection}
+
+\let\oldsubsection\subsection
+\renewcommand{\subsection}{\needspace{3\baselineskip}\oldsubsection}  % Move only if less than 3 lines fit
+
+\let\oldsubsubsection\subsubsection
+\renewcommand{\subsubsection}{\needspace{2\baselineskip}\oldsubsubsection}  % Smallest headings need 2 lines
+
+% Prevents 'titlesec' errors if the package is missing
+\ifdefined\titleformat
+  % titlesec is loaded
+\else
+  \usepackage{titlesec}
+\fi
+
+\usepackage{fancyhdr}
+\pagestyle{plain}  % Removes headers, keeps page numbers at the bottom
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={PS2010 Workshop Code Book},
+  pdfauthor={Luke Kendrick},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{PS2010 Workshop Code Book}
+\author{Luke Kendrick}
+\date{2025-08-13}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter*{Preface}\label{preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+\begin{quote}
+This is the PS2010 Psychological Research Methods and Analysis Workshop Codebook.
+\end{quote}
+
+\section{About this Book}\label{about-this-book}
+
+This code book contains information, exercises, and code for the PS2010 workshop sessions.
+
+This is resource is a work in progress, and we're continually updating and improving it.
+
+If you spot an error or something that doesn't look quite right, please get in touch:
+
+\href{mailto:luke.kendrick@rhul.ac.uk}{\nolinkurl{luke.kendrick@rhul.ac.uk}}.
+
+\section{\texorpdfstring{\textbf{License}}{License}}\label{license}
+
+This work is licensed under Creative Commons Attribution-ShareAlike 4.0 International License \href{https://creativecommons.org/licenses/by-sa/4.0/}{(CC-BY-SA 4.0)}. You are free to share and adapt the material for non-commercial purposes, with appropriate credit and under the same license. If you adapt the material, you must distribute your contributions under the same license.
+
+\section{\texorpdfstring{\textbf{Citation}}{Citation}}\label{citation}
+
+Kendrick, L. T. (2025). PS2010 Workshop Code Book (Version 1.0). \url{https://luke-kendrick.github.io/startr/}
+
+\chapter{Workshop 1: Data Handling Skills}\label{workshop-1-data-handling-skills}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\item
+  Practice importing a .csv data file into RStudio using \texttt{read\_csv()}
+\item
+  Practice inspecting your data in RStudio.
+\item
+  Use different data wrangling functions to develop your data handling skills.
+\item
+  Check basic summary statistics.
+\end{itemize}
+
+\section{Exercise 1: Import the Data}\label{exercise-1-import-the-data}
+
+\textbf{Import the Data File \texttt{guess\_who.csv}}
+
+Before you begin, you will need the tidyverse package loaded.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{) }\CommentTok{\#install tidyverse if you do not have it.}
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\#loads tidyverse.}
+\end{Highlighting}
+\end{Shaded}
+
+Next import the data file and store it as an object called \texttt{dataset}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"guess\_who.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you see an error saying cannot find function \texttt{read\_csv()} this usually means you have not loaded (or installed) the tidyverse package.
+
+\section{Exercise 2: Inspect and Check Your Data}\label{exercise-2-inspect-and-check-your-data}
+
+\textbf{Take a look at your newly imported data file}
+
+Check the top right panel (the environment) and also use the code below to inspect your data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(dataset) }\CommentTok{\# this will open the data in a new tab.}
+\FunctionTok{names}\NormalTok{(dataset) }\CommentTok{\# this will show the variable names.}
+\end{Highlighting}
+\end{Shaded}
+
+It is really important to look at the variable names as you'll be using them in code later on.
+
+Answer Question 2.1 - 2.2 on your worksheet.
+
+\section{Exercise 3: Change a Variable Name}\label{exercise-3-change-a-variable-name}
+
+\textbf{One of the variable names is quite long. This can be annoying if we have to keep typing it out}
+
+Change the variable name \texttt{do\_you\_own\_a\_pet} to \texttt{pet}. The \texttt{rename()} function will let you rename a variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset }\OtherTok{\textless{}{-}}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{pet =}\NormalTok{ do\_you\_own\_a\_pet)}
+\end{Highlighting}
+\end{Shaded}
+
+Check it has worked:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(dataset) }\CommentTok{\# ask for the variable names again}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 4: Remove a Variable}\label{exercise-4-remove-a-variable}
+
+\textbf{We do not really care about the \texttt{age} variable for the next few exercises.}
+
+Let's remove it.
+
+The code below will create a new object (once we start removing things, it is best to keep the original data file called \texttt{dataset} in the environment)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+This code will:
+
+\begin{itemize}
+\item
+  Create a new object called \texttt{mydata}.
+\item
+  Take our original data called \texttt{dataset}
+\item
+  ``And then'' \texttt{\%\textgreater{}\%}
+\item
+  Use the select() function to remove \texttt{age} by placing a minus symbol \texttt{-} in front of it.
+\end{itemize}
+
+From now on, we will use the object called \texttt{mydata} and not the original data set.
+
+\section{Exercise 5: Filter Cases}\label{exercise-5-filter-cases}
+
+\textbf{We can select particular cases in our data set}
+
+For example, I could ask: how many people were from the city of Birmingham using the code below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(city }\SpecialCharTok{==} \StringTok{"birmingham"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Check the console (bottom left panel) for the answer.
+
+This code will:
+
+\begin{itemize}
+\item
+  Take \texttt{mydata} and then\ldots{}
+\item
+  Filter it by the \texttt{city} variable.
+\item
+  We use a double equals symbol \texttt{==} to specify an exact match.
+\item
+  I've added ``birmingham'' in speech marks. Note it is lowercase as to match the data set and then\ldots{}
+\item
+  count() the number of data points.
+\end{itemize}
+
+Adapt the code above to answer question 5.1 on the worksheet.
+
+\section{Exercise 6: Guess Who?}\label{exercise-6-guess-who}
+
+\textbf{We can filter based on multiple criteria}.
+
+The code below will show us someone who is from Brighton, has a dog, and does not drink coffee.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(city }\SpecialCharTok{==} \StringTok{"brighton"}\NormalTok{, pet }\SpecialCharTok{==} \StringTok{"dog"}\NormalTok{, coffee }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can also use less than/more than symbols to filter data, For example, this will show all people who have a art enjoyment score of less than 20:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(maths }\SpecialCharTok{\textless{}} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Use what you have learned above and adapt your code to play GUESS WHO? and complete questions 6.1-6.2 on the worksheet.
+
+\section{Exercise 7: Create a New Variable}\label{exercise-7-create-a-new-variable}
+
+\textbf{Sometimes we might want to compute new scores or variables}
+
+Add up the three enjoyment scores for \texttt{maths}, \texttt{science}, and \texttt{art} to create an overall score called \texttt{total\_score}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{total\_score =}\NormalTok{ maths }\SpecialCharTok{+}\NormalTok{ science }\SpecialCharTok{+}\NormalTok{ art)}
+\end{Highlighting}
+\end{Shaded}
+
+This code will:
+
+\begin{itemize}
+\item
+  Take \texttt{mydata} to overwrite it (ready to add the new variable) and then\ldots{}
+\item
+  Use the \texttt{mutate()} function to create a new variable named \texttt{total\_score} which should equal \texttt{=} \texttt{maths} \texttt{+} \texttt{science} \texttt{+} \texttt{art}.
+\end{itemize}
+
+View the data set and look for the new column to see it has worked.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+Now, we can look at who had the highest and lowest total enjoyment score.
+
+\texttt{slice\_min} will find the row which has the lowest score:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice\_min}\NormalTok{(total\_score)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{slice\_max} will find the row which has the highest score:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice\_max}\NormalTok{(total\_score)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer questions 7.1-7.2 on the worksheet.
+
+\section{Exercise 8: Counting and Removing Missing Data}\label{exercise-8-counting-and-removing-missing-data}
+
+\textbf{Real data sets often are missing data points}
+
+Different people have differing views on how to treat missing data points. For today, we will just identify and remove any. If you view the data, you might notice there are some blanks for \texttt{degree} as not everyone is studying for one.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{degree))}
+\end{Highlighting}
+\end{Shaded}
+
+This code will:
+
+\begin{itemize}
+\item
+  Calculate the total number using \texttt{sum()} of\ldots{}
+\item
+  Any missing data points (R calls these \texttt{is.na})
+\item
+  We can then direct to a particular column using \texttt{mydata\$degree}. This essentially means ``look in \texttt{mydata} and then the column called \texttt{degree}. We use the dollar sign \texttt{\$} to specify the column.
+\end{itemize}
+
+If we want to remove them, we can use \texttt{filter()} again!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(degree))}
+\end{Highlighting}
+\end{Shaded}
+
+Note: this will overwrite \texttt{mydata} and remove the cases.
+
+Answer question 8.1 on the worksheet.
+
+\section{Exercise 9: Summary Statistics}\label{exercise-9-summary-statistics}
+
+\textbf{We might want to know What was the average enjoyment score?}
+
+We can use this code to look across the data set as a whole:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+Look through the output in the console (bottom left panel) and answer questions 9.1-9.3 on the worksheet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Well Done. You have reached the end of the workshop. Give yourself an extra challenge and try out the optional exercise on the worksheet.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Workshop 2: Summarising and Describing Data}\label{workshop-2-summarising-and-describing-data}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\item
+  Practice importing a .csv data file into RStudio using \texttt{read\_csv()}
+\item
+  Practice inspecting your data in RStudio.
+\item
+  Calculate mean and standard deviation using the \texttt{group\_by()} and \texttt{summarise()} functions.
+\item
+  Visually inspect data using plots and describe data distributions.
+\end{itemize}
+
+\section{Exercise 1: Import the Data}\label{exercise-1-import-the-data-1}
+
+\textbf{Import the Data File:} \texttt{sleep.csv}
+
+Before you begin, you will need the tidyverse package loaded.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{) }\CommentTok{\#install tidyverse if you do not have it.}
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\#loads tidyverse.}
+\end{Highlighting}
+\end{Shaded}
+
+Next import the data file and store it as an object called \texttt{dataset}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"sleep.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you see an error saying cannot find function \texttt{read\_csv()} this usually means you have not loaded (or installed) the tidyverse package.
+
+\section{Exercise 2: Inspect and Check Your Data}\label{exercise-2-inspect-and-check-your-data-1}
+
+\textbf{Take a look at your newly imported data file}
+
+Check the top right panel (the environment) and also use the code below to inspect your data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(dataset) }\CommentTok{\# this will open the data in a new tab.}
+\FunctionTok{names}\NormalTok{(dataset) }\CommentTok{\# this will show the variable names.}
+\end{Highlighting}
+\end{Shaded}
+
+It is really important to look at the variable names as you'll be using them in code later on.
+
+\section{Exercise 3: Calculate the Total Sleep Score}\label{exercise-3-calculate-the-total-sleep-score}
+
+\textbf{Sometimes we might want to compute new scores or variables}
+
+Add up the two sleep scores \texttt{sleep\_quality} and \texttt{drowsy} scores to create an overall score called \texttt{total\_sleep}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{total\_sleep =}\NormalTok{ scale\_1 }\SpecialCharTok{+}\NormalTok{ scale\_2)}
+\end{Highlighting}
+\end{Shaded}
+
+This code will:
+
+\begin{itemize}
+\item
+  Create an object called \texttt{mydata} before using the original \texttt{dataset} and then\ldots{}
+\item
+  Use the \texttt{mutate()} function to create a new variable named \texttt{total\_sleep} which should equal \texttt{=} \texttt{scale\_1} \texttt{+} \texttt{scale\_2}.
+\end{itemize}
+
+View the data set and look for the new column to see it has worked.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer questions 3.1-3.2 on the worksheet.
+
+\section{Exercise 4: Calculate Descriptive Statistics}\label{exercise-4-calculate-descriptive-statistics}
+
+Just as shown in the lecture, use the code below to calculate the mean and standard deviation for \texttt{total\_sleep}. Remember, we want to use the total score calculated in exercise 3, and not to use the two subscales.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{  mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(}\ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{m\_sleep =} \FunctionTok{mean}\NormalTok{(}\ConstantTok{NULL}\NormalTok{),}
+            \AttributeTok{sd\_sleep =} \FunctionTok{sd}\NormalTok{(}\ConstantTok{NULL}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+You will need to change \texttt{NULL} to match your data set. Try and give this a go on your own first, but if you aren't sure look below for help.
+
+Think about:
+
+\begin{itemize}
+\item
+  What is the name of the variable you will split the data file by (e.g., what is the grouping variable/independent variable called in the data set)
+\item
+  What is the name of the score that you want to find the mean and standard deviation for (e.g., what is the dependent variable called in the data set)
+\end{itemize}
+
+👀 Click for a hint
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{  mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(energy\_drink) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{m\_sleep =} \FunctionTok{mean}\NormalTok{(total\_sleep),}
+            \AttributeTok{sd\_sleep =} \FunctionTok{sd}\NormalTok{(total\_sleep))}
+\end{Highlighting}
+\end{Shaded}
+
+If you look in the environment (top right panel) you will see a new object called \texttt{desc}. This is where your descriptive statistics are stored. I called it \texttt{desc} but you can call it anything you like. It is best to keep object names short and informative. We can now view that object using the \texttt{view()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(desc)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer questions 4.1-4.2 on the worksheet.
+
+\section{Exercise 5: Explore Data with Plots}\label{exercise-5-explore-data-with-plots}
+
+Generate a box plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ energy\_drink, }\AttributeTok{y =}\NormalTok{ total\_sleep)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Generate histograms:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ total\_sleep, }\AttributeTok{fill =}\NormalTok{ energy\_drink)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ energy\_drink)}
+\end{Highlighting}
+\end{Shaded}
+
+Generate density plots:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ total\_sleep, }\AttributeTok{fill =}\NormalTok{ energy\_drink)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ energy\_drink)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer questions 5.1-5.2 in the worksheet.
+
+\section{\texorpdfstring{Exercise 6: What Does \texttt{facet\_wrap()} do?}{Exercise 6: What Does facet\_wrap() do?}}\label{exercise-6-what-does-facet_wrap-do}
+
+Re-run the density plot code, except this time delete the final line. This will show what \texttt{facet\_wrap()} does. What do you notice about the plot now?
+
+Use this code without \texttt{facet\_wrap()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ total\_sleep, }\AttributeTok{fill =}\NormalTok{ energy\_drink)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Answer question 6.1 on the worksheet.}\label{answer-question-6.1-on-the-worksheet.}
+
+\textbf{Well Done. You have reached the end of the workshop.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{\texorpdfstring{Workshop 3: \emph{t}-Tests}{Workshop 3: t-Tests}}\label{workshop-3-t-tests}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\item
+  Practice running and interpreting a two-sample \emph{t}-test in RStudio.
+\item
+  Practice running and interpreting a paired \emph{t}-test in RStudio.
+\end{itemize}
+
+\section{Part One}\label{part-one}
+
+Part one of today's workshop will involved running a two-sample t-test, which is appropriate for an independent measures design with \textbf{two} groups.
+
+You should use the same data file from last week, as you will be aiming to answer ``What impact does energy drink consumption (if any) have on sleep quality?''
+
+\section{Exercise 1: Import the Data}\label{exercise-1-import-the-data-2}
+
+\textbf{Import the Data File:} \texttt{sleep.csv}
+
+Before you begin, you will need the tidyverse package loaded.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{) }\CommentTok{\#install if needed.}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"rstatix"}\NormalTok{)   }\CommentTok{\#install if needed.}
+\FunctionTok{library}\NormalTok{(tidyverse)            }\CommentTok{\#load package}
+\FunctionTok{library}\NormalTok{(rstatix)              }\CommentTok{\#load package}
+\end{Highlighting}
+\end{Shaded}
+
+Then import the data file. Make sure it has the \texttt{total\_sleep} score that you calculated last week.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"sleep.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 2: Inspect and Check Your Data}\label{exercise-2-inspect-and-check-your-data-2}
+
+\textbf{Take a look at your newly imported data file}
+
+Check the top right panel (the environment) and also use the code below to inspect your data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(mydata) }\CommentTok{\# this will open the data in a new tab.}
+\FunctionTok{names}\NormalTok{(mydata) }\CommentTok{\# this will show the variable names.}
+\end{Highlighting}
+\end{Shaded}
+
+It is really important to look at the variable names as you'll be using them in code later on.
+
+\section{Exercise 3: Check Assumptions}\label{exercise-3-check-assumptions}
+
+\subsection{Check Heteroscedasticity with Levene's Test}\label{check-heteroscedasticity-with-levenes-test}
+
+Use Levene's test to check for homogeneity of variance.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{leveneTest}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Change \texttt{DV} to the name of your dependent variable.
+\item
+  Change \texttt{IV} to the name of your independent (grouping) variable.
+\item
+  Change \texttt{DATA} to the name of your data.
+\end{itemize}
+
+Run the code and interpret the output:
+
+If the p-value is significant (\textless.05) then the variances differ across the two groups and the assumption has been violated, which could be an issue. If the p-value is \emph{not} significant (\textgreater.05) then the variances are roughly equal.
+
+Write up as follows:
+
+\begin{quote}
+\emph{F}(df) = XX.XX, \emph{p} = .XXX
+\end{quote}
+
+Enter the degrees of freedom in place of \texttt{df}, the \emph{F} value, and the \emph{p}-value.
+Remember use p \textless.001 if the p-value is smaller than 0.001.
+
+Here is an example where degrees of freedom is 36, \emph{F} is 3.25, and \emph{p} is .065:
+
+\begin{quote}
+\emph{F}(36) = 3.25, \emph{p} = .065
+\end{quote}
+
+\subsection{Check Normality with Shapiro-Wilk Test and Histograms}\label{check-normality-with-shapiro-wilk-test-and-histograms}
+
+We need to check normality for both groups separately. We can filter the groups:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#first create a data set that contains energy drink consumers only.}
+\NormalTok{yes }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(energy\_drink }\SpecialCharTok{==} \StringTok{"yes"}\NormalTok{)}
+
+\CommentTok{\#then run the test}
+\FunctionTok{shapiro.test}\NormalTok{(yes}\SpecialCharTok{$}\NormalTok{total\_sleep)}
+
+\CommentTok{\#then create a data set that contains non{-}consumers only.}
+\NormalTok{no }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(energy\_drink }\SpecialCharTok{==} \StringTok{"no"}\NormalTok{)}
+
+\CommentTok{\#then run the test}
+\FunctionTok{shapiro.test}\NormalTok{(no}\SpecialCharTok{$}\NormalTok{total\_sleep)}
+\end{Highlighting}
+\end{Shaded}
+
+We use a dollar sign \texttt{\$} to point R to a particular column.
+For example, when using \texttt{shapiro.test(yes\$total\_sleep)} you are saying to run the Shapiro Test on the \texttt{yes} data set column called \texttt{total\_score}
+
+Again, we want the \emph{p}-values to be not significant. A non-significant \emph{p}-value means the data are roughly normally distributed. If the \emph{p}-value is significant, this could be an issue as it indicates the data are not normally distributed.
+
+When reporting the Shapiro-Wilk test, you just need to report the test statistics (\emph{w} = XX) and the \emph{p}-value. Here is an example what it could look like:
+
+\begin{quote}
+\emph{W} = 0.98, \emph{p} = .875
+\end{quote}
+
+You can also visually check the data with a quick histogram:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(yes}\SpecialCharTok{$}\NormalTok{total\_sleep)}
+\FunctionTok{hist}\NormalTok{(no}\SpecialCharTok{$}\NormalTok{total\_sleep)}
+\end{Highlighting}
+\end{Shaded}
+
+Check the plots panel, and use the blue arrow to switch between the two plots.
+
+\subsection{A Note on Assumptions}\label{a-note-on-assumptions}
+
+Assessing assumptions can be a little tricky. For a two-sample \emph{t}-test we will run something called Welch's \emph{t}-test which can cope with violations of assumptions.
+
+You might ask what is the point of checking them. One reason is because it is helpful to report the characteristics (heteroscedasticity and normality) of your data.
+
+\section{\texorpdfstring{Exercise 4: Run the Two-Sample \emph{t}-Test and ask for Cohen's d}{Exercise 4: Run the Two-Sample t-Test and ask for Cohen's d}}\label{exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d}
+
+Run the \emph{t}-test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(total\_sleep }\SpecialCharTok{\textasciitilde{}}\NormalTok{ energy\_drink, }\AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{var.equal =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Ask for Cohen's d:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cohens\_d}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mydata, total\_sleep }\SpecialCharTok{\textasciitilde{}}\NormalTok{ energy\_drink, }\AttributeTok{var.equal =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Interpret your \emph{t}-test.
+- Is it significant?
+- What is the effect size?
+- If significant, how do the groups differ?
+
+For the final question, you will need descriptive statistics. Hint: use the code from last week to find the mean and standard deviation for the two groups.
+
+\section{Part Two}\label{part-two}
+
+Part two of today's workshop will involved running a paired t-test, which is appropriate for a repeated measures design with \textbf{two} conditions.
+
+Here we have a sleep intervention study. A group of participants completed the sleep quality questionnaire \textbf{before} completing an intervention which aimed to improve sleep. Afterwards, participants completed the sleep questionnaire again.
+
+The independent variable is time point: before, after.
+The dependent variable is sleep quality score (0-100).
+
+\section{Exercise 5: Import the Data}\label{exercise-5-import-the-data}
+
+We will calle the object \texttt{int} (short for intervention data)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{int }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"sleep\_intervention.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 6: Inspect and Check Your Data}\label{exercise-6-inspect-and-check-your-data}
+
+\textbf{Take a look at your newly imported data file}
+
+Check the top right panel (the environment) and also use the code below to inspect your data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(int) }\CommentTok{\# this will open the data in a new tab.}
+\FunctionTok{names}\NormalTok{(int) }\CommentTok{\# this will show the variable names.}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 7: Check Assumptions}\label{exercise-7-check-assumptions}
+
+This time we only have to check normality, as heteroscedasiticty does not apply to repeated measures designs. However, we need to ensure the difference score is normally distributed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diff }\OtherTok{\textless{}{-}}\NormalTok{ int}\SpecialCharTok{$}\NormalTok{post }\SpecialCharTok{{-}}\NormalTok{ int}\SpecialCharTok{$}\NormalTok{pre  }\CommentTok{\#this will calculate the difference score.}
+\FunctionTok{shapiro.test}\NormalTok{(diff)          }\CommentTok{\# run the Shapiro test}
+\FunctionTok{hist}\NormalTok{(diff)                  }\CommentTok{\# also visually inspect data}
+\end{Highlighting}
+\end{Shaded}
+
+You should interpret and report this in the same way as earlier (exercise 3).
+
+\section{\texorpdfstring{Exercise 8: Run the Paired \emph{t}-Test and ask for Cohen's d}{Exercise 8: Run the Paired t-Test and ask for Cohen's d}}\label{exercise-8-run-the-paired-t-test-and-ask-for-cohens-d}
+
+A paired t-test is a little different compared to the two-sample t-test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(NULL1, NULL2, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  Change \texttt{NULL1} to the column with the first condition.
+\item
+  Change \texttt{NULL2} to the column with the second condition.
+\end{itemize}
+
+(Hint: you will need to use the dollar sign \texttt{\$} to specify which column)
+
+👀 Click for a hint
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(int}\SpecialCharTok{$}\NormalTok{before, int}\SpecialCharTok{$}\NormalTok{after, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Annoyingly, we need to use a different package for Cohen's d for a paired t-test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.package}\NormalTok{(}\StringTok{"2effectsize"}\NormalTok{) }\CommentTok{\#install if needed.}
+\FunctionTok{library}\NormalTok{(effectsize)}
+\NormalTok{effectsize}\SpecialCharTok{::}\FunctionTok{cohens\_d}\NormalTok{(int}\SpecialCharTok{$}\NormalTok{before, int}\SpecialCharTok{$}\NormalTok{after, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 9: Calculate Descriptive Statistics}\label{exercise-9-calculate-descriptive-statistics}
+
+The good news is that for a paired sample t-test, we can use the \texttt{summary()} function to obtain the descriptive statistics.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(int)}
+\end{Highlighting}
+\end{Shaded}
+
+Make note of the mean and standard deviation for the \texttt{before} and \texttt{after} conditions.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Well Done. You have reached the end of the workshop.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}

@@ -1,0 +1,16 @@
+bookdown::bs4_book:
+  css: style.css  # Ensures custom styling is applied
+  theme:
+    primary: "#096B72"  # Custom theme color for Bookdown HTML output
+
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex  # Custom LaTeX header for PDF output
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes  # Keeps intermediate .tex files (optional)
+  toc: true
+  toc_title: "Table of Contents"
+  number_sections: true
+
+bookdown::epub_book: default
