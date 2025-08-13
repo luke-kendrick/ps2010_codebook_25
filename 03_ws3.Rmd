@@ -66,9 +66,7 @@ Write up as follows:
 
 > *F*(df) = XX.XX, *p* = .XXX
 
-
-Enter the degrees of freedom in place of `df`, the *F* value, and the *p*-value.
-Remember use p <.001 if the p-value is smaller than 0.001.
+Enter the degrees of freedom in place of `df`, the *F* value, and the *p*-value. Remember use p \<.001 if the p-value is smaller than 0.001.
 
 Here is an example where degrees of freedom is 36, *F* is 3.25, and *p* is .065:
 
@@ -78,7 +76,7 @@ Here is an example where degrees of freedom is 36, *F* is 3.25, and *p* is .065:
 
 We need to check normality for both groups separately. We can filter the groups:
 
-```r
+``` r
 #first create a data set that contains energy drink consumers only.
 yes <- mydata %>%
   filter(energy_drink == "yes")
@@ -93,8 +91,8 @@ no <- mydata %>%
 #then run the test
 shapiro.test(no$total_sleep)
 ```
-We use a dollar sign `$` to point R to a particular column.
-For example, when using `shapiro.test(yes$total_sleep)` you are saying to run the Shapiro Test on the `yes` data set column called `total_score`
+
+We use a dollar sign `$` to point R to a particular column. For example, when using `shapiro.test(yes$total_sleep)` you are saying to run the Shapiro Test on the `yes` data set column called `total_score`
 
 Again, we want the *p*-values to be not significant. A non-significant *p*-value means the data are roughly normally distributed. If the *p*-value is significant, this could be an issue as it indicates the data are not normally distributed.
 
@@ -104,36 +102,34 @@ When reporting the Shapiro-Wilk test, you just need to report the test statistic
 
 You can also visually check the data with a quick histogram:
 
-```r
+``` r
 hist(yes$total_sleep)
 hist(no$total_sleep)
 ```
+
 Check the plots panel, and use the blue arrow to switch between the two plots.
 
 ### A Note on Assumptions
 
 Assessing assumptions can be a little tricky. For a two-sample *t*-test we will run something called Welch's *t*-test which can cope with violations of assumptions.
 
-You might ask what is the point of checking them. One reason is because it is helpful to report the characteristics (heteroscedasticity and normality) of your data. 
+You might ask what is the point of checking them. One reason is because it is helpful to report the characteristics (heteroscedasticity and normality) of your data.
 
 ## Exercise 4: Run the Two-Sample *t*-Test and ask for Cohen's d
 
 Run the *t*-test.
 
-```r
+``` r
 t.test(total_sleep ~ energy_drink, data = mydata, var.equal = FALSE, alternative = "two.sided")
 ```
 
 Ask for Cohen's d:
 
-```r
+``` r
 cohens_d(data = mydata, total_sleep ~ energy_drink, var.equal = FALSE)
 ```
 
-Interpret your *t*-test.
-- Is it significant?
-- What is the effect size?
-- If significant, how do the groups differ?
+Interpret your *t*-test. - Is it significant? - What is the effect size? - If significant, how do the groups differ?
 
 For the final question, you will need descriptive statistics. Hint: use the code from last week to find the mean and standard deviation for the two groups.
 
@@ -143,8 +139,7 @@ Part two of today's workshop will involved running a paired t-test, which is app
 
 Here we have a sleep intervention study. A group of participants completed the sleep quality questionnaire **before** completing an intervention which aimed to improve sleep. Afterwards, participants completed the sleep questionnaire again.
 
-The independent variable is time point: before, after.
-The dependent variable is sleep quality score (0-100).
+The independent variable is time point: before, after. The dependent variable is sleep quality score (0-100).
 
 ## Exercise 5: Import the Data
 
@@ -169,7 +164,7 @@ names(int) # this will show the variable names.
 
 This time we only have to check normality, as heteroscedasiticty does not apply to repeated measures designs. However, we need to ensure the difference score is normally distributed.
 
-```r
+``` r
 diff <- int$post - int$pre  #this will calculate the difference score.
 shapiro.test(diff)          # run the Shapiro test
 hist(diff)                  # also visually inspect data
@@ -181,15 +176,17 @@ You should interpret and report this in the same way as earlier (exercise 3).
 
 A paired t-test is a little different compared to the two-sample t-test.
 
-```r
+``` r
 t.test(NULL1, NULL2, paired = TRUE)
 ```
 
-- Change `NULL1` to the column with the first condition.
+-   Change `NULL1` to the column with the first condition.
 
-- Change `NULL2` to the column with the second condition.
+-   Change `NULL2` to the column with the second condition.
 
 (Hint: you will need to use the dollar sign `$` to specify which column)
+
+-----
 
 <details>
 
@@ -201,11 +198,12 @@ t.test(int$before, int$after, paired = TRUE)
 
 </details>
 
+------------------------------------------------------------------------
 
 Annoyingly, we need to use a different package for Cohen's d for a paired t-test.
 
-```r
-install.package("2effectsize") #install if needed.
+``` r
+install.package("effectsize") #install if needed.
 library(effectsize)
 effectsize::cohens_d(int$before, int$after, paired = TRUE)
 ```
@@ -214,7 +212,7 @@ effectsize::cohens_d(int$before, int$after, paired = TRUE)
 
 The good news is that for a paired sample t-test, we can use the `summary()` function to obtain the descriptive statistics.
 
-```r
+``` r
 summary(int)
 ```
 

@@ -85,6 +85,8 @@ Think about:
 
 -   What is the name of the score that you want to find the mean and standard deviation for (e.g., what is the dependent variable called in the data set)
 
+-----
+
 <details>
 
 <summary>👀 Click for a hint</summary>
@@ -97,6 +99,8 @@ desc <-  mydata %>%
 ```
 
 </details>
+
+-----
 
 If you look in the environment (top right panel) you will see a new object called `desc`. This is where your descriptive statistics are stored. I called it `desc` but you can call it anything you like. It is best to keep object names short and informative. We can now view that object using the `view()` function.
 

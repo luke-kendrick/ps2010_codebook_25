@@ -566,6 +566,8 @@ Think about:
   What is the name of the score that you want to find the mean and standard deviation for (e.g., what is the dependent variable called in the data set)
 \end{itemize}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 👀 Click for a hint
 
 \begin{Shaded}
@@ -576,6 +578,8 @@ Think about:
             \AttributeTok{sd\_sleep =} \FunctionTok{sd}\NormalTok{(total\_sleep))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 If you look in the environment (top right panel) you will see a new object called \texttt{desc}. This is where your descriptive statistics are stored. I called it \texttt{desc} but you can call it anything you like. It is best to keep object names short and informative. We can now view that object using the \texttt{view()} function.
 
@@ -726,8 +730,7 @@ Write up as follows:
 \emph{F}(df) = XX.XX, \emph{p} = .XXX
 \end{quote}
 
-Enter the degrees of freedom in place of \texttt{df}, the \emph{F} value, and the \emph{p}-value.
-Remember use p \textless.001 if the p-value is smaller than 0.001.
+Enter the degrees of freedom in place of \texttt{df}, the \emph{F} value, and the \emph{p}-value. Remember use p \textless.001 if the p-value is smaller than 0.001.
 
 Here is an example where degrees of freedom is 36, \emph{F} is 3.25, and \emph{p} is .065:
 
@@ -757,8 +760,7 @@ We need to check normality for both groups separately. We can filter the groups:
 \end{Highlighting}
 \end{Shaded}
 
-We use a dollar sign \texttt{\$} to point R to a particular column.
-For example, when using \texttt{shapiro.test(yes\$total\_sleep)} you are saying to run the Shapiro Test on the \texttt{yes} data set column called \texttt{total\_score}
+We use a dollar sign \texttt{\$} to point R to a particular column. For example, when using \texttt{shapiro.test(yes\$total\_sleep)} you are saying to run the Shapiro Test on the \texttt{yes} data set column called \texttt{total\_score}
 
 Again, we want the \emph{p}-values to be not significant. A non-significant \emph{p}-value means the data are roughly normally distributed. If the \emph{p}-value is significant, this could be an issue as it indicates the data are not normally distributed.
 
@@ -803,10 +805,7 @@ Ask for Cohen's d:
 \end{Highlighting}
 \end{Shaded}
 
-Interpret your \emph{t}-test.
-- Is it significant?
-- What is the effect size?
-- If significant, how do the groups differ?
+Interpret your \emph{t}-test. - Is it significant? - What is the effect size? - If significant, how do the groups differ?
 
 For the final question, you will need descriptive statistics. Hint: use the code from last week to find the mean and standard deviation for the two groups.
 
@@ -816,8 +815,7 @@ Part two of today's workshop will involved running a paired t-test, which is app
 
 Here we have a sleep intervention study. A group of participants completed the sleep quality questionnaire \textbf{before} completing an intervention which aimed to improve sleep. Afterwards, participants completed the sleep questionnaire again.
 
-The independent variable is time point: before, after.
-The dependent variable is sleep quality score (0-100).
+The independent variable is time point: before, after. The dependent variable is sleep quality score (0-100).
 
 \section{Exercise 5: Import the Data}\label{exercise-5-import-the-data}
 
@@ -875,6 +873,8 @@ A paired t-test is a little different compared to the two-sample t-test.
 
 (Hint: you will need to use the dollar sign \texttt{\$} to specify which column)
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 👀 Click for a hint
 
 \begin{Shaded}
@@ -883,11 +883,13 @@ A paired t-test is a little different compared to the two-sample t-test.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 Annoyingly, we need to use a different package for Cohen's d for a paired t-test.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.package}\NormalTok{(}\StringTok{"2effectsize"}\NormalTok{) }\CommentTok{\#install if needed.}
+\FunctionTok{install.package}\NormalTok{(}\StringTok{"effectsize"}\NormalTok{) }\CommentTok{\#install if needed.}
 \FunctionTok{library}\NormalTok{(effectsize)}
 \NormalTok{effectsize}\SpecialCharTok{::}\FunctionTok{cohens\_d}\NormalTok{(int}\SpecialCharTok{$}\NormalTok{before, int}\SpecialCharTok{$}\NormalTok{after, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}

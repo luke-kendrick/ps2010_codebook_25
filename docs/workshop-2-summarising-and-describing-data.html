@@ -125,6 +125,7 @@
 <li><p>What is the name of the variable you will split the data file by (e.g., what is the grouping variable/independent variable called in the data set)</p></li>
 <li><p>What is the name of the score that you want to find the mean and standard deviation for (e.g., what is the dependent variable called in the data set)</p></li>
 </ul>
+<hr>
 <details><summary>
 👀 Click for a hint
 </summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -132,7 +133,8 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">energy_drink</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>m_sleep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">total_sleep</span><span class="op">)</span>,</span>
 <span>            sd_sleep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">total_sleep</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p>If you look in the environment (top right panel) you will see a new object called <code>desc</code>. This is where your descriptive statistics are stored. I called it <code>desc</code> but you can call it anything you like. It is best to keep object names short and informative. We can now view that object using the <code><a href="https://tibble.tidyverse.org/reference/view.html">view()</a></code> function.</p>
+</details><hr>
+<p>If you look in the environment (top right panel) you will see a new object called <code>desc</code>. This is where your descriptive statistics are stored. I called it <code>desc</code> but you can call it anything you like. It is best to keep object names short and informative. We can now view that object using the <code><a href="https://tibble.tidyverse.org/reference/view.html">view()</a></code> function.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">desc</span><span class="op">)</span></span></code></pre></div>
 <p>Answer questions 4.1-4.2 on the worksheet.</p>
