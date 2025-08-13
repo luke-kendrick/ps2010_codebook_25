@@ -216,8 +216,52 @@ summary(mydata)
 
 Look through the output in the console (bottom left panel) and answer questions 9.1-9.3 on the worksheet.
 
+## Exercise 10: Fixing Luke's Broken Code
+
+Help!! My code below just is not working. I need your help to get it working.
+
+Fix the code below to work out how many coffees were drunk by the person from canterbury and is studying medicine. Try running the code first and then work out why it doesn't work!
+
+``` r
+mydata %>%
+  filter(city = "canterberry", degree == medicine)
+```
+
+Fix the code below to work out the name of the person who is from London, has a hamster, and did not drink coffee. Try running the code first and then work out why it doesn't work!
+
+``` r
+mydata =
+  filter(city == "London", pet == "hamsta", coffee >1)
+```
+
+Answer questions 10.1-10.2 on the worksheet.
+
+If you get stuck, use the hints below.
+
 ------------------------------------------------------------------------
 
-**Well Done. You have reached the end of the workshop. Give yourself an extra challenge and try out the optional exercise on the worksheet.**
+<details>
+
+<summary>👀 Click for a hint</summary>
+
+-   Check for spelling errors: there are two of them.
+
+-   Make sure to use double equals when specifying a label `==`.
+
+-   Use quote marks when necessary. Some are missing.
+
+-   Code is case sensitive. There is a capital letter where there shouldn't be one.
+
+-   Use symbols correctly. We want to use the pipe %\>% before we filter.
+
+-   Use symbols correctly. More than `>` is not the same as `<`.
+
+</details>
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+**Well Done. You have reached the end of the workshop.**
 
 ------------------------------------------------------------------------

@@ -217,8 +217,35 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div>
 <p>Look through the output in the console (bottom left panel) and answer questions 9.1-9.3 on the worksheet.</p>
+</div>
+<div id="exercise-10-fixing-lukes-broken-code" class="section level2" number="1.10">
+<h2>
+<span class="header-section-number">1.10</span> Exercise 10: Fixing Luke’s Broken Code<a class="anchor" aria-label="anchor" href="#exercise-10-fixing-lukes-broken-code"><i class="fas fa-link"></i></a>
+</h2>
+<p>Help!! My code below just is not working. I need your help to get it working.</p>
+<p>Fix the code below to work out how many coffees were drunk by the person from canterbury and is studying medicine. Try running the code first and then work out why it doesn’t work!</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"canterberry"</span>, <span class="va">degree</span> <span class="op">==</span> <span class="va">medicine</span><span class="op">)</span></span></code></pre></div>
+<p>Fix the code below to work out the name of the person who is from London, has a hamster, and did not drink coffee. Try running the code first and then work out why it doesn’t work!</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">=</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">city</span> <span class="op">==</span> <span class="st">"London"</span>, <span class="va">pet</span> <span class="op">==</span> <span class="st">"hamsta"</span>, <span class="va">coffee</span> <span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<p>Answer questions 10.1-10.2 on the worksheet.</p>
+<p>If you get stuck, use the hints below.</p>
 <hr>
-<p><strong>Well Done. You have reached the end of the workshop. Give yourself an extra challenge and try out the optional exercise on the worksheet.</strong></p>
+<details><summary>
+👀 Click for a hint
+</summary><ul>
+<li><p>Check for spelling errors: there are two of them.</p></li>
+<li><p>Make sure to use double equals when specifying a label <code>==</code>.</p></li>
+<li><p>Use quote marks when necessary. Some are missing.</p></li>
+<li><p>Code is case sensitive. There is a capital letter where there shouldn’t be one.</p></li>
+<li><p>Use symbols correctly. We want to use the pipe %&gt;% before we filter.</p></li>
+<li><p>Use symbols correctly. More than <code>&gt;</code> is not the same as <code>&lt;</code>.</p></li>
+</ul></details><hr>
+<hr>
+<p><strong>Well Done. You have reached the end of the workshop.</strong></p>
 <hr>
 </div>
 </div>
@@ -238,6 +265,7 @@
 <li><a class="nav-link" href="#exercise-7-create-a-new-variable"><span class="header-section-number">1.7</span> Exercise 7: Create a New Variable</a></li>
 <li><a class="nav-link" href="#exercise-8-counting-and-removing-missing-data"><span class="header-section-number">1.8</span> Exercise 8: Counting and Removing Missing Data</a></li>
 <li><a class="nav-link" href="#exercise-9-summary-statistics"><span class="header-section-number">1.9</span> Exercise 9: Summary Statistics</a></li>
+<li><a class="nav-link" href="#exercise-10-fixing-lukes-broken-code"><span class="header-section-number">1.10</span> Exercise 10: Fixing Luke’s Broken Code</a></li>
 </ul>
 
       <div class="book-extra">

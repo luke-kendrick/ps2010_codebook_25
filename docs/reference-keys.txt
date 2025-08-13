@@ -1,4 +1,4 @@
-about-this-book
+about-this-code-book
 license
 citation
 workshop-1-data-handling-skills
@@ -11,6 +11,7 @@ exercise-6-guess-who
 exercise-7-create-a-new-variable
 exercise-8-counting-and-removing-missing-data
 exercise-9-summary-statistics
+exercise-10-fixing-lukes-broken-code
 workshop-2-summarising-and-describing-data
 exercise-1-import-the-data-1
 exercise-2-inspect-and-check-your-data-1
@@ -18,7 +19,7 @@ exercise-3-calculate-the-total-sleep-score
 exercise-4-calculate-descriptive-statistics
 exercise-5-explore-data-with-plots
 exercise-6-what-does-facet_wrap-do
-answer-question-6.1-on-the-worksheet.
+exercise-7-save-your-amended-data-file
 workshop-3-t-tests
 part-one
 exercise-1-import-the-data-2

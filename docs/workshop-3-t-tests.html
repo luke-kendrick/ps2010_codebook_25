@@ -69,6 +69,7 @@
 </h2>
 <p>Part one of today’s workshop will involved running a two-sample t-test, which is appropriate for an independent measures design with <strong>two</strong> groups.</p>
 <p>You should use the same data file from last week, as you will be aiming to answer “What impact does energy drink consumption (if any) have on sleep quality?”</p>
+<p>You must have completed the week 2 workshop before starting this one.</p>
 </div>
 <div id="exercise-1-import-the-data-2" class="section level2" number="3.2">
 <h2>
@@ -76,13 +77,15 @@
 </h2>
 <p><strong>Import the Data File:</strong> <code>sleep.csv</code></p>
 <p>Before you begin, you will need the tidyverse package loaded.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span> <span class="co">#install if needed.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rstatix"</span><span class="op">)</span>   <span class="co">#install if needed.</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>            <span class="co">#load package</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span>              <span class="co">#load package</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span>       <span class="co">#install if needed.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>            <span class="co">#load package.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span>              <span class="co">#load package.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span>                  <span class="co">#load package.</span></span></code></pre></div>
 <p>Then import the data file. Make sure it has the <code>total_sleep</code> score that you calculated last week.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"sleep.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="exercise-2-inspect-and-check-your-data-2" class="section level2" number="3.3">
@@ -91,7 +94,7 @@
 </h2>
 <p><strong>Take a look at your newly imported data file</strong></p>
 <p>Check the top right panel (the environment) and also use the code below to inspect your data set.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="co"># this will open the data in a new tab.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="co"># this will show the variable names.</span></span></code></pre></div>
 <p>It is really important to look at the variable names as you’ll be using them in code later on.</p>
@@ -105,8 +108,8 @@
 <span class="header-section-number">3.4.1</span> Check Heteroscedasticity with Levene’s Test<a class="anchor" aria-label="anchor" href="#check-heteroscedasticity-with-levenes-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>Use Levene’s test to check for homogeneity of variance.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">leveneTest</span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>Change <code>DV</code> to the name of your dependent variable.</li>
 <li>Change <code>IV</code> to the name of your independent (grouping) variable.</li>
@@ -129,7 +132,7 @@
 <span class="header-section-number">3.4.2</span> Check Normality with Shapiro-Wilk Test and Histograms<a class="anchor" aria-label="anchor" href="#check-normality-with-shapiro-wilk-test-and-histograms"><i class="fas fa-link"></i></a>
 </h3>
 <p>We need to check normality for both groups separately. We can filter the groups:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#first create a data set that contains energy drink consumers only.</span></span>
 <span><span class="va">yes</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">energy_drink</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">)</span></span>
@@ -150,7 +153,7 @@
 <p><em>W</em> = 0.98, <em>p</em> = .875</p>
 </blockquote>
 <p>You can also visually check the data with a quick histogram:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">yes</span><span class="op">$</span><span class="va">total_sleep</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">no</span><span class="op">$</span><span class="va">total_sleep</span><span class="op">)</span></span></code></pre></div>
 <p>Check the plots panel, and use the blue arrow to switch between the two plots.</p>
@@ -168,10 +171,10 @@
 <span class="header-section-number">3.5</span> Exercise 4: Run the Two-Sample <em>t</em>-Test and ask for Cohen’s d<a class="anchor" aria-label="anchor" href="#exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d"><i class="fas fa-link"></i></a>
 </h2>
 <p>Run the <em>t</em>-test.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">total_sleep</span> <span class="op">~</span> <span class="va">energy_drink</span>, data <span class="op">=</span> <span class="va">mydata</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <p>Ask for Cohen’s d:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mydata</span>, <span class="va">total_sleep</span> <span class="op">~</span> <span class="va">energy_drink</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Interpret your <em>t</em>-test. - Is it significant? - What is the effect size? - If significant, how do the groups differ?</p>
 <p>For the final question, you will need descriptive statistics. Hint: use the code from last week to find the mean and standard deviation for the two groups.</p>
@@ -189,7 +192,7 @@
 <span class="header-section-number">3.7</span> Exercise 5: Import the Data<a class="anchor" aria-label="anchor" href="#exercise-5-import-the-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will calle the object <code>int</code> (short for intervention data)</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"sleep_intervention.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="exercise-6-inspect-and-check-your-data" class="section level2" number="3.8">
@@ -198,7 +201,7 @@
 </h2>
 <p><strong>Take a look at your newly imported data file</strong></p>
 <p>Check the top right panel (the environment) and also use the code below to inspect your data set.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">int</span><span class="op">)</span> <span class="co"># this will open the data in a new tab.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">int</span><span class="op">)</span> <span class="co"># this will show the variable names.</span></span></code></pre></div>
 </div>
@@ -207,10 +210,10 @@
 <span class="header-section-number">3.9</span> Exercise 7: Check Assumptions<a class="anchor" aria-label="anchor" href="#exercise-7-check-assumptions"><i class="fas fa-link"></i></a>
 </h2>
 <p>This time we only have to check normality, as heteroscedasiticty does not apply to repeated measures designs. However, we need to ensure the difference score is normally distributed.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">diff</span> <span class="op">&lt;-</span> <span class="va">int</span><span class="op">$</span><span class="va">post</span> <span class="op">-</span> <span class="va">int</span><span class="op">$</span><span class="va">pre</span>  <span class="co">#this will calculate the difference score.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>          <span class="co"># run the Shapiro test</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>                  <span class="co"># also visually inspect data</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">diff</span> <span class="op">&lt;-</span> <span class="va">int</span><span class="op">$</span><span class="va">after</span> <span class="op">-</span> <span class="va">int</span><span class="op">$</span><span class="va">before</span>  <span class="co">#this will calculate the difference score.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>              <span class="co"># run the Shapiro test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>                      <span class="co"># also visually inspect data</span></span></code></pre></div>
 <p>You should interpret and report this in the same way as earlier (exercise 3).</p>
 </div>
 <div id="exercise-8-run-the-paired-t-test-and-ask-for-cohens-d" class="section level2" number="3.10">
@@ -218,7 +221,7 @@
 <span class="header-section-number">3.10</span> Exercise 8: Run the Paired <em>t</em>-Test and ask for Cohen’s d<a class="anchor" aria-label="anchor" href="#exercise-8-run-the-paired-t-test-and-ask-for-cohens-d"><i class="fas fa-link"></i></a>
 </h2>
 <p>A paired t-test is a little different compared to the two-sample t-test.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">NULL1</span>, <span class="va">NULL2</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li><p>Change <code>NULL1</code> to the column with the first condition.</p></li>
@@ -228,12 +231,12 @@
 <hr>
 <details><summary>
 👀 Click for a hint
-</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">int</span><span class="op">$</span><span class="va">before</span>, <span class="va">int</span><span class="op">$</span><span class="va">after</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </details><hr>
 <p>Annoyingly, we need to use a different package for Cohen’s d for a paired t-test.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">install.package</span><span class="op">(</span><span class="st">"effectsize"</span><span class="op">)</span> <span class="co">#install if needed.</span></span>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"effectsize"</span><span class="op">)</span> <span class="co">#install if needed.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span></span>
 <span><span class="fu">effectsize</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">int</span><span class="op">$</span><span class="va">before</span>, <span class="va">int</span><span class="op">$</span><span class="va">after</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -241,9 +244,28 @@
 <h2>
 <span class="header-section-number">3.11</span> Exercise 9: Calculate Descriptive Statistics<a class="anchor" aria-label="anchor" href="#exercise-9-calculate-descriptive-statistics"><i class="fas fa-link"></i></a>
 </h2>
-<p>The good news is that for a paired sample t-test, we can use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to obtain the descriptive statistics.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">int</span><span class="op">)</span></span></code></pre></div>
+<p>The final thing to do is to convert the data from wide format to long format. Often with repeated measures when asking for descriptive statistics or plots, we need the data in long format.</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">longd</span> <span class="op">&lt;-</span> <span class="va">int</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">score</span>, <span class="va">before</span><span class="op">:</span><span class="va">after</span><span class="op">)</span></span></code></pre></div>
+<p>Code explanation:</p>
+<ul>
+<li><p>Create a new object called <code>longd</code> where we will store the long data.</p></li>
+<li><p>Base it on the original data set called <code>int</code> and then <code>%&gt;%</code></p></li>
+<li><p><code><a href="https://tidyr.tidyverse.org/reference/gather.html">gather()</a></code></p></li>
+<li><p>The first argument is the name of your independent variable. I have called it <code>time</code> The second argument is the name of your dependent variable. I have called it <code>sleep</code>.</p></li>
+<li><p><code>before:after</code> will then take all and any columns from <code>before</code> through to <code>after</code> and re-arrange them into long data format.</p></li>
+</ul>
+<p>Once you have created the new long data set called <code>long</code> we can use it to calculate descriptive statistics. But first check it to see the difference.</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">longd</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">longd</span><span class="op">)</span></span></code></pre></div>
+<p>Now adapt the code below to ask for the mean and standard deviation.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="workshop-3-t-tests.html#cb48-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span> longd <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="workshop-3-t-tests.html#cb48-2" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="workshop-3-t-tests.html#cb48-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_sleep =</span> <span class="fu">mean</span>(<span class="cn">NULL</span>)</span>
+<span id="cb48-4"><a href="workshop-3-t-tests.html#cb48-4" tabindex="-1"></a>            <span class="at">sd_sleep =</span> <span class="fu">sd</span>(<span class="cn">NULL</span>))</span></code></pre></div>
+<p>Change <code>NULL1</code> to the name of the independent variable in the <code>long</code> data file, and <code>NULL2</code> to the dependent variable. Use <code>names(long)</code> if you need a reminder.</p>
 <p>Make note of the mean and standard deviation for the <code>before</code> and <code>after</code> conditions.</p>
 <hr>
 <p><strong>Well Done. You have reached the end of the workshop.</strong></p>

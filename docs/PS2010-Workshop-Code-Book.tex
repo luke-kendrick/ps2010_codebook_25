@@ -168,7 +168,7 @@
 This is the PS2010 Psychological Research Methods and Analysis Workshop Codebook.
 \end{quote}
 
-\section{About this Book}\label{about-this-book}
+\section{About this Code Book}\label{about-this-code-book}
 
 This code book contains information, exercises, and code for the PS2010 workshop sessions.
 
@@ -184,7 +184,7 @@ This work is licensed under Creative Commons Attribution-ShareAlike 4.0 Internat
 
 \section{\texorpdfstring{\textbf{Citation}}{Citation}}\label{citation}
 
-Kendrick, L. T. (2025). PS2010 Workshop Code Book (Version 1.0). \url{https://luke-kendrick.github.io/startr/}
+Kendrick, L. T. (2025). PS2010 Workshop Code Book (Version 1.0). \url{https://luke-kendrick.github.io/r_codebook}
 
 \chapter{Workshop 1: Data Handling Skills}\label{workshop-1-data-handling-skills}
 
@@ -451,9 +451,56 @@ We can use this code to look across the data set as a whole:
 
 Look through the output in the console (bottom left panel) and answer questions 9.1-9.3 on the worksheet.
 
+\section{Exercise 10: Fixing Luke's Broken Code}\label{exercise-10-fixing-lukes-broken-code}
+
+Help!! My code below just is not working. I need your help to get it working.
+
+Fix the code below to work out how many coffees were drunk by the person from canterbury and is studying medicine. Try running the code first and then work out why it doesn't work!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\AttributeTok{city =} \StringTok{"canterberry"}\NormalTok{, degree }\SpecialCharTok{==}\NormalTok{ medicine)}
+\end{Highlighting}
+\end{Shaded}
+
+Fix the code below to work out the name of the person who is from London, has a hamster, and did not drink coffee. Try running the code first and then work out why it doesn't work!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{=}
+  \FunctionTok{filter}\NormalTok{(city }\SpecialCharTok{==} \StringTok{"London"}\NormalTok{, pet }\SpecialCharTok{==} \StringTok{"hamsta"}\NormalTok{, coffee }\SpecialCharTok{\textgreater{}}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer questions 10.1-10.2 on the worksheet.
+
+If you get stuck, use the hints below.
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\textbf{Well Done. You have reached the end of the workshop. Give yourself an extra challenge and try out the optional exercise on the worksheet.}
+👀 Click for a hint
+
+\begin{itemize}
+\item
+  Check for spelling errors: there are two of them.
+\item
+  Make sure to use double equals when specifying a label \texttt{==}.
+\item
+  Use quote marks when necessary. Some are missing.
+\item
+  Code is case sensitive. There is a capital letter where there shouldn't be one.
+\item
+  Use symbols correctly. We want to use the pipe \%\textgreater\% before we filter.
+\item
+  Use symbols correctly. More than \texttt{\textgreater{}} is not the same as \texttt{\textless{}}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Well Done. You have reached the end of the workshop.}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -637,7 +684,21 @@ Use this code without \texttt{facet\_wrap()}.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Answer question 6.1 on the worksheet.}\label{answer-question-6.1-on-the-worksheet.}
+Answer question 6.1 on the worksheet.
+
+\section{Exercise 7: Save Your Amended Data File}\label{exercise-7-save-your-amended-data-file}
+
+**Your current data file has the \texttt{total\_sleep} column in. You need to save it so you can use it for next week's workshop. You can overwrite you original .csv file using this code, which will save today's data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.csv}\NormalTok{(mydata, }\StringTok{"sleep.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This means the \texttt{sleep.csv} on your computer will be updated and ready to use next week! Make sure you know where it has saved on your computer before you leave.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Well Done. You have reached the end of the workshop.}
 
@@ -660,6 +721,8 @@ Part one of today's workshop will involved running a two-sample t-test, which is
 
 You should use the same data file from last week, as you will be aiming to answer ``What impact does energy drink consumption (if any) have on sleep quality?''
 
+You must have completed the week 2 workshop before starting this one.
+
 \section{Exercise 1: Import the Data}\label{exercise-1-import-the-data-2}
 
 \textbf{Import the Data File:} \texttt{sleep.csv}
@@ -670,8 +733,10 @@ Before you begin, you will need the tidyverse package loaded.
 \begin{Highlighting}[]
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{) }\CommentTok{\#install if needed.}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"rstatix"}\NormalTok{)   }\CommentTok{\#install if needed.}
-\FunctionTok{library}\NormalTok{(tidyverse)            }\CommentTok{\#load package}
-\FunctionTok{library}\NormalTok{(rstatix)              }\CommentTok{\#load package}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"car"}\NormalTok{)       }\CommentTok{\#install if needed.}
+\FunctionTok{library}\NormalTok{(tidyverse)            }\CommentTok{\#load package.}
+\FunctionTok{library}\NormalTok{(rstatix)              }\CommentTok{\#load package.}
+\FunctionTok{library}\NormalTok{(car)                  }\CommentTok{\#load package.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -846,9 +911,9 @@ This time we only have to check normality, as heteroscedasiticty does not apply 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{diff }\OtherTok{\textless{}{-}}\NormalTok{ int}\SpecialCharTok{$}\NormalTok{post }\SpecialCharTok{{-}}\NormalTok{ int}\SpecialCharTok{$}\NormalTok{pre  }\CommentTok{\#this will calculate the difference score.}
-\FunctionTok{shapiro.test}\NormalTok{(diff)          }\CommentTok{\# run the Shapiro test}
-\FunctionTok{hist}\NormalTok{(diff)                  }\CommentTok{\# also visually inspect data}
+\NormalTok{diff }\OtherTok{\textless{}{-}}\NormalTok{ int}\SpecialCharTok{$}\NormalTok{after }\SpecialCharTok{{-}}\NormalTok{ int}\SpecialCharTok{$}\NormalTok{before  }\CommentTok{\#this will calculate the difference score.}
+\FunctionTok{shapiro.test}\NormalTok{(diff)              }\CommentTok{\# run the Shapiro test}
+\FunctionTok{hist}\NormalTok{(diff)                      }\CommentTok{\# also visually inspect data}
 \end{Highlighting}
 \end{Shaded}
 
@@ -889,7 +954,7 @@ Annoyingly, we need to use a different package for Cohen's d for a paired t-test
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.package}\NormalTok{(}\StringTok{"effectsize"}\NormalTok{) }\CommentTok{\#install if needed.}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"effectsize"}\NormalTok{) }\CommentTok{\#install if needed.}
 \FunctionTok{library}\NormalTok{(effectsize)}
 \NormalTok{effectsize}\SpecialCharTok{::}\FunctionTok{cohens\_d}\NormalTok{(int}\SpecialCharTok{$}\NormalTok{before, int}\SpecialCharTok{$}\NormalTok{after, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
@@ -897,13 +962,51 @@ Annoyingly, we need to use a different package for Cohen's d for a paired t-test
 
 \section{Exercise 9: Calculate Descriptive Statistics}\label{exercise-9-calculate-descriptive-statistics}
 
-The good news is that for a paired sample t-test, we can use the \texttt{summary()} function to obtain the descriptive statistics.
+The final thing to do is to convert the data from wide format to long format. Often with repeated measures when asking for descriptive statistics or plots, we need the data in long format.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(int)}
+\NormalTok{longd }\OtherTok{\textless{}{-}}\NormalTok{ int }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(time, score, before}\SpecialCharTok{:}\NormalTok{after)}
 \end{Highlighting}
 \end{Shaded}
+
+Code explanation:
+
+\begin{itemize}
+\item
+  Create a new object called \texttt{longd} where we will store the long data.
+\item
+  Base it on the original data set called \texttt{int} and then \texttt{\%\textgreater{}\%}
+\item
+  \texttt{gather()}
+\item
+  The first argument is the name of your independent variable. I have called it \texttt{time} The second argument is the name of your dependent variable. I have called it \texttt{sleep}.
+\item
+  \texttt{before:after} will then take all and any columns from \texttt{before} through to \texttt{after} and re-arrange them into long data format.
+\end{itemize}
+
+Once you have created the new long data set called \texttt{long} we can use it to calculate descriptive statistics. But first check it to see the difference.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(longd)}
+\FunctionTok{names}\NormalTok{(longd)}
+\end{Highlighting}
+\end{Shaded}
+
+Now adapt the code below to ask for the mean and standard deviation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{ longd }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(}\ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_sleep =} \FunctionTok{mean}\NormalTok{(}\ConstantTok{NULL}\NormalTok{)}
+            \AttributeTok{sd\_sleep =} \FunctionTok{sd}\NormalTok{(}\ConstantTok{NULL}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Change \texttt{NULL1} to the name of the independent variable in the \texttt{long} data file, and \texttt{NULL2} to the dependent variable. Use \texttt{names(long)} if you need a reminder.
 
 Make note of the mean and standard deviation for the \texttt{before} and \texttt{after} conditions.
 

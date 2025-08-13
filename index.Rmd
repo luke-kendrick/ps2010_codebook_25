@@ -15,7 +15,7 @@ csl: "chicago-fullnote-bibliography.csl"
 
 > This is the PS2010 Psychological Research Methods and Analysis Workshop Codebook.
 
-## About this Book
+## About this Code Book
 
 This code book contains information, exercises, and code for the PS2010 workshop sessions.
 
@@ -31,4 +31,4 @@ This work is licensed under Creative Commons Attribution-ShareAlike 4.0 Internat
 
 ## **Citation**
 
-Kendrick, L. T. (2025). PS2010 Workshop Code Book (Version 1.0). <https://luke-kendrick.github.io/startr/>
+Kendrick, L. T. (2025). PS2010 Workshop Code Book (Version 1.0). <https://luke-kendrick.github.io/r_codebook>

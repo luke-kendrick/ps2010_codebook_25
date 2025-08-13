@@ -71,11 +71,11 @@
 </h2>
 <p><strong>Import the Data File:</strong> <code>sleep.csv</code></p>
 <p>Before you begin, you will need the tidyverse package loaded.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span> <span class="co">#install tidyverse if you do not have it.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co">#loads tidyverse.</span></span></code></pre></div>
 <p>Next import the data file and store it as an object called <code>dataset</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"sleep.csv"</span><span class="op">)</span></span></code></pre></div>
 <p>If you see an error saying cannot find function <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> this usually means you have not loaded (or installed) the tidyverse package.</p>
 </div>
@@ -85,7 +85,7 @@
 </h2>
 <p><strong>Take a look at your newly imported data file</strong></p>
 <p>Check the top right panel (the environment) and also use the code below to inspect your data set.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span> <span class="co"># this will open the data in a new tab.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span> <span class="co"># this will show the variable names.</span></span></code></pre></div>
 <p>It is really important to look at the variable names as you’ll be using them in code later on.</p>
@@ -96,7 +96,7 @@
 </h2>
 <p><strong>Sometimes we might want to compute new scores or variables</strong></p>
 <p>Add up the two sleep scores <code>sleep_quality</code> and <code>drowsy</code> scores to create an overall score called <code>total_sleep</code>.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>total_sleep <span class="op">=</span> <span class="va">scale_1</span> <span class="op">+</span> <span class="va">scale_2</span><span class="op">)</span></span></code></pre></div>
 <p>This code will:</p>
@@ -105,7 +105,7 @@
 <li><p>Use the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function to create a new variable named <code>total_sleep</code> which should equal <code>=</code> <code>scale_1</code> <code>+</code> <code>scale_2</code>.</p></li>
 </ul>
 <p>View the data set and look for the new column to see it has worked.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div>
 <p>Answer questions 3.1-3.2 on the worksheet.</p>
 </div>
@@ -114,7 +114,7 @@
 <span class="header-section-number">2.4</span> Exercise 4: Calculate Descriptive Statistics<a class="anchor" aria-label="anchor" href="#exercise-4-calculate-descriptive-statistics"><i class="fas fa-link"></i></a>
 </h2>
 <p>Just as shown in the lecture, use the code below to calculate the mean and standard deviation for <code>total_sleep</code>. Remember, we want to use the total score calculated in exercise 3, and not to use the two subscales.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span>  <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>m_sleep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>,</span>
@@ -128,14 +128,14 @@
 <hr>
 <details><summary>
 👀 Click for a hint
-</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span>  <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">energy_drink</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>m_sleep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">total_sleep</span><span class="op">)</span>,</span>
 <span>            sd_sleep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">total_sleep</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </details><hr>
 <p>If you look in the environment (top right panel) you will see a new object called <code>desc</code>. This is where your descriptive statistics are stored. I called it <code>desc</code> but you can call it anything you like. It is best to keep object names short and informative. We can now view that object using the <code><a href="https://tibble.tidyverse.org/reference/view.html">view()</a></code> function.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">desc</span><span class="op">)</span></span></code></pre></div>
 <p>Answer questions 4.1-4.2 on the worksheet.</p>
 </div>
@@ -144,16 +144,16 @@
 <span class="header-section-number">2.5</span> Exercise 5: Explore Data with Plots<a class="anchor" aria-label="anchor" href="#exercise-5-explore-data-with-plots"><i class="fas fa-link"></i></a>
 </h2>
 <p>Generate a box plot:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">energy_drink</span>, y <span class="op">=</span> <span class="va">total_sleep</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span></span></code></pre></div>
 <p>Generate histograms:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_sleep</span>, fill <span class="op">=</span> <span class="va">energy_drink</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">energy_drink</span><span class="op">)</span></span></code></pre></div>
 <p>Generate density plots:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_sleep</span>, fill <span class="op">=</span> <span class="va">energy_drink</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">energy_drink</span><span class="op">)</span></span></code></pre></div>
@@ -165,14 +165,20 @@
 </h2>
 <p>Re-run the density plot code, except this time delete the final line. This will show what <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> does. What do you notice about the plot now?</p>
 <p>Use this code without <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code>.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_sleep</span>, fill <span class="op">=</span> <span class="va">energy_drink</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span></code></pre></div>
+<p>Answer question 6.1 on the worksheet.</p>
 </div>
-<div id="answer-question-6.1-on-the-worksheet." class="section level2" number="2.7">
+<div id="exercise-7-save-your-amended-data-file" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">2.7</span> Answer question 6.1 on the worksheet.<a class="anchor" aria-label="anchor" href="#answer-question-6.1-on-the-worksheet."><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> Exercise 7: Save Your Amended Data File<a class="anchor" aria-label="anchor" href="#exercise-7-save-your-amended-data-file"><i class="fas fa-link"></i></a>
 </h2>
+<p>**Your current data file has the <code>total_sleep</code> column in. You need to save it so you can use it for next week’s workshop. You can overwrite you original .csv file using this code, which will save today’s data set.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"sleep.csv"</span><span class="op">)</span></span></code></pre></div>
+<p>This means the <code>sleep.csv</code> on your computer will be updated and ready to use next week! Make sure you know where it has saved on your computer before you leave.</p>
+<hr>
 <p><strong>Well Done. You have reached the end of the workshop.</strong></p>
 <hr>
 </div>
@@ -190,7 +196,7 @@
 <li><a class="nav-link" href="#exercise-4-calculate-descriptive-statistics"><span class="header-section-number">2.4</span> Exercise 4: Calculate Descriptive Statistics</a></li>
 <li><a class="nav-link" href="#exercise-5-explore-data-with-plots"><span class="header-section-number">2.5</span> Exercise 5: Explore Data with Plots</a></li>
 <li><a class="nav-link" href="#exercise-6-what-does-facet_wrap-do"><span class="header-section-number">2.6</span> Exercise 6: What Does facet_wrap() do?</a></li>
-<li><a class="nav-link" href="#answer-question-6.1-on-the-worksheet."><span class="header-section-number">2.7</span> Answer question 6.1 on the worksheet.</a></li>
+<li><a class="nav-link" href="#exercise-7-save-your-amended-data-file"><span class="header-section-number">2.7</span> Exercise 7: Save Your Amended Data File</a></li>
 </ul>
 
       <div class="book-extra">
