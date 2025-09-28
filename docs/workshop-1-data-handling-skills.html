@@ -1,249 +1,117 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Workshop 1: Data Handling Skills | PS2010 Workshop Code Book</title>
-  <meta name="description" content="Chapter 1 Workshop 1: Data Handling Skills | PS2010 Workshop Code Book" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 1 Workshop 1: Data Handling Skills | PS2010 Workshop Code Book" />
-  <meta property="og:type" content="book" />
-  
-  
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Workshop 1: Data Handling Skills | PS2010 Workshop Code Book" />
-  
-  
-  
-
-<meta name="author" content="Luke Kendrick" />
-
-
-<meta name="date" content="2025-09-28" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="index.html"/>
-<link rel="next" href="workshop-2-summarising-and-describing-data.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Workshop 1: Data Handling Skills | PS2010 Workshop Code Book</title>
+<meta name="author" content="Luke Kendrick">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Workshop 1: Data Handling Skills | PS2010 Workshop Code Book">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Workshop 1: Data Handling Skills | PS2010 Workshop Code Book">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Aims: Practice importing a .csv data file into RStudio using read_csv() Practice inspecting your data in RStudio. Use different data wrangling functions to develop your data handling skills. Check...">
+<meta property="og:description" content="Aims: Practice importing a .csv data file into RStudio using read_csv() Practice inspecting your data in RStudio. Use different data wrangling functions to develop your data handling skills. Check...">
+<meta name="twitter:description" content="Aims: Practice importing a .csv data file into RStudio using read_csv() Practice inspecting your data in RStudio. Use different data wrangling functions to develop your data handling skills. Check...">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-code-book"><i class="fa fa-check"></i><b>0.1</b> About this Code Book</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.2</b> <strong>License</strong></a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#citation"><i class="fa fa-check"></i><b>0.3</b> <strong>Citation</strong></a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html"><i class="fa fa-check"></i><b>1</b> Workshop 1: Data Handling Skills</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-1-import-the-data"><i class="fa fa-check"></i><b>1.1</b> Exercise 1: Import the Data</a></li>
-<li class="chapter" data-level="1.2" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-2-inspect-and-check-your-data"><i class="fa fa-check"></i><b>1.2</b> Exercise 2: Inspect and Check Your Data</a></li>
-<li class="chapter" data-level="1.3" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-3-change-a-variable-name"><i class="fa fa-check"></i><b>1.3</b> Exercise 3: Change a Variable Name</a></li>
-<li class="chapter" data-level="1.4" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-4-remove-a-variable"><i class="fa fa-check"></i><b>1.4</b> Exercise 4: Remove a Variable</a></li>
-<li class="chapter" data-level="1.5" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-5-filter-cases"><i class="fa fa-check"></i><b>1.5</b> Exercise 5: Filter Cases</a></li>
-<li class="chapter" data-level="1.6" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-6-guess-who"><i class="fa fa-check"></i><b>1.6</b> Exercise 6: Guess Who?</a></li>
-<li class="chapter" data-level="1.7" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-7-create-a-new-variable"><i class="fa fa-check"></i><b>1.7</b> Exercise 7: Create a New Variable</a></li>
-<li class="chapter" data-level="1.8" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-8-counting-and-removing-missing-data"><i class="fa fa-check"></i><b>1.8</b> Exercise 8: Counting and Removing Missing Data</a></li>
-<li class="chapter" data-level="1.9" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-9-summary-statistics"><i class="fa fa-check"></i><b>1.9</b> Exercise 9: Summary Statistics</a></li>
-<li class="chapter" data-level="1.10" data-path="workshop-1-data-handling-skills.html"><a href="workshop-1-data-handling-skills.html#exercise-10-fixing-lukes-broken-code"><i class="fa fa-check"></i><b>1.10</b> Exercise 10: Fixing Luke’s Broken Code</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="workshop-2-summarising-and-describing-data.html"><a href="workshop-2-summarising-and-describing-data.html"><i class="fa fa-check"></i><b>2</b> Workshop 2: Summarising and Describing Data</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="workshop-2-summarising-and-describing-data.html"><a href="workshop-2-summarising-and-describing-data.html#exercise-1-import-the-data-1"><i class="fa fa-check"></i><b>2.1</b> Exercise 1: Import the Data</a></li>
-<li class="chapter" data-level="2.2" data-path="workshop-2-summarising-and-describing-data.html"><a href="workshop-2-summarising-and-describing-data.html#exercise-2-inspect-and-check-your-data-1"><i class="fa fa-check"></i><b>2.2</b> Exercise 2: Inspect and Check Your Data</a></li>
-<li class="chapter" data-level="2.3" data-path="workshop-2-summarising-and-describing-data.html"><a href="workshop-2-summarising-and-describing-data.html#exercise-3-calculate-the-total-sleep-score"><i class="fa fa-check"></i><b>2.3</b> Exercise 3: Calculate the Total Sleep Score</a></li>
-<li class="chapter" data-level="2.4" data-path="workshop-2-summarising-and-describing-data.html"><a href="workshop-2-summarising-and-describing-data.html#exercise-4-calculate-descriptive-statistics"><i class="fa fa-check"></i><b>2.4</b> Exercise 4: Calculate Descriptive Statistics</a></li>
-<li class="chapter" data-level="2.5" data-path="workshop-2-summarising-and-describing-data.html"><a href="workshop-2-summarising-and-describing-data.html#exercise-5-explore-data-with-plots"><i class="fa fa-check"></i><b>2.5</b> Exercise 5: Explore Data with Plots</a></li>
-<li class="chapter" data-level="2.6" data-path="workshop-2-summarising-and-describing-data.html"><a href="workshop-2-summarising-and-describing-data.html#exercise-6-what-does-facet_wrap-do"><i class="fa fa-check"></i><b>2.6</b> Exercise 6: What Does <code>facet_wrap()</code> do?</a></li>
-<li class="chapter" data-level="2.7" data-path="workshop-2-summarising-and-describing-data.html"><a href="workshop-2-summarising-and-describing-data.html#exercise-7-save-your-amended-data-file"><i class="fa fa-check"></i><b>2.7</b> Exercise 7: Save Your Amended Data File</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html"><i class="fa fa-check"></i><b>3</b> Workshop 3: <em>t</em>-tests</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-1-import-the-data-2"><i class="fa fa-check"></i><b>3.1</b> Exercise 1: Import the Data</a></li>
-<li class="chapter" data-level="3.2" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-2-inspect-and-check-your-data-2"><i class="fa fa-check"></i><b>3.2</b> Exercise 2: Inspect and Check Your Data</a></li>
-<li class="chapter" data-level="3.3" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-3-check-assumptions"><i class="fa fa-check"></i><b>3.3</b> Exercise 3: Check Assumptions</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#check-heteroscedasticity-with-levenes-test"><i class="fa fa-check"></i><b>3.3.1</b> Check Heteroscedasticity with Levene’s Test</a></li>
-<li class="chapter" data-level="3.3.2" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#check-normality-with-shapiro-wilk-test-and-histograms"><i class="fa fa-check"></i><b>3.3.2</b> Check Normality with Shapiro-Wilk Test and Histograms</a></li>
-<li class="chapter" data-level="3.3.3" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#a-note-on-assumptions"><i class="fa fa-check"></i><b>3.3.3</b> A Note on Assumptions</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d"><i class="fa fa-check"></i><b>3.4</b> Exercise 4: Run the Two-Sample <em>t</em>-Test and ask for Cohen’s d</a></li>
-<li class="chapter" data-level="3.5" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-5-import-the-data"><i class="fa fa-check"></i><b>3.5</b> Exercise 5: Import the Data</a></li>
-<li class="chapter" data-level="3.6" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-6-inspect-and-check-your-data"><i class="fa fa-check"></i><b>3.6</b> Exercise 6: Inspect and Check Your Data</a></li>
-<li class="chapter" data-level="3.7" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-7-check-assumptions"><i class="fa fa-check"></i><b>3.7</b> Exercise 7: Check Assumptions</a></li>
-<li class="chapter" data-level="3.8" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-8-run-the-paired-t-test-and-ask-for-cohens-d"><i class="fa fa-check"></i><b>3.8</b> Exercise 8: Run the Paired <em>t</em>-Test and ask for Cohen’s d</a></li>
-<li class="chapter" data-level="3.9" data-path="workshop-3-t-tests.html"><a href="workshop-3-t-tests.html#exercise-9-calculate-descriptive-statistics"><i class="fa fa-check"></i><b>3.9</b> Exercise 9: Calculate Descriptive Statistics</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="workshop-4-one-way-anova-independent-measures.html"><a href="workshop-4-one-way-anova-independent-measures.html"><i class="fa fa-check"></i><b>4</b> Workshop 4: One-Way ANOVA (Independent Measures)</a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">PS2010 Workshop Code Book</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PS2010 Workshop Code Book</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="active" href="workshop-1-data-handling-skills.html"><span class="header-section-number">1</span> Workshop 1: Data Handling Skills</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="workshop-1-data-handling-skills" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Workshop 1: Data Handling Skills<a href="workshop-1-data-handling-skills.html#workshop-1-data-handling-skills" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workshop-1-data-handling-skills" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Workshop 1: Data Handling Skills<a class="anchor" aria-label="anchor" href="#workshop-1-data-handling-skills"><i class="fas fa-link"></i></a>
+</h1>
 <p><strong>Aims:</strong></p>
 <ul>
-<li><p>Practice importing a .csv data file into RStudio using <code>read_csv()</code></p></li>
+<li><p>Practice importing a .csv data file into RStudio using <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code></p></li>
 <li><p>Practice inspecting your data in RStudio.</p></li>
 <li><p>Use different data wrangling functions to develop your data handling skills.</p></li>
 <li><p>Check basic summary statistics.</p></li>
 </ul>
-<div id="exercise-1-import-the-data" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Exercise 1: Import the Data<a href="workshop-1-data-handling-skills.html#exercise-1-import-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-1-import-the-data" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Exercise 1: Import the Data<a class="anchor" aria-label="anchor" href="#exercise-1-import-the-data"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Import the Data File <code>guess_who.csv</code></strong></p>
 <p>Before you begin, you will need the tidyverse package loaded.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="workshop-1-data-handling-skills.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>) <span class="co">#install tidyverse if you do not have it.</span></span>
-<span id="cb1-2"><a href="workshop-1-data-handling-skills.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#loads tidyverse.</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span> <span class="co">#install tidyverse if you do not have it.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co">#loads tidyverse.</span></span></code></pre></div>
 <p>Next import the data file and store it as an object called <code>dataset</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="workshop-1-data-handling-skills.html#cb2-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;guess_who.csv&quot;</span>)</span></code></pre></div>
-<p>If you see an error saying cannot find function <code>read_csv()</code> this usually means you have not loaded (or installed) the tidyverse package.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"guess_who.csv"</span><span class="op">)</span></span></code></pre></div>
+<p>If you see an error saying cannot find function <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> this usually means you have not loaded (or installed) the tidyverse package.</p>
 </div>
-<div id="exercise-2-inspect-and-check-your-data" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Exercise 2: Inspect and Check Your Data<a href="workshop-1-data-handling-skills.html#exercise-2-inspect-and-check-your-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-2-inspect-and-check-your-data" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Exercise 2: Inspect and Check Your Data<a class="anchor" aria-label="anchor" href="#exercise-2-inspect-and-check-your-data"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Take a look at your newly imported data file</strong></p>
 <p>Check the top right panel (the environment) and also use the code below to inspect your data set.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="workshop-1-data-handling-skills.html#cb3-1" tabindex="-1"></a><span class="fu">view</span>(dataset) <span class="co"># this will open the data in a new tab.</span></span>
-<span id="cb3-2"><a href="workshop-1-data-handling-skills.html#cb3-2" tabindex="-1"></a><span class="fu">names</span>(dataset) <span class="co"># this will show the variable names.</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span> <span class="co"># this will open the data in a new tab.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span> <span class="co"># this will show the variable names.</span></span></code></pre></div>
 <p>It is really important to look at the variable names as you’ll be using them in code later on.</p>
 <p>Answer Question 2.1 - 2.2 on your worksheet.</p>
 </div>
-<div id="exercise-3-change-a-variable-name" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Exercise 3: Change a Variable Name<a href="workshop-1-data-handling-skills.html#exercise-3-change-a-variable-name" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-3-change-a-variable-name" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Exercise 3: Change a Variable Name<a class="anchor" aria-label="anchor" href="#exercise-3-change-a-variable-name"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>One of the variable names is quite long. This can be annoying if we have to keep typing it out</strong></p>
-<p>Change the variable name <code>do_you_own_a_pet</code> to <code>pet</code>. The <code>rename()</code> function will let you rename a variable.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="workshop-1-data-handling-skills.html#cb4-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="workshop-1-data-handling-skills.html#cb4-2" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">pet =</span> do_you_own_a_pet)</span></code></pre></div>
+<p>Change the variable name <code>do_you_own_a_pet</code> to <code>pet</code>. The <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> function will let you rename a variable.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>pet <span class="op">=</span> <span class="va">do_you_own_a_pet</span><span class="op">)</span></span></code></pre></div>
 <p>Check it has worked:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="workshop-1-data-handling-skills.html#cb5-1" tabindex="-1"></a><span class="fu">names</span>(dataset) <span class="co"># ask for the variable names again</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span> <span class="co"># ask for the variable names again</span></span></code></pre></div>
 </div>
-<div id="exercise-4-remove-a-variable" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Exercise 4: Remove a Variable<a href="workshop-1-data-handling-skills.html#exercise-4-remove-a-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-4-remove-a-variable" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Exercise 4: Remove a Variable<a class="anchor" aria-label="anchor" href="#exercise-4-remove-a-variable"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>We do not really care about the <code>age</code> variable for the next few exercises.</strong></p>
 <p>Let’s remove it.</p>
 <p>The code below will create a new object (once we start removing things, it is best to keep the original data file called <code>dataset</code> in the environment)</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="workshop-1-data-handling-skills.html#cb6-1" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="workshop-1-data-handling-skills.html#cb6-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">age</span><span class="op">)</span></span></code></pre></div>
 <p>This code will:</p>
 <ul>
 <li><p>Create a new object called <code>mydata</code>.</p></li>
@@ -253,13 +121,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>From now on, we will use the object called <code>mydata</code> and not the original data set.</p>
 </div>
-<div id="exercise-5-filter-cases" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Exercise 5: Filter Cases<a href="workshop-1-data-handling-skills.html#exercise-5-filter-cases" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-5-filter-cases" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Exercise 5: Filter Cases<a class="anchor" aria-label="anchor" href="#exercise-5-filter-cases"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>We can select particular cases in our data set</strong></p>
 <p>For example, I could ask: how many people were from the city of Birmingham using the code below:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="workshop-1-data-handling-skills.html#cb7-1" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="workshop-1-data-handling-skills.html#cb7-2" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">==</span> <span class="st">&quot;birmingham&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="workshop-1-data-handling-skills.html#cb7-3" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">city</span> <span class="op">==</span> <span class="st">"birmingham"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Check the console (bottom left panel) for the answer.</p>
 <p>This code will:</p>
 <ul>
@@ -271,155 +142,152 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Adapt the code above to answer question 5.1 on the worksheet.</p>
 </div>
-<div id="exercise-6-guess-who" class="section level2 hasAnchor" number="1.6">
-<h2><span class="header-section-number">1.6</span> Exercise 6: Guess Who?<a href="workshop-1-data-handling-skills.html#exercise-6-guess-who" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-6-guess-who" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Exercise 6: Guess Who?<a class="anchor" aria-label="anchor" href="#exercise-6-guess-who"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>We can filter based on multiple criteria</strong>.</p>
 <p>The code below will show us someone who is from Brighton, has a dog, and does not drink coffee.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="workshop-1-data-handling-skills.html#cb8-1" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="workshop-1-data-handling-skills.html#cb8-2" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">==</span> <span class="st">&quot;brighton&quot;</span>, pet <span class="sc">==</span> <span class="st">&quot;dog&quot;</span>, coffee <span class="sc">==</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">city</span> <span class="op">==</span> <span class="st">"brighton"</span>, <span class="va">pet</span> <span class="op">==</span> <span class="st">"dog"</span>, <span class="va">coffee</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>We can also use less than/more than symbols to filter data, For example, this will show all people who have a art enjoyment score of less than 20:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="workshop-1-data-handling-skills.html#cb9-1" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="workshop-1-data-handling-skills.html#cb9-2" tabindex="-1"></a>  <span class="fu">filter</span>(maths <span class="sc">&lt;</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">maths</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p>Use what you have learned above and adapt your code to play GUESS WHO? and complete questions 6.1-6.2 on the worksheet.</p>
 </div>
-<div id="exercise-7-create-a-new-variable" class="section level2 hasAnchor" number="1.7">
-<h2><span class="header-section-number">1.7</span> Exercise 7: Create a New Variable<a href="workshop-1-data-handling-skills.html#exercise-7-create-a-new-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-7-create-a-new-variable" class="section level2" number="1.7">
+<h2>
+<span class="header-section-number">1.7</span> Exercise 7: Create a New Variable<a class="anchor" aria-label="anchor" href="#exercise-7-create-a-new-variable"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Sometimes we might want to compute new scores or variables</strong></p>
 <p>Add up the three enjoyment scores for <code>maths</code>, <code>science</code>, and <code>art</code> to create an overall score called <code>total_score</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="workshop-1-data-handling-skills.html#cb10-1" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> mydata <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="workshop-1-data-handling-skills.html#cb10-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_score =</span> maths <span class="sc">+</span> science <span class="sc">+</span> art)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>total_score <span class="op">=</span> <span class="va">maths</span> <span class="op">+</span> <span class="va">science</span> <span class="op">+</span> <span class="va">art</span><span class="op">)</span></span></code></pre></div>
 <p>This code will:</p>
 <ul>
 <li><p>Take <code>mydata</code> to overwrite it (ready to add the new variable) and then…</p></li>
-<li><p>Use the <code>mutate()</code> function to create a new variable named <code>total_score</code> which should equal <code>=</code> <code>maths</code> <code>+</code> <code>science</code> <code>+</code> <code>art</code>.</p></li>
+<li><p>Use the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function to create a new variable named <code>total_score</code> which should equal <code>=</code> <code>maths</code> <code>+</code> <code>science</code> <code>+</code> <code>art</code>.</p></li>
 </ul>
 <p>View the data set and look for the new column to see it has worked.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="workshop-1-data-handling-skills.html#cb11-1" tabindex="-1"></a><span class="fu">view</span>(mydata)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div>
 <p>Now, we can look at who had the highest and lowest total enjoyment score.</p>
 <p><code>slice_min</code> will find the row which has the lowest score:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="workshop-1-data-handling-skills.html#cb12-1" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="workshop-1-data-handling-skills.html#cb12-2" tabindex="-1"></a>  <span class="fu">slice_min</span>(total_score)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span><span class="va">total_score</span><span class="op">)</span></span></code></pre></div>
 <p><code>slice_max</code> will find the row which has the highest score:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="workshop-1-data-handling-skills.html#cb13-1" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="workshop-1-data-handling-skills.html#cb13-2" tabindex="-1"></a>  <span class="fu">slice_max</span>(total_score)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">total_score</span><span class="op">)</span></span></code></pre></div>
 <p>Answer questions 7.1-7.2 on the worksheet.</p>
 </div>
-<div id="exercise-8-counting-and-removing-missing-data" class="section level2 hasAnchor" number="1.8">
-<h2><span class="header-section-number">1.8</span> Exercise 8: Counting and Removing Missing Data<a href="workshop-1-data-handling-skills.html#exercise-8-counting-and-removing-missing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-8-counting-and-removing-missing-data" class="section level2" number="1.8">
+<h2>
+<span class="header-section-number">1.8</span> Exercise 8: Counting and Removing Missing Data<a class="anchor" aria-label="anchor" href="#exercise-8-counting-and-removing-missing-data"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Real data sets often are missing data points</strong></p>
 <p>Different people have differing views on how to treat missing data points. For today, we will just identify and remove any. If you view the data, you might notice there are some blanks for <code>degree</code> as not everyone is studying for one.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="workshop-1-data-handling-skills.html#cb14-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(mydata<span class="sc">$</span>degree))</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">degree</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>This code will:</p>
 <ul>
-<li><p>Calculate the total number using <code>sum()</code> of…</p></li>
+<li><p>Calculate the total number using <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> of…</p></li>
 <li><p>Any missing data points (R calls these <code>is.na</code>)</p></li>
 <li><p>We can then direct to a particular column using <code>mydata$degree</code>. This essentially means “look in <code>mydata</code> and then the column called <code>degree</code>. We use the dollar sign <code>$</code> to specify the column.</p></li>
 </ul>
-<p>If we want to remove them, we can use <code>filter()</code> again!</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="workshop-1-data-handling-skills.html#cb15-1" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> mydata <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="workshop-1-data-handling-skills.html#cb15-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(degree))</span></code></pre></div>
+<p>If we want to remove them, we can use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> again!</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">degree</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Note: this will overwrite <code>mydata</code> and remove the cases.</p>
 <p>Answer question 8.1 on the worksheet.</p>
 </div>
-<div id="exercise-9-summary-statistics" class="section level2 hasAnchor" number="1.9">
-<h2><span class="header-section-number">1.9</span> Exercise 9: Summary Statistics<a href="workshop-1-data-handling-skills.html#exercise-9-summary-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-9-summary-statistics" class="section level2" number="1.9">
+<h2>
+<span class="header-section-number">1.9</span> Exercise 9: Summary Statistics<a class="anchor" aria-label="anchor" href="#exercise-9-summary-statistics"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>We might want to know What was the average enjoyment score?</strong></p>
 <p>We can use this code to look across the data set as a whole:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="workshop-1-data-handling-skills.html#cb16-1" tabindex="-1"></a><span class="fu">summary</span>(mydata)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div>
 <p>Look through the output in the console (bottom left panel) and answer questions 9.1-9.3 on the worksheet.</p>
 </div>
-<div id="exercise-10-fixing-lukes-broken-code" class="section level2 hasAnchor" number="1.10">
-<h2><span class="header-section-number">1.10</span> Exercise 10: Fixing Luke’s Broken Code<a href="workshop-1-data-handling-skills.html#exercise-10-fixing-lukes-broken-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise-10-fixing-lukes-broken-code" class="section level2" number="1.10">
+<h2>
+<span class="header-section-number">1.10</span> Exercise 10: Fixing Luke’s Broken Code<a class="anchor" aria-label="anchor" href="#exercise-10-fixing-lukes-broken-code"><i class="fas fa-link"></i></a>
+</h2>
 <p>Help!! My code below is not working. I need your help to fix it…</p>
 <p>Fix the code below to work out how many coffees were drunk by the person from canterbury and is studying medicine. Try running the code first and then work out why it doesn’t work!</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="workshop-1-data-handling-skills.html#cb17-1" tabindex="-1"></a>mydata <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="workshop-1-data-handling-skills.html#cb17-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="at">city =</span> <span class="st">&quot;canterburY&quot;</span>, degree <span class="sc">==</span> medicine)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"canterburY"</span>, <span class="va">degree</span> <span class="op">==</span> <span class="va">medicine</span><span class="op">)</span></span></code></pre></div>
 <p>Fix the code below to work out the name of the person who is from London, has a hamster, studies psychology, and did not drink coffee. Try running the code first and then work out why it doesn’t work!</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="workshop-1-data-handling-skills.html#cb18-1" tabindex="-1"></a>mydata <span class="ot">=</span></span>
-<span id="cb18-2"><a href="workshop-1-data-handling-skills.html#cb18-2" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">==</span> <span class="st">&quot;London&quot;</span>, pet <span class="sc">==</span> <span class="st">&quot;hamsta&quot;</span>, degree <span class="sc">==</span> <span class="st">&quot;psychology&quot;</span>, coffee <span class="sc">&gt;</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">=</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">city</span> <span class="op">==</span> <span class="st">"London"</span>, <span class="va">pet</span> <span class="op">==</span> <span class="st">"hamsta"</span>, <span class="va">degree</span> <span class="op">==</span> <span class="st">"psychology"</span>, <span class="va">coffee</span> <span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>Answer questions 10.1-10.2 on the worksheet.</p>
 <p>If you get stuck, use the hints below.</p>
-<hr />
-<details>
-<summary>
+<hr>
+<details><summary>
 👀 Click for a hint
-</summary>
-<ul>
+</summary><ul>
 <li><p>Check for spelling errors: there are two of them.</p></li>
 <li><p>Make sure to use double equals when specifying a label <code>==</code>.</p></li>
 <li><p>Use quote marks when necessary. Some are missing.</p></li>
 <li><p>Code is case sensitive. There is a capital letter where there shouldn’t be one.</p></li>
 <li><p>Use symbols correctly. We want to use the pipe %&gt;% before we filter.</p></li>
 <li><p>Use symbols correctly. More than <code>&gt;</code> is not the same as <code>&lt;</code>.</p></li>
-</ul>
-</details>
-<hr />
-<hr />
+</ul></details><hr>
+<hr>
 <p><strong>Well Done. You have reached the end of the workshop.</strong></p>
-<hr />
-
+<hr>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Preface</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#workshop-1-data-handling-skills"><span class="header-section-number">1</span> Workshop 1: Data Handling Skills</a></li>
+<li><a class="nav-link" href="#exercise-1-import-the-data"><span class="header-section-number">1.1</span> Exercise 1: Import the Data</a></li>
+<li><a class="nav-link" href="#exercise-2-inspect-and-check-your-data"><span class="header-section-number">1.2</span> Exercise 2: Inspect and Check Your Data</a></li>
+<li><a class="nav-link" href="#exercise-3-change-a-variable-name"><span class="header-section-number">1.3</span> Exercise 3: Change a Variable Name</a></li>
+<li><a class="nav-link" href="#exercise-4-remove-a-variable"><span class="header-section-number">1.4</span> Exercise 4: Remove a Variable</a></li>
+<li><a class="nav-link" href="#exercise-5-filter-cases"><span class="header-section-number">1.5</span> Exercise 5: Filter Cases</a></li>
+<li><a class="nav-link" href="#exercise-6-guess-who"><span class="header-section-number">1.6</span> Exercise 6: Guess Who?</a></li>
+<li><a class="nav-link" href="#exercise-7-create-a-new-variable"><span class="header-section-number">1.7</span> Exercise 7: Create a New Variable</a></li>
+<li><a class="nav-link" href="#exercise-8-counting-and-removing-missing-data"><span class="header-section-number">1.8</span> Exercise 8: Counting and Removing Missing Data</a></li>
+<li><a class="nav-link" href="#exercise-9-summary-statistics"><span class="header-section-number">1.9</span> Exercise 9: Summary Statistics</a></li>
+<li><a class="nav-link" href="#exercise-10-fixing-lukes-broken-code"><span class="header-section-number">1.10</span> Exercise 10: Fixing Luke’s Broken Code</a></li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="workshop-2-summarising-and-describing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-09-28.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
-});
-});
-</script>
 
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
 </body>
-
 </html>
