@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Workshop 2: Summarising and Describing Data | PS2010 Workshop Code Book</title>
-  <meta name="description" content="Chapter 2 Workshop 2: Summarising and Describing Data | PS2010 Workshop Code Book" />
+  <title>Chapter 4 Workshop 4: One-Way ANOVA (Independent Measures) | PS2010 Workshop Code Book</title>
+  <meta name="description" content="Chapter 4 Workshop 4: One-Way ANOVA (Independent Measures) | PS2010 Workshop Code Book" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Workshop 2: Summarising and Describing Data | PS2010 Workshop Code Book" />
+  <meta property="og:title" content="Chapter 4 Workshop 4: One-Way ANOVA (Independent Measures) | PS2010 Workshop Code Book" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Workshop 2: Summarising and Describing Data | PS2010 Workshop Code Book" />
+  <meta name="twitter:title" content="Chapter 4 Workshop 4: One-Way ANOVA (Independent Measures) | PS2010 Workshop Code Book" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="workshop-1-data-handling-skills.html"/>
-<link rel="next" href="workshop-3-t-tests.html"/>
+<link rel="prev" href="workshop-3-t-tests.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -200,117 +200,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="workshop-2-summarising-and-describing-data" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Workshop 2: Summarising and Describing Data<a href="workshop-2-summarising-and-describing-data.html#workshop-2-summarising-and-describing-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="workshop-4-one-way-anova-independent-measures" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Workshop 4: One-Way ANOVA (Independent Measures)<a href="workshop-4-one-way-anova-independent-measures.html#workshop-4-one-way-anova-independent-measures" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Aims:</strong></p>
 <ul>
-<li><p>Practice importing a .csv data file into RStudio using <code>read_csv()</code></p></li>
-<li><p>Practice inspecting your data in RStudio.</p></li>
-<li><p>Calculate mean and standard deviation using the <code>group_by()</code> and <code>summarise()</code> functions.</p></li>
-<li><p>Visually inspect data using plots and describe data distributions.</p></li>
+<li><p>Practice running and interpreting a one-way ANOVA (for an independent measures design)</p></li>
+<li><p>Show an understanding of how to interpret a main effect using post-hoc analyses.</p></li>
+<li><p>Consider key assumptions to evaluate the model.</p></li>
 </ul>
-<div id="exercise-1-import-the-data-1" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Exercise 1: Import the Data<a href="workshop-2-summarising-and-describing-data.html#exercise-1-import-the-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Import the Data File:</strong> <code>sleep.csv</code></p>
-<p>Before you begin, you will need the tidyverse package loaded.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="workshop-2-summarising-and-describing-data.html#cb19-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>) <span class="co">#install tidyverse if you do not have it.</span></span>
-<span id="cb19-2"><a href="workshop-2-summarising-and-describing-data.html#cb19-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#loads tidyverse.</span></span></code></pre></div>
-<p>Next import the data file and store it as an object called <code>dataset</code>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="workshop-2-summarising-and-describing-data.html#cb20-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;sleep.csv&quot;</span>)</span></code></pre></div>
-<p>If you see an error saying cannot find function <code>read_csv()</code> this usually means you have not loaded (or installed) the tidyverse package.</p>
-</div>
-<div id="exercise-2-inspect-and-check-your-data-1" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Exercise 2: Inspect and Check Your Data<a href="workshop-2-summarising-and-describing-data.html#exercise-2-inspect-and-check-your-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Take a look at your newly imported data file</strong></p>
-<p>Check the top right panel (the environment) and also use the code below to inspect your data set.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="workshop-2-summarising-and-describing-data.html#cb21-1" tabindex="-1"></a><span class="fu">view</span>(dataset) <span class="co"># this will open the data in a new tab.</span></span>
-<span id="cb21-2"><a href="workshop-2-summarising-and-describing-data.html#cb21-2" tabindex="-1"></a><span class="fu">names</span>(dataset) <span class="co"># this will show the variable names.</span></span></code></pre></div>
-<p>It is really important to look at the variable names as you’ll be using them in code later on.</p>
-</div>
-<div id="exercise-3-calculate-the-total-sleep-score" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Exercise 3: Calculate the Total Sleep Score<a href="workshop-2-summarising-and-describing-data.html#exercise-3-calculate-the-total-sleep-score" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Sometimes we might want to compute new scores or variables</strong></p>
-<p>Add up the two sleep scores <code>sleep_quality</code> and <code>drowsy</code> scores to create an overall score called <code>total_sleep</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="workshop-2-summarising-and-describing-data.html#cb22-1" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="workshop-2-summarising-and-describing-data.html#cb22-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_sleep =</span> scale_1 <span class="sc">+</span> scale_2)</span></code></pre></div>
-<p>This code will:</p>
-<ul>
-<li><p>Create an object called <code>mydata</code> before using the original <code>dataset</code> and then…</p></li>
-<li><p>Use the <code>mutate()</code> function to create a new variable named <code>total_sleep</code> which should equal <code>=</code> <code>scale_1</code> <code>+</code> <code>scale_2</code>.</p></li>
-</ul>
-<p>View the data set and look for the new column to see it has worked.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="workshop-2-summarising-and-describing-data.html#cb23-1" tabindex="-1"></a><span class="fu">view</span>(mydata)</span></code></pre></div>
-<p>Answer questions 3.1-3.2 on the worksheet.</p>
-</div>
-<div id="exercise-4-calculate-descriptive-statistics" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Exercise 4: Calculate Descriptive Statistics<a href="workshop-2-summarising-and-describing-data.html#exercise-4-calculate-descriptive-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Just as shown in the lecture, use the code below to calculate the mean and standard deviation for <code>total_sleep</code>. Remember, we want to use the total score calculated in exercise 3, and not to use the two subscales.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="workshop-2-summarising-and-describing-data.html#cb24-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span>  mydata <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="workshop-2-summarising-and-describing-data.html#cb24-2" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="workshop-2-summarising-and-describing-data.html#cb24-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m_sleep =</span> <span class="fu">mean</span>(<span class="cn">NULL</span>),</span>
-<span id="cb24-4"><a href="workshop-2-summarising-and-describing-data.html#cb24-4" tabindex="-1"></a>            <span class="at">sd_sleep =</span> <span class="fu">sd</span>(<span class="cn">NULL</span>))</span></code></pre></div>
-<p>You will need to change <code>NULL</code> to match your data set. Try and give this a go on your own first, but if you aren’t sure look below for help.</p>
-<p>Think about:</p>
-<ul>
-<li><p>What is the name of the variable you will split the data file by (e.g., what is the grouping variable/independent variable called in the data set)</p></li>
-<li><p>What is the name of the score that you want to find the mean and standard deviation for (e.g., what is the dependent variable called in the data set)</p></li>
-</ul>
-<hr />
-<details>
-<summary>
-👀 Click for a hint
-</summary>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="workshop-2-summarising-and-describing-data.html#cb25-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span>  mydata <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="workshop-2-summarising-and-describing-data.html#cb25-2" tabindex="-1"></a>  <span class="fu">group_by</span>(energy_drink) <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="workshop-2-summarising-and-describing-data.html#cb25-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m_sleep =</span> <span class="fu">mean</span>(total_sleep),</span>
-<span id="cb25-4"><a href="workshop-2-summarising-and-describing-data.html#cb25-4" tabindex="-1"></a>            <span class="at">sd_sleep =</span> <span class="fu">sd</span>(total_sleep))</span></code></pre></div>
-</details>
-<hr />
-<p>If you look in the environment (top right panel) you will see a new object called <code>desc</code>. This is where your descriptive statistics are stored. I called it <code>desc</code> but you can call it anything you like. It is best to keep object names short and informative. We can now view that object using the <code>view()</code> function.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="workshop-2-summarising-and-describing-data.html#cb26-1" tabindex="-1"></a><span class="fu">view</span>(desc)</span></code></pre></div>
-<p>Answer questions 4.1-4.2 on the worksheet.</p>
-</div>
-<div id="exercise-5-explore-data-with-plots" class="section level2 hasAnchor" number="2.5">
-<h2><span class="header-section-number">2.5</span> Exercise 5: Explore Data with Plots<a href="workshop-2-summarising-and-describing-data.html#exercise-5-explore-data-with-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Generate a box plot:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="workshop-2-summarising-and-describing-data.html#cb27-1" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x =</span> energy_drink, <span class="at">y =</span> total_sleep)) <span class="sc">+</span></span>
-<span id="cb27-2"><a href="workshop-2-summarising-and-describing-data.html#cb27-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">4</span>)</span></code></pre></div>
-<p>Generate histograms:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="workshop-2-summarising-and-describing-data.html#cb28-1" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x =</span> total_sleep, <span class="at">fill =</span> energy_drink)) <span class="sc">+</span></span>
-<span id="cb28-2"><a href="workshop-2-summarising-and-describing-data.html#cb28-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb28-3"><a href="workshop-2-summarising-and-describing-data.html#cb28-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> energy_drink)</span></code></pre></div>
-<p>Generate density plots:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="workshop-2-summarising-and-describing-data.html#cb29-1" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x =</span> total_sleep, <span class="at">fill =</span> energy_drink)) <span class="sc">+</span></span>
-<span id="cb29-2"><a href="workshop-2-summarising-and-describing-data.html#cb29-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="workshop-2-summarising-and-describing-data.html#cb29-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> energy_drink)</span></code></pre></div>
-<p>Answer questions 5.1-5.2 in the worksheet.</p>
-</div>
-<div id="exercise-6-what-does-facet_wrap-do" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Exercise 6: What Does <code>facet_wrap()</code> do?<a href="workshop-2-summarising-and-describing-data.html#exercise-6-what-does-facet_wrap-do" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Re-run the density plot code, except this time delete the final line. This will show what <code>facet_wrap()</code> does. What do you notice about the plot now?</p>
-<p>Use this code without <code>facet_wrap()</code>.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="workshop-2-summarising-and-describing-data.html#cb30-1" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x =</span> total_sleep, <span class="at">fill =</span> energy_drink)) <span class="sc">+</span></span>
-<span id="cb30-2"><a href="workshop-2-summarising-and-describing-data.html#cb30-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)</span></code></pre></div>
-<p>Answer question 6.1 on the worksheet.</p>
-</div>
-<div id="exercise-7-save-your-amended-data-file" class="section level2 hasAnchor" number="2.7">
-<h2><span class="header-section-number">2.7</span> Exercise 7: Save Your Amended Data File<a href="workshop-2-summarising-and-describing-data.html#exercise-7-save-your-amended-data-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>**Your current data file has the <code>total_sleep</code> column in. You need to save it so you can use it for next week’s workshop. You can overwrite you original .csv file using this code, which will save today’s data set.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="workshop-2-summarising-and-describing-data.html#cb31-1" tabindex="-1"></a><span class="fu">write.csv</span>(mydata, <span class="st">&quot;sleep.csv&quot;</span>)</span></code></pre></div>
-<p>This means the <code>sleep.csv</code> on your computer will be updated and ready to use next week! Make sure you know where it has saved on your computer before you leave.</p>
-<hr />
-<p><strong>Well Done. You have reached the end of the workshop.</strong></p>
-<hr />
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="workshop-1-data-handling-skills.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="workshop-3-t-tests.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="workshop-3-t-tests.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

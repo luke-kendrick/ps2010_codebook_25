@@ -152,7 +152,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-08-13}
+\date{2025-08-14}
 
 \begin{document}
 \maketitle
@@ -453,23 +453,23 @@ Look through the output in the console (bottom left panel) and answer questions 
 
 \section{Exercise 10: Fixing Luke's Broken Code}\label{exercise-10-fixing-lukes-broken-code}
 
-Help!! My code below just is not working. I need your help to get it working.
+Help!! My code below is not working. I need your help to fix it\ldots{}
 
 Fix the code below to work out how many coffees were drunk by the person from canterbury and is studying medicine. Try running the code first and then work out why it doesn't work!
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{filter}\NormalTok{(}\AttributeTok{city =} \StringTok{"canterberry"}\NormalTok{, degree }\SpecialCharTok{==}\NormalTok{ medicine)}
+  \FunctionTok{filter}\NormalTok{(}\AttributeTok{city =} \StringTok{"canterburY"}\NormalTok{, degree }\SpecialCharTok{==}\NormalTok{ medicine)}
 \end{Highlighting}
 \end{Shaded}
 
-Fix the code below to work out the name of the person who is from London, has a hamster, and did not drink coffee. Try running the code first and then work out why it doesn't work!
+Fix the code below to work out the name of the person who is from London, has a hamster, studies psychology, and did not drink coffee. Try running the code first and then work out why it doesn't work!
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{mydata }\OtherTok{=}
-  \FunctionTok{filter}\NormalTok{(city }\SpecialCharTok{==} \StringTok{"London"}\NormalTok{, pet }\SpecialCharTok{==} \StringTok{"hamsta"}\NormalTok{, coffee }\SpecialCharTok{\textgreater{}}\DecValTok{1}\NormalTok{)}
+  \FunctionTok{filter}\NormalTok{(city }\SpecialCharTok{==} \StringTok{"London"}\NormalTok{, pet }\SpecialCharTok{==} \StringTok{"hamsta"}\NormalTok{, degree }\SpecialCharTok{==} \StringTok{"psychology"}\NormalTok{, coffee }\SpecialCharTok{\textgreater{}}\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -704,7 +704,7 @@ This means the \texttt{sleep.csv} on your computer will be updated and ready to 
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{\texorpdfstring{Workshop 3: \emph{t}-Tests}{Workshop 3: t-Tests}}\label{workshop-3-t-tests}
+\chapter{\texorpdfstring{Workshop 3: \emph{t}-tests}{Workshop 3: t-tests}}\label{workshop-3-t-tests}
 
 \textbf{Aims:}
 
@@ -715,7 +715,7 @@ This means the \texttt{sleep.csv} on your computer will be updated and ready to 
   Practice running and interpreting a paired \emph{t}-test in RStudio.
 \end{itemize}
 
-\section{Part One}\label{part-one}
+\textbf{Part One}
 
 Part one of today's workshop will involved running a two-sample t-test, which is appropriate for an independent measures design with \textbf{two} groups.
 
@@ -862,6 +862,10 @@ Run the \emph{t}-test.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{quote}
+\textbf{How do I ensure it is a Welch's \emph{t}-test?} By setting \texttt{var.equal\ =\ FALSE} you are asking for a Welch's \emph{t}-test. If you change this to \texttt{var.equal\ =\ TRUE} it will run a Studen't \emph{t}-test, but if you do this, make sure you meet all the assumptions.
+\end{quote}
+
 Ask for Cohen's d:
 
 \begin{Shaded}
@@ -870,11 +874,24 @@ Ask for Cohen's d:
 \end{Highlighting}
 \end{Shaded}
 
-Interpret your \emph{t}-test. - Is it significant? - What is the effect size? - If significant, how do the groups differ?
+Interpret your \emph{t}-test.
 
-For the final question, you will need descriptive statistics. Hint: use the code from last week to find the mean and standard deviation for the two groups.
+\begin{itemize}
+\item
+  Is the test significant?
+\item
+  What is the effect size?
+\item
+  If significant, how do the groups differ (e.g., use descriptive statistics to interpret the difference)?
 
-\section{Part Two}\label{part-two}
+  \begin{itemize}
+  \tightlist
+  \item
+    Hint: use the code from last week to find the mean and standard deviation for the two groups.
+  \end{itemize}
+\end{itemize}
+
+\textbf{Part Two}
 
 Part two of today's workshop will involved running a paired t-test, which is appropriate for a repeated measures design with \textbf{two} conditions.
 
@@ -884,7 +901,7 @@ The independent variable is time point: before, after. The dependent variable is
 
 \section{Exercise 5: Import the Data}\label{exercise-5-import-the-data}
 
-We will calle the object \texttt{int} (short for intervention data)
+We will call the object \texttt{int} (short for intervention data)
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -936,7 +953,7 @@ A paired t-test is a little different compared to the two-sample t-test.
   Change \texttt{NULL2} to the column with the second condition.
 \end{itemize}
 
-(Hint: you will need to use the dollar sign \texttt{\$} to specify which column)
+(Hint: you will need to use the dollar sign \texttt{\$} to specify which data set andcolumn, e.g., \texttt{data\$column}).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -983,7 +1000,7 @@ Code explanation:
 \item
   The first argument is the name of your independent variable. I have called it \texttt{time} The second argument is the name of your dependent variable. I have called it \texttt{sleep}.
 \item
-  \texttt{before:after} will then take all and any columns from \texttt{before} through to \texttt{after} and re-arrange them into long data format.
+  \texttt{before:after} will then take all and any columns from \texttt{before} through to \texttt{after} and re-arrange them into long data format (these are the only columns so it will just take the two of them).
 \end{itemize}
 
 Once you have created the new long data set called \texttt{long} we can use it to calculate descriptive statistics. But first check it to see the difference.
@@ -1000,13 +1017,13 @@ Now adapt the code below to ask for the mean and standard deviation.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{ longd }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{group\_by}\NormalTok{(}\ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_sleep =} \FunctionTok{mean}\NormalTok{(}\ConstantTok{NULL}\NormalTok{)}
-            \AttributeTok{sd\_sleep =} \FunctionTok{sd}\NormalTok{(}\ConstantTok{NULL}\NormalTok{))}
+  \FunctionTok{group\_by}\NormalTok{(NULL1) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_sleep =} \FunctionTok{mean}\NormalTok{(NULL2)}
+            \AttributeTok{sd\_sleep =} \FunctionTok{sd}\NormalTok{(NULL2))}
 \end{Highlighting}
 \end{Shaded}
 
-Change \texttt{NULL1} to the name of the independent variable in the \texttt{long} data file, and \texttt{NULL2} to the dependent variable. Use \texttt{names(long)} if you need a reminder.
+Change \texttt{NULL1} to the name of the independent variable in the \texttt{long} data file, and \texttt{NULL2} to the dependent variable. If this is tricky, use \texttt{names(long)} if you need a reminder of the variable names and revisit your notes from last week's workshop.
 
 Make note of the mean and standard deviation for the \texttt{before} and \texttt{after} conditions.
 
@@ -1015,6 +1032,19 @@ Make note of the mean and standard deviation for the \texttt{before} and \texttt
 \textbf{Well Done. You have reached the end of the workshop.}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Workshop 4: One-Way ANOVA (Independent Measures)}\label{workshop-4-one-way-anova-independent-measures}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\item
+  Practice running and interpreting a one-way ANOVA (for an independent measures design)
+\item
+  Show an understanding of how to interpret a main effect using post-hoc analyses.
+\item
+  Consider key assumptions to evaluate the model.
+\end{itemize}
 
   \bibliography{book.bib,packages.bib}
 
