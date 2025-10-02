@@ -125,7 +125,7 @@ mydata %>%
   filter(city == "brighton", pet == "dog", coffee == 0)
 ```
 
-We can also use less than/more than symbols to filter data, For example, this will show all people who have a art enjoyment score of less than 20:
+We can also use less than/more than symbols to filter data, For example, this will show all people who have a maths enjoyment score of less than 20:
 
 ``` r
 mydata %>%

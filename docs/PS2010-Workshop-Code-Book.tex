@@ -152,7 +152,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-09-28}
+\date{2025-10-02}
 
 \begin{document}
 \maketitle
@@ -338,7 +338,7 @@ The code below will show us someone who is from Brighton, has a dog, and does no
 \end{Highlighting}
 \end{Shaded}
 
-We can also use less than/more than symbols to filter data, For example, this will show all people who have a art enjoyment score of less than 20:
+We can also use less than/more than symbols to filter data, For example, this will show all people who have a maths enjoyment score of less than 20:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -497,6 +497,220 @@ If you get stuck, use the hints below.
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Well Done. You have reached the end of the workshop.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Workshop 2: Summarising and Describing Data}\label{workshop-2-summarising-and-describing-data}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\item
+  Practice importing a .csv data file into RStudio using \texttt{read\_csv()}
+\item
+  Practice inspecting your data in RStudio.
+\item
+  Calculate mean and standard deviation using the \texttt{group\_by()} and \texttt{summarise()} functions.
+\item
+  Visually inspect data using plots and describe data distributions.
+\end{itemize}
+
+\section{Exercise 1: Import the Data}\label{exercise-1-import-the-data-1}
+
+\textbf{Import the Data File:} \texttt{stroop.csv}
+
+Before you begin, you will need the tidyverse package loaded.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{) }\CommentTok{\#install tidyverse if you do not have it.}
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\#loads tidyverse.}
+\end{Highlighting}
+\end{Shaded}
+
+Next import the data file and store it as an object called \texttt{dataset}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"stroop.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you see an error saying cannot find function \texttt{read\_csv()} this usually means you have not loaded (or installed) the tidyverse package.
+
+\section{Exercise 2: Inspect and Check Your Data}\label{exercise-2-inspect-and-check-your-data-1}
+
+\textbf{Take a look at your newly imported data file}
+
+Check the top right panel (the environment) and also use the code below to inspect your data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(dataset) }\CommentTok{\# this will open the data in a new tab.}
+\FunctionTok{names}\NormalTok{(dataset) }\CommentTok{\# this will show the variable names.}
+\end{Highlighting}
+\end{Shaded}
+
+It is really important to look at the variable names as you'll be using them in code later on.
+
+\section{Exercise 3: Calculate the Stroop Inteference Score}\label{exercise-3-calculate-the-stroop-inteference-score}
+
+\textbf{Sometimes we might want to compute new scores or variables}
+
+Calculate the Stroop interference measure. This should be the difference between the incongruent and congruent conditions. Take the \texttt{incongruent} reaction times and then subtract the \texttt{congruent} reaction times using the code below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{int =}\NormalTok{ incongruent }\SpecialCharTok{{-}}\NormalTok{ congruent)}
+\end{Highlighting}
+\end{Shaded}
+
+This code will:
+
+\begin{itemize}
+\item
+  Create an object called \texttt{mydata} before using the original \texttt{dataset} and then\ldots{}
+\item
+  Use the \texttt{mutate()} function to create a new variable named \texttt{int} which should equal \texttt{=} \texttt{incongruent} \texttt{-} (minus) \texttt{congruent}.
+\end{itemize}
+
+View the data set and look for the new column to see it has worked. Note: check the final column to see if \texttt{int} has appeared.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+What exactly is this Stroop Interference thingy? If you want to learn more, see below.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👀 Click for more information
+
+The interference measure in milliseconds (msecs) is the amount of extra time it took a participant to answer the incongruent (trickier trials because the colours do not match the word) compared to the congruent trials (easier trial because the colours do match the work).
+
+In a sense, it is how many milliseconds slower you are because you need to focus your attention and engage executive functions to fight the urge to read the word rather than name the colour.
+
+A smaller number is perhaps indicative of having better attention/executive functioning processes!
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Answer questions 3.1-3.2 on the worksheet.
+
+\section{Exercise 4: Calculate Descriptive Statistics}\label{exercise-4-calculate-descriptive-statistics}
+
+Just as shown in the lecture, use the code below to calculate the mean and standard deviation for Stroop interference or \texttt{int}. Remember, we want to use \texttt{int} that was calculated in exercise 3.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{  mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(NULL1) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_int =} \FunctionTok{mean}\NormalTok{(NULL2),}
+            \AttributeTok{sd\_int =} \FunctionTok{sd}\NormalTok{(NULL2))}
+\end{Highlighting}
+\end{Shaded}
+
+You will need to change \texttt{NULL} to match your data set. Try and give this a go on your own first, but if you aren't sure look below for help.
+
+Think about:
+
+\begin{itemize}
+\item
+  For \texttt{NULL1}: What is the name of the variable you will split the data file by (e.g., what is the grouping variable/independent variable called in \texttt{mydata})
+\item
+  For \texttt{NULL2}: What is the name of the score that you want to find the mean and standard deviation for (e.g., what is the dependent variable called in \texttt{mydata})
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👀 Click for a hint
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{  mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(drink) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_int =} \FunctionTok{mean}\NormalTok{(int),}
+            \AttributeTok{sd\_int =} \FunctionTok{sd}\NormalTok{(int))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+If you look in the environment (top right panel) you will see a new object called \texttt{desc}. This is where your descriptive statistics are stored. I called it \texttt{desc} but you can call it anything you like. It is best to keep object names short and informative. We can now view that object using the \texttt{view()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(desc)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer questions 4.1-4.2 on the worksheet.
+
+\section{Exercise 5: Explore Data with Plots}\label{exercise-5-explore-data-with-plots}
+
+Generate a box plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ drink, }\AttributeTok{y =}\NormalTok{ int)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Generate histograms:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ int, }\AttributeTok{fill =}\NormalTok{ drink)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ drink)}
+\end{Highlighting}
+\end{Shaded}
+
+Generate density plots:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ int, }\AttributeTok{fill =}\NormalTok{ drink)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ drink)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer questions 5.1-5.2 in the worksheet.
+
+\section{\texorpdfstring{Exercise 6: What Does \texttt{facet\_wrap()} do?}{Exercise 6: What Does facet\_wrap() do?}}\label{exercise-6-what-does-facet_wrap-do}
+
+Re-run the density plot code, except this time delete the final line. This will show what \texttt{facet\_wrap()} does. What do you notice about the plot now?
+
+Use this code without \texttt{facet\_wrap()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ int, }\AttributeTok{fill =}\NormalTok{ drink)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Answer question 6.1 on the worksheet.
+
+\section{Exercise 7: Save Your Amended Data File}\label{exercise-7-save-your-amended-data-file}
+
+Your current data file has the \texttt{int} column in, calculated in exercise 3. You need to save it so you can use it for next week's workshop. You can overwrite you original .csv file using this code, which will save today's data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.csv}\NormalTok{(mydata, }\StringTok{"stroop.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This means the \texttt{stroop.csv} file on your computer will be updated and ready to use next week! Make sure you know where it has saved on your computer before you leave. You will need this file next week!
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 

@@ -12,3 +12,11 @@ exercise-7-create-a-new-variable
 exercise-8-counting-and-removing-missing-data
 exercise-9-summary-statistics
 exercise-10-fixing-lukes-broken-code
+workshop-2-summarising-and-describing-data
+exercise-1-import-the-data-1
+exercise-2-inspect-and-check-your-data-1
+exercise-3-calculate-the-stroop-inteference-score
+exercise-4-calculate-descriptive-statistics
+exercise-5-explore-data-with-plots
+exercise-6-what-does-facet_wrap-do
+exercise-7-save-your-amended-data-file
