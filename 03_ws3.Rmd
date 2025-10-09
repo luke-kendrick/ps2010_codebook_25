@@ -104,6 +104,7 @@ Run the *t*-test.
 ``` r
 t.test(int ~ drink, data = mydata, var.equal = FALSE, alternative = "two.sided")
 ```
+
 Ask for Cohen's d:
 
 ``` r
@@ -120,7 +121,7 @@ Interpret your *t*-test.
 
 -   Hint: re-use the code from last week to find the mean and standard deviation for the two groups.
 
-Answer questions 4.1-4.2 on the worksheet.
+Answer questions 4.1-4.3 on the worksheet.
 
 **Part Two**
 
@@ -228,13 +229,13 @@ Code explanation:
 
 -   `pivot_longer()`
 
--   The first argument should include the columns which contain your dependent variable. In this case we will use `before:after`which will then take all and any columns from `before` through to `after` (these are the only columns so it will just take the two of them). 
+-   The first argument should include the columns which contain your dependent variable. In this case we will use `before:after`which will then take all and any columns from `before` through to `after` (these are the only columns so it will just take the two of them).
 
--   Next we use `names_to = ` to tell R what we want to call our independent variable. I have used "time" as it was time point for this study.
+-   Next we use `names_to =` to tell R what we want to call our independent variable. I have used "time" as it was time point for this study.
 
-- Then we use `values_to = ` to tell R what we want to call our dependent variable. We measure beats per minute, so I have just called this "bpm".
+-   Then we use `values_to =` to tell R what we want to call our dependent variable. We measure beats per minute, so I have just called this "bpm".
 
-- Pay careful attention to the lay out of this code. For example, notice where brackets open and close, and the plavement of commas to move on the the next line.
+-   Pay careful attention to the lay out of this code. For example, notice where brackets open and close, and the plavement of commas to move on the the next line.
 
 Once you have created the new long data set called `longd` we can use it to calculate descriptive statistics. But first check it to see the difference.
 
@@ -272,7 +273,6 @@ desc <- longd %>%
 ```
 
 </details>
-
 
 ------------------------------------------------------------------------
 
