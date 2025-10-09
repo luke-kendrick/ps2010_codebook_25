@@ -834,12 +834,6 @@ You can also visually check the data with a quick histogram:
 
 Check the plots panel, and use the blue arrow to switch between the two plots.
 
-\subsection{A Note on Assumptions}\label{a-note-on-assumptions}
-
-Assessing assumptions can be a little tricky. For a two-sample \emph{t}-test we will run something called Welch's \emph{t}-test which can cope with violations of assumptions.
-
-You might ask what is the point of checking them. One reason is because it is helpful to report the characteristics (heteroscedasticity and normality) of your data.
-
 \section{\texorpdfstring{Exercise 4: Run the Two-Sample \emph{t}-Test and ask for Cohen's d}{Exercise 4: Run the Two-Sample t-Test and ask for Cohen's d}}\label{exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d}
 
 Run the \emph{t}-test.
@@ -849,10 +843,6 @@ Run the \emph{t}-test.
 \FunctionTok{t.test}\NormalTok{(int }\SpecialCharTok{\textasciitilde{}}\NormalTok{ drink, }\AttributeTok{data =}\NormalTok{ mydata, }\AttributeTok{var.equal =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{quote}
-\textbf{How do I ensure it is a Welch's \emph{t}-test?} By setting \texttt{var.equal\ =\ FALSE} you are asking for a Welch's \emph{t}-test. If you change this to \texttt{var.equal\ =\ TRUE} it will run a Studen't \emph{t}-test, but if you do this, make sure you meet all the assumptions.
-\end{quote}
 
 Ask for Cohen's d:
 
@@ -874,6 +864,8 @@ Interpret your \emph{t}-test.
 \item
   Hint: re-use the code from last week to find the mean and standard deviation for the two groups.
 \end{itemize}
+
+Answer questions 4.1-4.2 on the worksheet.
 
 \textbf{Part Two}
 
@@ -924,6 +916,8 @@ We do need to check normality, as heteroscedasiticty does not apply to repeated 
 
 You should interpret and report this in the same way as earlier (exercise 3).
 
+Answer questions 7.1-7.2 on the worksheet.
+
 \section{\texorpdfstring{Exercise 8: Run the Paired \emph{t}-Test and ask for Cohen's d}{Exercise 8: Run the Paired t-Test and ask for Cohen's d}}\label{exercise-8-run-the-paired-t-test-and-ask-for-cohens-d}
 
 A paired t-test is a little different compared to the two-sample t-test.
@@ -967,6 +961,8 @@ Annoyingly, we need to use a different package for Cohen's d for a paired t-test
 \end{Highlighting}
 \end{Shaded}
 
+Answer questions 8.1-8.2 on the worksheet. Hint: you will also need the descriptive statistics (see exercise 9 below).
+
 \section{Exercise 9: Calculate Descriptive Statistics}\label{exercise-9-calculate-descriptive-statistics}
 
 The final thing to do is to convert the data from wide format to long format. Often with repeated measures when asking for descriptive statistics or plots, we need the data in long format.
@@ -974,7 +970,11 @@ The final thing to do is to convert the data from wide format to long format. Of
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{longd }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{gather}\NormalTok{(time, bpm, before}\SpecialCharTok{:}\NormalTok{after)}
+  \FunctionTok{pivot\_longer}\NormalTok{(}
+\NormalTok{              before}\SpecialCharTok{:}\NormalTok{after,}
+              \AttributeTok{names\_to =} \StringTok{"time"}\NormalTok{,}
+              \AttributeTok{values\_to =} \StringTok{"bpm"}
+\NormalTok{              )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -986,14 +986,18 @@ Code explanation:
 \item
   Base it on the original data set called \texttt{dat} and then \texttt{\%\textgreater{}\%}
 \item
-  \texttt{gather()}
+  \texttt{pivot\_longer()}
 \item
-  The first argument is the name of your independent variable. I have called it \texttt{time} The second argument is the name of your dependent variable. I have called it \texttt{bpm}.
+  The first argument should include the columns which contain your dependent variable. In this case we will use \texttt{before:after}which will then take all and any columns from \texttt{before} through to \texttt{after} (these are the only columns so it will just take the two of them).
 \item
-  \texttt{before:after} will then take all and any columns from \texttt{before} through to \texttt{after} and re-arrange them into long data format (these are the only columns so it will just take the two of them).
+  Next we use \texttt{names\_to\ =} to tell R what we want to call our independent variable. I have used ``time'' as it was time point for this study.
+\item
+  Then we use \texttt{values\_to\ =} to tell R what we want to call our dependent variable. We measure beats per minute, so I have just called this ``bpm''.
+\item
+  Pay careful attention to the lay out of this code. For example, notice where brackets open and close, and the plavement of commas to move on the the next line.
 \end{itemize}
 
-Once you have created the new long data set called \texttt{long} we can use it to calculate descriptive statistics. But first check it to see the difference.
+Once you have created the new long data set called \texttt{longd} we can use it to calculate descriptive statistics. But first check it to see the difference.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1016,6 +1020,21 @@ Now adapt the code below to ask for the mean and standard deviation.
 Change \texttt{NULL1} to the name of the independent variable in the \texttt{long} data file, and \texttt{NULL2} to the dependent variable. If this is tricky, use \texttt{names(longd)} if you need a reminder of the variable names and revisit your notes from last week's workshop.
 
 Make note of the mean and standard deviation for the \texttt{before} and \texttt{after} conditions.
+
+Try yourself first, but if you need, check the solution below.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👀 Click for a hint
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{ longd }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(time) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_bpm =} \FunctionTok{mean}\NormalTok{(bpm)}
+            \AttributeTok{sd\_bpm =} \FunctionTok{sd}\NormalTok{(bpm))}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 

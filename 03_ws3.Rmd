@@ -97,12 +97,6 @@ hist(redcow$int)
 
 Check the plots panel, and use the blue arrow to switch between the two plots.
 
-### A Note on Assumptions
-
-Assessing assumptions can be a little tricky. For a two-sample *t*-test we will run something called Welch's *t*-test which can cope with violations of assumptions.
-
-You might ask what is the point of checking them. One reason is because it is helpful to report the characteristics (heteroscedasticity and normality) of your data.
-
 ## Exercise 4: Run the Two-Sample *t*-Test and ask for Cohen's d
 
 Run the *t*-test.
@@ -110,9 +104,6 @@ Run the *t*-test.
 ``` r
 t.test(int ~ drink, data = mydata, var.equal = FALSE, alternative = "two.sided")
 ```
-
-> **How do I ensure it is a Welch's *t*-test?** By setting `var.equal = FALSE` you are asking for a Welch's *t*-test. If you change this to `var.equal = TRUE` it will run a Studen't *t*-test, but if you do this, make sure you meet all the assumptions.
-
 Ask for Cohen's d:
 
 ``` r
@@ -128,6 +119,8 @@ Interpret your *t*-test.
 -   If significant, how do the groups differ (e.g., use descriptive statistics to interpret the difference)?
 
 -   Hint: re-use the code from last week to find the mean and standard deviation for the two groups.
+
+Answer questions 4.1-4.2 on the worksheet.
 
 **Part Two**
 
@@ -172,6 +165,8 @@ hist(diff)                      # also visually inspect data
 
 You should interpret and report this in the same way as earlier (exercise 3).
 
+Answer questions 7.1-7.2 on the worksheet.
+
 ## Exercise 8: Run the Paired *t*-Test and ask for Cohen's d
 
 A paired t-test is a little different compared to the two-sample t-test.
@@ -210,13 +205,19 @@ library(effectsize)
 effectsize::cohens_d(dat$before, dat$after, paired = TRUE)
 ```
 
+Answer questions 8.1-8.2 on the worksheet. Hint: you will also need the descriptive statistics (see exercise 9 below).
+
 ## Exercise 9: Calculate Descriptive Statistics
 
 The final thing to do is to convert the data from wide format to long format. Often with repeated measures when asking for descriptive statistics or plots, we need the data in long format.
 
 ``` r
 longd <- dat %>%
-  gather(time, bpm, before:after)
+  pivot_longer(
+              before:after,
+              names_to = "time",
+              values_to = "bpm"
+              )
 ```
 
 Code explanation:
@@ -225,13 +226,17 @@ Code explanation:
 
 -   Base it on the original data set called `dat` and then `%>%`
 
--   `gather()`
+-   `pivot_longer()`
 
--   The first argument is the name of your independent variable. I have called it `time` The second argument is the name of your dependent variable. I have called it `bpm`.
+-   The first argument should include the columns which contain your dependent variable. In this case we will use `before:after`which will then take all and any columns from `before` through to `after` (these are the only columns so it will just take the two of them). 
 
--   `before:after` will then take all and any columns from `before` through to `after` and re-arrange them into long data format (these are the only columns so it will just take the two of them).
+-   Next we use `names_to = ` to tell R what we want to call our independent variable. I have used "time" as it was time point for this study.
 
-Once you have created the new long data set called `long` we can use it to calculate descriptive statistics. But first check it to see the difference.
+- Then we use `values_to = ` to tell R what we want to call our dependent variable. We measure beats per minute, so I have just called this "bpm".
+
+- Pay careful attention to the lay out of this code. For example, notice where brackets open and close, and the plavement of commas to move on the the next line.
+
+Once you have created the new long data set called `longd` we can use it to calculate descriptive statistics. But first check it to see the difference.
 
 ``` r
 view(longd)
@@ -250,6 +255,24 @@ desc <- longd %>%
 Change `NULL1` to the name of the independent variable in the `long` data file, and `NULL2` to the dependent variable. If this is tricky, use `names(longd)` if you need a reminder of the variable names and revisit your notes from last week's workshop.
 
 Make note of the mean and standard deviation for the `before` and `after` conditions.
+
+Try yourself first, but if you need, check the solution below.
+
+------------------------------------------------------------------------
+
+<details>
+
+<summary>👀 Click for a hint</summary>
+
+``` r
+desc <- longd %>%
+  group_by(time) %>%
+  summarise(mean_bpm = mean(bpm)
+            sd_bpm = sd(bpm))
+```
+
+</details>
+
 
 ------------------------------------------------------------------------
 

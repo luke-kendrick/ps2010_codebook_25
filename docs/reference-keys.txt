@@ -26,7 +26,6 @@ exercise-2-inspect-and-check-your-data-2
 exercise-3-check-assumptions
 check-heteroscedasticity-with-levenes-test
 check-normality-with-shapiro-wilk-test-and-histograms
-a-note-on-assumptions
 exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d
 exercise-5-import-the-data
 exercise-6-inspect-and-check-your-data

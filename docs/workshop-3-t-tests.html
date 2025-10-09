@@ -140,13 +140,6 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">redcow</span><span class="op">$</span><span class="va">int</span><span class="op">)</span></span></code></pre></div>
 <p>Check the plots panel, and use the blue arrow to switch between the two plots.</p>
 </div>
-<div id="a-note-on-assumptions" class="section level3" number="3.3.3">
-<h3>
-<span class="header-section-number">3.3.3</span> A Note on Assumptions<a class="anchor" aria-label="anchor" href="#a-note-on-assumptions"><i class="fas fa-link"></i></a>
-</h3>
-<p>Assessing assumptions can be a little tricky. For a two-sample <em>t</em>-test we will run something called Welch’s <em>t</em>-test which can cope with violations of assumptions.</p>
-<p>You might ask what is the point of checking them. One reason is because it is helpful to report the characteristics (heteroscedasticity and normality) of your data.</p>
-</div>
 </div>
 <div id="exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d" class="section level2" number="3.4">
 <h2>
@@ -155,9 +148,6 @@
 <p>Run the <em>t</em>-test.</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">int</span> <span class="op">~</span> <span class="va">drink</span>, data <span class="op">=</span> <span class="va">mydata</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
-<blockquote>
-<p><strong>How do I ensure it is a Welch’s <em>t</em>-test?</strong> By setting <code>var.equal = FALSE</code> you are asking for a Welch’s <em>t</em>-test. If you change this to <code>var.equal = TRUE</code> it will run a Studen’t <em>t</em>-test, but if you do this, make sure you meet all the assumptions.</p>
-</blockquote>
 <p>Ask for Cohen’s d:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mydata</span>, <span class="va">total_sleep</span> <span class="op">~</span> <span class="va">energy_drink</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -168,6 +158,7 @@
 <li><p>If significant, how do the groups differ (e.g., use descriptive statistics to interpret the difference)?</p></li>
 <li><p>Hint: re-use the code from last week to find the mean and standard deviation for the two groups.</p></li>
 </ul>
+<p>Answer questions 4.1-4.2 on the worksheet.</p>
 <p><strong>Part Two</strong></p>
 <p>Part two of today’s workshop will involved running a paired t-test, which is appropriate for a repeated measures design with <strong>two</strong> conditions.</p>
 <p>Let’s switch it up a bit and use a different scenario and experiment with a new data set.</p>
@@ -203,6 +194,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>              <span class="co"># run the Shapiro test</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>                      <span class="co"># also visually inspect data</span></span></code></pre></div>
 <p>You should interpret and report this in the same way as earlier (exercise 3).</p>
+<p>Answer questions 7.1-7.2 on the worksheet.</p>
 </div>
 <div id="exercise-8-run-the-paired-t-test-and-ask-for-cohens-d" class="section level2" number="3.8">
 <h2>
@@ -228,6 +220,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"effectsize"</span><span class="op">)</span> <span class="co">#install if needed.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span></span>
 <span><span class="fu">effectsize</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">before</span>, <span class="va">dat</span><span class="op">$</span><span class="va">after</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>Answer questions 8.1-8.2 on the worksheet. Hint: you will also need the descriptive statistics (see exercise 9 below).</p>
 </div>
 <div id="exercise-9-calculate-descriptive-statistics" class="section level2" number="3.9">
 <h2>
@@ -236,16 +229,22 @@
 <p>The final thing to do is to convert the data from wide format to long format. Often with repeated measures when asking for descriptive statistics or plots, we need the data in long format.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">longd</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">bpm</span>, <span class="va">before</span><span class="op">:</span><span class="va">after</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
+<span>              <span class="va">before</span><span class="op">:</span><span class="va">after</span>,</span>
+<span>              names_to <span class="op">=</span> <span class="st">"time"</span>,</span>
+<span>              values_to <span class="op">=</span> <span class="st">"bpm"</span></span>
+<span>              <span class="op">)</span></span></code></pre></div>
 <p>Code explanation:</p>
 <ul>
 <li><p>Create a new object called <code>longd</code> where we will store the long data.</p></li>
 <li><p>Base it on the original data set called <code>dat</code> and then <code>%&gt;%</code></p></li>
-<li><p><code><a href="https://tidyr.tidyverse.org/reference/gather.html">gather()</a></code></p></li>
-<li><p>The first argument is the name of your independent variable. I have called it <code>time</code> The second argument is the name of your dependent variable. I have called it <code>bpm</code>.</p></li>
-<li><p><code>before:after</code> will then take all and any columns from <code>before</code> through to <code>after</code> and re-arrange them into long data format (these are the only columns so it will just take the two of them).</p></li>
+<li><p><code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code></p></li>
+<li><p>The first argument should include the columns which contain your dependent variable. In this case we will use <code>before:after</code>which will then take all and any columns from <code>before</code> through to <code>after</code> (these are the only columns so it will just take the two of them).</p></li>
+<li><p>Next we use <code>names_to =</code> to tell R what we want to call our independent variable. I have used “time” as it was time point for this study.</p></li>
+<li><p>Then we use <code>values_to =</code> to tell R what we want to call our dependent variable. We measure beats per minute, so I have just called this “bpm”.</p></li>
+<li><p>Pay careful attention to the lay out of this code. For example, notice where brackets open and close, and the plavement of commas to move on the the next line.</p></li>
 </ul>
-<p>Once you have created the new long data set called <code>long</code> we can use it to calculate descriptive statistics. But first check it to see the difference.</p>
+<p>Once you have created the new long data set called <code>longd</code> we can use it to calculate descriptive statistics. But first check it to see the difference.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">longd</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">longd</span><span class="op">)</span></span></code></pre></div>
@@ -256,7 +255,15 @@
 <span id="cb47-4"><a href="workshop-3-t-tests.html#cb47-4" tabindex="-1"></a>            <span class="at">sd_bpm =</span> <span class="fu">sd</span>(NULL2))</span></code></pre></div>
 <p>Change <code>NULL1</code> to the name of the independent variable in the <code>long</code> data file, and <code>NULL2</code> to the dependent variable. If this is tricky, use <code>names(longd)</code> if you need a reminder of the variable names and revisit your notes from last week’s workshop.</p>
 <p>Make note of the mean and standard deviation for the <code>before</code> and <code>after</code> conditions.</p>
+<p>Try yourself first, but if you need, check the solution below.</p>
 <hr>
+<details><summary>
+👀 Click for a hint
+</summary><div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="workshop-3-t-tests.html#cb48-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span> longd <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="workshop-3-t-tests.html#cb48-2" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="workshop-3-t-tests.html#cb48-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_bpm =</span> <span class="fu">mean</span>(bpm)</span>
+<span id="cb48-4"><a href="workshop-3-t-tests.html#cb48-4" tabindex="-1"></a>            <span class="at">sd_bpm =</span> <span class="fu">sd</span>(bpm))</span></code></pre></div>
+</details><hr>
 <p><strong>Well Done. You have reached the end of the workshop.</strong></p>
 <hr>
 </div>
@@ -274,7 +281,6 @@
 <a class="nav-link" href="#exercise-3-check-assumptions"><span class="header-section-number">3.3</span> Exercise 3: Check Assumptions</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#check-heteroscedasticity-with-levenes-test"><span class="header-section-number">3.3.1</span> Check Heteroscedasticity with Levene’s Test</a></li>
 <li><a class="nav-link" href="#check-normality-with-shapiro-wilk-test-and-histograms"><span class="header-section-number">3.3.2</span> Check Normality with Shapiro-Wilk Test and Histograms</a></li>
-<li><a class="nav-link" href="#a-note-on-assumptions"><span class="header-section-number">3.3.3</span> A Note on Assumptions</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d"><span class="header-section-number">3.4</span> Exercise 4: Run the Two-Sample t-Test and ask for Cohen’s d</a></li>
