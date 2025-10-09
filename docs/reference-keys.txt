@@ -20,3 +20,16 @@ exercise-4-calculate-descriptive-statistics
 exercise-5-explore-data-with-plots
 exercise-6-what-does-facet_wrap-do
 exercise-7-save-your-amended-data-file
+workshop-3-t-tests
+exercise-1-import-the-data-2
+exercise-2-inspect-and-check-your-data-2
+exercise-3-check-assumptions
+check-heteroscedasticity-with-levenes-test
+check-normality-with-shapiro-wilk-test-and-histograms
+a-note-on-assumptions
+exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d
+exercise-5-import-the-data
+exercise-6-inspect-and-check-your-data
+exercise-7-check-assumptions
+exercise-8-run-the-paired-t-test-and-ask-for-cohens-d
+exercise-9-calculate-descriptive-statistics
