@@ -162,8 +162,8 @@
 <p><strong>Part Two</strong></p>
 <p>Part two of today’s workshop will involved running a paired t-test, which is appropriate for a repeated measures design with <strong>two</strong> conditions.</p>
 <p>Let’s switch it up a bit and use a different scenario and experiment with a new data set.</p>
-<p>Here we will look at how someone’s resting heart rate (BPM: beats per minute) minute might change as a result of drinking a can of Red Cow.</p>
-<p>In this study the resting heart rate (BPM) was measured in a group of participants both <strong>before</strong> and <strong>after</strong> consuming a can of Red Cow.</p>
+<p>Here we will look at how someone’s resting heart rate might change as a result of drinking a can of Red Cow.</p>
+<p>In this study the resting heart rate in beats per minute (BPM) was measured in a group of participants both <strong>before</strong> and <strong>after</strong> consuming a can of Red Cow.</p>
 <p>The independent variable is time point: before, after. The dependent variable is BPM.</p>
 </div>
 <div id="exercise-5-import-the-data" class="section level2" number="3.5">
@@ -259,10 +259,13 @@
 <hr>
 <details><summary>
 👀 Click for a hint
-</summary><div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="workshop-3-t-tests.html#cb48-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span> longd <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="workshop-3-t-tests.html#cb48-2" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
-<span id="cb48-3"><a href="workshop-3-t-tests.html#cb48-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_bpm =</span> <span class="fu">mean</span>(bpm)</span>
-<span id="cb48-4"><a href="workshop-3-t-tests.html#cb48-4" tabindex="-1"></a>            <span class="at">sd_bpm =</span> <span class="fu">sd</span>(bpm))</span></code></pre></div>
+</summary><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span> <span class="va">longd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_bpm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bpm</span><span class="op">)</span>,</span>
+<span>            sd_bpm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">bpm</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">desc</span><span class="op">)</span></span></code></pre></div>
 </details><hr>
 <p><strong>Well Done. You have reached the end of the workshop.</strong></p>
 <hr>
