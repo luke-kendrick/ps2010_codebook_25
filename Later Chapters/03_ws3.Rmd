@@ -10,15 +10,15 @@
 
 Part one of today's workshop will involved running a two-sample t-test, which is appropriate for an independent measures design with **two** groups.
 
-You should use the same data file from last week, as you will be aiming to answer "What impact does energy drink consumption (if any) have on sleep quality?"
+You should use the same data file from last week, as you will be aiming to investigate whether Stroop interference scores (msecs) significantly differ between the Red Cow group and the control group. 
 
 You must have completed the week 2 workshop before starting this one.
 
 ## Exercise 1: Import the Data
 
-**Import the Data File:** `sleep.csv`
+**Import the Data File:** `stroop.csv`
 
-Before you begin, you will need the tidyverse package loaded.
+Before you begin, you will need the following packages:
 
 ``` r
 install.packages("tidyverse") #install if needed.
@@ -29,10 +29,10 @@ library(rstatix)              #load package.
 library(car)                  #load package.
 ```
 
-Then import the data file. Make sure it has the `total_sleep` score that you calculated last week.
+Then import the data file. Make sure it has the `int` score that you calculated last week. If not, you will need to go back and complete workshop 2.
 
 ``` r
-mydata <- read_csv("sleep.csv")
+mydata <- read_csv("stroop.csv")
 ```
 
 ## Exercise 2: Inspect and Check Your Data
@@ -60,7 +60,7 @@ leveneTest(DV ~ IV, data = DATA)
 
 -   Change `DV` to the name of your dependent variable.
 -   Change `IV` to the name of your independent (grouping) variable.
--   Change `DATA` to the name of your data.
+-   Change `DATA` to the name of your data (object name).
 
 Run the code and interpret the output:
 
@@ -81,22 +81,20 @@ Here is an example where degrees of freedom is 36, *F* is 3.25, and *p* is .065:
 We need to check normality for both groups separately. We can filter the groups:
 
 ``` r
-#first create a data set that contains energy drink consumers only.
-yes <- mydata %>%
-  filter(energy_drink == "yes")
-
+#first create a data set that contains the control group only
+control <- mydata %>%
+  filter(drink == "control")
 #then run the test
-shapiro.test(yes$total_sleep)
+shapiro.test(control$int)
 
-#then create a data set that contains non-consumers only.
-no <- mydata %>%
-  filter(energy_drink == "no")
-
+#then create a data set that contains Red Cow drinkers only
+redcow <- mydata %>%
+  filter(drink == "redcow")
 #then run the test
-shapiro.test(no$total_sleep)
+shapiro.test(redcow$int)
 ```
 
-We use a dollar sign `$` to point R to a particular column. For example, when using `shapiro.test(yes$total_sleep)` you are saying to run the Shapiro Test on the `yes` data set column called `total_score`
+We use a dollar sign `$` to point R to a particular column. For example, when using `shapiro.test(redcow$int)` you are saying to run the Shapiro Test on the `redcow` only data set and the specific column called `int`
 
 Again, we want the *p*-values to be not significant. A non-significant *p*-value means the data are roughly normally distributed. If the *p*-value is significant, this could be an issue as it indicates the data are not normally distributed.
 
@@ -107,8 +105,8 @@ When reporting the Shapiro-Wilk test, you just need to report the test statistic
 You can also visually check the data with a quick histogram:
 
 ``` r
-hist(yes$total_sleep)
-hist(no$total_sleep)
+hist(control$int)
+hist(redcow$int)
 ```
 
 Check the plots panel, and use the blue arrow to switch between the two plots.
@@ -124,7 +122,7 @@ You might ask what is the point of checking them. One reason is because it is he
 Run the *t*-test.
 
 ``` r
-t.test(total_sleep ~ energy_drink, data = mydata, var.equal = FALSE, alternative = "two.sided")
+t.test(int ~ drink, data = mydata, var.equal = FALSE, alternative = "two.sided")
 ```
 
 > **How do I ensure it is a Welch's *t*-test?** By setting `var.equal = FALSE` you are asking for a Welch's *t*-test. If you change this to `var.equal = TRUE` it will run a Studen't *t*-test, but if you do this, make sure you meet all the assumptions.
@@ -143,22 +141,26 @@ Interpret your *t*-test.
 
 -   If significant, how do the groups differ (e.g., use descriptive statistics to interpret the difference)?
 
-    -    Hint: use the code from last week to find the mean and standard deviation for the two groups.
+-    Hint: re-use the code from last week to find the mean and standard deviation for the two groups.
 
 **Part Two**
 
 Part two of today's workshop will involved running a paired t-test, which is appropriate for a repeated measures design with **two** conditions.
 
-Here we have a sleep intervention study. A group of participants completed the sleep quality questionnaire **before** completing an intervention which aimed to improve sleep. Afterwards, participants completed the sleep questionnaire again.
+Let's switch it up a bit and use a different scenario and experiment with a new data set.
 
-The independent variable is time point: before, after. The dependent variable is sleep quality score (0-100).
+Here we will look at how someone's resting heart rate (BPM: beats per minute) minute might change as a result of drinking a can of Red Cow. 
+
+In this study the resting heart rate (BPM) was measured in a group of participants both **before** and **after** consuming a can of Red Cow.
+
+The independent variable is time point: before, after. The dependent variable is BPM.
 
 ## Exercise 5: Import the Data
 
-We will call the object `int` (short for intervention data)
+We will call the object `dat` (short name for data)
 
 ``` r
-int <- read_csv("sleep_intervention.csv")
+dat <- read_csv("bpm.csv")
 ```
 
 ## Exercise 6: Inspect and Check Your Data
@@ -168,16 +170,16 @@ int <- read_csv("sleep_intervention.csv")
 Check the top right panel (the environment) and also use the code below to inspect your data set.
 
 ``` r
-view(int) # this will open the data in a new tab.
-names(int) # this will show the variable names.
+view(dat) # this will open the data in a new tab.
+names(dat) # this will show the variable names.
 ```
 
 ## Exercise 7: Check Assumptions
 
-This time we only have to check normality, as heteroscedasiticty does not apply to repeated measures designs. However, we need to ensure the difference score is normally distributed.
+We do need  to check normality, as heteroscedasiticty does not apply to repeated measures designs. However, we need to ensure the **difference** score is normally distributed.
 
 ``` r
-diff <- int$after - int$before  #this will calculate the difference score.
+diff <- dat$after - dat$before  #this will calculate the difference score.
 shapiro.test(diff)              # run the Shapiro test
 hist(diff)                      # also visually inspect data
 ```
@@ -196,7 +198,9 @@ t.test(NULL1, NULL2, paired = TRUE)
 
 -   Change `NULL2` to the column with the second condition.
 
-(Hint: you will need to use the dollar sign `$` to specify which data set andcolumn, e.g., `data$column`).
+(Hint: you will need to use the dollar sign `$` to specify which data set and column, e.g., `dat$NULL1` and `dat$NULL2`).
+
+Try yourself first, but if you need, check the solution below.
 
 ------------------------------------------------------------------------
 
@@ -205,7 +209,7 @@ t.test(NULL1, NULL2, paired = TRUE)
 <summary>👀 Click for a hint</summary>
 
 ``` r
-t.test(int$before, int$after, paired = TRUE)
+t.test(dat$before, dat$after, paired = TRUE)
 ```
 
 </details>
@@ -217,7 +221,7 @@ Annoyingly, we need to use a different package for Cohen's d for a paired t-test
 ``` r
 install.packages("effectsize") #install if needed.
 library(effectsize)
-effectsize::cohens_d(int$before, int$after, paired = TRUE)
+effectsize::cohens_d(dat$before, dat$after, paired = TRUE)
 ```
 
 ## Exercise 9: Calculate Descriptive Statistics
@@ -225,19 +229,19 @@ effectsize::cohens_d(int$before, int$after, paired = TRUE)
 The final thing to do is to convert the data from wide format to long format. Often with repeated measures when asking for descriptive statistics or plots, we need the data in long format.
 
 ``` r
-longd <- int %>%
-  gather(time, score, before:after)
+longd <- dat %>%
+  gather(time, bpm, before:after)
 ```
 
 Code explanation:
 
 -   Create a new object called `longd` where we will store the long data.
 
--   Base it on the original data set called `int` and then `%>%`
+-   Base it on the original data set called `dat` and then `%>%`
 
 -   `gather()`
 
--   The first argument is the name of your independent variable. I have called it `time` The second argument is the name of your dependent variable. I have called it `sleep`.
+-   The first argument is the name of your independent variable. I have called it `time` The second argument is the name of your dependent variable. I have called it `bpm`.
 
 -   `before:after` will then take all and any columns from `before` through to `after` and re-arrange them into long data format (these are the only columns so it will just take the two of them).
 
@@ -253,11 +257,11 @@ Now adapt the code below to ask for the mean and standard deviation.
 ``` r
 desc <- longd %>%
   group_by(NULL1) %>%
-  summarise(mean_sleep = mean(NULL2)
-            sd_sleep = sd(NULL2))
+  summarise(mean_bpm = mean(NULL2)
+            sd_bpm = sd(NULL2))
 ```
 
-Change `NULL1` to the name of the independent variable in the `long` data file, and `NULL2` to the dependent variable. If this is tricky, use `names(long)` if you need a reminder of the variable names and revisit your notes from last week's workshop.
+Change `NULL1` to the name of the independent variable in the `long` data file, and `NULL2` to the dependent variable. If this is tricky, use `names(longd)` if you need a reminder of the variable names and revisit your notes from last week's workshop.
 
 Make note of the mean and standard deviation for the `before` and `after` conditions.
 
