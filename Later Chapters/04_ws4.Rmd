@@ -1,9 +1,0 @@
-# Workshop 4: One-Way ANOVA (Independent Measures)
-
-**Aims:**
-
--   Practice running and interpreting a one-way ANOVA (for an independent measures design)
-
--   Show an understanding of how to interpret a main effect using post-hoc analyses.
-
--   Consider key assumptions to evaluate the model.

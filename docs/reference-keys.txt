@@ -32,3 +32,13 @@ exercise-6-inspect-and-check-your-data
 exercise-7-check-assumptions
 exercise-8-run-the-paired-t-test-and-ask-for-cohens-d
 exercise-9-calculate-descriptive-statistics
+workshop-4-one-way-anova-model-designs-assumptions
+exercise-1-import-the-data-3
+exercise-2-inspect-and-check-your-data-3
+exercise-3-check-descriptives
+exercise-4-check-assumptions
+exercise-5-interpret-the-anova-model
+part-2---exercise-5-import-the-data-1
+exercise-6-check-descriptives
+exercise-7-check-assumptions-1
+exercise-8-interpret-the-anova-model

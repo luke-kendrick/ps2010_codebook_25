@@ -151,7 +151,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-10-13}
+\date{2025-10-17}
 
 \begin{document}
 \maketitle
@@ -1045,6 +1045,348 @@ Try yourself first, but if you need, check the solution below.
 \textbf{Well Done. You have reached the end of the workshop.}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Workshop 4: One-Way ANOVA (Model, designs, assumptions)}\label{workshop-4-one-way-anova-model-designs-assumptions}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\tightlist
+\item
+  Practice running one-way ANOVAs for both repeated and independent measures designs.
+\item
+  Practice checking ANOVA assumptions and interpreting the ANOVA model output.
+\end{itemize}
+
+\textbf{Part One}
+
+Part one of today's workshop will involve running a one-way ANOVA for a repeated measures design.
+
+Mild cognitive impairment (MCI) occurs wen someone begins to have difficulty with their memory or other cognitive abilities, however, these are (1) not usually significant enough to interfere with general activities of daily living and (2) do not fully meet the criteria for dementia.
+
+This data set contains data from a new memory assessment used for individuals with MCI across a four year period (each participant was assessed once per year).
+
+Using a one-way ANOVA, can you determine what happens to memory scores over time?
+
+\section{Exercise 1: Import the Data}\label{exercise-1-import-the-data-3}
+
+\textbf{Import the Data File}
+
+Before you begin you will need a few packages loaded.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# should already be installed.}
+
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"afex"}\NormalTok{) }\CommentTok{\# install if needed}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"car"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(afex)}
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+Next import the data file and store it as an object called \texttt{dat}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"mci.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 2: Inspect and Check Your Data}\label{exercise-2-inspect-and-check-your-data-3}
+
+\textbf{Take a look at your newly imported data file}
+
+Check the top right panel (the environment) and also use the code below to inspect your dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(dat) }\CommentTok{\# open data in new tab}
+\FunctionTok{names}\NormalTok{(dar) }\CommentTok{\# print variable names to console}
+\end{Highlighting}
+\end{Shaded}
+
+Is this data in wide format or long format?
+
+If the data is wide, you will need to convert it to long format using the code below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ year1}\SpecialCharTok{:}\NormalTok{year4,}
+               \AttributeTok{names\_to =} \StringTok{"time"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"memory"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Here is an explanation of this code line by line. This one is a little tricky.
+
+\begin{itemize}
+\item
+  First, create a new object called \texttt{mydata} and base it on the existing \texttt{dat} and then\ldots{}
+\item
+  Pivot the data (from long to wide) by taking all columns starting with \texttt{year1} through to \texttt{year4}. By stating \texttt{year1}:\texttt{year4} you are telling to take all columns from \texttt{year1} through to \texttt{year4}, including anything in between. Essentially you are stating the first and final levels of your independent variable.
+\item
+  \texttt{names\_to} should include a name you assign to the independent variable. In this study it is time point but we will just use \texttt{time} as it is shorter.
+\item
+  \texttt{values\_to} should include a name you assign to the dependent variable. In this study it was memory assessment score, but we will just use \texttt{memory}.
+\end{itemize}
+
+Run the code and then check \texttt{mydata} to see if it worked.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(mydata)}
+\FunctionTok{names}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+From now on we will only use the \texttt{mydata} object, as it is in long format.
+
+\section{Exercise 3: Check Descriptives}\label{exercise-3-check-descriptives}
+
+Using the code below, generate descriptive statistics to look at the mean memory score across time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(time) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{m\_memory =} \FunctionTok{mean}\NormalTok{(memory),}
+            \AttributeTok{sd\_memory =} \FunctionTok{sd}\NormalTok{(memory))}
+            
+\FunctionTok{view}\NormalTok{(desc) }\CommentTok{\# view the descriptive stats}
+\end{Highlighting}
+\end{Shaded}
+
+Also, visualise the data using a box plot or density plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ memory)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ggplot(mydata, aes(x = memory, fill = time)) +
+  geom_density(alpha = .5)
+\end{verbatim}
+
+\texttt{facet\_wrap()} is missing from the density plots, however, if you feel it would be beneficial to aid interpretation, you can add it.
+
+\section{Exercise 4: Check Assumptions}\label{exercise-4-check-assumptions}
+
+\textbf{Run the ANOVA model}
+
+Before we start looking at assumptions, we do need to run and store the initial ANOVA model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{aov\_ez}\NormalTok{(}\AttributeTok{id =} \StringTok{"id"}\NormalTok{,}
+                       \AttributeTok{dv =} \StringTok{"memory"}\NormalTok{,}
+                       \AttributeTok{within =} \StringTok{"time"}\NormalTok{,}
+                       \AttributeTok{type =} \DecValTok{3}\NormalTok{,}
+                       \AttributeTok{include\_aov =} \ConstantTok{TRUE}\NormalTok{,}
+                       \AttributeTok{data =}\NormalTok{ mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Checking Normality}
+
+First, look to see if the assumption of normality was met. You should look at three things.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  The QQ-Plot
+\item
+  The histogram
+\item
+  The Shapiro-Wilk test
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#testing normality, looking at normal distribution of residuals from the model.}
+\NormalTok{residuals }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(mod) }\CommentTok{\#pulls residuals from the model}
+
+\CommentTok{\# produce QQ{-}Plot}
+\FunctionTok{qqPlot}\NormalTok{(residuals) }\CommentTok{\#produces a qq{-}plot of residuals}
+
+\CommentTok{\# produce histogram of residuals}
+\FunctionTok{hist}\NormalTok{(residuals, }\AttributeTok{breaks =} \DecValTok{20}\NormalTok{, }\AttributeTok{main =} \StringTok{"Histogram of Residuals"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Residuals"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{) }
+
+\CommentTok{\# Shapiro test on residuals}
+\FunctionTok{shapiro.test}\NormalTok{(residuals) }\CommentTok{\#Shapiro test for residuals}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Checking Sphericity}
+
+To check sphericity, we need to produce the model output.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(mod) }\CommentTok{\# provides the output of the main ANOVA model with Sphericity output.}
+\end{Highlighting}
+\end{Shaded}
+
+Look through the output to find: ``Mauchly Tests for Sphericity''.
+
+It will provide a test statistic, reported using \emph{W} = XX.XX
+
+It will provide a \emph{p}-value statistic. For this test, a non-significant \emph{p}-value means the assumption was met. A non-significant \emph{p}-value is one that is a larger value than .05. A significant \emph{p}-value is one smaller than .05.
+
+It looks as though this \emph{p}-value is smaller than .05 and so the assumption is violated. uh-oh!
+
+\section{Exercise 5: Interpret the ANOVA Model}\label{exercise-5-interpret-the-anova-model}
+
+For an easier and more streamlined output to interpret the model, use the code below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod}\SpecialCharTok{$}\NormalTok{anova\_table}
+\end{Highlighting}
+\end{Shaded}
+
+You should interpret this the same way as was explained in the lecture. Particularly noting the \emph{F}, degrees of freedom (two values), and \emph{p}-value (noting whether it was significant or not).
+
+This model simply tells us: Should we reject the null hypothesis.
+
+As this is a significant result, \emph{F}(2.15, 105.54) = 127.16, \emph{p}\textless.001, then we can reject our null hypothesis as at least one of the conditions differs. How they differ we do not yet know and you will learn about that next week\ldots{}
+
+\section{Part 2 - Exercise 5: Import the Data}\label{part-2---exercise-5-import-the-data-1}
+
+\textbf{Part Two}
+
+In this part of the workshop you should conduct a one-way ANOVA for an independent measures design. The general interpretation is the same as above, but as covered in the lecture, the assumptions differ slightly.
+
+In this study, participants were placed into one of three groups based on their circadian chronotype: in other words, are they an early bird (morning person), night owl (evening person), or neither (do not fit into either category). This means we have three independent groups.
+
+You can try this out yourself here: \href{https://qxmd.com/calculate/calculator_829/morningness-eveningness-questionnaire-meq\#}{link}. Probably best to try this after your workshop.
+
+The research question here is a simple one: does the early bird really catch the worm? or more scientifically put\ldots who is more alert when completing an attention task at 9am.
+
+The independent variable is circadian chronotype, 3 levels.
+The dependent variable is \texttt{score} on an attention task from 0-100 (100 is highly alert/top score).
+
+\textbf{Import the data}
+
+The file is called \texttt{alert.csv}. Import the data file and save it as an object called \texttt{mydata1} (as to not overwrite anything from Part 1 in case you want to look back)
+
+\section{Exercise 6: Check Descriptives}\label{exercise-6-check-descriptives}
+
+Amend the code below to produce descriptive statistics.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(mydata1)  }\CommentTok{\# might be useful to check variable names}
+\FunctionTok{view}\NormalTok{(mydata1)   }\CommentTok{\# might be useful to look at the data}
+
+\NormalTok{desc1 }\OtherTok{\textless{}{-}}\NormalTok{ mydata1 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(NULL1) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_score =} \FunctionTok{mean}\NormalTok{(NULL2),}
+            \AttributeTok{sd\_score =} \FunctionTok{sd}\NormalTok{(NULL2))}
+\end{Highlighting}
+\end{Shaded}
+
+Also use this code to visualise the data to see what is going on.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ group, }\AttributeTok{y =}\NormalTok{ score)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{4}\NormalTok{)}
+  
+\FunctionTok{ggplot}\NormalTok{(mydata1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ score, }\AttributeTok{fill =}\NormalTok{ group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Change:
+
+\begin{itemize}
+\item
+  \texttt{NULL1} to the variable you want to split the data by. This should be the independent variable. This should be the dependent variable as it is names in \texttt{mydata1}.
+\item
+  \texttt{NULL2} to the variable you want to calculate the mean and sd for. This should be the dependent variable as it is names in \texttt{mydata1}.
+\end{itemize}
+
+\section{Exercise 7: Check Assumptions}\label{exercise-7-check-assumptions-1}
+
+Before we start looking at assumptions, we do need to run and store the initial ANOVA model. There are \textbf{four} \texttt{NULL} values you need to change in the code below to match your new data set.
+
+We will save the model as an object called \texttt{mod1}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod1 }\OtherTok{\textless{}{-}} \FunctionTok{aov\_ez}\NormalTok{(}\AttributeTok{id =} \StringTok{"NULL"}\NormalTok{,}
+              \AttributeTok{dv =} \StringTok{"NULL"}\NormalTok{,}
+              \AttributeTok{between =} \StringTok{"NULL"}\NormalTok{,}
+              \AttributeTok{type =} \DecValTok{3}\NormalTok{,}
+              \AttributeTok{include\_aov =} \ConstantTok{TRUE}\NormalTok{,}
+              \AttributeTok{data =} \ConstantTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Checking Normality}
+
+First, look to see if the assumption of normality was met. You should look at three things.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  The QQ-Plot
+\item
+  The histogram
+\item
+  The Shapiro-Wilk test
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#testing normality, looking at normal distribution of residuals from the model.}
+\NormalTok{residuals }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(mod1) }\CommentTok{\#pulls residuals from the model, note name is \textasciigrave{}mod1\textasciigrave{}}
+
+\CommentTok{\# produce QQ{-}Plot}
+\FunctionTok{qqPlot}\NormalTok{(residuals) }\CommentTok{\#produces a qq{-}plot of residuals}
+
+\CommentTok{\# produce histogram of residuals}
+\FunctionTok{hist}\NormalTok{(residuals, }\AttributeTok{breaks =} \DecValTok{20}\NormalTok{, }\AttributeTok{main =} \StringTok{"Histogram of Residuals"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Residuals"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{) }
+
+\CommentTok{\# Shapiro test on residuals}
+\FunctionTok{shapiro.test}\NormalTok{(residuals) }\CommentTok{\#Shapiro test for residuals}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Checking Homogeneity of Variance}
+
+Run and interpret Levene's test using the code below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{leveneTest}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group, mydata1)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 8: Interpret the ANOVA Model}\label{exercise-8-interpret-the-anova-model}
+
+Use the code below to interpret the ANOVA model. Decide if the model is significant and whether you can reject the null hypothesis. Also check back at the descriptive statistics to see if you can work out what could be going on.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod1}\SpecialCharTok{$}\NormalTok{anova\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Well Done. You have reached the end of the workshop \\
+\end{longtable}
 
 \bibliography{book.bib,packages.bib}
 
