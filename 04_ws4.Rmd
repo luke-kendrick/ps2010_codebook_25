@@ -25,7 +25,7 @@ Before you begin you will need a few packages loaded.
 library(tidyverse) # should already be installed.
 
 install.packages("afex") # install if needed
-install.packages("car")
+install.packages("car") #install if needed
 library(afex)
 library(car)
 ```
@@ -44,7 +44,7 @@ Check the top right panel (the environment) and also use the code below to inspe
 
 ``` r
 view(dat) # open data in new tab
-names(dar) # print variable names to console
+names(dat) # print variable names to console
 ```
 
 Is this data in wide format or long format?
@@ -112,11 +112,11 @@ Before we start looking at assumptions, we do need to run and store the initial 
 
 ``` r
 mod <- aov_ez(id = "id",
-                       dv = "memory",
-                       within = "time",
-                       type = 3,
-                       include_aov = TRUE,
-                       data = mydata)
+              dv = "memory",
+              within = "time",
+              type = 3,
+              include_aov = TRUE,
+              data = mydata)
 ```
 
 **Checking Normality**
@@ -171,7 +171,7 @@ This model simply tells us: Should we reject the null hypothesis.
 
 As this is a significant result, *F*(2.15, 105.54) = 127.16, *p*\<.001, then we can reject our null hypothesis as at least one of the conditions differs. How they differ we do not yet know and you will learn about that next week...
 
-## Part 2 - Exercise 5: Import the Data
+## Part 2 - Exercise 6: Import the Data
 
 **Part Two**
 
@@ -183,18 +183,17 @@ You can try this out yourself here: [link](https://qxmd.com/calculate/calculator
 
 The research question here is a simple one: does the early bird really catch the worm? or more scientifically put...who is more alert when completing an attention task at 9am.
 
-The independent variable is circadian chronotype, 3 levels.
-The dependent variable is `score` on an attention task from 0-100 (100 is highly alert/top score).
+The independent variable is circadian chronotype, 3 levels. The dependent variable is `score` on an attention task from 0-100 (100 is highly alert/top score).
 
 **Import the data**
 
 The file is called `alert.csv`. Import the data file and save it as an object called `mydata1` (as to not overwrite anything from Part 1 in case you want to look back)
 
-## Exercise 6: Check Descriptives
+## Exercise 7: Check Descriptives
 
-Amend the code below to produce descriptive statistics. 
+Amend the code below to produce descriptive statistics.
 
-```r
+``` r
 names(mydata1)  # might be useful to check variable names
 view(mydata1)   # might be useful to look at the data
 
@@ -204,9 +203,15 @@ desc1 <- mydata1 %>%
             sd_score = sd(NULL2))
 ```
 
+Change:
+
+-   `NULL1` to the variable you want to split the data by. This should be the independent variable. This should be the dependent variable as it is names in `mydata1`.
+
+-   `NULL2` to the variable you want to calculate the mean and sd for. This should be the dependent variable as it is names in `mydata1`.
+
 Also use this code to visualise the data to see what is going on.
 
-```r
+``` r
 ggplot(mydata1, aes(x = group, y = score)) +
   geom_boxplot(width = .4)
   
@@ -214,13 +219,7 @@ ggplot(mydata1, aes(x = score, fill = group)) +
   geom_density(alpha = .5)
 ```
 
-Change:
-
-- `NULL1` to the variable you want to split the data by. This should be the independent variable. This should be the dependent variable as it is names in `mydata1`.
-
-- `NULL2` to the variable you want to calculate the mean and sd for. This should be the dependent variable as it is names in `mydata1`.
-
-## Exercise 7: Check Assumptions
+## Exercise 8: Check Assumptions
 
 Before we start looking at assumptions, we do need to run and store the initial ANOVA model. There are **four** `NULL` values you need to change in the code below to match your new data set.
 
@@ -261,15 +260,15 @@ shapiro.test(residuals) #Shapiro test for residuals
 
 Run and interpret Levene's test using the code below:
 
-```r
+``` r
 leveneTest(score ~ group, mydata1)
 ```
 
-## Exercise 8: Interpret the ANOVA Model
+## Exercise 9: Interpret the ANOVA Model
 
 Use the code below to interpret the ANOVA model. Decide if the model is significant and whether you can reject the null hypothesis. Also check back at the descriptive statistics to see if you can work out what could be going on.
 
-```r
+``` r
 mod1$anova_table
 ```
 

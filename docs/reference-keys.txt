@@ -38,7 +38,7 @@ exercise-2-inspect-and-check-your-data-3
 exercise-3-check-descriptives
 exercise-4-check-assumptions
 exercise-5-interpret-the-anova-model
-part-2---exercise-5-import-the-data-1
-exercise-6-check-descriptives
-exercise-7-check-assumptions-1
-exercise-8-interpret-the-anova-model
+part-2---exercise-6-import-the-data
+exercise-7-check-descriptives
+exercise-8-check-assumptions
+exercise-9-interpret-the-anova-model

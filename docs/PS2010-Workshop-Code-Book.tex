@@ -151,7 +151,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-10-17}
+\date{2025-10-20}
 
 \begin{document}
 \maketitle
@@ -1079,7 +1079,7 @@ Before you begin you will need a few packages loaded.
 \FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# should already be installed.}
 
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"afex"}\NormalTok{) }\CommentTok{\# install if needed}
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"car"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"car"}\NormalTok{) }\CommentTok{\#install if needed}
 \FunctionTok{library}\NormalTok{(afex)}
 \FunctionTok{library}\NormalTok{(car)}
 \end{Highlighting}
@@ -1102,7 +1102,7 @@ Check the top right panel (the environment) and also use the code below to inspe
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{view}\NormalTok{(dat) }\CommentTok{\# open data in new tab}
-\FunctionTok{names}\NormalTok{(dar) }\CommentTok{\# print variable names to console}
+\FunctionTok{names}\NormalTok{(dat) }\CommentTok{\# print variable names to console}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1183,11 +1183,11 @@ Before we start looking at assumptions, we do need to run and store the initial 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{aov\_ez}\NormalTok{(}\AttributeTok{id =} \StringTok{"id"}\NormalTok{,}
-                       \AttributeTok{dv =} \StringTok{"memory"}\NormalTok{,}
-                       \AttributeTok{within =} \StringTok{"time"}\NormalTok{,}
-                       \AttributeTok{type =} \DecValTok{3}\NormalTok{,}
-                       \AttributeTok{include\_aov =} \ConstantTok{TRUE}\NormalTok{,}
-                       \AttributeTok{data =}\NormalTok{ mydata)}
+              \AttributeTok{dv =} \StringTok{"memory"}\NormalTok{,}
+              \AttributeTok{within =} \StringTok{"time"}\NormalTok{,}
+              \AttributeTok{type =} \DecValTok{3}\NormalTok{,}
+              \AttributeTok{include\_aov =} \ConstantTok{TRUE}\NormalTok{,}
+              \AttributeTok{data =}\NormalTok{ mydata)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1256,7 +1256,7 @@ This model simply tells us: Should we reject the null hypothesis.
 
 As this is a significant result, \emph{F}(2.15, 105.54) = 127.16, \emph{p}\textless.001, then we can reject our null hypothesis as at least one of the conditions differs. How they differ we do not yet know and you will learn about that next week\ldots{}
 
-\section{Part 2 - Exercise 5: Import the Data}\label{part-2---exercise-5-import-the-data-1}
+\section{Part 2 - Exercise 6: Import the Data}\label{part-2---exercise-6-import-the-data}
 
 \textbf{Part Two}
 
@@ -1268,14 +1268,13 @@ You can try this out yourself here: \href{https://qxmd.com/calculate/calculator_
 
 The research question here is a simple one: does the early bird really catch the worm? or more scientifically put\ldots who is more alert when completing an attention task at 9am.
 
-The independent variable is circadian chronotype, 3 levels.
-The dependent variable is \texttt{score} on an attention task from 0-100 (100 is highly alert/top score).
+The independent variable is circadian chronotype, 3 levels. The dependent variable is \texttt{score} on an attention task from 0-100 (100 is highly alert/top score).
 
 \textbf{Import the data}
 
 The file is called \texttt{alert.csv}. Import the data file and save it as an object called \texttt{mydata1} (as to not overwrite anything from Part 1 in case you want to look back)
 
-\section{Exercise 6: Check Descriptives}\label{exercise-6-check-descriptives}
+\section{Exercise 7: Check Descriptives}\label{exercise-7-check-descriptives}
 
 Amend the code below to produce descriptive statistics.
 
@@ -1291,6 +1290,15 @@ Amend the code below to produce descriptive statistics.
 \end{Highlighting}
 \end{Shaded}
 
+Change:
+
+\begin{itemize}
+\item
+  \texttt{NULL1} to the variable you want to split the data by. This should be the independent variable. This should be the dependent variable as it is names in \texttt{mydata1}.
+\item
+  \texttt{NULL2} to the variable you want to calculate the mean and sd for. This should be the dependent variable as it is names in \texttt{mydata1}.
+\end{itemize}
+
 Also use this code to visualise the data to see what is going on.
 
 \begin{Shaded}
@@ -1303,16 +1311,7 @@ Also use this code to visualise the data to see what is going on.
 \end{Highlighting}
 \end{Shaded}
 
-Change:
-
-\begin{itemize}
-\item
-  \texttt{NULL1} to the variable you want to split the data by. This should be the independent variable. This should be the dependent variable as it is names in \texttt{mydata1}.
-\item
-  \texttt{NULL2} to the variable you want to calculate the mean and sd for. This should be the dependent variable as it is names in \texttt{mydata1}.
-\end{itemize}
-
-\section{Exercise 7: Check Assumptions}\label{exercise-7-check-assumptions-1}
+\section{Exercise 8: Check Assumptions}\label{exercise-8-check-assumptions}
 
 Before we start looking at assumptions, we do need to run and store the initial ANOVA model. There are \textbf{four} \texttt{NULL} values you need to change in the code below to match your new data set.
 
@@ -1370,7 +1369,7 @@ Run and interpret Levene's test using the code below:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Exercise 8: Interpret the ANOVA Model}\label{exercise-8-interpret-the-anova-model}
+\section{Exercise 9: Interpret the ANOVA Model}\label{exercise-9-interpret-the-anova-model}
 
 Use the code below to interpret the ANOVA model. Decide if the model is significant and whether you can reject the null hypothesis. Also check back at the descriptive statistics to see if you can work out what could be going on.
 
