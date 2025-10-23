@@ -42,3 +42,10 @@ part-2---exercise-6-import-the-data
 exercise-7-check-descriptives
 exercise-8-check-assumptions
 exercise-9-interpret-the-anova-model
+workshop-5-one-way-anova-post-hocs-contrasts-write-up
+exercise-1-import-data-and-run-model
+exercise-2-estimated-marginal-means-emms
+part-2---exercise-3-import-the-data
+exercise-3-run-the-anova-model
+exercise-4-post-hoc-pairwise-comparisons
+exercise-5-introducting-the-violin-plot

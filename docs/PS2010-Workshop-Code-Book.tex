@@ -151,7 +151,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-10-20}
+\date{2025-10-23}
 
 \begin{document}
 \maketitle
@@ -1046,7 +1046,7 @@ Try yourself first, but if you need, check the solution below.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{Workshop 4: One-Way ANOVA (Model, designs, assumptions)}\label{workshop-4-one-way-anova-model-designs-assumptions}
+\chapter{Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)}\label{workshop-4-one-way-anova-model-designs-assumptions}
 
 \textbf{Aims:}
 
@@ -1376,6 +1376,207 @@ Use the code below to interpret the ANOVA model. Decide if the model is signific
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{mod1}\SpecialCharTok{$}\NormalTok{anova\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Well Done. You have reached the end of the workshop \\
+\end{longtable}
+
+\chapter{Workshop 5: One-Way ANOVA (Post-hocs, Contrasts, Write-up)}\label{workshop-5-one-way-anova-post-hocs-contrasts-write-up}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\tightlist
+\item
+  Practice using a post-hoc test to interpret an ANOVA
+\item
+  Practice using a planned contrast to interpret an ANOVA result.
+\item
+  Practice writing-up the results from an ANOVA, using APA style.
+\end{itemize}
+
+\textbf{Part One}
+
+\section{Exercise 1: Import Data and Run Model}\label{exercise-1-import-data-and-run-model}
+
+Last week you ran a one-way repeated measures ANOVA looking at memory assessment score over time. This week you will need the same dataset and the code (below) to run the initial model.
+
+Remember - you already checked the assumptions \textbf{and} the ANOVA model was significant, in which case you will now practice using a planned contrast.
+
+To save time, use the code below to load necessary packages, import the data, and run the model. Try running \textbf{ALL} of this code at once to save time (highlight it all and run it). Make sure you working directory is set up correctly first to find the \texttt{mci.csv} file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"afex"}\NormalTok{) }\CommentTok{\# install if needed}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"car"}\NormalTok{) }\CommentTok{\#install if needed}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(afex)}
+\FunctionTok{library}\NormalTok{(car)}
+
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"mci.csv"}\NormalTok{)}
+\NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ year1}\SpecialCharTok{:}\NormalTok{year4,}
+               \AttributeTok{names\_to =} \StringTok{"time"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"memory"}\NormalTok{)}
+               
+\NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{aov\_ez}\NormalTok{(}\AttributeTok{id =} \StringTok{"id"}\NormalTok{,}
+              \AttributeTok{dv =} \StringTok{"memory"}\NormalTok{,}
+              \AttributeTok{within =} \StringTok{"time"}\NormalTok{,}
+              \AttributeTok{type =} \DecValTok{3}\NormalTok{,}
+              \AttributeTok{include\_aov =} \ConstantTok{TRUE}\NormalTok{,}
+              \AttributeTok{data =}\NormalTok{ mydata)}
+              
+\NormalTok{mod}\SpecialCharTok{$}\NormalTok{anova\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 2: Estimated Marginal Means (EMMs)}\label{exercise-2-estimated-marginal-means-emms}
+
+The code above should import the data, switch it to long format, and run the model.
+
+As the model was significant, we need to pull out the estimated marginal means.
+
+We need a specific package for this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(emmeans) }\CommentTok{\# install if needed.}
+\FunctionTok{library}\NormalTok{(emmeans)}
+\end{Highlighting}
+\end{Shaded}
+
+Next, pull out the EMMs and save them as an object called \texttt{emms}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{emms }\OtherTok{\textless{}{-}} \FunctionTok{emmeans}\NormalTok{(mod, }\SpecialCharTok{\textasciitilde{}}\NormalTok{ time)}
+\end{Highlighting}
+\end{Shaded}
+
+Now let's say that the alternate hypothesis for this study was that there would be a linear decline in memory scores over time, we could use a polynomial contrast. This will look for a trend. Polynomial contrasts are only suitable for an independent variable which could be considered ``continuous'' in nature, e.g., time point.
+
+Use the code below to run the contrast.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{poly }\OtherTok{\textless{}{-}} \FunctionTok{contrast}\NormalTok{(emms, }\AttributeTok{method =} \StringTok{"poly"}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(poly) }\CommentTok{\# print the results to the console}
+\end{Highlighting}
+\end{Shaded}
+
+Look through the output. Remember, you should look for \emph{p}-values that are less than .05 (\emph{p} \textless{} .05).
+
+Is there a significant linear, quadratic, or cubic trend?
+
+Additionally, use the code below to visualise this.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#let\textquotesingle{}s visualise the data to help our interpretation}
+\FunctionTok{ggplot}\NormalTok{(mydata\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ score, }\AttributeTok{fill =}\NormalTok{ time)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{geom =} \StringTok{"line"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{group =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}  \CommentTok{\# line for mean}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot of Memory Score Across Time"}\NormalTok{,  }\CommentTok{\# add a title}
+       \AttributeTok{x =} \StringTok{"Time Point"}\NormalTok{,  }\CommentTok{\# X{-}axis label}
+       \AttributeTok{y =} \StringTok{"Memory Score"}\NormalTok{)  }\CommentTok{\# Y{-}axis label}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Part 2 - Exercise 3: Import the Data}\label{part-2---exercise-3-import-the-data}
+
+\textbf{Part Two}
+
+Part two of this workshop will use the same dataset and ANOVA model from part two of workshop 4 (last week).
+
+Ensure you have the correct data file loaded.
+
+The file is called \texttt{alert.csv}. Import the data file and save it as an object called \texttt{mydata1} (as to not overwrite anything from Part 1 in case you want to look back).
+
+\section{Exercise 3: Run the ANOVA Model}\label{exercise-3-run-the-anova-model}
+
+Next, run the ANOVA model again and save it as an object.
+
+We will save the model as an object called \texttt{mod1}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod1 }\OtherTok{\textless{}{-}} \FunctionTok{aov\_ez}\NormalTok{(}\AttributeTok{id =} \StringTok{"id"}\NormalTok{,}
+              \AttributeTok{dv =} \StringTok{"score"}\NormalTok{,}
+              \AttributeTok{between =} \StringTok{"group"}\NormalTok{,}
+              \AttributeTok{type =} \DecValTok{3}\NormalTok{,}
+              \AttributeTok{include\_aov =} \ConstantTok{TRUE}\NormalTok{,}
+              \AttributeTok{data =}\NormalTok{ mydata1)}
+              
+\NormalTok{mod1}\SpecialCharTok{$}\NormalTok{anova\_table}
+\end{Highlighting}
+\end{Shaded}
+
+Last week you would have seen that the model was significant (p-value was less than .05). This means we reject the null hypothesis and at least \textbf{one} of the groups are signficiantly different.
+
+\section{Exercise 4: Post-hoc Pairwise Comparisons}\label{exercise-4-post-hoc-pairwise-comparisons}
+
+To run post-hoc tests, you first need to pull out the estimated marginal means using emmeans() and apply the necessary p-value adjustment.
+
+For this exercise, use the Holm adjustment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{emmeans}\NormalTok{(mod1,}
+\NormalTok{        pairwise }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group,}
+        \AttributeTok{adjust =} \StringTok{"holm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Look at the output and interpret it. Which conditions differ from one another? Remember to look for \emph{p}-values that are less than .05.
+
+Also look for effect sizes, so you can report them alongside the rest of your analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cohens\_d}\NormalTok{(mydata1, score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group)}
+\end{Highlighting}
+\end{Shaded}
+
+Use a box plot to also help your interpretation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#how about a box plot too}
+
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ group, }\AttributeTok{y =}\NormalTok{ alert, }\AttributeTok{fill =}\NormalTok{ group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 5: Introducting the Violin Plot}\label{exercise-5-introducting-the-violin-plot}
+
+Previously, you have looked at density plots and box plots. Ever wondered if there was a handy way to look at both the distributions and the box plot at the same time? No, probably not. Well I will show you anyway.
+
+Use this code to generate a violin plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ group, }\AttributeTok{y =}\NormalTok{ score, }\AttributeTok{fill =}\NormalTok{ group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{trim =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# violin plot without trimming tails}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# overlay a boxplot for additional summary statistics}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# Classic theme}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Violin Plot of Alertness Score by Group"}\NormalTok{,  }\CommentTok{\# add a title}
+       \AttributeTok{x =} \StringTok{"Group"}\NormalTok{,  }\CommentTok{\# x{-}axis label}
+       \AttributeTok{y =} \StringTok{"Altertness Score"}\NormalTok{)  }\CommentTok{\# y{-}axis label}
 \end{Highlighting}
 \end{Shaded}
 
