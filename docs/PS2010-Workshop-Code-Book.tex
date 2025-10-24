@@ -151,7 +151,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-10-23}
+\date{2025-10-24}
 
 \begin{document}
 \maketitle
@@ -1546,6 +1546,7 @@ Also look for effect sizes, so you can report them alongside the rest of your an
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rstatix)}
 \FunctionTok{cohens\_d}\NormalTok{(mydata1, score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group)}
 \end{Highlighting}
 \end{Shaded}
@@ -1556,7 +1557,7 @@ Use a box plot to also help your interpretation:
 \begin{Highlighting}[]
 \CommentTok{\#how about a box plot too}
 
-\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ group, }\AttributeTok{y =}\NormalTok{ alert, }\AttributeTok{fill =}\NormalTok{ group)) }\SpecialCharTok{+}
+\FunctionTok{ggplot}\NormalTok{(mydata1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ group, }\AttributeTok{y =}\NormalTok{ score, }\AttributeTok{fill =}\NormalTok{ group)) }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
