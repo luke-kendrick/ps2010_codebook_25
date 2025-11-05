@@ -1,0 +1,136 @@
+# Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions
+
+**Aims:**
+
+-   To practice running and interpreting a factorial ANOVA for an independent measures design.
+-   To practice plotting an interaction using `afex_plot`.
+-   To practice conducting simple effects analysis to break down and interpret an interaction.
+
+## Exercise 1: Import Data
+
+Before begging make sure you load the relevant packages.
+
+```r
+library(tidyverse)
+library(afex)
+```
+
+The data set this week includes data from a study looking at level of anxiety in young adults who were either rare, regular, or problematic social media users. Participants were then randomly assigned to a notification condition--whether notifications were switched off or turned on.
+
+
+Import `socialmedia.csv` and inspect the data set, making note of the variable names.
+
+```r
+mydata <- read_csv(NULL)
+view(mydata)
+names(mydata)
+
+#we also need to ensure any factors are coded as `factor`
+mydata$use <- factor(mydata$use)
+mydata$notify <- factor(mydata$notify)
+```
+
+## Exercise 2:
+
+HELP! Before we progress we need to run descriptive statistics. However, the code below is broken and incomplete. Fix the code in order to successfully generate the descriptive stats. There are FOUR issues to resolve. 
+
+Try running the code as it is first and check what the error message says.
+
+```r
+desc <- data %>%
+  group.by(use, notify) %>%
+  summarise(
+    mean_anxiety = mean(anx),
+    sd_anxiety = sd(axn),
+    n = n())
+    
+view(des)
+```
+
+Box plots are a nice way to visually inspect the data
+
+```r
+ggplot(mydata, aes(x = use, y = anx, fill = notify)) +
+  geom_boxplot() +
+  theme_classic()
+```
+
+## Exercise 3: Run the ANOVA Model
+
+Using `aov_ez()` run the ANOVA model. You should replace `NULL` where necessary to match the data set in this workshop.
+
+```r
+mod <- aov_ez(id = "NULL",
+              dv = "NULL",
+              between = c("NULL, "NULL"),
+              type = 3,
+              include_aov = TRUE,
+              data = NULL)
+```
+
+Once you have successfully run the model, an object called `mod` should now appear in the environment panel. Let's interpret the model
+
+```r
+mod$anova_table
+```
+
+## Exercise 4: Plot the Interaction
+
+It seems as though there is a significant interaction.
+
+```r
+afex_plot(object = mod, 
+          x = "use", 
+          trace = "notify",
+          legend_title = "Notification",
+          error = "between",
+          factor_levels = list(use = c("rare", "regular", "problematic"))) + 
+  theme_classic()
+```
+
+Inspect the plot and begin to try and interpret what might be driving the significant interaction?
+
+## Exercise 5: Simple Effects Analysis (Pairwise)
+
+```r
+library(emmeans)
+emms <- emmeans(mod, ~ use*notify)
+
+contrasts <- contrast(emms,
+          interaction = "pairwise", 
+          simple = "each", 
+          combine = FALSE, 
+          adjust = "holm")
+```
+
+The code above with firstly pull out the estimated marginal means (EMMs) before running simple pairwise comparisons with a Holm correction, and saving them as an object called `contrasts`
+
+Next, print and interpret the contrasts.
+
+```r
+print(contrasts)
+```
+
+## Exercise 6: Cohen's d for Simple Effects
+
+We have three pairwise comparisons and so we need three effect sizes.
+
+```r
+# compare notifications for the rare group
+cohens_d(anx ~ notify, 
+         data = filter(mydata, use == "rare"), 
+         paired = FALSE)
+# compare notifications for the regular group
+cohens_d(anx ~ notify, 
+         data = filter(mydata, use == "regular"), 
+         paired = FALSE)
+# compare notifications for the problematic group
+# use the examples above to replace `NULL`
+cohens_d(NULL ~ NULL, 
+         data = filter(NULL, NULL == "NULL"), 
+         paired = FALSE)
+```
+
+
+
+

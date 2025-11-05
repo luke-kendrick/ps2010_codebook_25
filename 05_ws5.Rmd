@@ -29,7 +29,7 @@ library(car)
 dat <- read_csv("mci.csv")
 mydata <- dat %>%
 
-  pivot_longer(cols = year1:year4,
+pivot_longer(cols = year1:year4,
                names_to = "time",
                values_to = "memory")
                
@@ -52,7 +52,7 @@ As the model was significant, we need to pull out the estimated marginal means.
 We need a specific package for this:
 
 ``` r
-install.packages(emmeans) # install if needed.
+install.packages("emmeans") # install if needed.
 library(emmeans)
 ```
 
@@ -80,8 +80,8 @@ Additionally, use the code below to visualise this.
 
 ``` r
 #let's visualise the data to help our interpretation
-ggplot(mydata_long, aes(x = time, y = score, fill = time)) +
-  stat_summary(fun = mean, geom = "line", color = "black", size = 1, aes(group = 1)) +  # line for mean
+ggplot(mydata, aes(x = time, y = memory, fill = time)) +
+  stat_summary(fun = mean, geom = "line", color = "black", size = 1, aes(group = 1)) + 
   theme_classic() +
   labs(title = "Plot of Memory Score Across Time",  # add a title
        x = "Time Point",  # X-axis label
@@ -98,7 +98,7 @@ Ensure you have the correct data file loaded.
 
 The file is called `alert.csv`. Import the data file and save it as an object called `mydata1` (as to not overwrite anything from Part 1 in case you want to look back).
 
-## Exercise 3: Run the ANOVA Model
+## Exercise 4: Run the ANOVA Model
 
 Next, run the ANOVA model again and save it as an object.
 
@@ -117,7 +117,7 @@ mod1$anova_table
 
 Last week you would have seen that the model was significant (p-value was less than .05). This means we reject the null hypothesis and at least **one** of the groups are signficiantly different.
 
-## Exercise 4: Post-hoc Pairwise Comparisons
+## Exercise 5: Post-hoc Pairwise Comparisons
 
 To run post-hoc tests, you first need to pull out the estimated marginal means using emmeans() and apply the necessary p-value adjustment.
 
@@ -148,7 +148,7 @@ ggplot(mydata1, aes(x = group, y = score, fill = group)) +
   theme_classic()
 ```
 
-## Exercise 5: Introducting the Violin Plot
+## Exercise 6: Introducting the Violin Plot
 
 Previously, you have looked at density plots and box plots. Ever wondered if there was a handy way to look at both the distributions and the box plot at the same time? No, probably not. Well I will show you anyway.
 
@@ -163,6 +163,7 @@ ggplot(mydata1, aes(x = group, y = score, fill = group)) +
        x = "Group",  # x-axis label
        y = "Altertness Score")  # y-axis label
 ```
+Mow answer the questions on the Workshop Question Sheet
 
 ---
 Well Done. You have reached the end of the workshop

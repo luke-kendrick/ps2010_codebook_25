@@ -151,7 +151,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-10-24}
+\date{2025-11-05}
 
 \begin{document}
 \maketitle
@@ -1427,7 +1427,7 @@ To save time, use the code below to load necessary packages, import the data, an
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"mci.csv"}\NormalTok{)}
 \NormalTok{mydata }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%}
 
-  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ year1}\SpecialCharTok{:}\NormalTok{year4,}
+\FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =}\NormalTok{ year1}\SpecialCharTok{:}\NormalTok{year4,}
                \AttributeTok{names\_to =} \StringTok{"time"}\NormalTok{,}
                \AttributeTok{values\_to =} \StringTok{"memory"}\NormalTok{)}
                
@@ -1452,7 +1452,7 @@ We need a specific package for this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(emmeans) }\CommentTok{\# install if needed.}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"emmeans"}\NormalTok{) }\CommentTok{\# install if needed.}
 \FunctionTok{library}\NormalTok{(emmeans)}
 \end{Highlighting}
 \end{Shaded}
@@ -1486,8 +1486,8 @@ Additionally, use the code below to visualise this.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#let\textquotesingle{}s visualise the data to help our interpretation}
-\FunctionTok{ggplot}\NormalTok{(mydata\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ score, }\AttributeTok{fill =}\NormalTok{ time)) }\SpecialCharTok{+}
-  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{geom =} \StringTok{"line"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{group =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}  \CommentTok{\# line for mean}
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ memory, }\AttributeTok{fill =}\NormalTok{ time)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{geom =} \StringTok{"line"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{group =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot of Memory Score Across Time"}\NormalTok{,  }\CommentTok{\# add a title}
        \AttributeTok{x =} \StringTok{"Time Point"}\NormalTok{,  }\CommentTok{\# X{-}axis label}
@@ -1505,7 +1505,7 @@ Ensure you have the correct data file loaded.
 
 The file is called \texttt{alert.csv}. Import the data file and save it as an object called \texttt{mydata1} (as to not overwrite anything from Part 1 in case you want to look back).
 
-\section{Exercise 3: Run the ANOVA Model}\label{exercise-3-run-the-anova-model}
+\section{Exercise 4: Run the ANOVA Model}\label{exercise-4-run-the-anova-model}
 
 Next, run the ANOVA model again and save it as an object.
 
@@ -1526,7 +1526,7 @@ We will save the model as an object called \texttt{mod1}.
 
 Last week you would have seen that the model was significant (p-value was less than .05). This means we reject the null hypothesis and at least \textbf{one} of the groups are signficiantly different.
 
-\section{Exercise 4: Post-hoc Pairwise Comparisons}\label{exercise-4-post-hoc-pairwise-comparisons}
+\section{Exercise 5: Post-hoc Pairwise Comparisons}\label{exercise-5-post-hoc-pairwise-comparisons}
 
 To run post-hoc tests, you first need to pull out the estimated marginal means using emmeans() and apply the necessary p-value adjustment.
 
@@ -1563,7 +1563,7 @@ Use a box plot to also help your interpretation:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Exercise 5: Introducting the Violin Plot}\label{exercise-5-introducting-the-violin-plot}
+\section{Exercise 6: Introducting the Violin Plot}\label{exercise-6-introducting-the-violin-plot}
 
 Previously, you have looked at density plots and box plots. Ever wondered if there was a handy way to look at both the distributions and the box plot at the same time? No, probably not. Well I will show you anyway.
 
@@ -1581,6 +1581,8 @@ Use this code to generate a violin plot:
 \end{Highlighting}
 \end{Shaded}
 
+Mow answer the questions on the Workshop Question Sheet
+
 \begin{longtable}[]{@{}l@{}}
 \toprule\noalign{}
 \endhead
@@ -1588,6 +1590,165 @@ Use this code to generate a violin plot:
 \endlastfoot
 Well Done. You have reached the end of the workshop \\
 \end{longtable}
+
+\chapter{Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions}\label{workshop-6-factorial-anova-factorial-designs-and-an-interactions}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\tightlist
+\item
+  To practice running and interpreting a factorial ANOVA for an independent measures design.
+\item
+  To practice plotting an interaction using \texttt{afex\_plot}.
+\item
+  To practice conducting simple effects analysis to break down and interpret an interaction.
+\end{itemize}
+
+\section{Exercise 1: Import Data}\label{exercise-1-import-data}
+
+Before begging make sure you load the relevant packages.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(afex)}
+\end{Highlighting}
+\end{Shaded}
+
+The data set this week includes data from a study looking at level of anxiety in young adults who were either rare, regular, or problematic social media users. Participants were then randomly assigned to a notification condition--whether notifications were switched off or turned on.
+
+Import \texttt{socialmedia.csv} and inspect the data set, making note of the variable names.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\ConstantTok{NULL}\NormalTok{)}
+\FunctionTok{view}\NormalTok{(mydata)}
+\FunctionTok{names}\NormalTok{(mydata)}
+
+\CommentTok{\#we also need to ensure any factors are coded as \textasciigrave{}factor\textasciigrave{}}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{use }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{use)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{notify }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{notify)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 2:}\label{exercise-2}
+
+HELP! Before we progress we need to run descriptive statistics. However, the code below is broken and incomplete. Fix the code in order to successfully generate the descriptive stats. There are FOUR issues to resolve.
+
+Try running the code as it is first and check what the error message says.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group.by}\NormalTok{(use, notify) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{mean\_anxiety =} \FunctionTok{mean}\NormalTok{(anx),}
+    \AttributeTok{sd\_anxiety =} \FunctionTok{sd}\NormalTok{(axn),}
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+    
+\FunctionTok{view}\NormalTok{(des)}
+\end{Highlighting}
+\end{Shaded}
+
+Box plots are a nice way to visually inspect the data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ use, }\AttributeTok{y =}\NormalTok{ anx, }\AttributeTok{fill =}\NormalTok{ notify)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 3: Run the ANOVA Model}\label{exercise-3-run-the-anova-model}
+
+Using \texttt{aov\_ez()} run the ANOVA model. You should replace \texttt{NULL} where necessary to match the data set in this workshop.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{aov\_ez}\NormalTok{(}\AttributeTok{id =} \StringTok{"NULL"}\NormalTok{,}
+              \AttributeTok{dv =} \StringTok{"NULL"}\NormalTok{,}
+              \AttributeTok{between =} \FunctionTok{c}\NormalTok{(}\StringTok{"NULL, "}\NormalTok{NULL}\StringTok{"),}
+\StringTok{              type = 3,}
+\StringTok{              include\_aov = TRUE,}
+\StringTok{              data = NULL)}
+\end{Highlighting}
+\end{Shaded}
+
+Once you have successfully run the model, an object called \texttt{mod} should now appear in the environment panel. Let's interpret the model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod}\SpecialCharTok{$}\NormalTok{anova\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 4: Plot the Interaction}\label{exercise-4-plot-the-interaction}
+
+It seems as though there is a significant interaction.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{afex\_plot}\NormalTok{(}\AttributeTok{object =}\NormalTok{ mod, }
+          \AttributeTok{x =} \StringTok{"use"}\NormalTok{, }
+          \AttributeTok{trace =} \StringTok{"notify"}\NormalTok{,}
+          \AttributeTok{legend\_title =} \StringTok{"Notification"}\NormalTok{,}
+          \AttributeTok{error =} \StringTok{"between"}\NormalTok{,}
+          \AttributeTok{factor\_levels =} \FunctionTok{list}\NormalTok{(}\AttributeTok{use =} \FunctionTok{c}\NormalTok{(}\StringTok{"rare"}\NormalTok{, }\StringTok{"regular"}\NormalTok{, }\StringTok{"problematic"}\NormalTok{))) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Inspect the plot and begin to try and interpret what might be driving the significant interaction?
+
+\section{Exercise 5: Simple Effects Analysis (Pairwise)}\label{exercise-5-simple-effects-analysis-pairwise}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(emmeans)}
+\NormalTok{emms }\OtherTok{\textless{}{-}} \FunctionTok{emmeans}\NormalTok{(mod, }\SpecialCharTok{\textasciitilde{}}\NormalTok{ use}\SpecialCharTok{*}\NormalTok{notify)}
+
+\NormalTok{contrasts }\OtherTok{\textless{}{-}} \FunctionTok{contrast}\NormalTok{(emms,}
+          \AttributeTok{interaction =} \StringTok{"pairwise"}\NormalTok{, }
+          \AttributeTok{simple =} \StringTok{"each"}\NormalTok{, }
+          \AttributeTok{combine =} \ConstantTok{FALSE}\NormalTok{, }
+          \AttributeTok{adjust =} \StringTok{"holm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The code above with firstly pull out the estimated marginal means (EMMs) before running simple pairwise comparisons with a Holm correction, and saving them as an object called \texttt{contrasts}
+
+Next, print and interpret the contrasts.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(contrasts)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise 6: Cohen's d for Simple Effects}\label{exercise-6-cohens-d-for-simple-effects}
+
+We have three pairwise comparisons and so we need three effect sizes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# compare notifications for the rare group}
+\FunctionTok{cohens\_d}\NormalTok{(anx }\SpecialCharTok{\textasciitilde{}}\NormalTok{ notify, }
+         \AttributeTok{data =} \FunctionTok{filter}\NormalTok{(mydata, use }\SpecialCharTok{==} \StringTok{"rare"}\NormalTok{), }
+         \AttributeTok{paired =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\# compare notifications for the regular group}
+\FunctionTok{cohens\_d}\NormalTok{(anx }\SpecialCharTok{\textasciitilde{}}\NormalTok{ notify, }
+         \AttributeTok{data =} \FunctionTok{filter}\NormalTok{(mydata, use }\SpecialCharTok{==} \StringTok{"regular"}\NormalTok{), }
+         \AttributeTok{paired =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\# compare notifications for the problematic group}
+\CommentTok{\# use the examples above to replace \textasciigrave{}NULL\textasciigrave{}}
+\FunctionTok{cohens\_d}\NormalTok{(}\ConstantTok{NULL} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NULL}\NormalTok{, }
+         \AttributeTok{data =} \FunctionTok{filter}\NormalTok{(}\ConstantTok{NULL}\NormalTok{, }\ConstantTok{NULL} \SpecialCharTok{==} \StringTok{"NULL"}\NormalTok{), }
+         \AttributeTok{paired =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 
 \bibliography{book.bib,packages.bib}
 

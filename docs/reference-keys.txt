@@ -46,6 +46,13 @@ workshop-5-one-way-anova-post-hocs-contrasts-write-up
 exercise-1-import-data-and-run-model
 exercise-2-estimated-marginal-means-emms
 part-2---exercise-3-import-the-data
+exercise-4-run-the-anova-model
+exercise-5-post-hoc-pairwise-comparisons
+exercise-6-introducting-the-violin-plot
+workshop-6-factorial-anova-factorial-designs-and-an-interactions
+exercise-1-import-data
+exercise-2
 exercise-3-run-the-anova-model
-exercise-4-post-hoc-pairwise-comparisons
-exercise-5-introducting-the-violin-plot
+exercise-4-plot-the-interaction
+exercise-5-simple-effects-analysis-pairwise
+exercise-6-cohens-d-for-simple-effects

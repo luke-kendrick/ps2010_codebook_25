@@ -1,7 +1,7 @@
 ---
 title: "PS2010 Workshop Code Book"
 author: "Luke Kendrick"
-date: "2025-10-24"
+date: "2025-11-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography:
