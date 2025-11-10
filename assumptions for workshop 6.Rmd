@@ -1,0 +1,37 @@
+## Exercise 6: Check Model Assumptions
+
+For this type of design, we can check normality of residuals and homogeneity of variance (similar to a one-way ANOVA for an independent measures design).
+
+Use the code below to generate plots to visually inspect the data and use statistical tests to check these two assumptions.
+
+You should decide if the assumptions of normality and homogeneity were met.
+
+```r
+library(performance) # might need installing if on your own device.
+
+#Normality plots
+check_model(mod)
+check_normality(mod)
+
+#Homogeneity of variance
+check_homogeneity(mod, method = "levene")
+plot(check_homogeneity(mod, method = "levene"))
+```
+
+If you experience issues with displaying the plots above using the `performance` package, here is some alternative code which will do the same.
+
+<details>
+  <summary>Click me</summary>
+
+```r
+# testing normality, looking at normal distribution of residuals from the model.
+residuals <- residuals(mod) #pulls residuals from the model
+qqPlot(residuals) #produces a qq-plot of residuals
+hist(residuals, breaks = 20, main = "Histogram of Residuals", xlab = "Residuals", col = "lightblue") #histogram of residuals
+shapiro.test(residuals) #Shapiro test for residuals
+
+# testing homogeneity of variance
+library(car)
+leveneTest(anx ~ usage*notify, mydata)
+```
+</details>
