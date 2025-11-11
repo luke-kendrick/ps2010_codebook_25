@@ -163,20 +163,22 @@
 </h2>
 <p>We have three pairwise comparisons and so we need three effect sizes.</p>
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># compare notifications for the rare group</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">anx</span> <span class="op">~</span> <span class="va">notify</span>, </span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># compare notifications for the rare group</span></span>
+<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">anx</span> <span class="op">~</span> <span class="va">notify</span>, </span>
 <span>         data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="va">use</span> <span class="op">==</span> <span class="st">"rare"</span><span class="op">)</span>, </span>
 <span>         paired <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co"># compare notifications for the regular group</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">anx</span> <span class="op">~</span> <span class="va">notify</span>, </span>
+<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">anx</span> <span class="op">~</span> <span class="va">notify</span>, </span>
 <span>         data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="va">use</span> <span class="op">==</span> <span class="st">"regular"</span><span class="op">)</span>, </span>
 <span>         paired <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co"># compare notifications for the problematic group</span></span>
 <span><span class="co"># use the examples above to replace `NULL`</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span>, </span>
+<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span>, </span>
 <span>         data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="cn">NULL</span> <span class="op">==</span> <span class="st">"NULL"</span><span class="op">)</span>, </span>
 <span>         paired <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>Using the output from exercises 3-6 above, answer questions 3.1-3.5 in the work sheet.</p>
+<p>Using the output from exercises 3-6 above, answer questions 3.1-3.5 in the worksheet.</p>
 <div class="inline-table"><table class="table table-sm"><tbody><tr>
 <td>Well Done. You have reached the end of the workshop</td>
 </tr></tbody></table></div>

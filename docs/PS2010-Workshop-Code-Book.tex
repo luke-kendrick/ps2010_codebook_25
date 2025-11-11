@@ -1735,6 +1735,8 @@ We have three pairwise comparisons and so we need three effect sizes.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(effectsize)}
+
 \CommentTok{\# compare notifications for the rare group}
 \FunctionTok{cohens\_d}\NormalTok{(anx }\SpecialCharTok{\textasciitilde{}}\NormalTok{ notify, }
          \AttributeTok{data =} \FunctionTok{filter}\NormalTok{(mydata, use }\SpecialCharTok{==} \StringTok{"rare"}\NormalTok{), }
@@ -1751,7 +1753,7 @@ We have three pairwise comparisons and so we need three effect sizes.
 \end{Highlighting}
 \end{Shaded}
 
-Using the output from exercises 3-6 above, answer questions 3.1-3.5 in the work sheet.
+Using the output from exercises 3-6 above, answer questions 3.1-3.5 in the worksheet.
 
 \begin{longtable}[]{@{}l@{}}
 \toprule\noalign{}
