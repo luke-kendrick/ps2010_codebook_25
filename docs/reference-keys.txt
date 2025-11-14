@@ -56,3 +56,14 @@ exercise-3-run-the-anova-model
 exercise-4-plot-the-interaction
 exercise-5-simple-effects-analysis-pairwise
 exercise-6-cohens-d-for-simple-effects
+workshop-7-factorial-anova-factorial-designs-and-an-interactions
+exercise-1-import-data-1
+exercise-2-descriptives
+exercise-3-run-the-anova-model-1
+exercise-4-check-model-assumptions
+exercise-5-data-visualisation
+exercise-6-understanding-designs
+look-at-the-code-below-and-answer-the-questions
+look-at-the-code-below-and-answer-the-questions.
+exercise-7-significant-or-non-significant-that-is-the-question
+exercise-8-help-my-code-wont-work
