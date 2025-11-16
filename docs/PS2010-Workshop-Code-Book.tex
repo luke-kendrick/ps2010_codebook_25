@@ -151,7 +151,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-11-14}
+\date{2025-11-16}
 
 \begin{document}
 \maketitle
@@ -1763,7 +1763,7 @@ Using the output from exercises 3-6 above, answer questions 3.1-3.5 in the works
 Well Done. You have reached the end of the workshop \\
 \end{longtable}
 
-\chapter{Workshop 7: Factorial ANOVA: Factorial Designs and an Interactions}\label{workshop-7-factorial-anova-factorial-designs-and-an-interactions}
+\chapter{Workshop 7: Factorial ANOVA: Different Designs and Assumptions}\label{workshop-7-factorial-anova-different-designs-and-assumptions}
 
 \textbf{Aims:}
 
@@ -1857,6 +1857,8 @@ How about a boxplot too? However, you will need to decide what to place on the x
 \end{Highlighting}
 \end{Shaded}
 
+Answer question 2.1 on the worksheet.
+
 \section{Exercise 3: Run the ANOVA Model}\label{exercise-3-run-the-anova-model-1}
 
 Using \texttt{aov\_ez()} run the ANOVA model. You should replace \texttt{NULL} where necessary to match the data set in this workshop.
@@ -1883,6 +1885,10 @@ Once you have successfully run the model, an object called \texttt{mod} should n
 Is the interaction significant? Decide for yourself. If it is, you should use the code from exercises 4-6 from last week's workshop (workshop 6).
 
 If not, as the two independent variables each only have two levels, you can interpret any main effects by looking at the descriptive statistics and/or plots.
+
+Remember to amend the group\_by() line of code in the descriptives to work out the statistics for each independent variable separately (as shown in the lecture).
+
+Answer questions 3.1-3.5 on the worksheet.
 
 \section{Exercise 4: Check Model Assumptions}\label{exercise-4-check-model-assumptions}
 
@@ -1918,12 +1924,13 @@ Consider whether a figure like this might be useful for your upcoming lab report
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(longd, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ wellbeing, }\AttributeTok{fill =}\NormalTok{ exercise)) }\SpecialCharTok{+}
   \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{geom =} \StringTok{"bar"}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ mean\_se, }\AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ mean\_sdl, }\AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }
                \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}
     \AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,   }\CommentTok{\# leave this as NULL because APA figures do not use titles.}
     \AttributeTok{x =} \StringTok{"Time Point"}\NormalTok{,  }
-    \AttributeTok{y =} \StringTok{"Mean Wellbeing Score"}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{y =} \StringTok{"Mean Wellbeing Score"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Exercise"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"run"} \OtherTok{=} \StringTok{"slategray4"}\NormalTok{, }\StringTok{"swim"} \OtherTok{=} \StringTok{"slategray2"}\NormalTok{), }
                     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Run"}\NormalTok{, }\StringTok{"Swim"}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"before"} \OtherTok{=} \StringTok{"Before"}\NormalTok{, }\StringTok{"after"} \OtherTok{=} \StringTok{"After"}\NormalTok{)) }\SpecialCharTok{+}

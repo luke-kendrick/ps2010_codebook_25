@@ -1,33 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions | PS2010 Workshop Code Book</title>
-<meta name="author" content="Luke Kendrick">
-<meta name="generator" content="bookdown 0.42 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions | PS2010 Workshop Code Book">
-<meta property="og:type" content="book">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions | PS2010 Workshop Code Book">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 6 Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions | PS2010 Workshop Code Book</title>
+
+    <meta name="author" content="Luke Kendrick" />
+  
+   
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 6 Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions | PS2010 Workshop Code Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions | PS2010 Workshop Code Book" />
+  
+  
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.6.1/transition.js"></script>
+    <script src="libs/bs3compat-0.6.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.6.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<link rel="stylesheet" href="style.css">
-<meta name="description" content="Aims: To practice running and interpreting a factorial ANOVA for an independent measures design. To practice plotting an interaction using afex_plot. To practice conducting simple effects analysis...">
-<meta property="og:description" content="Aims: To practice running and interpreting a factorial ANOVA for an independent measures design. To practice plotting an interaction using afex_plot. To practice conducting simple effects analysis...">
-<meta name="twitter:description" content="Aims: To practice running and interpreting a factorial ANOVA for an independent measures design. To practice plotting an interaction using afex_plot. To practice conducting simple effects analysis...">
+      <link rel="stylesheet" href="style.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -39,29 +63,22 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Preface</a></li>
-<li><a class="" href="workshop-1-data-handling-skills.html"><span class="header-section-number">1</span> Workshop 1: Data Handling Skills</a></li>
-<li><a class="" href="workshop-2-summarising-and-describing-data.html"><span class="header-section-number">2</span> Workshop 2: Summarising and Describing Data</a></li>
-<li><a class="" href="workshop-3-t-tests.html"><span class="header-section-number">3</span> Workshop 3: t-tests</a></li>
-<li><a class="" href="workshop-4-one-way-anova-model-designs-assumptions.html"><span class="header-section-number">4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)</a></li>
-<li><a class="" href="workshop-5-one-way-anova-post-hocs-contrasts-write-up.html"><span class="header-section-number">5</span> Workshop 5: One-Way ANOVA (Post-hocs, Contrasts, Write-up)</a></li>
-<li><a class="active" href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html"><span class="header-section-number">6</span> Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions</a></li>
-<li><a class="" href="workshop-7-factorial-anova-factorial-designs-and-an-interactions.html"><span class="header-section-number">7</span> Workshop 7: Factorial ANOVA: Factorial Designs and an Interactions</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workshop-6-factorial-anova-factorial-designs-and-an-interactions" class="section level1" number="6">
-<h1>
-<span class="header-section-number">6</span> Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions<a class="anchor" aria-label="anchor" href="#workshop-6-factorial-anova-factorial-designs-and-an-interactions"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="workshop-6-factorial-anova-factorial-designs-and-an-interactions" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions</h1>
 <p><strong>Aims:</strong></p>
 <ul>
 <li>To practice running and interpreting a factorial ANOVA for an independent measures design.</li>
@@ -69,152 +86,129 @@
 <li>To practice conducting simple effects analysis to break down and interpret an interaction.</li>
 </ul>
 <div id="exercise-1-import-data" class="section level2" number="6.1">
-<h2>
-<span class="header-section-number">6.1</span> Exercise 1: Import Data<a class="anchor" aria-label="anchor" href="#exercise-1-import-data"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">6.1</span> Exercise 1: Import Data</h2>
 <p>Before beginning make sure you load the relevant packages.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://afex.singmann.science/">afex</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb78-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb78-2"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb78-2" tabindex="-1"></a><span class="fu">library</span>(afex)</span></code></pre></div>
 <p>The data set this week includes data from a study looking at level of anxiety in young adults who were either rare, regular, or problematic social media users. Participants were then randomly assigned to a notification condition–whether notifications were switched off or turned on.</p>
 <p>Import <code>socialmedia.csv</code> and inspect the data set, making note of the variable names.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#we also need to ensure any factors are coded as `factor`</span></span>
-<span><span class="va">mydata</span><span class="op">$</span><span class="va">use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">use</span><span class="op">)</span></span>
-<span><span class="va">mydata</span><span class="op">$</span><span class="va">notify</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">notify</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb79-1" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="cn">NULL</span>)</span>
+<span id="cb79-2"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb79-2" tabindex="-1"></a><span class="fu">view</span>(mydata)</span>
+<span id="cb79-3"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb79-3" tabindex="-1"></a><span class="fu">names</span>(mydata)</span>
+<span id="cb79-4"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb79-4" tabindex="-1"></a></span>
+<span id="cb79-5"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb79-5" tabindex="-1"></a><span class="co">#we also need to ensure any factors are coded as `factor`</span></span>
+<span id="cb79-6"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb79-6" tabindex="-1"></a>mydata<span class="sc">$</span>use <span class="ot">&lt;-</span> <span class="fu">factor</span>(mydata<span class="sc">$</span>use)</span>
+<span id="cb79-7"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb79-7" tabindex="-1"></a>mydata<span class="sc">$</span>notify <span class="ot">&lt;-</span> <span class="fu">factor</span>(mydata<span class="sc">$</span>notify)</span></code></pre></div>
 </div>
 <div id="exercise-2" class="section level2" number="6.2">
-<h2>
-<span class="header-section-number">6.2</span> Exercise 2:<a class="anchor" aria-label="anchor" href="#exercise-2"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">6.2</span> Exercise 2:</h2>
 <p>HELP! Before we progress we need to run descriptive statistics. However, the code below is broken and incomplete. Fix the code in order to successfully generate the descriptive stats. There are FOUR issues to resolve.</p>
 <p>Try running the code as it is first and check what the error message says.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">group.by</span><span class="op">(</span><span class="va">use</span>, <span class="va">notify</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
-<span>    mean_anxiety <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">anx</span><span class="op">)</span>,</span>
-<span>    sd_anxiety <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">axn</span><span class="op">)</span>,</span>
-<span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>    </span>
-<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">des</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb80-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb80-2" tabindex="-1"></a>  <span class="fu">group.by</span>(use, notify) <span class="sc">%&gt;%</span></span>
+<span id="cb80-3"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb80-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb80-4"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb80-4" tabindex="-1"></a>    <span class="at">mean_anxiety =</span> <span class="fu">mean</span>(anx),</span>
+<span id="cb80-5"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb80-5" tabindex="-1"></a>    <span class="at">sd_anxiety =</span> <span class="fu">sd</span>(axn),</span>
+<span id="cb80-6"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb80-6" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb80-7"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb80-7" tabindex="-1"></a>    </span>
+<span id="cb80-8"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb80-8" tabindex="-1"></a><span class="fu">view</span>(des)</span></code></pre></div>
 <p>Box plots are a nice way to visually inspect the data</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">use</span>, y <span class="op">=</span> <span class="va">anx</span>, fill <span class="op">=</span> <span class="va">notify</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb81-1" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x =</span> use, <span class="at">y =</span> anx, <span class="at">fill =</span> notify)) <span class="sc">+</span></span>
+<span id="cb81-2"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb81-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb81-3"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb81-3" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p>Answer question 2.1 on the worksheet.</p>
 </div>
 <div id="exercise-3-run-the-anova-model" class="section level2" number="6.3">
-<h2>
-<span class="header-section-number">6.3</span> Exercise 3: Run the ANOVA Model<a class="anchor" aria-label="anchor" href="#exercise-3-run-the-anova-model"><i class="fas fa-link"></i></a>
-</h2>
-<p>Using <code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez()</a></code> run the ANOVA model. You should replace <code>NULL</code> where necessary to match the data set in this workshop.</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"NULL"</span>,</span>
-<span>              dv <span class="op">=</span> <span class="st">"NULL"</span>,</span>
-<span>              between <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NULL"</span>, <span class="st">"NULL"</span><span class="op">)</span>,</span>
-<span>              type <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>              include_aov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>              data <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<h2><span class="header-section-number">6.3</span> Exercise 3: Run the ANOVA Model</h2>
+<p>Using <code>aov_ez()</code> run the ANOVA model. You should replace <code>NULL</code> where necessary to match the data set in this workshop.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb82-1" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">&quot;NULL&quot;</span>,</span>
+<span id="cb82-2"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb82-2" tabindex="-1"></a>              <span class="at">dv =</span> <span class="st">&quot;NULL&quot;</span>,</span>
+<span id="cb82-3"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb82-3" tabindex="-1"></a>              <span class="at">between =</span> <span class="fu">c</span>(<span class="st">&quot;NULL&quot;</span>, <span class="st">&quot;NULL&quot;</span>),</span>
+<span id="cb82-4"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb82-4" tabindex="-1"></a>              <span class="at">type =</span> <span class="dv">3</span>,</span>
+<span id="cb82-5"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb82-5" tabindex="-1"></a>              <span class="at">include_aov =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb82-6"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb82-6" tabindex="-1"></a>              <span class="at">data =</span> <span class="cn">NULL</span>)</span></code></pre></div>
 <p>Once you have successfully run the model, an object called <code>mod</code> should now appear in the environment panel. Let’s interpret the model</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span><span class="op">$</span><span class="va">anova_table</span></span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb83-1" tabindex="-1"></a>mod<span class="sc">$</span>anova_table</span></code></pre></div>
 </div>
 <div id="exercise-4-plot-the-interaction" class="section level2" number="6.4">
-<h2>
-<span class="header-section-number">6.4</span> Exercise 4: Plot the Interaction<a class="anchor" aria-label="anchor" href="#exercise-4-plot-the-interaction"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">6.4</span> Exercise 4: Plot the Interaction</h2>
 <p>It seems as though there is a significant interaction.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/afex/man/afex_plot.html">afex_plot</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">mod</span>, </span>
-<span>          x <span class="op">=</span> <span class="st">"use"</span>, </span>
-<span>          trace <span class="op">=</span> <span class="st">"notify"</span>,</span>
-<span>          legend_title <span class="op">=</span> <span class="st">"Notification"</span>,</span>
-<span>          error <span class="op">=</span> <span class="st">"between"</span>,</span>
-<span>          factor_levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rare"</span>, <span class="st">"regular"</span>, <span class="st">"problematic"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb84-1" tabindex="-1"></a><span class="fu">afex_plot</span>(<span class="at">object =</span> mod, </span>
+<span id="cb84-2"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb84-2" tabindex="-1"></a>          <span class="at">x =</span> <span class="st">&quot;use&quot;</span>, </span>
+<span id="cb84-3"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb84-3" tabindex="-1"></a>          <span class="at">trace =</span> <span class="st">&quot;notify&quot;</span>,</span>
+<span id="cb84-4"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb84-4" tabindex="-1"></a>          <span class="at">legend_title =</span> <span class="st">&quot;Notification&quot;</span>,</span>
+<span id="cb84-5"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb84-5" tabindex="-1"></a>          <span class="at">error =</span> <span class="st">&quot;between&quot;</span>,</span>
+<span id="cb84-6"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb84-6" tabindex="-1"></a>          <span class="at">factor_levels =</span> <span class="fu">list</span>(<span class="at">use =</span> <span class="fu">c</span>(<span class="st">&quot;rare&quot;</span>, <span class="st">&quot;regular&quot;</span>, <span class="st">&quot;problematic&quot;</span>))) <span class="sc">+</span> </span>
+<span id="cb84-7"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb84-7" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p>Inspect the plot and begin to try and interpret what might be driving the significant interaction?</p>
 </div>
 <div id="exercise-5-simple-effects-analysis-pairwise" class="section level2" number="6.5">
-<h2>
-<span class="header-section-number">6.5</span> Exercise 5: Simple Effects Analysis (Pairwise)<a class="anchor" aria-label="anchor" href="#exercise-5-simple-effects-analysis-pairwise"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvlenth.github.io/emmeans/">emmeans</a></span><span class="op">)</span></span>
-<span><span class="va">emms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">mod</span>, <span class="op">~</span> <span class="va">use</span><span class="op">*</span><span class="va">notify</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/contrast.html">contrast</a></span><span class="op">(</span><span class="va">emms</span>,</span>
-<span>          interaction <span class="op">=</span> <span class="st">"pairwise"</span>, </span>
-<span>          simple <span class="op">=</span> <span class="st">"each"</span>, </span>
-<span>          combine <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>          adjust <span class="op">=</span> <span class="st">"holm"</span><span class="op">)</span></span></code></pre></div>
+<h2><span class="header-section-number">6.5</span> Exercise 5: Simple Effects Analysis (Pairwise)</h2>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb85-1" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb85-2"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb85-2" tabindex="-1"></a>emms <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod, <span class="sc">~</span> use<span class="sc">*</span>notify)</span>
+<span id="cb85-3"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb85-3" tabindex="-1"></a></span>
+<span id="cb85-4"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb85-4" tabindex="-1"></a>contrasts <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emms,</span>
+<span id="cb85-5"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb85-5" tabindex="-1"></a>          <span class="at">interaction =</span> <span class="st">&quot;pairwise&quot;</span>, </span>
+<span id="cb85-6"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb85-6" tabindex="-1"></a>          <span class="at">simple =</span> <span class="st">&quot;each&quot;</span>, </span>
+<span id="cb85-7"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb85-7" tabindex="-1"></a>          <span class="at">combine =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb85-8"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb85-8" tabindex="-1"></a>          <span class="at">adjust =</span> <span class="st">&quot;holm&quot;</span>)</span></code></pre></div>
 <p>The code above with firstly pull out the estimated marginal means (EMMs) before running simple pairwise comparisons with a Holm correction, and saving them as an object called <code>contrasts</code></p>
 <p>Next, print and interpret the contrasts.</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">contrasts</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb86-1" tabindex="-1"></a><span class="fu">print</span>(contrasts)</span></code></pre></div>
 </div>
 <div id="exercise-6-cohens-d-for-simple-effects" class="section level2" number="6.6">
-<h2>
-<span class="header-section-number">6.6</span> Exercise 6: Cohen’s d for Simple Effects<a class="anchor" aria-label="anchor" href="#exercise-6-cohens-d-for-simple-effects"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">6.6</span> Exercise 6: Cohen’s d for Simple Effects</h2>
 <p>We have three pairwise comparisons and so we need three effect sizes.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># compare notifications for the rare group</span></span>
-<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">anx</span> <span class="op">~</span> <span class="va">notify</span>, </span>
-<span>         data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="va">use</span> <span class="op">==</span> <span class="st">"rare"</span><span class="op">)</span>, </span>
-<span>         paired <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co"># compare notifications for the regular group</span></span>
-<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">anx</span> <span class="op">~</span> <span class="va">notify</span>, </span>
-<span>         data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="va">use</span> <span class="op">==</span> <span class="st">"regular"</span><span class="op">)</span>, </span>
-<span>         paired <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co"># compare notifications for the problematic group</span></span>
-<span><span class="co"># use the examples above to replace `NULL`</span></span>
-<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span>, </span>
-<span>         data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="cn">NULL</span> <span class="op">==</span> <span class="st">"NULL"</span><span class="op">)</span>, </span>
-<span>         paired <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-1" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb87-2"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-2" tabindex="-1"></a></span>
+<span id="cb87-3"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-3" tabindex="-1"></a><span class="co"># compare notifications for the rare group</span></span>
+<span id="cb87-4"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-4" tabindex="-1"></a><span class="fu">cohens_d</span>(anx <span class="sc">~</span> notify, </span>
+<span id="cb87-5"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-5" tabindex="-1"></a>         <span class="at">data =</span> <span class="fu">filter</span>(mydata, use <span class="sc">==</span> <span class="st">&quot;rare&quot;</span>), </span>
+<span id="cb87-6"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-6" tabindex="-1"></a>         <span class="at">paired =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb87-7"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-7" tabindex="-1"></a><span class="co"># compare notifications for the regular group</span></span>
+<span id="cb87-8"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-8" tabindex="-1"></a><span class="fu">cohens_d</span>(anx <span class="sc">~</span> notify, </span>
+<span id="cb87-9"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-9" tabindex="-1"></a>         <span class="at">data =</span> <span class="fu">filter</span>(mydata, use <span class="sc">==</span> <span class="st">&quot;regular&quot;</span>), </span>
+<span id="cb87-10"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-10" tabindex="-1"></a>         <span class="at">paired =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb87-11"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-11" tabindex="-1"></a><span class="co"># compare notifications for the problematic group</span></span>
+<span id="cb87-12"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-12" tabindex="-1"></a><span class="co"># use the examples above to replace `NULL`</span></span>
+<span id="cb87-13"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-13" tabindex="-1"></a><span class="fu">cohens_d</span>(<span class="cn">NULL</span> <span class="sc">~</span> <span class="cn">NULL</span>, </span>
+<span id="cb87-14"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-14" tabindex="-1"></a>         <span class="at">data =</span> <span class="fu">filter</span>(<span class="cn">NULL</span>, <span class="cn">NULL</span> <span class="sc">==</span> <span class="st">&quot;NULL&quot;</span>), </span>
+<span id="cb87-15"><a href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html#cb87-15" tabindex="-1"></a>         <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Using the output from exercises 3-6 above, answer questions 3.1-3.5 in the worksheet.</p>
-<div class="inline-table"><table class="table table-sm"><tbody><tr>
+<table>
+<tbody>
+<tr>
 <td>Well Done. You have reached the end of the workshop</td>
-</tr></tbody></table></div>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="workshop-5-one-way-anova-post-hocs-contrasts-write-up.html"><span class="header-section-number">5</span> Workshop 5: One-Way ANOVA (Post-hocs, Contrasts, Write-up)</a></div>
-<div class="next"><a href="workshop-7-factorial-anova-factorial-designs-and-an-interactions.html"><span class="header-section-number">7</span> Workshop 7: Factorial ANOVA: Factorial Designs and an Interactions</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#workshop-6-factorial-anova-factorial-designs-and-an-interactions"><span class="header-section-number">6</span> Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions</a></li>
-<li><a class="nav-link" href="#exercise-1-import-data"><span class="header-section-number">6.1</span> Exercise 1: Import Data</a></li>
-<li><a class="nav-link" href="#exercise-2"><span class="header-section-number">6.2</span> Exercise 2:</a></li>
-<li><a class="nav-link" href="#exercise-3-run-the-anova-model"><span class="header-section-number">6.3</span> Exercise 3: Run the ANOVA Model</a></li>
-<li><a class="nav-link" href="#exercise-4-plot-the-interaction"><span class="header-section-number">6.4</span> Exercise 4: Plot the Interaction</a></li>
-<li><a class="nav-link" href="#exercise-5-simple-effects-analysis-pairwise"><span class="header-section-number">6.5</span> Exercise 5: Simple Effects Analysis (Pairwise)</a></li>
-<li><a class="nav-link" href="#exercise-6-cohens-d-for-simple-effects"><span class="header-section-number">6.6</span> Exercise 6: Cohen’s d for Simple Effects</a></li>
-</ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-11-14.</p>
+    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-11-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -223,5 +217,8 @@
 
 </div></div>
 </footer>
+
+
 </body>
+
 </html>
