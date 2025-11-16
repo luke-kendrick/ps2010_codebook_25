@@ -1,57 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Chapter 4 Workshop 4: One-Way ANOVA (Model, Designs, Assumptions) | PS2010 Workshop Code Book</title>
-
-    <meta name="author" content="Luke Kendrick" />
-  
-   
-   <meta name="generator" content="placeholder" />
-  <meta property="og:title" content="Chapter 4 Workshop 4: One-Way ANOVA (Model, Designs, Assumptions) | PS2010 Workshop Code Book" />
-  <meta property="og:type" content="book" />
-  
-  
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Workshop 4: One-Way ANOVA (Model, Designs, Assumptions) | PS2010 Workshop Code Book" />
-  
-  
-  
-  <!-- JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
-    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
-    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
-    <script src="libs/bs3compat-0.6.1/transition.js"></script>
-    <script src="libs/bs3compat-0.6.1/tabs.js"></script>
-    <script src="libs/bs3compat-0.6.1/bs3compat.js"></script>
-    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
-    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
-
-  <!-- CSS -->
-  <style type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Workshop 4: One-Way ANOVA (Model, Designs, Assumptions) | PS2010 Workshop Code Book</title>
+<meta name="author" content="Luke Kendrick">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Workshop 4: One-Way ANOVA (Model, Designs, Assumptions) | PS2010 Workshop Code Book">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Workshop 4: One-Way ANOVA (Model, Designs, Assumptions) | PS2010 Workshop Code Book">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-      <link rel="stylesheet" href="style.css" />
-  
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Aims: Practice running one-way ANOVAs for both repeated and independent measures designs. Practice checking ANOVA assumptions and interpreting the ANOVA model output. Part One Part one of today’s...">
+<meta property="og:description" content="Aims: Practice running one-way ANOVAs for both repeated and independent measures designs. Practice checking ANOVA assumptions and interpreting the ANOVA model output. Part One Part one of today’s...">
+<meta name="twitter:description" content="Aims: Practice running one-way ANOVAs for both repeated and independent measures designs. Practice checking ANOVA assumptions and interpreting the ANOVA model output. Part One Part one of today’s...">
 </head>
-
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
-    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -63,22 +39,29 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-      </form>
+</form>
 
-      <nav aria-label="Table of contents">
-        <h2>Table of contents</h2>
-        <div id="book-toc"></div>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="workshop-1-data-handling-skills.html"><span class="header-section-number">1</span> Workshop 1: Data Handling Skills</a></li>
+<li><a class="" href="workshop-2-summarising-and-describing-data.html"><span class="header-section-number">2</span> Workshop 2: Summarising and Describing Data</a></li>
+<li><a class="" href="workshop-3-t-tests.html"><span class="header-section-number">3</span> Workshop 3: t-tests</a></li>
+<li><a class="active" href="workshop-4-one-way-anova-model-designs-assumptions.html"><span class="header-section-number">4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)</a></li>
+<li><a class="" href="workshop-5-one-way-anova-post-hocs-contrasts-write-up.html"><span class="header-section-number">5</span> Workshop 5: One-Way ANOVA (Post-hocs, Contrasts, Write-up)</a></li>
+<li><a class="" href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html"><span class="header-section-number">6</span> Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions</a></li>
+<li><a class="" href="workshop-7-factorial-anova-different-designs-and-assumptions.html"><span class="header-section-number">7</span> Workshop 7: Factorial ANOVA: Different Designs and Assumptions</a></li>
+</ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+          
         </div>
       </nav>
-    </div>
-  </header>
-
-  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
-<div id="workshop-4-one-way-anova-model-designs-assumptions" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)</h1>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workshop-4-one-way-anova-model-designs-assumptions" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)<a class="anchor" aria-label="anchor" href="#workshop-4-one-way-anova-model-designs-assumptions"><i class="fas fa-link"></i></a>
+</h1>
 <p><strong>Aims:</strong></p>
 <ul>
 <li>Practice running one-way ANOVAs for both repeated and independent measures designs.</li>
@@ -90,30 +73,38 @@
 <p>This data set contains data from a new memory assessment used for individuals with MCI across a four year period (each participant was assessed once per year).</p>
 <p>Using a one-way ANOVA, can you determine what happens to memory scores over time?</p>
 <div id="exercise-1-import-the-data-3" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Exercise 1: Import the Data</h2>
+<h2>
+<span class="header-section-number">4.1</span> Exercise 1: Import the Data<a class="anchor" aria-label="anchor" href="#exercise-1-import-the-data-3"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Import the Data File</strong></p>
 <p>Before you begin you will need a few packages loaded.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb49-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># should already be installed.</span></span>
-<span id="cb49-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb49-2" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb49-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;afex&quot;</span>) <span class="co"># install if needed</span></span>
-<span id="cb49-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb49-4" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;car&quot;</span>) <span class="co">#install if needed</span></span>
-<span id="cb49-5"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb49-5" tabindex="-1"></a><span class="fu">library</span>(afex)</span>
-<span id="cb49-6"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb49-6" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># should already be installed.</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"afex"</span><span class="op">)</span> <span class="co"># install if needed</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span> <span class="co">#install if needed</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://afex.singmann.science/">afex</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span></code></pre></div>
 <p>Next import the data file and store it as an object called <code>dat</code>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb50-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;mci.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"mci.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="exercise-2-inspect-and-check-your-data-3" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Exercise 2: Inspect and Check Your Data</h2>
+<h2>
+<span class="header-section-number">4.2</span> Exercise 2: Inspect and Check Your Data<a class="anchor" aria-label="anchor" href="#exercise-2-inspect-and-check-your-data-3"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Take a look at your newly imported data file</strong></p>
 <p>Check the top right panel (the environment) and also use the code below to inspect your dataset.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb51-1" tabindex="-1"></a><span class="fu">view</span>(dat) <span class="co"># open data in new tab</span></span>
-<span id="cb51-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb51-2" tabindex="-1"></a><span class="fu">names</span>(dat) <span class="co"># print variable names to console</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="co"># open data in new tab</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="co"># print variable names to console</span></span></code></pre></div>
 <p>Is this data in wide format or long format?</p>
 <p>If the data is wide, you will need to convert it to long format using the code below.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb52-1" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb52-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb52-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> year1<span class="sc">:</span>year4,</span>
-<span id="cb52-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb52-3" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;time&quot;</span>,</span>
-<span id="cb52-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb52-4" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;memory&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">year1</span><span class="op">:</span><span class="va">year4</span>,</span>
+<span>               names_to <span class="op">=</span> <span class="st">"time"</span>,</span>
+<span>               values_to <span class="op">=</span> <span class="st">"memory"</span><span class="op">)</span></span></code></pre></div>
 <p>Here is an explanation of this code line by line. This one is a little tricky.</p>
 <ul>
 <li><p>First, create a new object called <code>mydata</code> and base it on the existing <code>dat</code> and then…</p></li>
@@ -122,36 +113,44 @@
 <li><p><code>values_to</code> should include a name you assign to the dependent variable. In this study it was memory assessment score, but we will just use <code>memory</code>.</p></li>
 </ul>
 <p>Run the code and then check <code>mydata</code> to see if it worked.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb53-1" tabindex="-1"></a><span class="fu">view</span>(mydata)</span>
-<span id="cb53-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb53-2" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div>
 <p>From now on we will only use the <code>mydata</code> object, as it is in long format.</p>
 </div>
 <div id="exercise-3-check-descriptives" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Exercise 3: Check Descriptives</h2>
+<h2>
+<span class="header-section-number">4.3</span> Exercise 3: Check Descriptives<a class="anchor" aria-label="anchor" href="#exercise-3-check-descriptives"><i class="fas fa-link"></i></a>
+</h2>
 <p>Using the code below, generate descriptive statistics to look at the mean memory score across time.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb54-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span> mydata <span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb54-2" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
-<span id="cb54-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb54-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m_memory =</span> <span class="fu">mean</span>(memory),</span>
-<span id="cb54-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb54-4" tabindex="-1"></a>            <span class="at">sd_memory =</span> <span class="fu">sd</span>(memory))</span>
-<span id="cb54-5"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb54-5" tabindex="-1"></a>            </span>
-<span id="cb54-6"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb54-6" tabindex="-1"></a><span class="fu">view</span>(desc) <span class="co"># view the descriptive stats</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>m_memory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">memory</span><span class="op">)</span>,</span>
+<span>            sd_memory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">memory</span><span class="op">)</span><span class="op">)</span></span>
+<span>            </span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">desc</span><span class="op">)</span> <span class="co"># view the descriptive stats</span></span></code></pre></div>
 <p>Also, visualise the data using a box plot or density plot.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb55-1" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> memory)) <span class="sc">+</span></span>
-<span id="cb55-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb55-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">memory</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>ggplot(mydata, aes(x = memory, fill = time)) +
   geom_density(alpha = .5)</code></pre>
-<p><code>facet_wrap()</code> is missing from the density plots, however, if you feel it would be beneficial to aid interpretation, you can add it.</p>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> is missing from the density plots, however, if you feel it would be beneficial to aid interpretation, you can add it.</p>
 </div>
 <div id="exercise-4-check-assumptions" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Exercise 4: Check Assumptions</h2>
+<h2>
+<span class="header-section-number">4.4</span> Exercise 4: Check Assumptions<a class="anchor" aria-label="anchor" href="#exercise-4-check-assumptions"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Run the ANOVA model</strong></p>
 <p>Before we start looking at assumptions, we do need to run and store the initial ANOVA model.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb57-1" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">&quot;id&quot;</span>,</span>
-<span id="cb57-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb57-2" tabindex="-1"></a>              <span class="at">dv =</span> <span class="st">&quot;memory&quot;</span>,</span>
-<span id="cb57-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb57-3" tabindex="-1"></a>              <span class="at">within =</span> <span class="st">&quot;time&quot;</span>,</span>
-<span id="cb57-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb57-4" tabindex="-1"></a>              <span class="at">type =</span> <span class="dv">3</span>,</span>
-<span id="cb57-5"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb57-5" tabindex="-1"></a>              <span class="at">include_aov =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb57-6"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb57-6" tabindex="-1"></a>              <span class="at">data =</span> mydata)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id"</span>,</span>
+<span>              dv <span class="op">=</span> <span class="st">"memory"</span>,</span>
+<span>              within <span class="op">=</span> <span class="st">"time"</span>,</span>
+<span>              type <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>              include_aov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>              data <span class="op">=</span> <span class="va">mydata</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Checking Normality</strong></p>
 <p>First, look to see if the assumption of normality was met. You should look at three things.</p>
 <ol style="list-style-type: decimal">
@@ -159,35 +158,42 @@
 <li>The histogram</li>
 <li>The Shapiro-Wilk test</li>
 </ol>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-1" tabindex="-1"></a><span class="co">#testing normality, looking at normal distribution of residuals from the model.</span></span>
-<span id="cb58-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-2" tabindex="-1"></a>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(mod) <span class="co">#pulls residuals from the model</span></span>
-<span id="cb58-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-3" tabindex="-1"></a></span>
-<span id="cb58-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-4" tabindex="-1"></a><span class="co"># produce QQ-Plot</span></span>
-<span id="cb58-5"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-5" tabindex="-1"></a><span class="fu">qqPlot</span>(residuals) <span class="co">#produces a qq-plot of residuals</span></span>
-<span id="cb58-6"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-6" tabindex="-1"></a></span>
-<span id="cb58-7"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-7" tabindex="-1"></a><span class="co"># produce histogram of residuals</span></span>
-<span id="cb58-8"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-8" tabindex="-1"></a><span class="fu">hist</span>(residuals, <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="st">&quot;Histogram of Residuals&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">col =</span> <span class="st">&quot;lightblue&quot;</span>) </span>
-<span id="cb58-9"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-9" tabindex="-1"></a></span>
-<span id="cb58-10"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-10" tabindex="-1"></a><span class="co"># Shapiro test on residuals</span></span>
-<span id="cb58-11"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb58-11" tabindex="-1"></a><span class="fu">shapiro.test</span>(residuals) <span class="co">#Shapiro test for residuals</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#testing normality, looking at normal distribution of residuals from the model.</span></span>
+<span><span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="co">#pulls residuals from the model</span></span>
+<span></span>
+<span><span class="co"># produce QQ-Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span> <span class="co">#produces a qq-plot of residuals</span></span>
+<span></span>
+<span><span class="co"># produce histogram of residuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">residuals</span>, breaks <span class="op">=</span> <span class="fl">20</span>, main <span class="op">=</span> <span class="st">"Histogram of Residuals"</span>, xlab <span class="op">=</span> <span class="st">"Residuals"</span>, col <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># Shapiro test on residuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span> <span class="co">#Shapiro test for residuals</span></span></code></pre></div>
 <p><strong>Checking Sphericity</strong></p>
 <p>To check sphericity, we need to produce the model output.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb59-1" tabindex="-1"></a><span class="fu">summary</span>(mod) <span class="co"># provides the output of the main ANOVA model with Sphericity output.</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="co"># provides the output of the main ANOVA model with Sphericity output.</span></span></code></pre></div>
 <p>Look through the output to find: “Mauchly Tests for Sphericity”.</p>
 <p>It will provide a test statistic, reported using <em>W</em> = XX.XX</p>
 <p>It will provide a <em>p</em>-value statistic. For this test, a non-significant <em>p</em>-value means the assumption was met. A non-significant <em>p</em>-value is one that is a larger value than .05. A significant <em>p</em>-value is one smaller than .05.</p>
 <p>It looks as though this <em>p</em>-value is smaller than .05 and so the assumption is violated. uh-oh!</p>
 </div>
 <div id="exercise-5-interpret-the-anova-model" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> Exercise 5: Interpret the ANOVA Model</h2>
+<h2>
+<span class="header-section-number">4.5</span> Exercise 5: Interpret the ANOVA Model<a class="anchor" aria-label="anchor" href="#exercise-5-interpret-the-anova-model"><i class="fas fa-link"></i></a>
+</h2>
 <p>For an easier and more streamlined output to interpret the model, use the code below:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb60-1" tabindex="-1"></a>mod<span class="sc">$</span>anova_table</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span><span class="op">$</span><span class="va">anova_table</span></span></code></pre></div>
 <p>You should interpret this the same way as was explained in the lecture. Particularly noting the <em>F</em>, degrees of freedom (two values), and <em>p</em>-value (noting whether it was significant or not).</p>
 <p>This model simply tells us: Should we reject the null hypothesis.</p>
 <p>As this is a significant result, <em>F</em>(2.15, 105.54) = 127.16, <em>p</em>&lt;.001, then we can reject our null hypothesis as at least one of the conditions differs. How they differ we do not yet know and you will learn about that next week…</p>
 </div>
 <div id="part-2---exercise-6-import-the-data" class="section level2" number="4.6">
-<h2><span class="header-section-number">4.6</span> Part 2 - Exercise 6: Import the Data</h2>
+<h2>
+<span class="header-section-number">4.6</span> Part 2 - Exercise 6: Import the Data<a class="anchor" aria-label="anchor" href="#part-2---exercise-6-import-the-data"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Part Two</strong></p>
 <p>In this part of the workshop you should conduct a one-way ANOVA for an independent measures design. The general interpretation is the same as above, but as covered in the lecture, the assumptions differ slightly.</p>
 <p>In this study, participants were placed into one of three groups based on their circadian chronotype: in other words, are they an early bird (morning person), night owl (evening person), or neither (do not fit into either category). This means we have three independent groups.</p>
@@ -198,37 +204,44 @@
 <p>The file is called <code>alert.csv</code>. Import the data file and save it as an object called <code>mydata1</code> (as to not overwrite anything from Part 1 in case you want to look back)</p>
 </div>
 <div id="exercise-7-check-descriptives" class="section level2" number="4.7">
-<h2><span class="header-section-number">4.7</span> Exercise 7: Check Descriptives</h2>
+<h2>
+<span class="header-section-number">4.7</span> Exercise 7: Check Descriptives<a class="anchor" aria-label="anchor" href="#exercise-7-check-descriptives"><i class="fas fa-link"></i></a>
+</h2>
 <p>Amend the code below to produce descriptive statistics.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb61-1" tabindex="-1"></a><span class="fu">names</span>(mydata1)  <span class="co"># might be useful to check variable names</span></span>
-<span id="cb61-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb61-2" tabindex="-1"></a><span class="fu">view</span>(mydata1)   <span class="co"># might be useful to look at the data</span></span>
-<span id="cb61-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb61-3" tabindex="-1"></a></span>
-<span id="cb61-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb61-4" tabindex="-1"></a>desc1 <span class="ot">&lt;-</span> mydata1 <span class="sc">%&gt;%</span></span>
-<span id="cb61-5"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb61-5" tabindex="-1"></a>  <span class="fu">group_by</span>(NULL1) <span class="sc">%&gt;%</span></span>
-<span id="cb61-6"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb61-6" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_score =</span> <span class="fu">mean</span>(NULL2),</span>
-<span id="cb61-7"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb61-7" tabindex="-1"></a>            <span class="at">sd_score =</span> <span class="fu">sd</span>(NULL2))</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mydata1</span><span class="op">)</span>  <span class="co"># might be useful to check variable names</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata1</span><span class="op">)</span>   <span class="co"># might be useful to look at the data</span></span>
+<span></span>
+<span><span class="va">desc1</span> <span class="op">&lt;-</span> <span class="va">mydata1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">NULL1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">NULL2</span><span class="op">)</span>,</span>
+<span>            sd_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">NULL2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Change:</p>
 <ul>
 <li><p><code>NULL1</code> to the variable you want to split the data by. This should be the independent variable. This should be the dependent variable as it is names in <code>mydata1</code>.</p></li>
 <li><p><code>NULL2</code> to the variable you want to calculate the mean and sd for. This should be the dependent variable as it is names in <code>mydata1</code>.</p></li>
 </ul>
 <p>Also use this code to visualise the data to see what is going on.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb62-1" tabindex="-1"></a><span class="fu">ggplot</span>(mydata1, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> score)) <span class="sc">+</span></span>
-<span id="cb62-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb62-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">4</span>)</span>
-<span id="cb62-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb62-3" tabindex="-1"></a>  </span>
-<span id="cb62-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb62-4" tabindex="-1"></a><span class="fu">ggplot</span>(mydata1, <span class="fu">aes</span>(<span class="at">x =</span> score, <span class="at">fill =</span> group)) <span class="sc">+</span></span>
-<span id="cb62-5"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb62-5" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">score</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">score</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="exercise-8-check-assumptions" class="section level2" number="4.8">
-<h2><span class="header-section-number">4.8</span> Exercise 8: Check Assumptions</h2>
+<h2>
+<span class="header-section-number">4.8</span> Exercise 8: Check Assumptions<a class="anchor" aria-label="anchor" href="#exercise-8-check-assumptions"><i class="fas fa-link"></i></a>
+</h2>
 <p>Before we start looking at assumptions, we do need to run and store the initial ANOVA model. There are <strong>four</strong> <code>NULL</code> values you need to change in the code below to match your new data set.</p>
 <p>We will save the model as an object called <code>mod1</code>.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb63-1" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">&quot;NULL&quot;</span>,</span>
-<span id="cb63-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb63-2" tabindex="-1"></a>              <span class="at">dv =</span> <span class="st">&quot;NULL&quot;</span>,</span>
-<span id="cb63-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb63-3" tabindex="-1"></a>              <span class="at">between =</span> <span class="st">&quot;NULL&quot;</span>,</span>
-<span id="cb63-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb63-4" tabindex="-1"></a>              <span class="at">type =</span> <span class="dv">3</span>,</span>
-<span id="cb63-5"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb63-5" tabindex="-1"></a>              <span class="at">include_aov =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-6"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb63-6" tabindex="-1"></a>              <span class="at">data =</span> <span class="cn">NULL</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>              dv <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>              between <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>              type <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>              include_aov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>              data <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Checking Normality</strong></p>
 <p>First, look to see if the assumption of normality was met. You should look at three things.</p>
 <ol style="list-style-type: decimal">
@@ -236,56 +249,65 @@
 <li>The histogram</li>
 <li>The Shapiro-Wilk test</li>
 </ol>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-1" tabindex="-1"></a><span class="co">#testing normality, looking at normal distribution of residuals from the model.</span></span>
-<span id="cb64-2"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-2" tabindex="-1"></a>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(mod1) <span class="co">#pulls residuals from the model, note name is `mod1`</span></span>
-<span id="cb64-3"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-3" tabindex="-1"></a></span>
-<span id="cb64-4"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-4" tabindex="-1"></a><span class="co"># produce QQ-Plot</span></span>
-<span id="cb64-5"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-5" tabindex="-1"></a><span class="fu">qqPlot</span>(residuals) <span class="co">#produces a qq-plot of residuals</span></span>
-<span id="cb64-6"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-6" tabindex="-1"></a></span>
-<span id="cb64-7"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-7" tabindex="-1"></a><span class="co"># produce histogram of residuals</span></span>
-<span id="cb64-8"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-8" tabindex="-1"></a><span class="fu">hist</span>(residuals, <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="st">&quot;Histogram of Residuals&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">col =</span> <span class="st">&quot;lightblue&quot;</span>) </span>
-<span id="cb64-9"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-9" tabindex="-1"></a></span>
-<span id="cb64-10"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-10" tabindex="-1"></a><span class="co"># Shapiro test on residuals</span></span>
-<span id="cb64-11"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb64-11" tabindex="-1"></a><span class="fu">shapiro.test</span>(residuals) <span class="co">#Shapiro test for residuals</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#testing normality, looking at normal distribution of residuals from the model.</span></span>
+<span><span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span> <span class="co">#pulls residuals from the model, note name is `mod1`</span></span>
+<span></span>
+<span><span class="co"># produce QQ-Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span> <span class="co">#produces a qq-plot of residuals</span></span>
+<span></span>
+<span><span class="co"># produce histogram of residuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">residuals</span>, breaks <span class="op">=</span> <span class="fl">20</span>, main <span class="op">=</span> <span class="st">"Histogram of Residuals"</span>, xlab <span class="op">=</span> <span class="st">"Residuals"</span>, col <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># Shapiro test on residuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span> <span class="co">#Shapiro test for residuals</span></span></code></pre></div>
 <p><strong>Checking Homogeneity of Variance</strong></p>
 <p>Run and interpret Levene’s test using the code below:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb65-1" tabindex="-1"></a><span class="fu">leveneTest</span>(score <span class="sc">~</span> group, mydata1)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">score</span> <span class="op">~</span> <span class="va">group</span>, <span class="va">mydata1</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="exercise-9-interpret-the-anova-model" class="section level2" number="4.9">
-<h2><span class="header-section-number">4.9</span> Exercise 9: Interpret the ANOVA Model</h2>
+<h2>
+<span class="header-section-number">4.9</span> Exercise 9: Interpret the ANOVA Model<a class="anchor" aria-label="anchor" href="#exercise-9-interpret-the-anova-model"><i class="fas fa-link"></i></a>
+</h2>
 <p>Use the code below to interpret the ANOVA model. Decide if the model is significant and whether you can reject the null hypothesis. Also check back at the descriptive statistics to see if you can work out what could be going on.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="workshop-4-one-way-anova-model-designs-assumptions.html#cb66-1" tabindex="-1"></a>mod1<span class="sc">$</span>anova_table</span></code></pre></div>
-<table>
-<tbody>
-<tr>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod1</span><span class="op">$</span><span class="va">anova_table</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm"><tbody><tr>
 <td>Well Done. You have reached the end of the workshop</td>
-</tr>
-</tbody>
-</table>
-
+</tr></tbody></table></div>
 </div>
 </div>
-  </main>
-
-  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page">
-      <h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+  <div class="chapter-nav">
+<div class="prev"><a href="workshop-3-t-tests.html"><span class="header-section-number">3</span> Workshop 3: t-tests</a></div>
+<div class="next"><a href="workshop-5-one-way-anova-post-hocs-contrasts-write-up.html"><span class="header-section-number">5</span> Workshop 5: One-Way ANOVA (Post-hocs, Contrasts, Write-up)</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#workshop-4-one-way-anova-model-designs-assumptions"><span class="header-section-number">4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)</a></li>
+<li><a class="nav-link" href="#exercise-1-import-the-data-3"><span class="header-section-number">4.1</span> Exercise 1: Import the Data</a></li>
+<li><a class="nav-link" href="#exercise-2-inspect-and-check-your-data-3"><span class="header-section-number">4.2</span> Exercise 2: Inspect and Check Your Data</a></li>
+<li><a class="nav-link" href="#exercise-3-check-descriptives"><span class="header-section-number">4.3</span> Exercise 3: Check Descriptives</a></li>
+<li><a class="nav-link" href="#exercise-4-check-assumptions"><span class="header-section-number">4.4</span> Exercise 4: Check Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-5-interpret-the-anova-model"><span class="header-section-number">4.5</span> Exercise 5: Interpret the ANOVA Model</a></li>
+<li><a class="nav-link" href="#part-2---exercise-6-import-the-data"><span class="header-section-number">4.6</span> Part 2 - Exercise 6: Import the Data</a></li>
+<li><a class="nav-link" href="#exercise-7-check-descriptives"><span class="header-section-number">4.7</span> Exercise 7: Check Descriptives</a></li>
+<li><a class="nav-link" href="#exercise-8-check-assumptions"><span class="header-section-number">4.8</span> Exercise 8: Check Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-9-interpret-the-anova-model"><span class="header-section-number">4.9</span> Exercise 9: Interpret the ANOVA Model</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
-      </div>
+</div>
     </nav>
-  </div>
+</div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5">
-  <div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-11-16.</p>
@@ -297,8 +319,5 @@
 
 </div></div>
 </footer>
-
-
 </body>
-
 </html>

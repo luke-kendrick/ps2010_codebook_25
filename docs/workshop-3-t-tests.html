@@ -1,57 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Chapter 3 Workshop 3: t-tests | PS2010 Workshop Code Book</title>
-
-    <meta name="author" content="Luke Kendrick" />
-  
-   
-   <meta name="generator" content="placeholder" />
-  <meta property="og:title" content="Chapter 3 Workshop 3: t-tests | PS2010 Workshop Code Book" />
-  <meta property="og:type" content="book" />
-  
-  
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Workshop 3: t-tests | PS2010 Workshop Code Book" />
-  
-  
-  
-  <!-- JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
-    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
-    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
-    <script src="libs/bs3compat-0.6.1/transition.js"></script>
-    <script src="libs/bs3compat-0.6.1/tabs.js"></script>
-    <script src="libs/bs3compat-0.6.1/bs3compat.js"></script>
-    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
-    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
-
-  <!-- CSS -->
-  <style type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Workshop 3: t-tests | PS2010 Workshop Code Book</title>
+<meta name="author" content="Luke Kendrick">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Workshop 3: t-tests | PS2010 Workshop Code Book">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Workshop 3: t-tests | PS2010 Workshop Code Book">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-      <link rel="stylesheet" href="style.css" />
-  
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Aims: Practice running and interpreting a two-sample t-test in RStudio. Practice running and interpreting a paired t-test in RStudio. Part One Part one of today’s workshop will involved running a...">
+<meta property="og:description" content="Aims: Practice running and interpreting a two-sample t-test in RStudio. Practice running and interpreting a paired t-test in RStudio. Part One Part one of today’s workshop will involved running a...">
+<meta name="twitter:description" content="Aims: Practice running and interpreting a two-sample t-test in RStudio. Practice running and interpreting a paired t-test in RStudio. Part One Part one of today’s workshop will involved running a...">
 </head>
-
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
-    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -63,22 +39,29 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-      </form>
+</form>
 
-      <nav aria-label="Table of contents">
-        <h2>Table of contents</h2>
-        <div id="book-toc"></div>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="workshop-1-data-handling-skills.html"><span class="header-section-number">1</span> Workshop 1: Data Handling Skills</a></li>
+<li><a class="" href="workshop-2-summarising-and-describing-data.html"><span class="header-section-number">2</span> Workshop 2: Summarising and Describing Data</a></li>
+<li><a class="active" href="workshop-3-t-tests.html"><span class="header-section-number">3</span> Workshop 3: t-tests</a></li>
+<li><a class="" href="workshop-4-one-way-anova-model-designs-assumptions.html"><span class="header-section-number">4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)</a></li>
+<li><a class="" href="workshop-5-one-way-anova-post-hocs-contrasts-write-up.html"><span class="header-section-number">5</span> Workshop 5: One-Way ANOVA (Post-hocs, Contrasts, Write-up)</a></li>
+<li><a class="" href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html"><span class="header-section-number">6</span> Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions</a></li>
+<li><a class="" href="workshop-7-factorial-anova-different-designs-and-assumptions.html"><span class="header-section-number">7</span> Workshop 7: Factorial ANOVA: Different Designs and Assumptions</a></li>
+</ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+          
         </div>
       </nav>
-    </div>
-  </header>
-
-  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
-<div id="workshop-3-t-tests" class="section level1" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Workshop 3: <em>t</em>-tests</h1>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workshop-3-t-tests" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Workshop 3: <em>t</em>-tests<a class="anchor" aria-label="anchor" href="#workshop-3-t-tests"><i class="fas fa-link"></i></a>
+</h1>
 <p><strong>Aims:</strong></p>
 <ul>
 <li><p>Practice running and interpreting a two-sample <em>t</em>-test in RStudio.</p></li>
@@ -89,30 +72,41 @@
 <p>You should use the same data file from last week, as you will be aiming to investigate whether Stroop interference scores (msecs) significantly differ between the Red Cow group and the control group.</p>
 <p>You must have completed the week 2 workshop before starting this one.</p>
 <div id="exercise-1-import-the-data-2" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Exercise 1: Import the Data</h2>
+<h2>
+<span class="header-section-number">3.1</span> Exercise 1: Import the Data<a class="anchor" aria-label="anchor" href="#exercise-1-import-the-data-2"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Import the Data File:</strong> <code>stroop.csv</code></p>
 <p>Before you begin, you will need the following packages:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="workshop-3-t-tests.html#cb32-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>) <span class="co">#install if needed.</span></span>
-<span id="cb32-2"><a href="workshop-3-t-tests.html#cb32-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rstatix&quot;</span>)   <span class="co">#install if needed.</span></span>
-<span id="cb32-3"><a href="workshop-3-t-tests.html#cb32-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;car&quot;</span>)       <span class="co">#install if needed.</span></span>
-<span id="cb32-4"><a href="workshop-3-t-tests.html#cb32-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)            <span class="co">#load package.</span></span>
-<span id="cb32-5"><a href="workshop-3-t-tests.html#cb32-5" tabindex="-1"></a><span class="fu">library</span>(rstatix)              <span class="co">#load package.</span></span>
-<span id="cb32-6"><a href="workshop-3-t-tests.html#cb32-6" tabindex="-1"></a><span class="fu">library</span>(car)                  <span class="co">#load package.</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span> <span class="co">#install if needed.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rstatix"</span><span class="op">)</span>   <span class="co">#install if needed.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span>       <span class="co">#install if needed.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>            <span class="co">#load package.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span>              <span class="co">#load package.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span>                  <span class="co">#load package.</span></span></code></pre></div>
 <p>Then import the data file. Make sure it has the <code>int</code> score that you calculated last week. If not, you will need to go back and complete workshop 2.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="workshop-3-t-tests.html#cb33-1" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;stroop.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"stroop.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="exercise-2-inspect-and-check-your-data-2" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Exercise 2: Inspect and Check Your Data</h2>
+<h2>
+<span class="header-section-number">3.2</span> Exercise 2: Inspect and Check Your Data<a class="anchor" aria-label="anchor" href="#exercise-2-inspect-and-check-your-data-2"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Take a look at your newly imported data file</strong></p>
 <p>Check the top right panel (the environment) and also use the code below to inspect your data set.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="workshop-3-t-tests.html#cb34-1" tabindex="-1"></a><span class="fu">view</span>(mydata) <span class="co"># this will open the data in a new tab.</span></span>
-<span id="cb34-2"><a href="workshop-3-t-tests.html#cb34-2" tabindex="-1"></a><span class="fu">names</span>(mydata) <span class="co"># this will show the variable names.</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="co"># this will open the data in a new tab.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="co"># this will show the variable names.</span></span></code></pre></div>
 <p>It is really important to look at the variable names as you’ll be using them in code later on.</p>
 </div>
 <div id="exercise-3-check-assumptions" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Exercise 3: Check Assumptions</h2>
+<h2>
+<span class="header-section-number">3.3</span> Exercise 3: Check Assumptions<a class="anchor" aria-label="anchor" href="#exercise-3-check-assumptions"><i class="fas fa-link"></i></a>
+</h2>
 <div id="check-heteroscedasticity-with-levenes-test" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Check Heteroscedasticity with Levene’s Test</h3>
+<h3>
+<span class="header-section-number">3.3.1</span> Check Heteroscedasticity with Levene’s Test<a class="anchor" aria-label="anchor" href="#check-heteroscedasticity-with-levenes-test"><i class="fas fa-link"></i></a>
+</h3>
 <p>We do not need to do this because we will just use a Welch’s <em>t</em>-test instead.</p>
 <p>If you need to justify this decision (e.g., for a 3rd Year Project), the following papers might help:</p>
 <ul>
@@ -122,19 +116,22 @@
 </ul>
 </div>
 <div id="check-normality-with-shapiro-wilk-test-and-histograms" class="section level3" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Check Normality with Shapiro-Wilk Test and Histograms</h3>
+<h3>
+<span class="header-section-number">3.3.2</span> Check Normality with Shapiro-Wilk Test and Histograms<a class="anchor" aria-label="anchor" href="#check-normality-with-shapiro-wilk-test-and-histograms"><i class="fas fa-link"></i></a>
+</h3>
 <p>We need to check normality for both groups separately. We can filter the groups:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="workshop-3-t-tests.html#cb35-1" tabindex="-1"></a><span class="co">#first create a data set that contains the control group only</span></span>
-<span id="cb35-2"><a href="workshop-3-t-tests.html#cb35-2" tabindex="-1"></a>control <span class="ot">&lt;-</span> mydata <span class="sc">%&gt;%</span></span>
-<span id="cb35-3"><a href="workshop-3-t-tests.html#cb35-3" tabindex="-1"></a>  <span class="fu">filter</span>(drink <span class="sc">==</span> <span class="st">&quot;control&quot;</span>)</span>
-<span id="cb35-4"><a href="workshop-3-t-tests.html#cb35-4" tabindex="-1"></a><span class="co">#then run the test</span></span>
-<span id="cb35-5"><a href="workshop-3-t-tests.html#cb35-5" tabindex="-1"></a><span class="fu">shapiro.test</span>(control<span class="sc">$</span>int)</span>
-<span id="cb35-6"><a href="workshop-3-t-tests.html#cb35-6" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="workshop-3-t-tests.html#cb35-7" tabindex="-1"></a><span class="co">#then create a data set that contains Red Cow drinkers only</span></span>
-<span id="cb35-8"><a href="workshop-3-t-tests.html#cb35-8" tabindex="-1"></a>redcow <span class="ot">&lt;-</span> mydata <span class="sc">%&gt;%</span></span>
-<span id="cb35-9"><a href="workshop-3-t-tests.html#cb35-9" tabindex="-1"></a>  <span class="fu">filter</span>(drink <span class="sc">==</span> <span class="st">&quot;redcow&quot;</span>)</span>
-<span id="cb35-10"><a href="workshop-3-t-tests.html#cb35-10" tabindex="-1"></a><span class="co">#then run the test</span></span>
-<span id="cb35-11"><a href="workshop-3-t-tests.html#cb35-11" tabindex="-1"></a><span class="fu">shapiro.test</span>(redcow<span class="sc">$</span>int)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#first create a data set that contains the control group only</span></span>
+<span><span class="va">control</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">drink</span> <span class="op">==</span> <span class="st">"control"</span><span class="op">)</span></span>
+<span><span class="co">#then run the test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">control</span><span class="op">$</span><span class="va">int</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#then create a data set that contains Red Cow drinkers only</span></span>
+<span><span class="va">redcow</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">drink</span> <span class="op">==</span> <span class="st">"redcow"</span><span class="op">)</span></span>
+<span><span class="co">#then run the test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">redcow</span><span class="op">$</span><span class="va">int</span><span class="op">)</span></span></code></pre></div>
 <p>We use a dollar sign <code>$</code> to point R to a particular column. For example, when using <code>shapiro.test(redcow$int)</code> you are saying to run the Shapiro Test on the <code>redcow</code> only data set and the specific column called <code>int</code></p>
 <p>Again, we want the <em>p</em>-values to be not significant. A non-significant <em>p</em>-value means the data are roughly normally distributed. If the <em>p</em>-value is significant, this could be an issue as it indicates the data are not normally distributed.</p>
 <p>When reporting the Shapiro-Wilk test, you just need to report the test statistics (<em>w</em> = XX) and the <em>p</em>-value. Here is an example what it could look like:</p>
@@ -142,17 +139,22 @@
 <p><em>W</em> = 0.98, <em>p</em> = .875</p>
 </blockquote>
 <p>You can also visually check the data with a quick histogram:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="workshop-3-t-tests.html#cb36-1" tabindex="-1"></a><span class="fu">hist</span>(control<span class="sc">$</span>int)</span>
-<span id="cb36-2"><a href="workshop-3-t-tests.html#cb36-2" tabindex="-1"></a><span class="fu">hist</span>(redcow<span class="sc">$</span>int)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">control</span><span class="op">$</span><span class="va">int</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">redcow</span><span class="op">$</span><span class="va">int</span><span class="op">)</span></span></code></pre></div>
 <p>Check the plots panel, and use the blue arrow to switch between the two plots.</p>
 </div>
 </div>
 <div id="exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Exercise 4: Run the Two-Sample <em>t</em>-Test and ask for Cohen’s d</h2>
+<h2>
+<span class="header-section-number">3.4</span> Exercise 4: Run the Two-Sample <em>t</em>-Test and ask for Cohen’s d<a class="anchor" aria-label="anchor" href="#exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d"><i class="fas fa-link"></i></a>
+</h2>
 <p>Run the <em>t</em>-test.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="workshop-3-t-tests.html#cb37-1" tabindex="-1"></a><span class="fu">t.test</span>(int <span class="sc">~</span> drink, <span class="at">data =</span> mydata, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">int</span> <span class="op">~</span> <span class="va">drink</span>, data <span class="op">=</span> <span class="va">mydata</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <p>Ask for Cohen’s d:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="workshop-3-t-tests.html#cb38-1" tabindex="-1"></a><span class="fu">cohens_d</span>(<span class="at">data =</span> mydata, int <span class="sc">~</span> drink, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mydata</span>, <span class="va">int</span> <span class="op">~</span> <span class="va">drink</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Interpret your <em>t</em>-test.</p>
 <ul>
 <li><p>Is the test significant?</p></li>
@@ -163,7 +165,9 @@
 <p>Answer questions 4.1-4.3 on the worksheet.</p>
 </div>
 <div id="part-2---exercise-5-import-the-data" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Part 2 - Exercise 5: Import the Data</h2>
+<h2>
+<span class="header-section-number">3.5</span> Part 2 - Exercise 5: Import the Data<a class="anchor" aria-label="anchor" href="#part-2---exercise-5-import-the-data"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Part Two Study</strong></p>
 <p>Part two of today’s workshop will involved running a paired t-test, which is appropriate for a repeated measures design with <strong>two</strong> conditions.</p>
 <p>Let’s switch it up a bit and use a different scenario and experiment with a new data set.</p>
@@ -172,70 +176,83 @@
 <p>The independent variable is time point: before, after. The dependent variable is BPM.</p>
 <p><strong>Import the Data</strong></p>
 <p>We will call the object <code>dat</code> (short name for data)</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="workshop-3-t-tests.html#cb39-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;bpm.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"bpm.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="exercise-6-inspect-and-check-your-data" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Exercise 6: Inspect and Check Your Data</h2>
+<h2>
+<span class="header-section-number">3.6</span> Exercise 6: Inspect and Check Your Data<a class="anchor" aria-label="anchor" href="#exercise-6-inspect-and-check-your-data"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Take a look at your newly imported data file</strong></p>
 <p>Check the top right panel (the environment) and also use the code below to inspect your data set.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="workshop-3-t-tests.html#cb40-1" tabindex="-1"></a><span class="fu">view</span>(dat) <span class="co"># this will open the data in a new tab.</span></span>
-<span id="cb40-2"><a href="workshop-3-t-tests.html#cb40-2" tabindex="-1"></a><span class="fu">names</span>(dat) <span class="co"># this will show the variable names.</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="co"># this will open the data in a new tab.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="co"># this will show the variable names.</span></span></code></pre></div>
 </div>
 <div id="exercise-7-check-assumptions" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> Exercise 7: Check Assumptions</h2>
+<h2>
+<span class="header-section-number">3.7</span> Exercise 7: Check Assumptions<a class="anchor" aria-label="anchor" href="#exercise-7-check-assumptions"><i class="fas fa-link"></i></a>
+</h2>
 <p>We do need to check normality, as heteroscedasiticty does not apply to repeated measures designs. However, we need to ensure the <strong>difference</strong> score is normally distributed.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="workshop-3-t-tests.html#cb41-1" tabindex="-1"></a>diff <span class="ot">&lt;-</span> dat<span class="sc">$</span>after <span class="sc">-</span> dat<span class="sc">$</span>before  <span class="co">#this will calculate the difference score.</span></span>
-<span id="cb41-2"><a href="workshop-3-t-tests.html#cb41-2" tabindex="-1"></a><span class="fu">shapiro.test</span>(diff)              <span class="co"># run the Shapiro test</span></span>
-<span id="cb41-3"><a href="workshop-3-t-tests.html#cb41-3" tabindex="-1"></a><span class="fu">hist</span>(diff)                      <span class="co"># also visually inspect data</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">diff</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">after</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">before</span>  <span class="co">#this will calculate the difference score.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>              <span class="co"># run the Shapiro test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>                      <span class="co"># also visually inspect data</span></span></code></pre></div>
 <p>You should interpret and report this in the same way as earlier (exercise 3).</p>
 <p>Answer questions 7.1-7.2 on the worksheet.</p>
 </div>
 <div id="exercise-8-run-the-paired-t-test-and-ask-for-cohens-d" class="section level2" number="3.8">
-<h2><span class="header-section-number">3.8</span> Exercise 8: Run the Paired <em>t</em>-Test and ask for Cohen’s d</h2>
+<h2>
+<span class="header-section-number">3.8</span> Exercise 8: Run the Paired <em>t</em>-Test and ask for Cohen’s d<a class="anchor" aria-label="anchor" href="#exercise-8-run-the-paired-t-test-and-ask-for-cohens-d"><i class="fas fa-link"></i></a>
+</h2>
 <p>A paired t-test is a little different compared to the two-sample t-test.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="workshop-3-t-tests.html#cb42-1" tabindex="-1"></a><span class="fu">t.test</span>(NULL1, NULL2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">NULL1</span>, <span class="va">NULL2</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li><p>Change <code>NULL1</code> to the column with the first condition.</p></li>
 <li><p>Change <code>NULL2</code> to the column with the second condition.</p></li>
 </ul>
 <p>(Hint: you will need to use the dollar sign <code>$</code> to specify which data set and column, e.g., <code>dat$NULL1</code> and <code>dat$NULL2</code>).</p>
 <p>Try yourself first, but if you need, check the solution below.</p>
-<hr />
-<details>
-<summary>
+<hr>
+<details><summary>
 👀 Click for a hint
-</summary>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="workshop-3-t-tests.html#cb43-1" tabindex="-1"></a><span class="fu">t.test</span>(dat<span class="sc">$</span>before, dat<span class="sc">$</span>after, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-</details>
-<hr />
+</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">before</span>, <span class="va">dat</span><span class="op">$</span><span class="va">after</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+</details><hr>
 <p>Annoyingly, we need to use a different package for Cohen’s d for a paired t-test.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="workshop-3-t-tests.html#cb44-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;effectsize&quot;</span>) <span class="co">#install if needed.</span></span>
-<span id="cb44-2"><a href="workshop-3-t-tests.html#cb44-2" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
-<span id="cb44-3"><a href="workshop-3-t-tests.html#cb44-3" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">cohens_d</span>(dat<span class="sc">$</span>before, dat<span class="sc">$</span>after, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"effectsize"</span><span class="op">)</span> <span class="co">#install if needed.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span></span>
+<span><span class="fu">effectsize</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">before</span>, <span class="va">dat</span><span class="op">$</span><span class="va">after</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Answer questions 8.1-8.2 on the worksheet. Hint: you will also need the descriptive statistics (see exercise 9 below).</p>
 </div>
 <div id="exercise-9-calculate-descriptive-statistics" class="section level2" number="3.9">
-<h2><span class="header-section-number">3.9</span> Exercise 9: Calculate Descriptive Statistics</h2>
+<h2>
+<span class="header-section-number">3.9</span> Exercise 9: Calculate Descriptive Statistics<a class="anchor" aria-label="anchor" href="#exercise-9-calculate-descriptive-statistics"><i class="fas fa-link"></i></a>
+</h2>
 <p>The final thing to do is to convert the data from wide format to long format. Often with repeated measures when asking for descriptive statistics or plots, we need the data in long format.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="workshop-3-t-tests.html#cb45-1" tabindex="-1"></a>longd <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="workshop-3-t-tests.html#cb45-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb45-3"><a href="workshop-3-t-tests.html#cb45-3" tabindex="-1"></a>              before<span class="sc">:</span>after,</span>
-<span id="cb45-4"><a href="workshop-3-t-tests.html#cb45-4" tabindex="-1"></a>              <span class="at">names_to =</span> <span class="st">&quot;time&quot;</span>,</span>
-<span id="cb45-5"><a href="workshop-3-t-tests.html#cb45-5" tabindex="-1"></a>              <span class="at">values_to =</span> <span class="st">&quot;bpm&quot;</span></span>
-<span id="cb45-6"><a href="workshop-3-t-tests.html#cb45-6" tabindex="-1"></a>              )</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">longd</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
+<span>              <span class="va">before</span><span class="op">:</span><span class="va">after</span>,</span>
+<span>              names_to <span class="op">=</span> <span class="st">"time"</span>,</span>
+<span>              values_to <span class="op">=</span> <span class="st">"bpm"</span></span>
+<span>              <span class="op">)</span></span></code></pre></div>
 <p>Code explanation:</p>
 <ul>
 <li><p>Create a new object called <code>longd</code> where we will store the long data.</p></li>
 <li><p>Base it on the original data set called <code>dat</code> and then <code>%&gt;%</code></p></li>
-<li><p><code>pivot_longer()</code></p></li>
+<li><p><code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code></p></li>
 <li><p>The first argument should include the columns which contain your dependent variable. In this case we will use <code>before:after</code>which will then take all and any columns from <code>before</code> through to <code>after</code> (these are the only columns so it will just take the two of them).</p></li>
 <li><p>Next we use <code>names_to =</code> to tell R what we want to call our independent variable. I have used “time” as it was time point for this study.</p></li>
 <li><p>Then we use <code>values_to =</code> to tell R what we want to call our dependent variable. We measure beats per minute, so I have just called this “bpm”.</p></li>
 <li><p>Pay careful attention to the lay out of this code. For example, notice where brackets open and close, and the placement of commas to move on the the next line.</p></li>
 </ul>
 <p>Once you have created the new long data set called <code>longd</code> we can use it to calculate descriptive statistics. But first check it to see the difference.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="workshop-3-t-tests.html#cb46-1" tabindex="-1"></a><span class="fu">view</span>(longd)</span>
-<span id="cb46-2"><a href="workshop-3-t-tests.html#cb46-2" tabindex="-1"></a><span class="fu">names</span>(longd)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">longd</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">longd</span><span class="op">)</span></span></code></pre></div>
 <p>Now adapt the code below to ask for the mean and standard deviation.</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="workshop-3-t-tests.html#cb47-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span> longd <span class="sc">%&gt;%</span></span>
 <span id="cb47-2"><a href="workshop-3-t-tests.html#cb47-2" tabindex="-1"></a>  <span class="fu">group_by</span>(NULL1) <span class="sc">%&gt;%</span></span>
@@ -244,45 +261,56 @@
 <p>Change <code>NULL1</code> to the name of the independent variable in the <code>long</code> data file, and <code>NULL2</code> to the dependent variable. If this is tricky, use <code>names(longd)</code> if you need a reminder of the variable names and revisit your notes from last week’s workshop.</p>
 <p>Make note of the mean and standard deviation for the <code>before</code> and <code>after</code> conditions.</p>
 <p>Try yourself first, but if you need, check the solution below.</p>
-<hr />
-<details>
-<summary>
+<hr>
+<details><summary>
 👀 Click for a hint
-</summary>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="workshop-3-t-tests.html#cb48-1" tabindex="-1"></a>desc <span class="ot">&lt;-</span> longd <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="workshop-3-t-tests.html#cb48-2" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
-<span id="cb48-3"><a href="workshop-3-t-tests.html#cb48-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_bpm =</span> <span class="fu">mean</span>(bpm),</span>
-<span id="cb48-4"><a href="workshop-3-t-tests.html#cb48-4" tabindex="-1"></a>            <span class="at">sd_bpm =</span> <span class="fu">sd</span>(bpm))</span>
-<span id="cb48-5"><a href="workshop-3-t-tests.html#cb48-5" tabindex="-1"></a></span>
-<span id="cb48-6"><a href="workshop-3-t-tests.html#cb48-6" tabindex="-1"></a><span class="fu">view</span>(desc)</span></code></pre></div>
-</details>
-<hr />
+</summary><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span> <span class="va">longd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_bpm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bpm</span><span class="op">)</span>,</span>
+<span>            sd_bpm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">bpm</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">desc</span><span class="op">)</span></span></code></pre></div>
+</details><hr>
 <p><strong>Well Done. You have reached the end of the workshop.</strong></p>
-<hr />
-
+<hr>
 </div>
 </div>
-  </main>
-
-  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page">
-      <h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+  <div class="chapter-nav">
+<div class="prev"><a href="workshop-2-summarising-and-describing-data.html"><span class="header-section-number">2</span> Workshop 2: Summarising and Describing Data</a></div>
+<div class="next"><a href="workshop-4-one-way-anova-model-designs-assumptions.html"><span class="header-section-number">4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#workshop-3-t-tests"><span class="header-section-number">3</span> Workshop 3: t-tests</a></li>
+<li><a class="nav-link" href="#exercise-1-import-the-data-2"><span class="header-section-number">3.1</span> Exercise 1: Import the Data</a></li>
+<li><a class="nav-link" href="#exercise-2-inspect-and-check-your-data-2"><span class="header-section-number">3.2</span> Exercise 2: Inspect and Check Your Data</a></li>
+<li>
+<a class="nav-link" href="#exercise-3-check-assumptions"><span class="header-section-number">3.3</span> Exercise 3: Check Assumptions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#check-heteroscedasticity-with-levenes-test"><span class="header-section-number">3.3.1</span> Check Heteroscedasticity with Levene’s Test</a></li>
+<li><a class="nav-link" href="#check-normality-with-shapiro-wilk-test-and-histograms"><span class="header-section-number">3.3.2</span> Check Normality with Shapiro-Wilk Test and Histograms</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#exercise-4-run-the-two-sample-t-test-and-ask-for-cohens-d"><span class="header-section-number">3.4</span> Exercise 4: Run the Two-Sample t-Test and ask for Cohen’s d</a></li>
+<li><a class="nav-link" href="#part-2---exercise-5-import-the-data"><span class="header-section-number">3.5</span> Part 2 - Exercise 5: Import the Data</a></li>
+<li><a class="nav-link" href="#exercise-6-inspect-and-check-your-data"><span class="header-section-number">3.6</span> Exercise 6: Inspect and Check Your Data</a></li>
+<li><a class="nav-link" href="#exercise-7-check-assumptions"><span class="header-section-number">3.7</span> Exercise 7: Check Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-8-run-the-paired-t-test-and-ask-for-cohens-d"><span class="header-section-number">3.8</span> Exercise 8: Run the Paired t-Test and ask for Cohen’s d</a></li>
+<li><a class="nav-link" href="#exercise-9-calculate-descriptive-statistics"><span class="header-section-number">3.9</span> Exercise 9: Calculate Descriptive Statistics</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
-      </div>
+</div>
     </nav>
-  </div>
+</div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5">
-  <div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-11-16.</p>
@@ -294,8 +322,5 @@
 
 </div></div>
 </footer>
-
-
 </body>
-
 </html>
