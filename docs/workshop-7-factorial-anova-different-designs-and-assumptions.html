@@ -19,9 +19,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="Aims: To practice running and interpreting a factorial ANOVA for a repeated measures design. To practice plotting an interaction using afex_plot. To practice conducting simple effects analysis to...">
-<meta property="og:description" content="Aims: To practice running and interpreting a factorial ANOVA for a repeated measures design. To practice plotting an interaction using afex_plot. To practice conducting simple effects analysis to...">
-<meta name="twitter:description" content="Aims: To practice running and interpreting a factorial ANOVA for a repeated measures design. To practice plotting an interaction using afex_plot. To practice conducting simple effects analysis to...">
+<meta name="description" content="Aims: To practice running and interpreting a factorial ANOVA for a repeated measures design. To practice interpreting means for main effects in a 2x2 design. To practice evaluating the assumption...">
+<meta property="og:description" content="Aims: To practice running and interpreting a factorial ANOVA for a repeated measures design. To practice interpreting means for main effects in a 2x2 design. To practice evaluating the assumption...">
+<meta name="twitter:description" content="Aims: To practice running and interpreting a factorial ANOVA for a repeated measures design. To practice interpreting means for main effects in a 2x2 design. To practice evaluating the assumption...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -65,8 +65,8 @@
 <p><strong>Aims:</strong></p>
 <ul>
 <li>To practice running and interpreting a factorial ANOVA for a repeated measures design.</li>
-<li>To practice plotting an interaction using <code>afex_plot</code>.</li>
-<li>To practice conducting simple effects analysis to break down and interpret an interaction.</li>
+<li>To practice interpreting means for main effects in a 2x2 design.</li>
+<li>To practice evaluating the assumption of normality.</li>
 </ul>
 <div id="exercise-1-import-data-1" class="section level2" number="7.1">
 <h2>
@@ -75,7 +75,8 @@
 <p>Before beginning make sure you load the relevant packages.</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://afex.singmann.science/">afex</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://afex.singmann.science/">afex</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span></code></pre></div>
 <p>The data set this week includes data from a study looking at wellbeing scores after exercise. Participants completing a psychological wellbeing measure before and after two different types of exercise: running and swimming. Participants completed all conditions.</p>
 <p>Import <code>exercise.csv</code> and inspect the data set, making note of the variable names.</p>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
@@ -137,6 +138,19 @@
 <p>Is the interaction significant? Decide for yourself. If it is, you should use the code from exercises 4-6 from last week’s workshop (workshop 6).</p>
 <p>If not, as the two independent variables each only have two levels, you can interpret any main effects by looking at the descriptive statistics and/or plots.</p>
 <p>Remember to amend the group_by() line of code in the descriptives to work out the statistics for each independent variable separately (as shown in the lecture).</p>
+<p>Use the hint below if needed.</p>
+<hr>
+<details><summary>
+👀 Click for a hint
+</summary><div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exercise</span> <span class="op">&lt;-</span> <span class="va">longd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">exercise</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">wellbeing</span><span class="op">)</span>, </span>
+<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">wellbeing</span><span class="op">)</span>, </span>
+<span>            n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">exercise</span><span class="op">)</span></span></code></pre></div>
+<p>Now try to amend the code to find the descriptives for the main effect of <code>time</code>.</p>
+</details><hr>
 <p>Answer questions 3.1-3.5 on the worksheet.</p>
 </div>
 <div id="exercise-4-check-model-assumptions" class="section level2" number="7.4">
@@ -145,7 +159,7 @@
 </h2>
 <p>The assumption of Sphericity is automatically checked and corrected for (if necessary). However, for a repeated measures design with only two-levels for each independent variable, Sphericity does not apply.</p>
 <p>This means for a 2x2 repeated measures design, we will only check normality of residuals.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># testing normality, looking at normal distribution of residuals from the model.</span></span>
 <span><span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="co">#pulls residuals from the model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span> <span class="co">#produces a qq-plot of residuals</span></span>
@@ -162,7 +176,7 @@
 <p>The code below is quite long, but have a go at running it and look at the graph it produces.</p>
 <p>Keep in mind you will look at data visualisation in a little more detail in a few weeks…</p>
 <p>Consider whether a figure like this might be useful for your upcoming lab report.</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">longd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">wellbeing</span>, fill <span class="op">=</span> <span class="va">exercise</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun.data <span class="op">=</span> <span class="va">mean_sdl</span>, geom <span class="op">=</span> <span class="st">"errorbar"</span>, </span>
@@ -195,7 +209,7 @@
 <h3>
 <span class="header-section-number">7.6.1</span> Look at the code below and answer the questions:<a class="anchor" aria-label="anchor" href="#look-at-the-code-below-and-answer-the-questions"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id"</span>,</span>
 <span>              between <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"group"</span>, <span class="st">"handedness"</span><span class="op">)</span>, </span>
 <span>              dv <span class="op">=</span> <span class="st">"reaction_time"</span>, </span>
@@ -220,7 +234,7 @@
 <h3>
 <span class="header-section-number">7.6.2</span> Look at the code below and answer the questions.<a class="anchor" aria-label="anchor" href="#look-at-the-code-below-and-answer-the-questions."><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id"</span>,</span>
 <span>              between <span class="op">=</span> <span class="st">"group"</span>,</span>
 <span>              within <span class="op">=</span> <span class="st">"time_point"</span>,</span>
@@ -278,7 +292,7 @@
 </h2>
 <p>A friend is trying to run some code. They want to run a factorial ANOVA and then pull out the estimated marginal means, but it is not working!</p>
 <p>Use your expert code skills to identify where the issue is by looking through the code below.</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id"</span>,</span>
 <span>              dv <span class="op">=</span> <span class="st">"score"</span>,</span>
 <span>              between <span class="op">=</span> <span class="st">"treatment"</span>,</span>
@@ -364,7 +378,7 @@ function checkAnswer(id, correctValue){
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-11-16.</p>
+    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-11-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

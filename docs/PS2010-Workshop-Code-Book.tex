@@ -151,7 +151,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-11-16}
+\date{2025-11-17}
 
 \begin{document}
 \maketitle
@@ -1772,9 +1772,9 @@ Well Done. You have reached the end of the workshop \\
 \item
   To practice running and interpreting a factorial ANOVA for a repeated measures design.
 \item
-  To practice plotting an interaction using \texttt{afex\_plot}.
+  To practice interpreting means for main effects in a 2x2 design.
 \item
-  To practice conducting simple effects analysis to break down and interpret an interaction.
+  To practice evaluating the assumption of normality.
 \end{itemize}
 
 \section{Exercise 1: Import Data}\label{exercise-1-import-data-1}
@@ -1785,6 +1785,7 @@ Before beginning make sure you load the relevant packages.
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse)}
 \FunctionTok{library}\NormalTok{(afex)}
+\FunctionTok{library}\NormalTok{(car)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1887,6 +1888,27 @@ Is the interaction significant? Decide for yourself. If it is, you should use th
 If not, as the two independent variables each only have two levels, you can interpret any main effects by looking at the descriptive statistics and/or plots.
 
 Remember to amend the group\_by() line of code in the descriptives to work out the statistics for each independent variable separately (as shown in the lecture).
+
+Use the hint below if needed.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👀 Click for a hint
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exercise }\OtherTok{\textless{}{-}}\NormalTok{ longd }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(exercise) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{m =} \FunctionTok{mean}\NormalTok{(wellbeing), }
+            \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(wellbeing), }
+            \AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\FunctionTok{view}\NormalTok{(exercise)}
+\end{Highlighting}
+\end{Shaded}
+
+Now try to amend the code to find the descriptives for the main effect of \texttt{time}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 Answer questions 3.1-3.5 on the worksheet.
 
