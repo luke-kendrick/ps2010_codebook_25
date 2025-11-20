@@ -213,11 +213,50 @@ mod <- aov_ez(id = "NULL",
               type = 3,
               include_aov = TRUE,
               data = NULL)
-
-mod$anova_table
 ```
 
 Take extra care to ensure you enter the correct variable for the `within` and `between` lines of code. Look back over the study scenario section at the start of the workshop if you need.
+
+**Sphericity Check**
+
+As one of the independent variables is repeated measures we need to run an extra check here.
+
+aov_ez() will automatically check Sphericity for you when you have a repeated measures variable with three or more levels, and it will essentially produce two ANOVA models: a corrected model and an uncorrected model. You need to decide which one to use.
+
+If the assumption of Sphericity is violated, you should use the corrected model.
+If the assumption of Sphericity is met, you can use the uncorrected model.
+
+To check, produce the model output but this time using `summary(mod)` as this gives us some extra information.
+
+``` r
+summary(mod)
+```
+
+Check the output and look for Mauchly Tests for Sphericity:
+
+``` r
+Mauchly Tests for Sphericity
+
+                   Test statistic p-value
+hazard                    0.96285 0.33993
+distraction:hazard        0.96285 0.33993
+```
+
+To report the assumption based on the output above, i'd write something like:
+> Mauchly’s test indicated that the assumption of sphericity was not violated for the main effect of hazard, *w* = .96, *p* = .340 or the distraction × hazard interaction, *W* = .96 , *p* = .340.
+
+
+As these p-values were not-significant this means that Sphericity was NOT violated and the assumption was met. This now means we can report the ANOVA model without any correction.
+
+If the assumption is violated (either *p*-value is less than 0.05 and therefore significant) then you should use and report the corrected model. To find this just use:
+
+```r
+nice(mod)
+```
+
+If you run this now to compare, you'll notice that the degrees of freedon are slightly adjusted (they're not whole numbers) and some other values, such as *p*-values, might have changed slightly. If you see `Sphericity correction method: GG` this meand a Greenhouse-Geisser correction has been applied and you should include that information in your write-up.
+
+As for today's scenario the assumption was met, continue wit the uncorrected model.
 
 Interpret the ANOVA model and decide what should happen next...
 
@@ -325,38 +364,153 @@ cohens_d(mydata$pedestrian, mydata$bike, paired = TRUE)
 
 These need to match the three comparisons carried out in exercise 4.
 
-> **Question 13: Which pairwise comparison had the largest effect size?** <select id="q11" onchange="checkAnswer('q11','A')"> <option value="">-- choose an answer --</option> <option value="A">A. Car vs. Pedestrian</option> <option value="B">B. Bike vs. Pedestrian</option> <option value="C">C. Car vs. Bike</option> </select>
+> **Question 13: Which pairwise comparison had the largest effect size?** <select id="q13" onchange="checkAnswer('q13','A')"> <option value="">-- choose an answer --</option> <option value="A">A. Car vs. Pedestrian</option> <option value="B">B. Bike vs. Pedestrian</option> <option value="C">C. Car vs. Bike</option> </select>
 
 ## Exercise 7: Evaluating Assumptions
 
-We need to evaluate two key assumptions for this design: Sphericity and Normality of Residuals.
+We Sphericity was already checker earlier on. As this is a mixed design, we now have two more assumptions to check.
 
-### Sphericity
+### Checking Normality
 
-As we have a repeated measures independent variable with three levels, Sphericity applies. The good news is the initial ANOVA model checks this and automatically applies any correction. but with a caveat.
+You have done this before. Same code, providing your ANOVA model is called `mod`.
 
-To check, produce the model output again but this time using `summary(mod)` as this gives us some extra information.
-
-``` r
-summary(mod)
+```r
+# testing normality, looking at normal distribution of residuals from the model.
+residuals <- residuals(mod) #pulls residuals from the model
+qqPlot(residuals) #produces a qq-plot of residuals
+hist(residuals, breaks = 20, main = "Histogram of Residuals", xlab = "Residuals", col = "lightblue") #histogram of residuals
+shapiro.test(residuals) #Shapiro test for residuals
 ```
 
-If you look at the degrees of freedom, you'll notice these are a bit unusual as they're not whole numbers. `aov_ez()` will always apply the correction, whether we need it or not. How can we check if the assumption was violated?
+### Checking Homogeneity of Variance
 
-Check the output:
+You should use Levene's test. You've also done this before but for a one-way independent ANOVA.
 
-``` r
-                   Test statistic p-value
-hazard                    0.96285 0.33993
-distraction:hazard        0.96285 0.33993
+```r
+leveneTest(NULL1 ~ NULL2, longd)
 ```
 
-As the p-values were not-significant this means that Sphericity was NOT violated and actually we could report the ANOVA model without the correction.
+-   Change `NULL1` to the dependent variable.
+-   Change `NULL2` to the independent (between subjects) measures independent variable.
+-   The third item is the object which contains the data, in this case `longd` again.
 
-To report the assumption based on the output above, i'd write something like: > Mauchly’s test indicated that the assumption of sphericity was not violated for the main effect of hazard, *w* = .96, *p* = .340 or the distraction × hazard interaction, *W* = .96 , *p* = .340.
+Remember, a non-significant *p*-value (>.05) means the assumption was met.
 
-This means the assumption of Sphericity was not violated.
+## Exercise 8: Data Visualisation
 
+When considering data visualisation options, you should consider "what are the significant and important findings I want to show my reader?". Given you have two significant main effects and a non-significant interaction, if you only present a figure showing the interaction, you're not teling the full story.
+
+Use the code below to generate three plots. Take a look at them and interpret what they show.
+
+### Plot 1
+
+<details>
+
+<summary>📊 Click for Code</summary>
+
+``` r
+p1 <- ggplot(longd, aes(x = distraction, y = acc)) +
+  stat_summary(fun = mean, geom = "bar", 
+               position = position_dodge(), 
+               color = "black",
+               fill = c("slategray4", "slategray2")) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", 
+               position = position_dodge(0.9), width = 0.25) +
+  labs(
+    title = NULL,
+    x = "distraction Holder",
+    y = "Mean Number of Hazards Identified") +
+  scale_x_discrete(labels = c("yes" = "Yes", "no" = "No")) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, size = 1),
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"))
+```
+
+</details>
+
+### Plot 2
+
+<details>
+
+<summary>📊 Click for Code</summary>
+
+``` r
+p2 <- ggplot(longd, aes(x = hazard, y = acc)) +
+  stat_summary(fun = mean, geom = "bar", 
+               position = position_dodge(), 
+               color = "black",
+               fill = c("slategray4", "slategray2", "darkslategray3")) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", 
+               position = position_dodge(0.9), width = 0.25) +
+  labs(
+    title = NULL,
+    x = "Hazard Type",
+    y = "Mean Hazards Identified") +
+  scale_x_discrete(labels = c("car" = "Car", "bike" = "Bike", "pedestrian" = "Pedestrian")) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, size = 1),
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"))
+```
+
+</details>
+
+### Plot 3
+
+<details>
+
+<summary>📊 Click for Code</summary>
+
+``` r
+p3 <- ggplot(longd, aes(x = hazard, y = acc, fill = distraction)) +
+  stat_summary(fun = mean, geom = "bar", position = position_dodge(), color = "black") +
+  stat_summary(fun.data = mean_se, geom = "errorbar", 
+               position = position_dodge(0.9), width = 0.25) +
+  labs(
+    title = NULL,   # leave this as NULL because APA figures do not use titles.
+    x = "Hazard",
+    y = "Mean Number of Hazards Identified",
+    fill = "Distraction") +
+  scale_fill_manual(values = c("yes" = "slategray4", "no" = "slategray2"), 
+                    labels = c("Yes", "No")) +
+  scale_x_discrete(labels = c("car" = "Car", "bike" = "Bike", "pedestrian" = "Pedestrian")) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, size = 1),
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.title = element_text(face = "bold"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"))
+```
+
+</details>
+
+Once you have run all three, use the code below to present all three at once.
+You'll need a new package.
+
+```r
+install.packahes("gridExtra")
+library(gridExtra)
+
+grid.arrange(p1,p2,p3, ncol = 3)
+```
+
+**NOTE**: You will likely need to resize the output panel (bottom right panel) by making it wider so all three plots are visible.
+
+> **Question 14: Which plot tells us about the main effect of distraction?** <select id="q14" onchange="checkAnswer('q14','B')"> <option value="">-- choose an answer --</option> <option value="A">A. Plot 1 (p1)</option> <option value="B">B. Plot 2 (p2)</option> <option value="C">C. Plot 3 (p3)</option> </select>
+> **Question 15: Which plot tells us about the main effect of hazard?** <select id="q15" onchange="checkAnswer('q15','A')"> <option value="">-- choose an answer --</option> <option value="A">A. Plot 1 (p1)</option> <option value="B">B. Plot 2 (p2)</option> <option value="C">C. Plot 3 (p3)</option> </select>
+> **Question 16: Which plot tells us about the interaction?** <select id="q16" onchange="checkAnswer('q16','C')"> <option value="">-- choose an answer --</option> <option value="A">A. Plot 1 (p1)</option> <option value="B">B. Plot 2 (p2)</option> <option value="C">C. Plot 3 (p3)</option> </select>
 
 
 <!-- JS to check correctness -->

@@ -75,4 +75,9 @@ exercise-4-interpreting-the-main-effect-of-distraction
 exercise-5-interpreting-the-main-effect-of-hazard-type
 exercise-6-effect-sizes
 exercise-7-evaluating-assumptions
-sphericity
+checking-normality
+checking-homogeneity-of-variance
+exercise-8-data-visualisation
+plot-1
+plot-2
+plot-3
