@@ -67,3 +67,12 @@ look-at-the-code-below-and-answer-the-questions
 look-at-the-code-below-and-answer-the-questions.
 exercise-7-significant-or-non-significant-that-is-the-question
 exercise-8-help-my-code-wont-work
+workshop-8-factorial-anova-different-designs-and-assumptions
+exercise-1-prepare-rstudio-and-import-the-data
+exercise-2-data-wrangling
+exercise-3-descriptive-stats-and-the-model
+exercise-4-interpreting-the-main-effect-of-distraction
+exercise-5-interpreting-the-main-effect-of-hazard-type
+exercise-6-effect-sizes
+exercise-7-evaluating-assumptions
+sphericity
