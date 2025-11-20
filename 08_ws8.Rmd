@@ -318,7 +318,7 @@ view(m_hazard)
 
 You have used the emmeans() function before in week 5's workshop. Interpret the output.
 
-> **Question 10: Which was the only pair that was not significantly different?** <select id="q10" onchange="checkAnswer('q10','C')"> <option value="">-- choose an answer --</option> <option value="A">A. bike vs. car</option> <option value="B">B. car vs. pedestrian</option> <option value="C">C. bike vs. pedestrian</option> </select>
+> **Question 10: Which was the only pairwise comparison that was NOT significant?** <select id="q10" onchange="checkAnswer('q10','C')"> <option value="">-- choose an answer --</option> <option value="A">A. bike vs. car</option> <option value="B">B. car vs. pedestrian</option> <option value="C">C. bike vs. pedestrian</option> </select>
 
 > **Question 11: Using all available information, which statement is NOT a correct interpretation of this main effect?** <select id="q11" onchange="checkAnswer('q11','B')"> <option value="">-- choose an answer --</option> <option value="A">A. Cars were easier to spot than bikes</option> <option value="B">B. Bikes were easier to spot than pedestrians</option> <option value="C">C. Cars were easier to spot than pedestrians</option> </select>
 
@@ -326,7 +326,7 @@ You have used the emmeans() function before in week 5's workshop. Interpret the 
 
 ## Exercise 6: Effect Sizes
 
-So far you have the initial ANOVA model which give you:
+So far you have the initial ANOVA model which gave you:
 
 -   *F*, df, and *p* for each main effect and the interaction.
 
@@ -340,7 +340,7 @@ Descriptive statistics and pairwise comparisons for main effect of hazard type w
 
 But what about effect sizes?
 
-For the ANOVA model, you should look for partial eta squared ($η_P^2$). This is super quick and easy to check from the ANOVA model `mod` using this code:
+For the ANOVA model, you should look at partial eta squared ($η_P^2$). This is super quick and easy to check from the ANOVA model `mod` using this code:
 
 ``` r
 eta_squared(mod)
@@ -509,7 +509,9 @@ grid.arrange(p1,p2,p3, ncol = 3)
 **NOTE**: You will likely need to resize the output panel (bottom right panel) by making it wider so all three plots are visible.
 
 > **Question 14: Which plot tells us about the main effect of distraction?** <select id="q14" onchange="checkAnswer('q14','B')"> <option value="">-- choose an answer --</option> <option value="A">A. Plot 1 (p1)</option> <option value="B">B. Plot 2 (p2)</option> <option value="C">C. Plot 3 (p3)</option> </select>
+
 > **Question 15: Which plot tells us about the main effect of hazard?** <select id="q15" onchange="checkAnswer('q15','A')"> <option value="">-- choose an answer --</option> <option value="A">A. Plot 1 (p1)</option> <option value="B">B. Plot 2 (p2)</option> <option value="C">C. Plot 3 (p3)</option> </select>
+
 > **Question 16: Which plot tells us about the interaction?** <select id="q16" onchange="checkAnswer('q16','C')"> <option value="">-- choose an answer --</option> <option value="A">A. Plot 1 (p1)</option> <option value="B">B. Plot 2 (p2)</option> <option value="C">C. Plot 3 (p3)</option> </select>
 
 

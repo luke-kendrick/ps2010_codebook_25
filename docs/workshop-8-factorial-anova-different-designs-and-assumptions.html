@@ -327,7 +327,7 @@ If the assumption of Sphericity is met, you can use the uncorrected model.</p>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">m_hazard</span><span class="op">)</span></span></code></pre></div>
 <p>You have used the emmeans() function before in week 5’s workshop. Interpret the output.</p>
 <blockquote>
-<p><strong>Question 10: Which was the only pair that was not significantly different?</strong> <select id="q10" onchange="checkAnswer('q10','C')"><option value="">– choose an answer –</option>
+<p><strong>Question 10: Which was the only pairwise comparison that was NOT significant?</strong> <select id="q10" onchange="checkAnswer('q10','C')"><option value="">– choose an answer –</option>
 <option value="A">A. bike vs. car</option>
 <option value="B">B. car vs. pedestrian</option>
 <option value="C">C. bike vs. pedestrian</option></select></p>
@@ -349,7 +349,7 @@ If the assumption of Sphericity is met, you can use the uncorrected model.</p>
 <h2>
 <span class="header-section-number">8.6</span> Exercise 6: Effect Sizes<a class="anchor" aria-label="anchor" href="#exercise-6-effect-sizes"><i class="fas fa-link"></i></a>
 </h2>
-<p>So far you have the initial ANOVA model which give you:</p>
+<p>So far you have the initial ANOVA model which gave you:</p>
 <ul>
 <li>
 <em>F</em>, df, and <em>p</em> for each main effect and the interaction.</li>
@@ -363,7 +363,7 @@ If the assumption of Sphericity is met, you can use the uncorrected model.</p>
 <li>Mean and standard deviation of identified hazards for the three conditions (car, bike, pedestrian for hazard type) and <em>t</em>, df, and <em>p</em> from pairwise comparisons between the three.</li>
 </ul>
 <p>But what about effect sizes?</p>
-<p>For the ANOVA model, you should look for partial eta squared (<span class="math inline">\(η_P^2\)</span>). This is super quick and easy to check from the ANOVA model <code>mod</code> using this code:</p>
+<p>For the ANOVA model, you should look at partial eta squared (<span class="math inline">\(η_P^2\)</span>). This is super quick and easy to check from the ANOVA model <code>mod</code> using this code:</p>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/eta_squared.html">eta_squared</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
 <p>You can report the full <em>F</em>-statement in APA format like this:</p>
@@ -519,10 +519,16 @@ You’ll need a new package.</p>
 <p><strong>Question 14: Which plot tells us about the main effect of distraction?</strong> <select id="q14" onchange="checkAnswer('q14','B')"><option value="">– choose an answer –</option>
 <option value="A">A. Plot 1 (p1)</option>
 <option value="B">B. Plot 2 (p2)</option>
-<option value="C">C. Plot 3 (p3)</option></select><strong>Question 15: Which plot tells us about the main effect of hazard?</strong> <select id="q15" onchange="checkAnswer('q15','A')"><option value="">– choose an answer –</option>
+<option value="C">C. Plot 3 (p3)</option></select></p>
+</blockquote>
+<blockquote>
+<p><strong>Question 15: Which plot tells us about the main effect of hazard?</strong> <select id="q15" onchange="checkAnswer('q15','A')"><option value="">– choose an answer –</option>
 <option value="A">A. Plot 1 (p1)</option>
 <option value="B">B. Plot 2 (p2)</option>
-<option value="C">C. Plot 3 (p3)</option></select><strong>Question 16: Which plot tells us about the interaction?</strong> <select id="q16" onchange="checkAnswer('q16','C')"><option value="">– choose an answer –</option>
+<option value="C">C. Plot 3 (p3)</option></select></p>
+</blockquote>
+<blockquote>
+<p><strong>Question 16: Which plot tells us about the interaction?</strong> <select id="q16" onchange="checkAnswer('q16','C')"><option value="">– choose an answer –</option>
 <option value="A">A. Plot 1 (p1)</option>
 <option value="B">B. Plot 2 (p2)</option>
 <option value="C">C. Plot 3 (p3)</option></select></p>
