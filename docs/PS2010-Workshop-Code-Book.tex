@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-11-20}
+\date{2025-11-24}
 
 \begin{document}
 \maketitle
@@ -2100,7 +2100,7 @@ Take your time to look through the code and spot \textbf{two} issues and then an
 Well Done. You have reached the end of the workshop \\
 \end{longtable}
 
-\chapter{Workshop 8: Factorial ANOVA: Different Designs and Assumptions}\label{workshop-8-factorial-anova-different-designs-and-assumptions}
+\chapter{Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA}\label{workshop-8-factorial-anova-mixed-design-factorial-anova}
 
 \textbf{Aims:}
 
@@ -2109,7 +2109,7 @@ Well Done. You have reached the end of the workshop \\
 \item
   Practice importing and wrangling data ready for analysis.
 \item
-  Practice running a mixed ANOVA, including interpreting the model and running and follow-up analyses.
+  Practice running a mixed design factorial ANOVA, including interpreting the model and running any follow-up analyses.
 \item
   Practice evaluating model assumptions.
 \item
@@ -2527,7 +2527,7 @@ So far you have the initial ANOVA model which gave you:
   \emph{F}, df, and \emph{p} for each main effect and the interaction.
 \end{itemize}
 
-Descriptive statistics for main effect of distraction which give you:
+Descriptive statistics for main effect of distraction which gave you:
 
 \begin{itemize}
 \tightlist
@@ -2535,7 +2535,7 @@ Descriptive statistics for main effect of distraction which give you:
   Mean and standard deviation of identified hazard for the two groups (yes, no for presence of distraction)
 \end{itemize}
 
-Descriptive statistics and pairwise comparisons for main effect of hazard type which give you:
+Descriptive statistics and pairwise comparisons for main effect of hazard type which gave you:
 
 \begin{itemize}
 \tightlist
@@ -2638,7 +2638,7 @@ Use the code below to generate three plots. Take a look at them and interpret wh
                \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}
     \AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,}
-    \AttributeTok{x =} \StringTok{"distraction Holder"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Distraction"}\NormalTok{,}
     \AttributeTok{y =} \StringTok{"Mean Number of Hazards Identified"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"yes"} \OtherTok{=} \StringTok{"Yes"}\NormalTok{, }\StringTok{"no"} \OtherTok{=} \StringTok{"No"}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA | PS2010 Workshop Code Book</title>
+<meta name="author" content="Luke Kendrick">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA | PS2010 Workshop Code Book">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA | PS2010 Workshop Code Book">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Aims: Practice importing and wrangling data ready for analysis. Practice running a mixed design factorial ANOVA, including interpreting the model and running any follow-up analyses. Practice...">
+<meta property="og:description" content="Aims: Practice importing and wrangling data ready for analysis. Practice running a mixed design factorial ANOVA, including interpreting the model and running any follow-up analyses. Practice...">
+<meta name="twitter:description" content="Aims: Practice importing and wrangling data ready for analysis. Practice running a mixed design factorial ANOVA, including interpreting the model and running any follow-up analyses. Practice...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">PS2010 Workshop Code Book</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="workshop-1-data-handling-skills.html"><span class="header-section-number">1</span> Workshop 1: Data Handling Skills</a></li>
+<li><a class="" href="workshop-2-summarising-and-describing-data.html"><span class="header-section-number">2</span> Workshop 2: Summarising and Describing Data</a></li>
+<li><a class="" href="workshop-3-t-tests.html"><span class="header-section-number">3</span> Workshop 3: t-tests</a></li>
+<li><a class="" href="workshop-4-one-way-anova-model-designs-assumptions.html"><span class="header-section-number">4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)</a></li>
+<li><a class="" href="workshop-5-one-way-anova-post-hocs-contrasts-write-up.html"><span class="header-section-number">5</span> Workshop 5: One-Way ANOVA (Post-hocs, Contrasts, Write-up)</a></li>
+<li><a class="" href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html"><span class="header-section-number">6</span> Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions</a></li>
+<li><a class="" href="workshop-7-factorial-anova-different-designs-and-assumptions.html"><span class="header-section-number">7</span> Workshop 7: Factorial ANOVA: Different Designs and Assumptions</a></li>
+<li><a class="active" href="workshop-8-factorial-anova-mixed-design-factorial-anova.html"><span class="header-section-number">8</span> Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workshop-8-factorial-anova-mixed-design-factorial-anova" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA<a class="anchor" aria-label="anchor" href="#workshop-8-factorial-anova-mixed-design-factorial-anova"><i class="fas fa-link"></i></a>
+</h1>
+<p><strong>Aims:</strong></p>
+<ul>
+<li>Practice importing and wrangling data ready for analysis.</li>
+<li>Practice running a mixed design factorial ANOVA, including interpreting the model and running any follow-up analyses.</li>
+<li>Practice evaluating model assumptions.</li>
+<li>Practice generating plots and writing-up the analysis.</li>
+</ul>
+<p><strong>Introduction</strong></p>
+<p>This week’s workshop is going to bring together several things you have covered so far during PS2010, including right back to the week one workshop. Today you are going to analyse a data set starting from a “messy” data set right the way through to producing some fancy data visualisations to show off your findings.</p>
+<p>All of the steps covered in today’s workshop could be helpful for your lab report analysis and write-up.</p>
+<p>There are quite a few steps today and so don’t worry if you cannot complete them all in the allotted time, but instead save your script and use your independent study time to complete it.</p>
+<p><strong>Today’s Research Scenario</strong></p>
+<p>There are lots of tasks where our performance can be negatively impacted by distractions. There are some tasks whereby we should solely focus on what we are doing, for example, when completing this workshop or driving a car.</p>
+<p>If you are distracted completing this workshop, the worst that could happen is that you make a mistake with your code. Distractions when driving can have much more serious consequences. Today’s research question is: How do distractions impact our ability to detect different types of hazards when driving.</p>
+<p>Sixty experienced drivers (minimum 1 year driving experience) were recruited to take part in a driving simulation task, whereby they had to identify different hazards. Participants were first randomly allocated to one of two conditions.</p>
+<ul>
+<li>
+<p>Independent variable 1 (distraction yes/no):</p>
+<ul>
+<li><p>Yes: participants were required to answer questions by the researcher via a hands free headset whilst in the simulator.</p></li>
+<li><p>No: participants were left to drive uninterrupted in the simulator.</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Question 1: Was this variable independent or repeated measures?</strong> <select id="q1" onchange="checkAnswer('q1','A')"><option value="">– choose an answer –</option>
+<option value="A">A. Independent Measures</option>
+<option value="B">B. Repeated Measures</option></select></p>
+</blockquote>
+<p>During the driving simulation task, participants had to identify hazards (e.g., a car pulling out in front, or a pedestrian stepping out) by pressing a button. There were three different types of hazard that participants saw.</p>
+<ul>
+<li>
+<p>Independent variable 2 (hazard type: car, bike, pedestrian)</p>
+<ul>
+<li><p>Car: a car was the cause of the hazard.</p></li>
+<li><p>Bike: a bicycle was the cause of the hazard</p></li>
+<li><p>Pedestrian: a pedestrian was the cause of the hazard.</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Question 2: Was this variable independent or repeated measures?</strong> <select id="q2" onchange="checkAnswer('q2','B')"><option value="">– choose an answer –</option>
+<option value="A">A. Independent Measures</option>
+<option value="B">B. Repeated Measures</option></select></p>
+</blockquote>
+<p>The dependent variable in this study was the number of hazards correctly identified. The driving task was split into <strong>two</strong> blocks, and there were a maximum of 10 hazards for each hazard type in each block (total 30 hazards per block).</p>
+<hr>
+<p><strong>Workshop Outline</strong></p>
+<p>The workshop is split into different parts:</p>
+<p><strong>Exercises 1-2</strong>: Import and Prepare Data for Analysis This will involve setting up RStudio, importing the data, and any data wrangling tasks to ensure the data is in the correct format prior to analysis.</p>
+<p><strong>Exercise 3</strong>: Calculate Statistics This will involve running initial descriptive statistics and the initial ANOVA model.</p>
+<p><strong>Exercises 4-6</strong> Carrying out any additional analyses (e.g., examine the interaction or interpret main effects) depending on the outcome of the initial ANOVA model.</p>
+<p><strong>Exercise 7</strong> Evaluate the model. This will be checking any necessary assumptions.</p>
+<p><strong>Exercise 8</strong> Generate publication worthy figures and write-up the results.</p>
+<p>Let’s begin…</p>
+<div id="exercise-1-prepare-rstudio-and-import-the-data" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Exercise 1: Prepare RStudio and Import the Data<a class="anchor" aria-label="anchor" href="#exercise-1-prepare-rstudio-and-import-the-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>You’ll need these packages:</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://afex.singmann.science/">afex</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvlenth.github.io/emmeans/">emmeans</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span></span></code></pre></div>
+<p>Import the data set from the csv file called <code>hazard.csv</code>.</p>
+<p>View the data to familiarise yourself with it:</p>
+<ul>
+<li><p><code>id</code>: the identifier.</p></li>
+<li><p><code>age</code>: participant age in years.</p></li>
+<li><p><code>exp_code</code>: was a code used to log in to the simulator experiment system for that participant.</p></li>
+<li><p><code>years_driving</code>: how many years they have been driving.</p></li>
+<li><p><code>distraction</code>: which distraction condition they were randomly assigned to.</p></li>
+<li><p><code>block1_car</code> and <code>block2_car</code>: the number of car hazards identified in blocks 1 and 2 respectively.</p></li>
+<li><p><code>block1_bike</code> and <code>block2_bike</code>: the number of bike hazards identified in blocks 1 and 2 respectively.</p></li>
+<li><p><code>block1_pedestrian</code> and <code>block2_pedestrian</code>: the number of pedestrian hazards identified in blocks 1 and 2 respectively.</p></li>
+</ul>
+</div>
+<div id="exercise-2-data-wrangling" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Exercise 2: Data Wrangling<a class="anchor" aria-label="anchor" href="#exercise-2-data-wrangling"><i class="fas fa-link"></i></a>
+</h2>
+<p>The data set is a bit busier than what you have seen before, and requires some work before it is ready to analyse. This is a normal part of data analysis.</p>
+<ul>
+<li>You need to calculate the total number of hazards correctly identified, because these are split over two blocks at the moment.</li>
+</ul>
+<blockquote>
+<p><strong>Question 3: Which R function could help with this?</strong> <select id="q3" onchange="checkAnswer('q3','C')"><option value="">– choose an answer –</option>
+<option value="A">A. filter()</option>
+<option value="B">B. select()</option>
+<option value="C">C. mutate()</option></select></p>
+</blockquote>
+<ul>
+<li>There are a few variables in the data set we don’t really need, you could get rid of them to clean up the data set if you want.</li>
+</ul>
+<blockquote>
+<p><strong>Question 4: Which R function could help with this?</strong> <select id="q4" onchange="checkAnswer('q4','B')"><option value="">– choose an answer –</option>
+<option value="A">A. filter()</option>
+<option value="B">B. select()</option>
+<option value="C">C. mutate()</option></select></p>
+</blockquote>
+<ul>
+<li>The data has a repeated measures variable and this is in wide format currently. You will need long format data.</li>
+</ul>
+<blockquote>
+<p><strong>Question 5: Which R function could help with this?</strong> <select id="q5" onchange="checkAnswer('q5','A')"><option value="">– choose an answer –</option>
+<option value="A">A. pivot_longer()</option>
+<option value="B">B. filter() </option>
+<option value="C">C. group_by()</option></select></p>
+</blockquote>
+<p><strong>Calculate the Total Scores</strong></p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>car <span class="op">=</span> <span class="va">block1_car</span> <span class="op">+</span> <span class="va">block2_car</span>,</span>
+<span>         bike <span class="op">=</span> <span class="va">block1_bike</span> <span class="op">+</span> <span class="va">block2_bike</span>,</span>
+<span>         pedestrian <span class="op">=</span> <span class="va">block1_pedestrian</span> <span class="op">+</span> <span class="va">block2_pedestrian</span><span class="op">)</span></span></code></pre></div>
+<p>This code will create three new variables: <code>car</code>, <code>bike</code>, and <code>pedestrian</code> to contain the sum of the two blocks. You used the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function in week 1’s workshop.</p>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div>
+<p>Can you spot the new variables that you created?</p>
+<p><strong>Select Relevant Variables</strong></p>
+<p>Use <code>names(mydata)</code> for a list of the variables in the data set. Use the code below to select the variables you will need for your ANOVA analysis. You do not need everything in the original <code>mydata</code> data set.</p>
+<p>For example, we really don’t need the original <code>block1_</code> or <code>block2_</code> scores now we have the totals from above, and similarly, the <code>exp_code</code> is not needed for our analysis.</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata_clean</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="cn">NULL</span><span class="op">)</span> <span class="co"># add as many as necessary</span></span></code></pre></div>
+<p>Change each <code>NULL</code> to a variable you want to keep (each separated by a comma). You used the <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function in week 1’s workshop. Note: this code creates a new object called <code>mydata_clean</code> so that we don’t overwrite the original <code>mydata</code> object.</p>
+<p>Use the hint below if needed.</p>
+<hr>
+<details><summary>
+👀 Click for a hint
+</summary><div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata_clean</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">age</span>, <span class="va">years_driving</span>, <span class="va">distraction</span>, <span class="va">car</span>, <span class="va">bike</span>, <span class="va">pedestrian</span><span class="op">)</span></span></code></pre></div>
+</details><hr>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">mydata_clean</span><span class="op">)</span></span></code></pre></div>
+<p>Do you notice that there are fewer variables in this data set? That looks a bit tidier!</p>
+<p><strong>Convert from Wide to Long format</strong></p>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">longd</span> <span class="op">&lt;-</span> <span class="va">mydata_clean</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
+<span>    cols <span class="op">=</span> <span class="va">car</span><span class="op">:</span><span class="va">pedestrian</span>,</span>
+<span>    names_to <span class="op">=</span> <span class="st">"hazard"</span>,</span>
+<span>    values_to <span class="op">=</span> <span class="st">"acc"</span><span class="op">)</span></span></code></pre></div>
+<p>This will create two new labels: <code>hazard</code> for type of hazard, and <code>acc</code> for number of hazards correctly identified (accuracy). From now on you should use the <code>longd</code> object.</p>
+<p><strong>Re-code Any Factors</strong></p>
+<p>Last bit of wrangling. Make sure you have any factors coded as a Factor and not a character.</p>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">longd</span><span class="op">$</span><span class="va">distraction</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">longd</span><span class="op">$</span><span class="va">distraction</span><span class="op">)</span></span>
+<span><span class="va">longd</span><span class="op">$</span><span class="va">hazard</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">longd</span><span class="op">$</span><span class="va">hazard</span><span class="op">)</span></span></code></pre></div>
+<p>Now you are ready for the real analysis.</p>
+</div>
+<div id="exercise-3-descriptive-stats-and-the-model" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Exercise 3: Descriptive Stats and the Model<a class="anchor" aria-label="anchor" href="#exercise-3-descriptive-stats-and-the-model"><i class="fas fa-link"></i></a>
+</h2>
+<p>Calculate descriptive statistics just like you have done in previous weeks.</p>
+<p>Use <code>names(longd)</code> if you need a reminder of the variable names.</p>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span> <span class="va">longd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="cn">NULL</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>              sd_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">desc</span><span class="op">)</span></span></code></pre></div>
+<p>You could also generate a box plot if you like (use code from previous weeks) but we will generate some visualisations later on.</p>
+<p>Now to run the initial ANOVA model…</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>              dv <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>              within <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>              between <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>              type <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>              include_aov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>              data <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<p>Take extra care to ensure you enter the correct variable for the <code>within</code> and <code>between</code> lines of code. Look back over the study scenario section at the start of the workshop if you need.</p>
+<p><strong>Sphericity Check</strong></p>
+<p>As one of the independent variables is repeated measures we need to run an extra check here.</p>
+<p>aov_ez() will automatically check Sphericity for you when you have a repeated measures variable with three or more levels, and it will essentially produce two ANOVA models: a corrected model and an uncorrected model. You need to decide which one to use.</p>
+<p>If the assumption of Sphericity is violated, you should use the corrected model.
+If the assumption of Sphericity is met, you can use the uncorrected model.</p>
+<p>To check, produce the model output but this time using <code>summary(mod)</code> as this gives us some extra information.</p>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
+<p>Check the output and look for Mauchly Tests for Sphericity:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="workshop-8-factorial-anova-mixed-design-factorial-anova.html#cb114-1" tabindex="-1"></a>Mauchly Tests <span class="cf">for</span> Sphericity</span>
+<span id="cb114-2"><a href="workshop-8-factorial-anova-mixed-design-factorial-anova.html#cb114-2" tabindex="-1"></a></span>
+<span id="cb114-3"><a href="workshop-8-factorial-anova-mixed-design-factorial-anova.html#cb114-3" tabindex="-1"></a>                   Test statistic p<span class="sc">-</span>value</span>
+<span id="cb114-4"><a href="workshop-8-factorial-anova-mixed-design-factorial-anova.html#cb114-4" tabindex="-1"></a>hazard                    <span class="fl">0.96285</span> <span class="fl">0.33993</span></span>
+<span id="cb114-5"><a href="workshop-8-factorial-anova-mixed-design-factorial-anova.html#cb114-5" tabindex="-1"></a>distraction<span class="sc">:</span>hazard        <span class="fl">0.96285</span> <span class="fl">0.33993</span></span></code></pre></div>
+<p>To report the assumption based on the output above, i’d write something like:
+&gt; Mauchly’s test indicated that the assumption of sphericity was not violated for the main effect of hazard, <em>w</em> = .96, <em>p</em> = .340 or the distraction × hazard interaction, <em>W</em> = .96 , <em>p</em> = .340.</p>
+<p>As these p-values were not-significant this means that Sphericity was NOT violated and the assumption was met. This now means we can report the ANOVA model without any correction.</p>
+<p>If the assumption is violated (either <em>p</em>-value is less than 0.05 and therefore significant) then you should use and report the corrected model. To find this just use:</p>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/afex/man/nice.html">nice</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
+<p>If you run this now to compare, you’ll notice that the degrees of freedon are slightly adjusted (they’re not whole numbers) and some other values, such as <em>p</em>-values, might have changed slightly. If you see <code>Sphericity correction method: GG</code> this meand a Greenhouse-Geisser correction has been applied and you should include that information in your write-up.</p>
+<p>As for today’s scenario the assumption was met, continue wit the uncorrected model.</p>
+<p>Interpret the ANOVA model and decide what should happen next…</p>
+<blockquote>
+<p><strong>The first main effect (distraction) is</strong> <select id="q6" onchange="checkAnswer('q6','B')"><option value="">– choose an answer –</option>
+<option value="A">Not significant</option>
+<option value="B"> Significant</option></select></p>
+</blockquote>
+<blockquote>
+<p><strong>The second main effect (hazard type) is</strong> <select id="q7" onchange="checkAnswer('q7','B')"><option value="">– choose an answer –</option>
+<option value="A">Not significant</option>
+<option value="B"> Significant</option></select></p>
+</blockquote>
+<blockquote>
+<p><strong>The distraction by hazard type interaction is</strong> <select id="q8" onchange="checkAnswer('q8','A')"><option value="">– choose an answer –</option>
+<option value="A">Not significant</option>
+<option value="B"> Significant</option></select></p>
+</blockquote>
+</div>
+<div id="exercise-4-interpreting-the-main-effect-of-distraction" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Exercise 4: Interpreting the Main effect of Distraction<a class="anchor" aria-label="anchor" href="#exercise-4-interpreting-the-main-effect-of-distraction"><i class="fas fa-link"></i></a>
+</h2>
+<p>As there are only two levels, you can just use the mean values to interpret the direction. You can also use a box plot too.</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_distract</span> <span class="op">&lt;-</span> <span class="va">longd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>              sd_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">m_distract</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">longd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">distraction</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p><strong>Question 9: Which statement is the correct interpretation of this main effect?</strong> <select id="q9" onchange="checkAnswer('q9','B')"><option value="">– choose an answer –</option>
+<option value="A">A. Hazard perception was higher in the “distraction = Yes” condition </option>
+<option value="B">B. Hazard perception was higher in the “distraction = No” condition</option></select></p>
+</blockquote>
+</div>
+<div id="exercise-5-interpreting-the-main-effect-of-hazard-type" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Exercise 5: Interpreting the Main Effect of Hazard Type<a class="anchor" aria-label="anchor" href="#exercise-5-interpreting-the-main-effect-of-hazard-type"><i class="fas fa-link"></i></a>
+</h2>
+<p>As there are more than two levels for this main effect, we cannot simply look at the means just yet, as it won’t be clear which conditions are <strong>significantly</strong> different. All the main tell us is that <strong>at least one</strong> of them are significantly different, but which one?</p>
+<p>Here you will need to follow the same steps as a one-way ANOVA (see Workshops 4 &amp; 5 for a refresher). As the main effect was significant, in this scenario you will run post-hoc multiple comparisons to see how they differ. Work through the code below to figure out how to best interpret this main effect using:</p>
+<ol style="list-style-type: decimal">
+<li><p>pairwise comparisons</p></li>
+<li><p>box plot for visualising data</p></li>
+<li><p>means and standard deviation descriptive statistics</p></li>
+</ol>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">mod</span>,</span>
+<span>        <span class="va">pairwise</span> <span class="op">~</span> <span class="va">hazard</span>,</span>
+<span>        adjust <span class="op">=</span> <span class="st">"holm"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">longd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">hazard</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m_hazard</span> <span class="op">&lt;-</span> <span class="va">longd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">hazard</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">acc</span><span class="op">)</span>,</span>
+<span>            sd_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">acc</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">m_hazard</span><span class="op">)</span></span></code></pre></div>
+<p>You have used the emmeans() function before in week 5’s workshop. Interpret the output.</p>
+<blockquote>
+<p><strong>Question 10: Which was the only pairwise comparison that was NOT significant?</strong> <select id="q10" onchange="checkAnswer('q10','C')"><option value="">– choose an answer –</option>
+<option value="A">A. bike vs. car</option>
+<option value="B">B. car vs. pedestrian</option>
+<option value="C">C. bike vs. pedestrian</option></select></p>
+</blockquote>
+<blockquote>
+<p><strong>Question 11: Using all available information, which statement is NOT a correct interpretation of this main effect?</strong> <select id="q11" onchange="checkAnswer('q11','B')"><option value="">– choose an answer –</option>
+<option value="A">A. Cars were easier to spot than bikes</option>
+<option value="B">B. Bikes were easier to spot than pedestrians</option>
+<option value="C">C. Cars were easier to spot than pedestrians</option></select></p>
+</blockquote>
+<blockquote>
+<p><strong>Question 12: Using all available information, which statement is the correct interpretation of this main effect?</strong> <select id="q12" onchange="checkAnswer('q12','B')"><option value="">– choose an answer –</option>
+<option value="A">A. Pedestrians were significantly easier to spot than bikes</option>
+<option value="B">B. Bikes and pedestrians were spotted equally as often</option>
+<option value="C">C. Bikes were significantly easier to spot than pedestrians</option></select></p>
+</blockquote>
+</div>
+<div id="exercise-6-effect-sizes" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Exercise 6: Effect Sizes<a class="anchor" aria-label="anchor" href="#exercise-6-effect-sizes"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far you have the initial ANOVA model which gave you:</p>
+<ul>
+<li>
+<em>F</em>, df, and <em>p</em> for each main effect and the interaction.</li>
+</ul>
+<p>Descriptive statistics for main effect of distraction which gave you:</p>
+<ul>
+<li>Mean and standard deviation of identified hazard for the two groups (yes, no for presence of distraction)</li>
+</ul>
+<p>Descriptive statistics and pairwise comparisons for main effect of hazard type which gave you:</p>
+<ul>
+<li>Mean and standard deviation of identified hazards for the three conditions (car, bike, pedestrian for hazard type) and <em>t</em>, df, and <em>p</em> from pairwise comparisons between the three.</li>
+</ul>
+<p>But what about effect sizes?</p>
+<p>For the ANOVA model, you should look at partial eta squared (<span class="math inline">\(η_P^2\)</span>). This is super quick and easy to check from the ANOVA model <code>mod</code> using this code:</p>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/eta_squared.html">eta_squared</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code></pre></div>
+<p>You can report the full <em>F</em>-statement in APA format like this:</p>
+<p><em>F</em>(<u>df1</u>, <u>df2</u>) = <u>value</u>, <em>p</em> = <u>value</u>, <span class="math inline">\(η_P^2\)</span> = <u>value</u></p>
+<p>Anything underlined needs to be replaced by values from your output so far.</p>
+<p>For the pairwise comparisons, it is a bit tricky as it depends if the variable for the main effect is an independent (between) or repeated (within) measures. If it is independent measures then follow the code from last week’s workshop (see <code>cohens_d</code>).</p>
+<p>As we have a repeated design we can use the same code as the <em>t</em>-test workshop earlier in term. **One annoying this here is we need to go back and use the original <code>mydata</code> data as this is a rare occasion that wide data is preferred (how annoying, right?!)</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">car</span>, <span class="va">mydata</span><span class="op">$</span><span class="va">bike</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">car</span>, <span class="va">mydata</span><span class="op">$</span><span class="va">pedestrian</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">pedestrian</span>, <span class="va">mydata</span><span class="op">$</span><span class="va">bike</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>These need to match the three comparisons carried out in exercise 4.</p>
+<blockquote>
+<p><strong>Question 13: Which pairwise comparison had the largest effect size?</strong> <select id="q13" onchange="checkAnswer('q13','A')"><option value="">– choose an answer –</option>
+<option value="A">A. Car vs. Pedestrian</option>
+<option value="B">B. Bike vs. Pedestrian</option>
+<option value="C">C. Car vs. Bike</option></select></p>
+</blockquote>
+</div>
+<div id="exercise-7-evaluating-assumptions" class="section level2" number="8.7">
+<h2>
+<span class="header-section-number">8.7</span> Exercise 7: Evaluating Assumptions<a class="anchor" aria-label="anchor" href="#exercise-7-evaluating-assumptions"><i class="fas fa-link"></i></a>
+</h2>
+<p>We Sphericity was already checker earlier on. As this is a mixed design, we now have two more assumptions to check.</p>
+<div id="checking-normality" class="section level3" number="8.7.1">
+<h3>
+<span class="header-section-number">8.7.1</span> Checking Normality<a class="anchor" aria-label="anchor" href="#checking-normality"><i class="fas fa-link"></i></a>
+</h3>
+<p>You have done this before. Same code, providing your ANOVA model is called <code>mod</code>.</p>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># testing normality, looking at normal distribution of residuals from the model.</span></span>
+<span><span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="co">#pulls residuals from the model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span> <span class="co">#produces a qq-plot of residuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">residuals</span>, breaks <span class="op">=</span> <span class="fl">20</span>, main <span class="op">=</span> <span class="st">"Histogram of Residuals"</span>, xlab <span class="op">=</span> <span class="st">"Residuals"</span>, col <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="co">#histogram of residuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span> <span class="co">#Shapiro test for residuals</span></span></code></pre></div>
+</div>
+<div id="checking-homogeneity-of-variance" class="section level3" number="8.7.2">
+<h3>
+<span class="header-section-number">8.7.2</span> Checking Homogeneity of Variance<a class="anchor" aria-label="anchor" href="#checking-homogeneity-of-variance"><i class="fas fa-link"></i></a>
+</h3>
+<p>You should use Levene’s test. You’ve also done this before but for a one-way independent ANOVA.</p>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">NULL1</span> <span class="op">~</span> <span class="va">NULL2</span>, <span class="va">longd</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Change <code>NULL1</code> to the dependent variable.</li>
+<li>Change <code>NULL2</code> to the independent (between subjects) measures independent variable.</li>
+<li>The third item is the object which contains the data, in this case <code>longd</code> again.</li>
+</ul>
+<p>Remember, a non-significant <em>p</em>-value (&gt;.05) means the assumption was met.</p>
+</div>
+</div>
+<div id="exercise-8-data-visualisation" class="section level2" number="8.8">
+<h2>
+<span class="header-section-number">8.8</span> Exercise 8: Data Visualisation<a class="anchor" aria-label="anchor" href="#exercise-8-data-visualisation"><i class="fas fa-link"></i></a>
+</h2>
+<p>When considering data visualisation options, you should consider “what are the significant and important findings I want to show my reader?”. Given you have two significant main effects and a non-significant interaction, if you only present a figure showing the interaction, you’re not teling the full story.</p>
+<p>Use the code below to generate three plots. Take a look at them and interpret what they show.</p>
+<div id="plot-1" class="section level3" number="8.8.1">
+<h3>
+<span class="header-section-number">8.8.1</span> Plot 1<a class="anchor" aria-label="anchor" href="#plot-1"><i class="fas fa-link"></i></a>
+</h3>
+<details><summary>
+📊 Click for Code
+</summary><div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">longd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">distraction</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, </span>
+<span>               position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>               color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>               fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"slategray4"</span>, <span class="st">"slategray2"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun.data <span class="op">=</span> <span class="va">mean_se</span>, geom <span class="op">=</span> <span class="st">"errorbar"</span>, </span>
+<span>               position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Distraction"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Mean Number of Hazards Identified"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"yes"</span> <span class="op">=</span> <span class="st">"Yes"</span>, <span class="st">"no"</span> <span class="op">=</span> <span class="st">"No"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="cn">NA</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</details>
+</div>
+<div id="plot-2" class="section level3" number="8.8.2">
+<h3>
+<span class="header-section-number">8.8.2</span> Plot 2<a class="anchor" aria-label="anchor" href="#plot-2"><i class="fas fa-link"></i></a>
+</h3>
+<details><summary>
+📊 Click for Code
+</summary><div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">longd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">hazard</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, </span>
+<span>               position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>               color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>               fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"slategray4"</span>, <span class="st">"slategray2"</span>, <span class="st">"darkslategray3"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun.data <span class="op">=</span> <span class="va">mean_se</span>, geom <span class="op">=</span> <span class="st">"errorbar"</span>, </span>
+<span>               position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Hazard Type"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Mean Hazards Identified"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"car"</span> <span class="op">=</span> <span class="st">"Car"</span>, <span class="st">"bike"</span> <span class="op">=</span> <span class="st">"Bike"</span>, <span class="st">"pedestrian"</span> <span class="op">=</span> <span class="st">"Pedestrian"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="cn">NA</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</details>
+</div>
+<div id="plot-3" class="section level3" number="8.8.3">
+<h3>
+<span class="header-section-number">8.8.3</span> Plot 3<a class="anchor" aria-label="anchor" href="#plot-3"><i class="fas fa-link"></i></a>
+</h3>
+<details><summary>
+📊 Click for Code
+</summary><div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">longd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">hazard</span>, y <span class="op">=</span> <span class="va">acc</span>, fill <span class="op">=</span> <span class="va">distraction</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun.data <span class="op">=</span> <span class="va">mean_se</span>, geom <span class="op">=</span> <span class="st">"errorbar"</span>, </span>
+<span>               position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="cn">NULL</span>,   <span class="co"># leave this as NULL because APA figures do not use titles.</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Hazard"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Mean Number of Hazards Identified"</span>,</span>
+<span>    fill <span class="op">=</span> <span class="st">"Distraction"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"yes"</span> <span class="op">=</span> <span class="st">"slategray4"</span>, <span class="st">"no"</span> <span class="op">=</span> <span class="st">"slategray2"</span><span class="op">)</span>, </span>
+<span>                    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Yes"</span>, <span class="st">"No"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"car"</span> <span class="op">=</span> <span class="st">"Car"</span>, <span class="st">"bike"</span> <span class="op">=</span> <span class="st">"Bike"</span>, <span class="st">"pedestrian"</span> <span class="op">=</span> <span class="st">"Pedestrian"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="cn">NA</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</details><p>Once you have run all three, use the code below to present all three at once.
+You’ll need a new package.</p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">install.packahes</span><span class="op">(</span><span class="st">"gridExtra"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span>,<span class="va">p3</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<p><strong>NOTE</strong>: You will likely need to resize the output panel (bottom right panel) by making it wider so all three plots are visible.</p>
+<blockquote>
+<p><strong>Question 14: Which plot tells us about the main effect of distraction?</strong> <select id="q14" onchange="checkAnswer('q14','A')"><option value="">– choose an answer –</option>
+<option value="A">A. Plot 1 (p1)</option>
+<option value="B">B. Plot 2 (p2)</option>
+<option value="C">C. Plot 3 (p3)</option></select></p>
+</blockquote>
+<blockquote>
+<p><strong>Question 15: Which plot tells us about the main effect of hazard?</strong> <select id="q15" onchange="checkAnswer('q15','B')"><option value="">– choose an answer –</option>
+<option value="A">A. Plot 1 (p1)</option>
+<option value="B">B. Plot 2 (p2)</option>
+<option value="C">C. Plot 3 (p3)</option></select></p>
+</blockquote>
+<blockquote>
+<p><strong>Question 16: Which plot tells us about the interaction?</strong> <select id="q16" onchange="checkAnswer('q16','C')"><option value="">– choose an answer –</option>
+<option value="A">A. Plot 1 (p1)</option>
+<option value="B">B. Plot 2 (p2)</option>
+<option value="C">C. Plot 3 (p3)</option></select></p>
+</blockquote>
+<!-- JS to check correctness -->
+<script>
+function checkAnswer(id, correctValue){
+  var el = document.getElementById(id);
+  if(el.value === "") {
+    el.style.backgroundColor = "";    // reset
+    return;
+  }
+  if(el.value === correctValue){
+    el.style.backgroundColor = "#b6f5b6";  // green
+  } else {
+    el.style.backgroundColor = "#f7b6b6";  // red
+  }
+}
+</script>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="workshop-7-factorial-anova-different-designs-and-assumptions.html"><span class="header-section-number">7</span> Workshop 7: Factorial ANOVA: Different Designs and Assumptions</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#workshop-8-factorial-anova-mixed-design-factorial-anova"><span class="header-section-number">8</span> Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA</a></li>
+<li><a class="nav-link" href="#exercise-1-prepare-rstudio-and-import-the-data"><span class="header-section-number">8.1</span> Exercise 1: Prepare RStudio and Import the Data</a></li>
+<li><a class="nav-link" href="#exercise-2-data-wrangling"><span class="header-section-number">8.2</span> Exercise 2: Data Wrangling</a></li>
+<li><a class="nav-link" href="#exercise-3-descriptive-stats-and-the-model"><span class="header-section-number">8.3</span> Exercise 3: Descriptive Stats and the Model</a></li>
+<li><a class="nav-link" href="#exercise-4-interpreting-the-main-effect-of-distraction"><span class="header-section-number">8.4</span> Exercise 4: Interpreting the Main effect of Distraction</a></li>
+<li><a class="nav-link" href="#exercise-5-interpreting-the-main-effect-of-hazard-type"><span class="header-section-number">8.5</span> Exercise 5: Interpreting the Main Effect of Hazard Type</a></li>
+<li><a class="nav-link" href="#exercise-6-effect-sizes"><span class="header-section-number">8.6</span> Exercise 6: Effect Sizes</a></li>
+<li>
+<a class="nav-link" href="#exercise-7-evaluating-assumptions"><span class="header-section-number">8.7</span> Exercise 7: Evaluating Assumptions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#checking-normality"><span class="header-section-number">8.7.1</span> Checking Normality</a></li>
+<li><a class="nav-link" href="#checking-homogeneity-of-variance"><span class="header-section-number">8.7.2</span> Checking Homogeneity of Variance</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#exercise-8-data-visualisation"><span class="header-section-number">8.8</span> Exercise 8: Data Visualisation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#plot-1"><span class="header-section-number">8.8.1</span> Plot 1</a></li>
+<li><a class="nav-link" href="#plot-2"><span class="header-section-number">8.8.2</span> Plot 2</a></li>
+<li><a class="nav-link" href="#plot-3"><span class="header-section-number">8.8.3</span> Plot 3</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-11-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
