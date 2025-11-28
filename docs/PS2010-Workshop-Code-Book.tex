@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-11-24}
+\date{2025-11-28}
 
 \begin{document}
 \maketitle
@@ -2736,6 +2736,231 @@ You'll need a new package.
 \begin{quote}
 \textbf{Question 16: Which plot tells us about the interaction?} -- choose an answer -- A. Plot 1 (p1) B. Plot 2 (p2) C. Plot 3 (p3)
 \end{quote}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Well Done. You have reached the end of the workshop \\
+\end{longtable}
+
+\chapter{Workshop 9: Non-Parametric Statistics}\label{workshop-9-non-parametric-statistics}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\tightlist
+\item
+  Practice importing and wrangling data ready for analysis.
+\item
+  Practice using non-parametric statistics for a one-way repeated design, including any follow-up analyses.
+\end{itemize}
+
+\section{Exercise 1: Import and Prepare Data}\label{exercise-1-import-and-prepare-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tudyverse)}
+\FunctionTok{library}\NormalTok{(rstatix)}
+\end{Highlighting}
+\end{Shaded}
+
+Import the data set called \texttt{exercise.csv}
+
+This is a data set which looked at the average number of hours per week university students engaged in any form of physical exercise, across three time points: before, during, and after university. This is a repeated measures design.
+
+The aim of this study was to determine if levels of physical exercise changed over time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(mydata)}
+\FunctionTok{names}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+The data are not in long format. Use the code below to change this changing \texttt{NULL} where necessary. The code below assumes you have saved the original data set as an object called \texttt{mydata}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{longd }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NULL}\SpecialCharTok{:}\ConstantTok{NULL}\NormalTok{),}
+               \AttributeTok{names\_to =} \StringTok{"time"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"exercise"}\NormalTok{)}
+               
+\FunctionTok{view}\NormalTok{(longd) }\CommentTok{\#take a look at what the above code has done. nice and long!}
+\end{Highlighting}
+\end{Shaded}
+
+You should probably code \texttt{time} as a factor, but also reorder the levels. As a standard, where there are multiple levels, RStudio will pop them in alphabetical order. However, our levels have a meaningful order. At the moment alphabetically they are: \texttt{after}, \texttt{before}, \texttt{druing} which is unhelpful.
+
+Change these so that they're in the correct order: \texttt{before}, \texttt{during}, \texttt{after}. Change \texttt{NULL} in the code to do this.
+
+\begin{verbatim}
+longd$time <- factor(longd$time, levels = c("NULL", "NULL", "NULL"))
+\end{verbatim}
+
+\#\#Exercise 2: Descriptive Statistics
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desc }\OtherTok{\textless{}{-}}\NormalTok{ longd }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(}\ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{median =} \ConstantTok{NULL}\NormalTok{(}\ConstantTok{NULL}\NormalTok{))}
+
+\FunctionTok{view}\NormalTok{(desc)}
+\end{Highlighting}
+\end{Shaded}
+
+Change \texttt{NULL} in the code above. Remember, as you are using non-parametric statistics you should consider if you want to use the mean or something else\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ exercise)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\#\#Exercise 3: Friedman's ANOVA
+
+Run the ANOVA and ask for effect size. Remember to use the formula \texttt{DV\ \textasciitilde{}\ IV\ \textbar{}\ id}. Change \texttt{NULL}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{friedman.test}\NormalTok{(}\ConstantTok{NULL} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NULL} \SpecialCharTok{|} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{data =}\NormalTok{ longd)}
+\FunctionTok{friedman\_effsize}\NormalTok{(}\ConstantTok{NULL} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NULL} \SpecialCharTok{|} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{data =}\NormalTok{ longd)}
+\end{Highlighting}
+\end{Shaded}
+
+Interpret the output. If the main effect is significant, post-hoc tests are needed. Amend the code below by changing \texttt{NULL} so your data set variables are in the correct place.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{longd }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pairwise\_wilcox\_test}\NormalTok{(}
+    \ConstantTok{NULL} \SpecialCharTok{\textasciitilde{}}\NormalTok{ BULL,}
+    \AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{p.adjust.method =} \StringTok{"holm"}\NormalTok{)}
+    
+\FunctionTok{wilcox\_effsize}\NormalTok{(NULLL }\SpecialCharTok{\textasciitilde{}} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{data =}\NormalTok{ longd, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Well Done. You have reached the end of the workshop \\
+\end{longtable}
+
+\section{Code for all Four Non-Parametric Tests}\label{code-for-all-four-non-parametric-tests}
+
+The code below is for all four statistics covered in the lecture. These are included below as you might want the code for your year 3 final year project, if you use non-parametric analyses for your project data analysis.
+
+\section{Code for Mann-Whitney U (or Wilcoxon Rank-Sum)}\label{code-for-mann-whitney-u-or-wilcoxon-rank-sum}
+
+To use this code you will need to change:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{DV} to the dependent variable.
+\item
+  \texttt{IV} to the independent variable.
+\item
+  \texttt{DATA} to the name of the object which has your data.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{wilcox.test}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA) }\CommentTok{\# provides W and p statistics}
+\FunctionTok{wilcox\_effsize}\NormalTok{(rt }\SpecialCharTok{\textasciitilde{}}\NormalTok{ drink, }\AttributeTok{data =}\NormalTok{ mydata) }\CommentTok{\# provides rank{-}biserial correlation r statistic and magnitude}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Code for Kruskal-Wallis}\label{code-for-kruskal-wallis}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{DV} to the dependent variable.
+\item
+  \texttt{IV} to the independent variable.
+\item
+  \texttt{DATA} to the name of the object which has your data.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kruskal.test}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA)}
+\FunctionTok{kruskal\_effsize}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA)}
+
+\CommentTok{\#pairwirse comparisons if main effect is signifcant}
+\NormalTok{DATA }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pairwise\_wilcox\_test}\NormalTok{(}
+\NormalTok{    DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV,}
+    \AttributeTok{paired =} \ConstantTok{FALSE}\NormalTok{,}
+    \AttributeTok{p.adjust.method =} \StringTok{"holm"}\NormalTok{)}
+    
+\FunctionTok{wilcox\_effsize}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA) }\CommentTok{\# provides rank{-}biserial correlation r statistic and magnitude}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Code for Wilcoxon-Signed Rank}\label{code-for-wilcoxon-signed-rank}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{DV} to the dependent variable.
+\item
+  \texttt{IV} to the independent variable.
+\item
+  \texttt{DATA} to the name of the object which has your data.
+\end{itemize}
+
+Your data need to be in long format for this analysis, as it is a repeated measures design.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pairwise\_wilcox\_test}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{wilcox\_effsize}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\# provides rank{-}biserial correlation r statistic and magnitude}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Code for Friedman's ANOVA}\label{code-for-friedmans-anova}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{DV} to the dependent variable.
+\item
+  \texttt{IV} to the independent variable.
+\item
+  \texttt{DATA} to the name of the object which has your data.
+\item
+  \texttt{id} should be the name of the \texttt{id} variable (identifier for each participant)
+\end{itemize}
+
+Your data need to be in long format for this analysis, as it is a repeated measures design.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{friedman.test}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV }\SpecialCharTok{|}\NormalTok{ id, }\AttributeTok{data =}\NormalTok{ DATA)}
+\FunctionTok{friedman\_effsize}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV }\SpecialCharTok{|}\NormalTok{ id, }\AttributeTok{data =}\NormalTok{ DATA)}
+
+\CommentTok{\#pairwirse comparisons if main effect is signifcant}
+\NormalTok{DATA }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pairwise\_wilcox\_test}\NormalTok{(}
+\NormalTok{    DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV,}
+    \AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{p.adjust.method =} \StringTok{"holm"}\NormalTok{)}
+\FunctionTok{wilcox\_effsize}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 
 \bibliography{book.bib,packages.bib}
 

@@ -81,3 +81,10 @@ exercise-8-data-visualisation
 plot-1
 plot-2
 plot-3
+workshop-9-non-parametric-statistics
+exercise-1-import-and-prepare-data
+code-for-all-four-non-parametric-tests
+code-for-mann-whitney-u-or-wilcoxon-rank-sum
+code-for-kruskal-wallis
+code-for-wilcoxon-signed-rank
+code-for-friedmans-anova
