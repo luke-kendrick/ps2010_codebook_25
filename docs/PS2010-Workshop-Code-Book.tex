@@ -2763,10 +2763,12 @@ Well Done. You have reached the end of the workshop \\
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse)}
 \FunctionTok{library}\NormalTok{(rstatix)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"coin"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(coin)}
 \end{Highlighting}
 \end{Shaded}
 
-Import the data set called \texttt{exercise.csv}
+Import the data set called \texttt{exercise\_uni.csv}
 
 This is a data set which looked at the average number of hours per week university students engaged in any form of physical exercise, across three time points: before, during, and after university. This is a repeated measures design.
 
@@ -2816,7 +2818,7 @@ Change \texttt{NULL} in the code above. Remember, as you are using non-parametri
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(mydata\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ exercise)) }\SpecialCharTok{+}
+\FunctionTok{ggplot}\NormalTok{(longd, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ exercise)) }\SpecialCharTok{+}
   \FunctionTok{geom\_violin}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_classic}\NormalTok{()}
@@ -2840,11 +2842,11 @@ Interpret the output. If the main effect is significant, post-hoc tests are need
 \begin{Highlighting}[]
 \NormalTok{longd }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{pairwise\_wilcox\_test}\NormalTok{(}
-    \ConstantTok{NULL} \SpecialCharTok{\textasciitilde{}}\NormalTok{ BULL,}
+    \ConstantTok{NULL} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NULL}\NormalTok{,}
     \AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{,}
     \AttributeTok{p.adjust.method =} \StringTok{"holm"}\NormalTok{)}
     
-\FunctionTok{wilcox\_effsize}\NormalTok{(NULLL }\SpecialCharTok{\textasciitilde{}} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{data =}\NormalTok{ longd, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{wilcox\_effsize}\NormalTok{(}\ConstantTok{NULL} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{data =}\NormalTok{ longd, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
