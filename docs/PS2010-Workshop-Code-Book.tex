@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-11-28}
+\date{2025-12-01}
 
 \begin{document}
 \maketitle
@@ -2761,7 +2761,7 @@ Well Done. You have reached the end of the workshop \\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tudyverse)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
 \FunctionTok{library}\NormalTok{(rstatix)}
 \end{Highlighting}
 \end{Shaded}
@@ -2800,7 +2800,7 @@ Change these so that they're in the correct order: \texttt{before}, \texttt{duri
 longd$time <- factor(longd$time, levels = c("NULL", "NULL", "NULL"))
 \end{verbatim}
 
-\#\#Exercise 2: Descriptive Statistics
+\section{Exercise 2: Descriptive Statistics}\label{exercise-2-descriptive-statistics}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2823,7 +2823,7 @@ Change \texttt{NULL} in the code above. Remember, as you are using non-parametri
 \end{Highlighting}
 \end{Shaded}
 
-\#\#Exercise 3: Friedman's ANOVA
+\section{Exercise 3: Friedman's ANOVA}\label{exercise-3-friedmans-anova}
 
 Run the ANOVA and ask for effect size. Remember to use the formula \texttt{DV\ \textasciitilde{}\ IV\ \textbar{}\ id}. Change \texttt{NULL}
 
@@ -2860,7 +2860,7 @@ Well Done. You have reached the end of the workshop \\
 
 The code below is for all four statistics covered in the lecture. These are included below as you might want the code for your year 3 final year project, if you use non-parametric analyses for your project data analysis.
 
-\section{Code for Mann-Whitney U (or Wilcoxon Rank-Sum)}\label{code-for-mann-whitney-u-or-wilcoxon-rank-sum}
+\section{Mann-Whitney U (or Wilcoxon Rank-Sum)}\label{mann-whitney-u-or-wilcoxon-rank-sum}
 
 To use this code you will need to change:
 
@@ -2881,7 +2881,7 @@ To use this code you will need to change:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Code for Kruskal-Wallis}\label{code-for-kruskal-wallis}
+\section{Kruskal-Wallis}\label{kruskal-wallis}
 
 \begin{itemize}
 \tightlist
@@ -2909,7 +2909,7 @@ To use this code you will need to change:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Code for Wilcoxon-Signed Rank}\label{code-for-wilcoxon-signed-rank}
+\section{Wilcoxon-Signed Rank}\label{wilcoxon-signed-rank}
 
 \begin{itemize}
 \tightlist
@@ -2930,7 +2930,7 @@ Your data need to be in long format for this analysis, as it is a repeated measu
 \end{Highlighting}
 \end{Shaded}
 
-\section{Code for Friedman's ANOVA}\label{code-for-friedmans-anova}
+\section{Friedman's ANOVA}\label{friedmans-anova}
 
 \begin{itemize}
 \tightlist

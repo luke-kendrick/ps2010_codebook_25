@@ -74,7 +74,7 @@
 <span class="header-section-number">9.1</span> Exercise 1: Import and Prepare Data<a class="anchor" aria-label="anchor" href="#exercise-1-import-and-prepare-data"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tudyverse</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span></code></pre></div>
 <p>Import the data set called <code>exercise.csv</code></p>
 <p>This is a data set which looked at the average number of hours per week university students engaged in any form of physical exercise, across three time points: before, during, and after university. This is a repeated measures design.</p>
@@ -93,7 +93,11 @@
 <p>You should probably code <code>time</code> as a factor, but also reorder the levels. As a standard, where there are multiple levels, RStudio will pop them in alphabetical order. However, our levels have a meaningful order. At the moment alphabetically they are: <code>after</code>, <code>before</code>, <code>druing</code> which is unhelpful.</p>
 <p>Change these so that they’re in the correct order: <code>before</code>, <code>during</code>, <code>after</code>. Change <code>NULL</code> in the code to do this.</p>
 <pre><code>longd$time &lt;- factor(longd$time, levels = c("NULL", "NULL", "NULL"))</code></pre>
-<p>##Exercise 2: Descriptive Statistics</p>
+</div>
+<div id="exercise-2-descriptive-statistics" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Exercise 2: Descriptive Statistics<a class="anchor" aria-label="anchor" href="#exercise-2-descriptive-statistics"><i class="fas fa-link"></i></a>
+</h2>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span> <span class="va">longd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -106,7 +110,11 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>##Exercise 3: Friedman’s ANOVA</p>
+</div>
+<div id="exercise-3-friedmans-anova" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Exercise 3: Friedman’s ANOVA<a class="anchor" aria-label="anchor" href="#exercise-3-friedmans-anova"><i class="fas fa-link"></i></a>
+</h2>
 <p>Run the ANOVA and ask for effect size. Remember to use the formula <code>DV ~ IV | id</code>. Change <code>NULL</code></p>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/friedman.test.html">friedman.test</a></span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span> <span class="op">|</span> <span class="cn">NULL</span>, data <span class="op">=</span> <span class="va">longd</span><span class="op">)</span></span>
@@ -124,15 +132,15 @@
 <td>Well Done. You have reached the end of the workshop</td>
 </tr></tbody></table></div>
 </div>
-<div id="code-for-all-four-non-parametric-tests" class="section level2" number="9.2">
+<div id="code-for-all-four-non-parametric-tests" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">9.2</span> Code for all Four Non-Parametric Tests<a class="anchor" aria-label="anchor" href="#code-for-all-four-non-parametric-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> Code for all Four Non-Parametric Tests<a class="anchor" aria-label="anchor" href="#code-for-all-four-non-parametric-tests"><i class="fas fa-link"></i></a>
 </h2>
 <p>The code below is for all four statistics covered in the lecture. These are included below as you might want the code for your year 3 final year project, if you use non-parametric analyses for your project data analysis.</p>
 </div>
-<div id="code-for-mann-whitney-u-or-wilcoxon-rank-sum" class="section level2" number="9.3">
+<div id="mann-whitney-u-or-wilcoxon-rank-sum" class="section level2" number="9.5">
 <h2>
-<span class="header-section-number">9.3</span> Code for Mann-Whitney U (or Wilcoxon Rank-Sum)<a class="anchor" aria-label="anchor" href="#code-for-mann-whitney-u-or-wilcoxon-rank-sum"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.5</span> Mann-Whitney U (or Wilcoxon Rank-Sum)<a class="anchor" aria-label="anchor" href="#mann-whitney-u-or-wilcoxon-rank-sum"><i class="fas fa-link"></i></a>
 </h2>
 <p>To use this code you will need to change:</p>
 <ul>
@@ -147,9 +155,9 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span> <span class="co"># provides W and p statistics</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_effsize.html">wilcox_effsize</a></span><span class="op">(</span><span class="va">rt</span> <span class="op">~</span> <span class="va">drink</span>, data <span class="op">=</span> <span class="va">mydata</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
 </div>
-<div id="code-for-kruskal-wallis" class="section level2" number="9.4">
+<div id="kruskal-wallis" class="section level2" number="9.6">
 <h2>
-<span class="header-section-number">9.4</span> Code for Kruskal-Wallis<a class="anchor" aria-label="anchor" href="#code-for-kruskal-wallis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.6</span> Kruskal-Wallis<a class="anchor" aria-label="anchor" href="#kruskal-wallis"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -172,9 +180,9 @@
 <span>    </span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_effsize.html">wilcox_effsize</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
 </div>
-<div id="code-for-wilcoxon-signed-rank" class="section level2" number="9.5">
+<div id="wilcoxon-signed-rank" class="section level2" number="9.7">
 <h2>
-<span class="header-section-number">9.5</span> Code for Wilcoxon-Signed Rank<a class="anchor" aria-label="anchor" href="#code-for-wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.7</span> Wilcoxon-Signed Rank<a class="anchor" aria-label="anchor" href="#wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -189,9 +197,9 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">pairwise_wilcox_test</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_effsize.html">wilcox_effsize</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
 </div>
-<div id="code-for-friedmans-anova" class="section level2" number="9.6">
+<div id="friedmans-anova" class="section level2" number="9.8">
 <h2>
-<span class="header-section-number">9.6</span> Code for Friedman’s ANOVA<a class="anchor" aria-label="anchor" href="#code-for-friedmans-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.8</span> Friedman’s ANOVA<a class="anchor" aria-label="anchor" href="#friedmans-anova"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -226,11 +234,13 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#workshop-9-non-parametric-statistics"><span class="header-section-number">9</span> Workshop 9: Non-Parametric Statistics</a></li>
 <li><a class="nav-link" href="#exercise-1-import-and-prepare-data"><span class="header-section-number">9.1</span> Exercise 1: Import and Prepare Data</a></li>
-<li><a class="nav-link" href="#code-for-all-four-non-parametric-tests"><span class="header-section-number">9.2</span> Code for all Four Non-Parametric Tests</a></li>
-<li><a class="nav-link" href="#code-for-mann-whitney-u-or-wilcoxon-rank-sum"><span class="header-section-number">9.3</span> Code for Mann-Whitney U (or Wilcoxon Rank-Sum)</a></li>
-<li><a class="nav-link" href="#code-for-kruskal-wallis"><span class="header-section-number">9.4</span> Code for Kruskal-Wallis</a></li>
-<li><a class="nav-link" href="#code-for-wilcoxon-signed-rank"><span class="header-section-number">9.5</span> Code for Wilcoxon-Signed Rank</a></li>
-<li><a class="nav-link" href="#code-for-friedmans-anova"><span class="header-section-number">9.6</span> Code for Friedman’s ANOVA</a></li>
+<li><a class="nav-link" href="#exercise-2-descriptive-statistics"><span class="header-section-number">9.2</span> Exercise 2: Descriptive Statistics</a></li>
+<li><a class="nav-link" href="#exercise-3-friedmans-anova"><span class="header-section-number">9.3</span> Exercise 3: Friedman’s ANOVA</a></li>
+<li><a class="nav-link" href="#code-for-all-four-non-parametric-tests"><span class="header-section-number">9.4</span> Code for all Four Non-Parametric Tests</a></li>
+<li><a class="nav-link" href="#mann-whitney-u-or-wilcoxon-rank-sum"><span class="header-section-number">9.5</span> Mann-Whitney U (or Wilcoxon Rank-Sum)</a></li>
+<li><a class="nav-link" href="#kruskal-wallis"><span class="header-section-number">9.6</span> Kruskal-Wallis</a></li>
+<li><a class="nav-link" href="#wilcoxon-signed-rank"><span class="header-section-number">9.7</span> Wilcoxon-Signed Rank</a></li>
+<li><a class="nav-link" href="#friedmans-anova"><span class="header-section-number">9.8</span> Friedman’s ANOVA</a></li>
 </ul>
 
       <div class="book-extra">
@@ -247,7 +257,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-11-28.</p>
+    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-12-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

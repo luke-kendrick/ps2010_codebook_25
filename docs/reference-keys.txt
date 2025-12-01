@@ -83,8 +83,10 @@ plot-2
 plot-3
 workshop-9-non-parametric-statistics
 exercise-1-import-and-prepare-data
+exercise-2-descriptive-statistics
+exercise-3-friedmans-anova
 code-for-all-four-non-parametric-tests
-code-for-mann-whitney-u-or-wilcoxon-rank-sum
-code-for-kruskal-wallis
-code-for-wilcoxon-signed-rank
-code-for-friedmans-anova
+mann-whitney-u-or-wilcoxon-rank-sum
+kruskal-wallis
+wilcoxon-signed-rank
+friedmans-anova
