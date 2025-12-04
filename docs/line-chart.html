@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 13 4. Line Chart | PS2010 Workshop Code Book</title>
+<meta name="author" content="Luke Kendrick">
+<meta name="generator" content="bookdown 0.45 with bs4_book()">
+<meta property="og:title" content="Chapter 13 4. Line Chart | PS2010 Workshop Code Book">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 13 4. Line Chart | PS2010 Workshop Code Book">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Import the data set called christmas.csv, save it as an object called tree. This data contains Christmas tree sales (in millions) in the US for both real and artificial Christmas trees from 2004....">
+<meta property="og:description" content="Import the data set called christmas.csv, save it as an object called tree. This data contains Christmas tree sales (in millions) in the US for both real and artificial Christmas trees from 2004....">
+<meta name="twitter:description" content="Import the data set called christmas.csv, save it as an object called tree. This data contains Christmas tree sales (in millions) in the US for both real and artificial Christmas trees from 2004....">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">PS2010 Workshop Code Book</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="workshop-1-data-handling-skills.html"><span class="header-section-number">1</span> Workshop 1: Data Handling Skills</a></li>
+<li><a class="" href="workshop-2-summarising-and-describing-data.html"><span class="header-section-number">2</span> Workshop 2: Summarising and Describing Data</a></li>
+<li><a class="" href="workshop-3-t-tests.html"><span class="header-section-number">3</span> Workshop 3: t-tests</a></li>
+<li><a class="" href="workshop-4-one-way-anova-model-designs-assumptions.html"><span class="header-section-number">4</span> Workshop 4: One-Way ANOVA (Model, Designs, Assumptions)</a></li>
+<li><a class="" href="workshop-5-one-way-anova-post-hocs-contrasts-write-up.html"><span class="header-section-number">5</span> Workshop 5: One-Way ANOVA (Post-hocs, Contrasts, Write-up)</a></li>
+<li><a class="" href="workshop-6-factorial-anova-factorial-designs-and-an-interactions.html"><span class="header-section-number">6</span> Workshop 6: Factorial ANOVA: Factorial Designs and an Interactions</a></li>
+<li><a class="" href="workshop-7-factorial-anova-different-designs-and-assumptions.html"><span class="header-section-number">7</span> Workshop 7: Factorial ANOVA: Different Designs and Assumptions</a></li>
+<li><a class="" href="workshop-8-factorial-anova-mixed-design-factorial-anova.html"><span class="header-section-number">8</span> Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA</a></li>
+<li><a class="" href="workshop-9-non-parametric-statistics.html"><span class="header-section-number">9</span> Workshop 9: Non-Parametric Statistics</a></li>
+<li><a class="" href="workshop-10-visualising-data.html"><span class="header-section-number">10</span> Workshop 10: Visualising Data</a></li>
+<li><a class="" href="violin-plot.html"><span class="header-section-number">11</span> 2. Violin Plot</a></li>
+<li><a class="" href="box-plot.html"><span class="header-section-number">12</span> 3. Box Plot</a></li>
+<li><a class="active" href="line-chart.html"><span class="header-section-number">13</span> 4. Line Chart</a></li>
+<li><a class="" href="build-a-snowman.html"><span class="header-section-number">14</span> 5. Build a Snowman</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="line-chart" class="section level1" number="13">
+<h1>
+<span class="header-section-number">13</span> 4. Line Chart<a class="anchor" aria-label="anchor" href="#line-chart"><i class="fas fa-link"></i></a>
+</h1>
+<p>Import the data set called <code>christmas.csv</code>, save it as an object called <code>tree</code>.</p>
+<p>This data contains Christmas tree sales (in millions) in the US for both real and artificial Christmas trees from 2004.</p>
+<p>This exercise is just to help you learn to adapt code.</p>
+<ul>
+<li>Layer 1: Add data and plot aesthetics</li>
+<li>Layers 2 &amp; 3: Add values and line of best fit.</li>
+<li>Layer 4: Labels</li>
+<li>Layer 5: Factor level labels and colours</li>
+<li>Layer 6: Apply a theme.</li>
+</ul>
+<p><strong>Layer 1</strong> Add data and plot aesthetics</p>
+<p>Look through the data set so you are aware what to include. Amend the code below to add data and plot the aesthetics.</p>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">NULL1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">NULL2</span>, y <span class="op">=</span> <span class="va">NULL3</span>, col <span class="op">=</span> <span class="va">NULL4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Use the drop down below if you need a hint…</p>
+<hr>
+<details><summary>
+👀 Click for a hint
+</summary><ul>
+<li><p><code>NULL1</code> - what is the name of your object with the data.</p></li>
+<li><p><code>NULL2</code> - what variable should be on the x (horizontal axis). As this is a line graph, try to think carefully what would be most appropriate.</p></li>
+<li><p><code>NULL3</code> - what variable should be in the y (vertical) axis. This is usually a numeric value for most charts.</p></li>
+<li><p><code>NULL4</code> - We can use <code>col =</code> to decide if we have factors with multiple levels. We can then later assign these a colour or pattern (e.g. dash vs. solid line).</p></li>
+</ul></details><hr>
+<p><strong>Layers 2 &amp; 3</strong> Add values and line of best fit</p>
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> will add the data as points, and <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> will give us a line of best fit .</p>
+<p><code>method = "lm</code> specifies the type of line: “lm” means linear model (simple linear regression).</p>
+<p><code>se = FALSE</code> will turn off a shaded area called a confidence interval around the line.</p>
+<p><strong>Layer 4</strong> Labels</p>
+<p>Run the code below <strong>before</strong> changing any <code>NULL</code> values. Then look at your plot to see which NULL labels appear on each part of the plot.</p>
+<p>Then, update these to give your plot a suitable title* and labels.</p>
+<p>*Yes, APA format doesn’t make use of titles, but for practice why not have a go at creating one.</p>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"NULL1"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"NULL2"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"NULL3"</span>,</span>
+<span>    col <span class="op">=</span> <span class="st">"NULL4"</span><span class="op">)</span> </span></code></pre></div>
+<hr>
+<details><summary>
+👀 Click for the answer
+</summary><div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Real and Artificial Christmas Trees Sold in the US"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Trees Sold (Millions)"</span>,</span>
+<span>    col <span class="op">=</span> <span class="st">"Type of Tree"</span><span class="op">)</span> </span></code></pre></div>
+</details><hr>
+<p><strong>Layer 5</strong> Factor level labels and colours</p>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span></span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"artificial"</span> <span class="op">=</span> <span class="st">"green2"</span>, <span class="st">"real"</span> <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span>,</span>
+<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NULL1"</span>, <span class="st">"NULL2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Change <code>NULL</code> values to suitable labels for the two tree types.</p>
+<p><strong>Layer 6</strong> Apply a theme.</p>
+<p>AGain, not stricly APA but just to try out different things, keep it simple and apply</p>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Consider trying different themes. Change <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw()</a></code> to one of these below to see how it changes the plot. Which is your favourite?</p>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#or</span></span>
+<span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#or</span></span>
+<span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_linedraw</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#or</span></span>
+<span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>There you go, you now have a perfectly functioning line chart.</p>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="box-plot.html"><span class="header-section-number">12</span> 3. Box Plot</a></div>
+<div class="next"><a href="build-a-snowman.html"><span class="header-section-number">14</span> 5. Build a Snowman</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#line-chart"><span class="header-section-number">13</span> 4. Line Chart</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-12-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

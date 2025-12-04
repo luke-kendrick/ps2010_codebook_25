@@ -90,3 +90,17 @@ mann-whitney-u-or-wilcoxon-rank-sum
 kruskal-wallis
 wilcoxon-signed-rank
 friedmans-anova
+workshop-10-visualising-data
+bar-chart
+exercise-1.1-import-data
+exercise-1.2-build-the-bar-chart
+exercise-1.3-tweaking-the-colours
+violin-plot
+box-plot
+line-chart
+snowman-plot
+optional-exercises-and-resources
+bar-charts-for-t-tests-one-way-designs-or-main-effects
+bar-chart-1
+violin-plot-1
+box-plot-1

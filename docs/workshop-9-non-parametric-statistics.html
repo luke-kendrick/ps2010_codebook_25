@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 9 Workshop 9: Non-Parametric Statistics | PS2010 Workshop Code Book</title>
 <meta name="author" content="Luke Kendrick">
-<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta name="generator" content="bookdown 0.45 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Workshop 9: Non-Parametric Statistics | PS2010 Workshop Code Book">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 9 Workshop 9: Non-Parametric Statistics | PS2010 Workshop Code Book">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -53,6 +53,7 @@
 <li><a class="" href="workshop-7-factorial-anova-different-designs-and-assumptions.html"><span class="header-section-number">7</span> Workshop 7: Factorial ANOVA: Different Designs and Assumptions</a></li>
 <li><a class="" href="workshop-8-factorial-anova-mixed-design-factorial-anova.html"><span class="header-section-number">8</span> Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA</a></li>
 <li><a class="active" href="workshop-9-non-parametric-statistics.html"><span class="header-section-number">9</span> Workshop 9: Non-Parametric Statistics</a></li>
+<li><a class="" href="workshop-10-visualising-data.html"><span class="header-section-number">10</span> Workshop 10: Visualising Data</a></li>
 </ul>
 
         <div class="book-extra">
@@ -120,17 +121,17 @@
 <p>Run the ANOVA and ask for effect size. Remember to use the formula <code>DV ~ IV | id</code>. Change <code>NULL</code></p>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/friedman.test.html">friedman.test</a></span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span> <span class="op">|</span> <span class="cn">NULL</span>, data <span class="op">=</span> <span class="va">longd</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/friedman_effsize.html">friedman_effsize</a></span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span> <span class="op">|</span> <span class="cn">NULL</span>, data <span class="op">=</span> <span class="va">longd</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">friedman_effsize</span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span> <span class="op">|</span> <span class="cn">NULL</span>, data <span class="op">=</span> <span class="va">longd</span><span class="op">)</span></span></code></pre></div>
 <p>Interpret the output. If the main effect is significant, post-hoc tests are needed. Amend the code below by changing <code>NULL</code> so your data set variables are in the correct place.</p>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">longd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">pairwise_wilcox_test</a></span><span class="op">(</span></span>
+<span>  <span class="fu">pairwise_wilcox_test</span><span class="op">(</span></span>
 <span>    <span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span>,</span>
 <span>    paired <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    p.adjust.method <span class="op">=</span> <span class="st">"holm"</span><span class="op">)</span></span>
 <span>    </span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_effsize.html">wilcox_effsize</a></span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span>, data <span class="op">=</span> <span class="va">longd</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-table"><table class="table table-sm"><tbody><tr>
+<span><span class="fu">wilcox_effsize</span><span class="op">(</span><span class="cn">NULL</span> <span class="op">~</span> <span class="cn">NULL</span>, data <span class="op">=</span> <span class="va">longd</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm"><tbody><tr class="odd">
 <td>Well Done. You have reached the end of the workshop</td>
 </tr></tbody></table></div>
 </div>
@@ -155,7 +156,7 @@
 </ul>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span> <span class="co"># provides W and p statistics</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_effsize.html">wilcox_effsize</a></span><span class="op">(</span><span class="va">rt</span> <span class="op">~</span> <span class="va">drink</span>, data <span class="op">=</span> <span class="va">mydata</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
+<span><span class="fu">wilcox_effsize</span><span class="op">(</span><span class="va">rt</span> <span class="op">~</span> <span class="va">drink</span>, data <span class="op">=</span> <span class="va">mydata</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
 </div>
 <div id="kruskal-wallis" class="section level2" number="9.6">
 <h2>
@@ -171,16 +172,16 @@
 </ul>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_effsize.html">kruskal_effsize</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span></span>
+<span><span class="fu">kruskal_effsize</span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#pairwirse comparisons if main effect is signifcant</span></span>
 <span><span class="va">DATA</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">pairwise_wilcox_test</a></span><span class="op">(</span></span>
+<span>  <span class="fu">pairwise_wilcox_test</span><span class="op">(</span></span>
 <span>    <span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>,</span>
 <span>    paired <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>    p.adjust.method <span class="op">=</span> <span class="st">"holm"</span><span class="op">)</span></span>
 <span>    </span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_effsize.html">wilcox_effsize</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
+<span><span class="fu">wilcox_effsize</span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
 </div>
 <div id="wilcoxon-signed-rank" class="section level2" number="9.7">
 <h2>
@@ -196,8 +197,8 @@
 </ul>
 <p>Your data need to be in long format for this analysis, as it is a repeated measures design.</p>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">pairwise_wilcox_test</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_effsize.html">wilcox_effsize</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pairwise_wilcox_test</span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">wilcox_effsize</span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># provides rank-biserial correlation r statistic and magnitude</span></span></code></pre></div>
 </div>
 <div id="friedmans-anova" class="section level2" number="9.8">
 <h2>
@@ -216,21 +217,21 @@
 <p>Your data need to be in long format for this analysis, as it is a repeated measures design.</p>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/friedman.test.html">friedman.test</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span> <span class="op">|</span> <span class="va">id</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/friedman_effsize.html">friedman_effsize</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span> <span class="op">|</span> <span class="va">id</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span></span>
+<span><span class="fu">friedman_effsize</span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span> <span class="op">|</span> <span class="va">id</span>, data <span class="op">=</span> <span class="va">DATA</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#pairwirse comparisons if main effect is signifcant</span></span>
 <span><span class="va">DATA</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">pairwise_wilcox_test</a></span><span class="op">(</span></span>
+<span>  <span class="fu">pairwise_wilcox_test</span><span class="op">(</span></span>
 <span>    <span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>,</span>
 <span>    paired <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    p.adjust.method <span class="op">=</span> <span class="st">"holm"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_effsize.html">wilcox_effsize</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">wilcox_effsize</span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">DATA</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="workshop-8-factorial-anova-mixed-design-factorial-anova.html"><span class="header-section-number">8</span> Workshop 8: Factorial ANOVA: Mixed Design Factorial ANOVA</a></div>
-<div class="empty"></div>
+<div class="next"><a href="workshop-10-visualising-data.html"><span class="header-section-number">10</span> Workshop 10: Visualising Data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -259,7 +260,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-12-01.</p>
+    <p>"<strong>PS2010 Workshop Code Book</strong>" was written by Luke Kendrick. It was last built on 2025-12-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

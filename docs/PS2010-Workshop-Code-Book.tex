@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-12-01}
+\date{2025-12-04}
 
 \begin{document}
 \maketitle
@@ -2960,6 +2960,630 @@ Your data need to be in long format for this analysis, as it is a repeated measu
     \AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{,}
     \AttributeTok{p.adjust.method =} \StringTok{"holm"}\NormalTok{)}
 \FunctionTok{wilcox\_effsize}\NormalTok{(DV }\SpecialCharTok{\textasciitilde{}}\NormalTok{ IV, }\AttributeTok{data =}\NormalTok{ DATA, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Workshop 10: Visualising Data}\label{workshop-10-visualising-data}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\tightlist
+\item
+  Practice working with ggplot() to produce a bar chart for a data set with two factors and a continuous dependent variable, each with two levels.
+\item
+  Explore code for a violin plot and a box plot.
+\item
+  Practice working with ggplot() to produce a line graph for a data set with one factor and a continuous dependent variable.
+\item
+  Build and interpret a snowman plot.
+\end{itemize}
+
+\section{Bar Chart}\label{bar-chart}
+
+In this part of the workshop you will work step by step to build a bar chart in order to learn about \texttt{ggplot().}
+
+As covered in lecture \texttt{ggplot()} is a very powerful package that can be used to create all sorts of figures, graphs plots, or data visuals.
+
+As explained in lecture, to build these plots you use layers.
+
+\subsection{Exercise 1.1: Import Data}\label{exercise-1.1-import-data}
+
+Import the \texttt{energy.csv} data set. The code below assumes it will be called \texttt{mydata}.
+
+In this data set we have two independent variables: drink type and circadian chronotype. Each with two levels. The dependent variable was self-reported ``alertness''. Participants consumed one of the two energy drinks at 9am before reporting their alertness an hour later. They also completed a questionnaire to determine their circadian chronotype.
+
+Ensure any factors are coded as a factor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{circadian }\OtherTok{=} \FunctionTok{factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{circadian, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"morning"}\NormalTok{, }\StringTok{"evening"}\NormalTok{))}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{drink }\OtherTok{=} \FunctionTok{factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{drink) }\CommentTok{\#turns into a factor}
+\end{Highlighting}
+\end{Shaded}
+
+Why does the code above have \texttt{levels\ =\ c()} for one of them. This is how we can re-order the levels if needed. R will automatically have these in alphabetical order, however, as morning does indeed come before evening on each day, I will specify the order.
+
+\subsection{Exercise 1.2: Build the Bar Chart}\label{exercise-1.2-build-the-bar-chart}
+
+You will build a bar chart step by step to learn about the different components at each layer of the code.
+
+\begin{itemize}
+\tightlist
+\item
+  Layer 1: Add data and plot aesthetics
+\item
+  Layers 2 \& 3: Add values and error bars.
+\item
+  Layer 4: Axis labels
+\item
+  Layer 5: Factor level labels
+\item
+  Layer 6: Apply a theme.
+\end{itemize}
+
+Here we go\ldots{}
+
+\textbf{Layer 1} Add data and plot aesthetics
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{y =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NULL}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Think carefully what you want to appear on the x-axis, the y-axis, and in the legend (called \texttt{fill\ =}). Change \texttt{NULL} with the variable names in \texttt{mydata} (or your data file).
+
+Sometimes it can be helpful to sketch out your figure on paper first before trying to work with the code.
+
+For this example, we are particularly interested in comparing the two energy drinks.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👀 Click for the solution
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ circadian, }\AttributeTok{y =}\NormalTok{ alert, }\AttributeTok{fill =}\NormalTok{ drink))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Layer 2} Add values
+
+You have told R where to find the data (in the object called \texttt{mydata}) and you have plotted what should go on the two axes (\texttt{x\ =} and \texttt{y=}) and the figure legend (\texttt{fill\ =}) but now you need to code what values you want to display.
+
+For a bar chart, use the mean.
+
+Remember to use \texttt{+} to add this on to the code above to build the layers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{geom =} \StringTok{"bar"}\NormalTok{,}
+            \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Layer 3} Error bars
+
+Really simple, we will use the standard error.
+
+If you want to instead show +/- 1 standard deviation, use the additional code below instead of this one.
+
+Remember for each layer to add \texttt{+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ mean\_se, }\AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }
+            \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👀 Click for Standard Deviation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{+}
+\FunctionTok{stat\_summary}\NormalTok{(}
+  \AttributeTok{fun.data =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{mean\_sdl}\NormalTok{(x, }\AttributeTok{mult =} \DecValTok{1}\NormalTok{),}
+  \AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{,}
+  \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{),}
+  \AttributeTok{width =} \FloatTok{0.25}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Layer 4} Axis labels
+
+Decide on appropriate names for both the \texttt{x} and \texttt{y} axes by changing \texttt{NULL}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,   }\CommentTok{\# keep NULL APA figures don\textquotesingle{}t use titles.}
+     \AttributeTok{x =} \StringTok{"Circadian Chronotype"}\NormalTok{,  }
+     \AttributeTok{y =} \StringTok{"Mean Alertness Score"}\NormalTok{,}
+     \AttributeTok{fill =} \StringTok{"Drink"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Layer 5} Factor level labels
+
+If you look at your figure at the moment, you'll see that ``morning'' and ``evening'' are lowercase. This is the same for the drink types. Let's change this.
+
+Usually we want to keep our data files all lowercase. This is generally good practice because it means we do not need to keep using capital letters when coding.
+
+However, if you look at your figure, you'll see that ``morning'' and ``evening'' are lowercase. This is the same for the drink types. Let's change this.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"redcow"} \OtherTok{=} \StringTok{"slategrey"}\NormalTok{, }\StringTok{"yumster"} \OtherTok{=} \StringTok{"slategray1"}\NormalTok{), }
+                    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Red Cow"}\NormalTok{, }\StringTok{"Yumster"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"morning"} \OtherTok{=} \StringTok{"Morning"}\NormalTok{, }\StringTok{"afternoon"} \OtherTok{=} \StringTok{"Afternoon"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{scale\_fill\_manual}
+
+\begin{itemize}
+\item
+  \texttt{values\ =} will allow you to assign colours to each level (if you have a figure legend). 've picked\texttt{slategrey4}and\texttt{slategrey2\textbackslash{}} but there are lots to choose from here: \url{https://r-charts.com/colors/} Try to be sensible when picking colours\ldots{}
+\item
+  \texttt{labels\ =} will allow you to code what the text says within the legend itself. Here we can add capital letters. scale\_x\_discrete`
+\item
+  \texttt{labels\ =} will again allow you to code what the text says on the x axis.
+\end{itemize}
+
+\textbf{Layer 6} Add a theme
+
+Themes in ggplot allow you to tidy up the figure as a whole. Here you could change the grey background, change the font types or sizes, and a few other things.
+
+The code below does not need tweaking as it is a theme which closely mimics an APA style figure.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.border =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{),}
+        \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+Hopefully you should now have the completed figure.
+
+\subsection{Exercise 1.3: Tweaking the Colours}\label{exercise-1.3-tweaking-the-colours}
+
+I know above I did say to be sensible about the colours. However, you might remember some quite specific branding from the two energy drinks.
+
+Change your code from figure above to use the following colours for the two energy drink types.
+
+\begin{itemize}
+\tightlist
+\item
+  For Red Cow use \texttt{"steelblue1"}
+\item
+  For Yumster use \texttt{"forestgreen"}
+\end{itemize}
+
+\section{Violin Plot}\label{violin-plot}
+
+Have a go at running this code to produce a violin plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ circadian, }\AttributeTok{y =}\NormalTok{ alert, }\AttributeTok{fill =}\NormalTok{ drink)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{trim =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{scale =} \StringTok{"area"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{linewidth =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{outlier.shape =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,   }\CommentTok{\# keep NULL APA figures don\textquotesingle{}t use titles.}
+       \AttributeTok{x =} \StringTok{"Circadian Chronotype"}\NormalTok{,  }
+       \AttributeTok{y =} \StringTok{"Mean Alertness Score"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Drink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"redcow"} \OtherTok{=} \StringTok{"steelblue1"}\NormalTok{, }\StringTok{"yumster"} \OtherTok{=} \StringTok{"forestgreen"}\NormalTok{), }
+                    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Red Cow"}\NormalTok{, }\StringTok{"Yumster"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Morning"}\NormalTok{, }\StringTok{"Afternoon"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.border =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{),}
+        \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Box Plot}\label{box-plot}
+
+Have a go at running this code to produce a boxplot plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ circadian, }\AttributeTok{y =}\NormalTok{ alert, }\AttributeTok{fill =}\NormalTok{ drink)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,   }\CommentTok{\# keep NULL APA figures don\textquotesingle{}t use titles.}
+       \AttributeTok{x =} \StringTok{"Circadian Chronotype"}\NormalTok{,  }
+       \AttributeTok{y =} \StringTok{"Mean Alertness Score"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Drink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"redcow"} \OtherTok{=} \StringTok{"steelblue1"}\NormalTok{, }\StringTok{"yumster"} \OtherTok{=} \StringTok{"forestgreen"}\NormalTok{), }
+                    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Red Cow"}\NormalTok{, }\StringTok{"Yumster"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Morning"}\NormalTok{, }\StringTok{"Afternoon"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.border =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{),}
+        \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Line Chart}\label{line-chart}
+
+Import the data set called \texttt{christmas.csv}, save it as an object called \texttt{tree}.
+
+This data contains Christmas tree sales (in millions) in the US for both real and artificial Christmas trees from 2004.
+
+This exercise is just to help you learn to adapt code.
+
+\begin{itemize}
+\tightlist
+\item
+  Layer 1: Add data and plot aesthetics
+\item
+  Layers 2 \& 3: Add values and line of best fit.
+\item
+  Layer 4: Labels
+\item
+  Layer 5: Factor level labels and colours
+\item
+  Layer 6: Apply a theme.
+\end{itemize}
+
+\textbf{Layer 1} Add data and plot aesthetics
+
+Look through the data set so you are aware what to include. Amend the code below to add data and plot the aesthetics.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(NULL1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ NULL2, }\AttributeTok{y =}\NormalTok{ NULL3, }\AttributeTok{col =}\NormalTok{ NULL4))}
+\end{Highlighting}
+\end{Shaded}
+
+Use the drop down below if you need a hint\ldots{}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👀 Click for a hint
+
+\begin{itemize}
+\item
+  \texttt{NULL1} - what is the name of your object with the data.
+\item
+  \texttt{NULL2} - what variable should be on the x (horizontal axis). As this is a line graph, try to think carefully what would be most appropriate.
+\item
+  \texttt{NULL3} - what variable should be in the y (vertical) axis. This is usually a numeric value for most charts.
+\item
+  \texttt{NULL4} - We can use \texttt{col\ =} to decide if we have factors with multiple levels. We can then later assign these a colour or pattern (e.g.~dash vs.~solid line).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Layers 2 \& 3} Add values and line of best fit
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{+}
+\FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+\FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{geom\_point()} will add the data as points, and \texttt{geom\_smooth()} will give us a line of best fit .
+
+\texttt{method\ =\ "lm} specifies the type of line: ``lm'' means linear model (simple linear regression).
+
+\texttt{se\ =\ FALSE} will turn off a shaded area called a confidence interval around the line.
+
+\textbf{Layer 4} Labels
+
+Run the code below \textbf{before} changing any \texttt{NULL} values. Then look at your plot to see which NULL labels appear on each part of the plot.
+
+Then, update these to give your plot a suitable title* and labels.
+
+*Yes, APA format doesn't make use of titles, but for practice why not have a go at creating one.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{+}
+\FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"NULL1"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"NULL2"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"NULL3"}\NormalTok{,}
+    \AttributeTok{col =} \StringTok{"NULL4"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👀 Click for the answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{+}
+\FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Real and Artificial Christmas Trees Sold in the US"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Year"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Trees Sold (Millions)"}\NormalTok{,}
+    \AttributeTok{col =} \StringTok{"Type of Tree"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Layer 5} Factor level labels and colours
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{+}
+\FunctionTok{scale\_colour\_manual}\NormalTok{(}
+  \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"artificial"} \OtherTok{=} \StringTok{"green2"}\NormalTok{, }\StringTok{"real"} \OtherTok{=} \StringTok{"darkgreen"}\NormalTok{),}
+  \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"NULL1"}\NormalTok{, }\StringTok{"NULL2"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Change \texttt{NULL} values to suitable labels for the two tree types.
+
+\textbf{Layer 6} Apply a theme.
+
+AGain, not stricly APA but just to try out different things, keep it simple and apply
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{+}
+\FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Consider trying different themes. Change \texttt{theme\_bw()} to one of these below to see how it changes the plot. Which is your favourite?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{+}
+\FunctionTok{theme\_bw}\NormalTok{()}
+
+\CommentTok{\#or}
+\SpecialCharTok{+}
+\FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\#or}
+\SpecialCharTok{+}
+\FunctionTok{theme\_linedraw}\NormalTok{()}
+
+\CommentTok{\#or}
+\SpecialCharTok{+}
+\FunctionTok{theme\_grey}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+There you go, you now have a perfectly functioning line chart.
+
+\section{Snowman Plot}\label{snowman-plot}
+
+Now for some real serious stuff\ldots{}
+
+\texttt{ggplot()} is really powerful and there are so many things you can do with it.
+
+Copy and paste the code below, run it, and interpret the snowman plot\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(ggforce) }\CommentTok{\# you\textquotesingle{}ll need this package if not installed}
+\FunctionTok{library}\NormalTok{(ggforce)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+The code is quite long so expand the section below to copy it.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+❄️ Click to build a snowman
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{snowman }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{y =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\AttributeTok{x =} \DecValTok{0}\NormalTok{, }\AttributeTok{r =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(snowman) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_circle}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x0 =}\NormalTok{ x, }\AttributeTok{y0 =}\NormalTok{ y, }\AttributeTok{r =}\NormalTok{ r)) }\SpecialCharTok{+} 
+  \FunctionTok{coord\_fixed}\NormalTok{()}
+\NormalTok{snowman }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \DecValTok{0}\NormalTok{, }\AttributeTok{r =} \DecValTok{3}\SpecialCharTok{:}\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{y =}\NormalTok{(r}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{*{-}}\DecValTok{1}\NormalTok{)}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(snowman) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_circle}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x0 =}\NormalTok{ x, }\AttributeTok{y0 =}\NormalTok{ y, }\AttributeTok{r =}\NormalTok{ r),}
+              \AttributeTok{fill =} \StringTok{"white"}\NormalTok{, }
+              \AttributeTok{colour =} \StringTok{"lightgrey"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{coord\_fixed}\NormalTok{()}
+\NormalTok{face }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\DecValTok{0}\NormalTok{),}
+               \AttributeTok{y =} \FunctionTok{c}\NormalTok{(.}\DecValTok{75}\NormalTok{, .}\DecValTok{75}\NormalTok{, }\DecValTok{1}\NormalTok{)}\SpecialCharTok{*{-}}\DecValTok{1}\NormalTok{,}
+  \AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"eye"}\NormalTok{, }\StringTok{"eye"}\NormalTok{, }\StringTok{"nose"}\NormalTok{),}
+  \AttributeTok{colour =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"black"}\NormalTok{, }\StringTok{"coral2"}\NormalTok{))}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =}\NormalTok{ face, }\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{,}
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y, }
+                 \AttributeTok{shape =}\NormalTok{ type, }\AttributeTok{colour =} \FunctionTok{I}\NormalTok{(colour)))}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_arc}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x0 =}\NormalTok{ snowman}\SpecialCharTok{$}\NormalTok{x[}\FunctionTok{nrow}\NormalTok{(snowman)], }
+               \AttributeTok{y0 =}\NormalTok{ snowman}\SpecialCharTok{$}\NormalTok{y[}\FunctionTok{nrow}\NormalTok{(snowman)], }
+               \AttributeTok{start =} \FloatTok{2.2}\NormalTok{, }\AttributeTok{end =} \DecValTok{4}\NormalTok{, }\AttributeTok{r=}\NormalTok{.}\DecValTok{6}\NormalTok{))}
+\NormalTok{arms }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.4}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\FloatTok{3.6}\NormalTok{, }\FloatTok{3.1}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\FloatTok{3.1}\NormalTok{, }\FloatTok{3.3}\NormalTok{),}
+               \AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.7}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.2}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.2}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{2.8}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.7}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.2}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.4}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.1}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{2.5}\NormalTok{),}
+    \AttributeTok{side =} \FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"left arm"}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+           \FunctionTok{rep}\NormalTok{(}\StringTok{"left finger1"}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+           \FunctionTok{rep}\NormalTok{(}\StringTok{"left finger2"}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+           \FunctionTok{rep}\NormalTok{(}\StringTok{"right arm"}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+           \FunctionTok{rep}\NormalTok{(}\StringTok{"right finger1"}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+           \FunctionTok{rep}\NormalTok{(}\StringTok{"right finger2"}\NormalTok{, }\DecValTok{2}\NormalTok{)))}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ arms, }
+            \AttributeTok{size =} \FloatTok{1.5}\NormalTok{, }\AttributeTok{lineend =} \StringTok{"round"}\NormalTok{,}
+            \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y, }\AttributeTok{group =}\NormalTok{ side))}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \DecValTok{0}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\DecValTok{3}\SpecialCharTok{:{-}}\DecValTok{5}\NormalTok{), }\AttributeTok{size =} \DecValTok{4}\NormalTok{)}
+\NormalTok{tophat }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.9}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.3}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\FloatTok{1.1}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\FloatTok{1.5}\NormalTok{, }\FloatTok{1.4}\NormalTok{),}
+                 \AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, .}\DecValTok{25}\NormalTok{, .}\DecValTok{15}\NormalTok{, }\DecValTok{1}\NormalTok{, .}\DecValTok{75}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.04}\NormalTok{, }\SpecialCharTok{{-}}\NormalTok{.}\DecValTok{25}\NormalTok{, }\SpecialCharTok{{-}}\NormalTok{.}\DecValTok{5}\NormalTok{),}
+                 \AttributeTok{id =} \DecValTok{1}\NormalTok{)}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{data =}\NormalTok{ tophat, }
+               \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y, }\AttributeTok{group =}\NormalTok{ id))}
+\NormalTok{scarf }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.5}\NormalTok{),}
+                \AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{))}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ scarf, }\AttributeTok{size =} \DecValTok{3}\NormalTok{, }
+            \AttributeTok{lineend=}\StringTok{"round"}\NormalTok{,}
+            \AttributeTok{colour =} \StringTok{"firebrick4"}\NormalTok{,}
+            \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y))}
+\NormalTok{p }\SpecialCharTok{+} \FunctionTok{theme\_void}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill =} \StringTok{"skyblue3"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+This code was adapted from:
+
+DrMowinckels (Dec 11, 2019) Do you wanna build a snowman?. Retrieved from \url{https://drmowinckels.io/blog/2019/do-you-wanna-build-a-snowman/}. DOI: \url{https://www.doi.org/10.5281/zenodo.13273500}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Well Done. You have reached the end of the workshop \\
+\end{longtable}
+
+\section{Optional Exercises and Resources}\label{optional-exercises-and-resources}
+
+The code below might be useful for your lab report to display a main effect. You'll need the \texttt{tidyverse} package.
+
+\section{Bar Charts (for t-tests, one-way designs, or main effects)}\label{bar-charts-for-t-tests-one-way-designs-or-main-effects}
+
+Download and import the hazard data set for this example. The code below assumes the data has been saved as an object called \texttt{mydata}.
+
+\href{data/earlybird.csv}{Download dataset}.
+
+In this data set \texttt{cc} is the circadian chronotype either morning (lark), neither, or evening (owl) preference. \texttt{slp} is whether the participant reported a calm or disturbed night sleep. \texttt{alert} was the dependent variable and measured morning alertness. Although this is a factorial design, this example will only look at \texttt{cc} independent variable, similar to that of a one-way ANOVA or if you only wanted to report the main effect of circadian chronotype.
+
+This is already in long format, so no need to amend it. However, it is good to check and re-order any factors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{cc }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{cc, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"lark"}\NormalTok{, }\StringTok{"neither"}\NormalTok{, }\StringTok{"owl"}\NormalTok{))}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{slp }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{slp)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Bar Chart}\label{bar-chart-1}
+
+This code will plot mean alertness scores for the three circadian chronotype groups \texttt{cc}, ignoring sleep quality \texttt{slp}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cc, }\AttributeTok{y =}\NormalTok{ alert)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{geom =} \StringTok{"bar"}\NormalTok{,}
+               \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+               \AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ mean\_se, }\AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }
+               \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,   }\CommentTok{\# keep NULL APA figures don\textquotesingle{}t use titles.}
+       \AttributeTok{x =} \StringTok{"Circadian Chronotype"}\NormalTok{,  }
+       \AttributeTok{y =} \StringTok{"Mean Alertness Score"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Lark"}\NormalTok{, }\StringTok{"Neither"}\NormalTok{, }\StringTok{"Owl"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.border =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{),}
+        \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Violin Plot}\label{violin-plot-1}
+
+Same data set, just a different way to show the three groups.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cc, }\AttributeTok{y =}\NormalTok{ alert)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{trim =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{scale =} \StringTok{"area"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{linewidth =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{outlier.shape =} \DecValTok{1}\NormalTok{,}
+               \AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,   }\CommentTok{\# keep NULL APA figures don\textquotesingle{}t use titles.}
+       \AttributeTok{x =} \StringTok{"Circadian Chronotype"}\NormalTok{,  }
+       \AttributeTok{y =} \StringTok{"Mean Alertness Score"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Lark"}\NormalTok{, }\StringTok{"Neither"}\NormalTok{, }\StringTok{"Owl"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.border =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{),}
+        \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Box Plot}\label{box-plot-1}
+
+Same data set, just a different way to show the three groups. All you'll notice here is the \texttt{geom\_violin()} function has been removed, because a box plot is essentially a violn plot but without the density information.
+
+The width for the boxplot has also increased a little too.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cc, }\AttributeTok{y =}\NormalTok{ alert)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{outlier.shape =} \DecValTok{1}\NormalTok{,}
+               \AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,   }\CommentTok{\# keep NULL APA figures don\textquotesingle{}t use titles.}
+       \AttributeTok{x =} \StringTok{"Circadian Chronotype"}\NormalTok{,  }
+       \AttributeTok{y =} \StringTok{"Mean Alertness Score"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Morning"}\NormalTok{, }\StringTok{"Neither"}\NormalTok{, }\StringTok{"Evening"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.border =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{),}
+        \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+If you have only two levels, this code will still work! You just need to remove the third label in \texttt{scale\_x\_discrete()} when you change the labels to match your data set. A bar chart example is below for an example using sleep qualit: calm vs.~disturbed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ slp, }\AttributeTok{y =}\NormalTok{ alert)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{geom =} \StringTok{"bar"}\NormalTok{,}
+               \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+               \AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ mean\_se, }\AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }
+               \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \ConstantTok{NULL}\NormalTok{,   }\CommentTok{\# keep NULL APA figures don\textquotesingle{}t use titles.}
+       \AttributeTok{x =} \StringTok{"Sleep Quality"}\NormalTok{,  }
+       \AttributeTok{y =} \StringTok{"Mean Alertness Score"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Calm"}\NormalTok{, }\StringTok{"Disturbed"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{panel.border =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{),}
+        \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{axis.ticks.x =} \FunctionTok{element\_line}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
 
