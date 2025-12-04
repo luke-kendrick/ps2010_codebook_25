@@ -2970,13 +2970,13 @@ Your data need to be in long format for this analysis, as it is a repeated measu
 \begin{itemize}
 \tightlist
 \item
-  Practice working with ggplot() to produce a bar chart for a data set with two factors and a continuous dependent variable, each with two levels.
+  Practice working with ggplot() to produce a bar chart for a 2x2 factorial design.
 \item
-  Explore code for a violin plot and a box plot.
+  Explore alternative plots using code for a violin plot and a box plot.
 \item
-  Practice working with ggplot() to produce a line graph for a data set with one factor and a continuous dependent variable.
+  Practice working with ggplot() to produce a line graph for a data set looking at data over time points.
 \item
-  Build and interpret a snowman plot.
+  Build and interpret a complex snowman plot.
 \end{itemize}
 
 \section{Bar Chart}\label{bar-chart}
@@ -2989,7 +2989,7 @@ As explained in lecture, to build these plots you use layers.
 
 \subsection{Exercise 1.1: Import Data}\label{exercise-1.1-import-data}
 
-Import the \texttt{energy.csv} data set. The code below assumes it will be called \texttt{mydata}.
+Import the \texttt{circadian.csv} data set. The code below assumes it will be called \texttt{mydata}.
 
 In this data set we have two independent variables: drink type and circadian chronotype. Each with two levels. The dependent variable was self-reported ``alertness''. Participants consumed one of the two energy drinks at 9am before reporting their alertness an hour later. They also completed a questionnaire to determine their circadian chronotype.
 
@@ -3075,7 +3075,6 @@ Remember for each layer to add \texttt{+}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-
 \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ mean\_se, }\AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }
             \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{) }
 \end{Highlighting}
@@ -3087,13 +3086,11 @@ Remember for each layer to add \texttt{+}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\SpecialCharTok{+}
 \FunctionTok{stat\_summary}\NormalTok{(}
   \AttributeTok{fun.data =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{mean\_sdl}\NormalTok{(x, }\AttributeTok{mult =} \DecValTok{1}\NormalTok{),}
   \AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{,}
   \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.9}\NormalTok{),}
-  \AttributeTok{width =} \FloatTok{0.25}
-\NormalTok{)}
+  \AttributeTok{width =} \FloatTok{0.25}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3124,17 +3121,23 @@ However, if you look at your figure, you'll see that ``morning'' and ``evening''
 \begin{Highlighting}[]
 \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"redcow"} \OtherTok{=} \StringTok{"slategrey"}\NormalTok{, }\StringTok{"yumster"} \OtherTok{=} \StringTok{"slategray1"}\NormalTok{), }
                     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Red Cow"}\NormalTok{, }\StringTok{"Yumster"}\NormalTok{)) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"morning"} \OtherTok{=} \StringTok{"Morning"}\NormalTok{, }\StringTok{"afternoon"} \OtherTok{=} \StringTok{"Afternoon"}\NormalTok{))}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"morning"} \OtherTok{=} \StringTok{"Morning"}\NormalTok{, }\StringTok{"evening"} \OtherTok{=} \StringTok{"Evening"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\texttt{scale\_fill\_manual}
+\texttt{scale\_fill\_manual}:
 
 \begin{itemize}
 \item
   \texttt{values\ =} will allow you to assign colours to each level (if you have a figure legend). 've picked\texttt{slategrey4}and\texttt{slategrey2\textbackslash{}} but there are lots to choose from here: \url{https://r-charts.com/colors/} Try to be sensible when picking colours\ldots{}
 \item
-  \texttt{labels\ =} will allow you to code what the text says within the legend itself. Here we can add capital letters. scale\_x\_discrete`
+  \texttt{labels\ =} will allow you to code what the text says within the legend itself. Here we can add capital letters.
+\end{itemize}
+
+\texttt{scale\_x\_discrete}:
+
+\begin{itemize}
+\tightlist
 \item
   \texttt{labels\ =} will again allow you to code what the text says on the x axis.
 \end{itemize}
@@ -3173,6 +3176,22 @@ Change your code from figure above to use the following colours for the two ener
 \item
   For Yumster use \texttt{"forestgreen"}
 \end{itemize}
+
+\subsection{Exercise 1.4: Saving a Plot}\label{exercise-1.4-saving-a-plot}
+
+To save a plot, you can use the \texttt{ggsave()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"NULL.jpg"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Change \texttt{NULL} to a name for your file. All the text should be in quotation marks (e.g., \texttt{ggsave("my\_file.png")}) You can also amend the file type, for example, to save it as a \texttt{.jpg} or \texttt{.png} image file.
+
+Finally, this will then export the most recently created plot directly to your working directory.
+
+Hint: you should do this for the plots you produce today as you will need some of them for the weekly quiz.
 
 \section{Violin Plot}\label{violin-plot}
 
@@ -3283,7 +3302,6 @@ Use the drop down below if you need a hint\ldots{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\SpecialCharTok{+}
 \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
 \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
@@ -3305,7 +3323,6 @@ Then, update these to give your plot a suitable title* and labels.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\SpecialCharTok{+}
 \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"NULL1"}\NormalTok{,}
     \AttributeTok{x =} \StringTok{"NULL2"}\NormalTok{,}
     \AttributeTok{y =} \StringTok{"NULL3"}\NormalTok{,}
@@ -3319,7 +3336,6 @@ Then, update these to give your plot a suitable title* and labels.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\SpecialCharTok{+}
 \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Real and Artificial Christmas Trees Sold in the US"}\NormalTok{,}
     \AttributeTok{x =} \StringTok{"Year"}\NormalTok{,}
     \AttributeTok{y =} \StringTok{"Trees Sold (Millions)"}\NormalTok{,}
@@ -3333,7 +3349,6 @@ Then, update these to give your plot a suitable title* and labels.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\SpecialCharTok{+}
 \FunctionTok{scale\_colour\_manual}\NormalTok{(}
   \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"artificial"} \OtherTok{=} \StringTok{"green2"}\NormalTok{, }\StringTok{"real"} \OtherTok{=} \StringTok{"darkgreen"}\NormalTok{),}
   \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"NULL1"}\NormalTok{, }\StringTok{"NULL2"}\NormalTok{))}
@@ -3348,7 +3363,6 @@ AGain, not stricly APA but just to try out different things, keep it simple and 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\SpecialCharTok{+}
 \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -3357,19 +3371,15 @@ Consider trying different themes. Change \texttt{theme\_bw()} to one of these be
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\SpecialCharTok{+}
 \FunctionTok{theme\_bw}\NormalTok{()}
 
 \CommentTok{\#or}
-\SpecialCharTok{+}
 \FunctionTok{theme\_classic}\NormalTok{()}
 
 \CommentTok{\#or}
-\SpecialCharTok{+}
 \FunctionTok{theme\_linedraw}\NormalTok{()}
 
 \CommentTok{\#or}
-\SpecialCharTok{+}
 \FunctionTok{theme\_grey}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -3378,7 +3388,7 @@ There you go, you now have a perfectly functioning line chart.
 
 \section{Snowman Plot}\label{snowman-plot}
 
-Now for some real serious stuff\ldots{}
+Now for some real serious complicated plotting\ldots{}
 
 \texttt{ggplot()} is really powerful and there are so many things you can do with it.
 
@@ -3388,11 +3398,11 @@ Copy and paste the code below, run it, and interpret the snowman plot\ldots{}
 \begin{Highlighting}[]
 \FunctionTok{install.packages}\NormalTok{(ggforce) }\CommentTok{\# you\textquotesingle{}ll need this package if not installed}
 \FunctionTok{library}\NormalTok{(ggforce)}
-\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# if not already loaded}
 \end{Highlighting}
 \end{Shaded}
 
-The code is quite long so expand the section below to copy it.
+The code is quite long so expand the section below to copy it, and then run it all at once.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -3455,15 +3465,11 @@ DrMowinckels (Dec 11, 2019) Do you wanna build a snowman?. Retrieved from \url{h
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{longtable}[]{@{}l@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Well Done. You have reached the end of the workshop \\
-\end{longtable}
+Well Done. You have reached the end of the workshop
 
-\section{Optional Exercises and Resources}\label{optional-exercises-and-resources}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Optional Exercises and Resources for Data Visualisation}\label{optional-exercises-and-resources-for-data-visualisation}
 
 The code below might be useful for your lab report to display a main effect. You'll need the \texttt{tidyverse} package.
 

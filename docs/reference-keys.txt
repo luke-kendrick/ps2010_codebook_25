@@ -95,11 +95,12 @@ bar-chart
 exercise-1.1-import-data
 exercise-1.2-build-the-bar-chart
 exercise-1.3-tweaking-the-colours
+exercise-1.4-saving-a-plot
 violin-plot
 box-plot
 line-chart
 snowman-plot
-optional-exercises-and-resources
+optional-exercises-and-resources-for-data-visualisation
 bar-charts-for-t-tests-one-way-designs-or-main-effects
 bar-chart-1
 violin-plot-1
