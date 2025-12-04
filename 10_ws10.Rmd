@@ -367,14 +367,14 @@ Now for some real serious complicated plotting...
 
 `ggplot()` is really powerful and there are so many things you can do with it.
 
-Copy and paste the code below, run it, and interpret the snowman plot...
+You'll need these packages.
 
 ``` r
 install.packages(ggforce) # you'll need this package if not installed
 library(ggforce)
 library(tidyverse) # if not already loaded
 ```
-
+Copy and paste the code below for the snowman plot...
 The code is quite long so expand the section below to copy it, and then run it all at once.
 
 ------------------------------------------------------------------------
