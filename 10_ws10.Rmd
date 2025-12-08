@@ -370,7 +370,7 @@ Now for some real serious complicated plotting...
 You'll need these packages.
 
 ``` r
-install.packages(ggforce) # you'll need this package if not installed
+install.packages("ggforce") # you'll need this package if not installed
 library(ggforce)
 library(tidyverse) # if not already loaded
 ```
