@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2025-12-08}
+\date{2026-02-09}
 
 \begin{document}
 \maketitle
@@ -3594,6 +3594,379 @@ If you have only two levels, this code will still work! You just need to remove 
 \end{Highlighting}
 \end{Shaded}
 
+\chapter{Workshop 14: Questionnaire Data}\label{workshop-14-questionnaire-data}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\tightlist
+\item
+  To practice working with questionnaire data in preparation for data analysis (e.g., the process sometimes called data wrangling or ``data cleaning'').
+\end{itemize}
+
+\section{\texorpdfstring{\textbf{Tasks}}{Tasks}}\label{tasks}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Work in excel to remove any rows and columns that are not needed.
+\item
+  Remove participants who did not complete the study properly.
+\item
+  Check for any unusual responses.
+\item
+  Clean the data file variable names.
+\item
+  Check for missing responses across each participant.
+\item
+  Re-code any factor/categorical variables.
+\item
+  Reverse code any negative items.
+\item
+  Calculate the mean scores for the two questionnaires.
+\item
+  Produce basic descriptive statistics for each questionnaire.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{\textbf{1.Work in excel to remove any rows and columns that are not needed}}{1.Work in excel to remove any rows and columns that are not needed}}\label{work-in-excel-to-remove-any-rows-and-columns-that-are-not-needed}
+
+Open the \texttt{anxiety\_procrastination.csv} file (which can be found on Moodle).
+
+This file contains data from participants who completed two questionnaires.
+The first was an academic anxiety questionnaire from Cassady et al.~(2019) and the second was the general procrastination scale (short form) from Sirios et al.~(2019).
+Participants were also asked their age and if they were a current UK university student.
+
+Have a look at the excel file and make sure you understand what each column shows.
+
+\begin{itemize}
+\tightlist
+\item
+  Column \texttt{C} includes progress data for the online study (\% completed).
+\item
+  Column \texttt{E} tells us if a participant completed the online study (1 = Yes, 0 = No).
+\item
+  Column \texttt{F} or \texttt{Q1\ age} tells us the participant age.
+\item
+  Column \texttt{G} or \texttt{Q2\ uni} tells us if the participant is a current UK university student (1 = No, 2 = Yes).
+\item
+  Columns \texttt{H} to \texttt{R} are the Likert responses to questions on the academic anxiety scale (scale 1 - 5).
+\item
+  Columns \texttt{S} to \texttt{AA} are the Likert responses to questions on the general procrastination scale (scale 1 - 5).
+\end{itemize}
+
+We need to remove any redundant columns or rows in the data file.
+This means any columns or rows which we don't need for the analysis.
+
+\begin{itemize}
+\item
+  Remove columns \texttt{A} and \texttt{B}.
+
+  -\textbf{Why?} This just contains the start and end date/time for the participant and we do not need the analysis.
+\item
+  Remove rows \texttt{2} and \texttt{3}.
+
+  -\textbf{Why?} These contain meta-data in the file and we do not need them for the analysis.
+\end{itemize}
+
+To remove the column or row, click on the letter or number and right click then press \texttt{delete}
+
+\includegraphics[width=6.78125in,height=\textheight,keepaspectratio]{images/excel1.jpg}
+
+\section{\texorpdfstring{\textbf{2. Remove participants who did not complete the study properly}}{2. Remove participants who did not complete the study properly}}\label{remove-participants-who-did-not-complete-the-study-properly}
+
+In excel we can sort the column which shows participant progress.
+Click on this column (now column \texttt{A}) and sort it.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click on \texttt{A}
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/excel2.jpg}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Click the \texttt{Data} tab.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Click the \texttt{Sort\ Smallest\ to\ Largest} button.
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/excel3.jpg}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Click sort with \texttt{expand\ the\ selection} selected.
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/excel4.jpg}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Delete any rows of participants who did not complete 100\% of the study. Make a note on how many there were as you would want to report this in your lab report.
+\end{enumerate}
+
+\section{\texorpdfstring{\textbf{3. Check for any unusual responses}}{3. Check for any unusual responses}}\label{check-for-any-unusual-responses}
+
+Look at the participant responses.
+What do you notice in the \texttt{Q1\ age} column?
+Make any changes to the data file to make sure all of the ages are in the same format.
+
+Hint
+
+One of the participants has entered the age as \texttt{19\ years}.
+Just change this so it says \texttt{19}
+
+\textbf{Once you have done this, save the excel file as a .csv file called \texttt{anxiety\_procrastination2} and save it somewhere you can easily find it. You will need to save it in your RStudio working directory (see next step!)}
+
+\section{\texorpdfstring{\textbf{4. Clean the data file variable names}}{4. Clean the data file variable names}}\label{clean-the-data-file-variable-names}
+
+Now we have tidying things up in excel, it is time to move over to RStudio.
+
+Load the following libraries, set your working directory, and import the data file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"janitor"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"psych"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(janitor)}
+\FunctionTok{library}\NormalTok{(psych)}
+
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"anxiety\_procrastination2.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This next bit of code will tidy up our data file in RStudio.
+We will also create a new object to work with called \texttt{clean\_mydata}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# clean\_names will:}
+\CommentTok{\#(1) change any capital letters to lowercase, }
+\CommentTok{\#(2) remove any spaces and replace with an underscore,}
+
+\NormalTok{clean\_mydata }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{clean\_names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{\textbf{5. Check for missing responses across each participant}}{5. Check for missing responses across each participant}}\label{check-for-missing-responses-across-each-participant}
+
+Sometimes a participant might accidentally miss a question.
+We need to check for this to see how many participants might have missing data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clean\_mydata }\OtherTok{\textless{}{-}}\NormalTok{ clean\_mydata }\SpecialCharTok{\%\textgreater{}\%}               \CommentTok{\#this will make sure a new column is added.}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{missing\_count =} \FunctionTok{rowSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.)))    }\CommentTok{\#this will count up the missing responses.}
+
+\FunctionTok{view}\NormalTok{(clean\_mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+When you \texttt{view} the data it will open in a new tab.
+Scroll to the very end and you'll see there is a new column called \texttt{missing\_count}.
+What has happened?
+The code above created a new column with the sum of the total number of missing responses.
+
+\textbf{How many participants had missing data?}
+
+\textbf{How many responses did they each miss?}
+
+Because the number of missing responses is quite low we can move on.
+But if you have a participant who has missed more than 25\% of their responses, you might consider removing them from the data file.
+
+\section{\texorpdfstring{\textbf{6. Re-code any factor/categorical variables}}{6. Re-code any factor/categorical variables}}\label{re-code-any-factorcategorical-variables}
+
+There is one categorical variable.
+\texttt{q2\_uni} is a \texttt{No} and \texttt{Yes} question (``Are you a current UK University student?'')
+
+Run this code to re-code the variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clean\_mydata}\SpecialCharTok{$}\NormalTok{q2\_uni }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(clean\_mydata}\SpecialCharTok{$}\NormalTok{q2\_uni)}
+\end{Highlighting}
+\end{Shaded}
+
+This code will take the \texttt{q2\_uni} variable and set it as \texttt{factor}.
+
+\section{\texorpdfstring{\textbf{7. Reverse code any negative items}}{7. Reverse code any negative items}}\label{reverse-code-any-negative-items}
+
+The general procrastination scale has three reverse coded items:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{q5\_3}
+\item
+  \texttt{q5\_5}
+\item
+  \texttt{q5\_6}
+\end{itemize}
+
+We need to reverse code these so that the Likert scores are swapped.
+This means:
+
+\texttt{5} becomes a \texttt{1}
+
+\texttt{4} becomes a \texttt{2}
+
+\texttt{3} stays as a \texttt{3}
+
+\texttt{2} becomes a \texttt{4}
+
+\texttt{1} becomes a \texttt{5}
+
+If you are unsure what is meant by a negative or reverse coded item, check the lecture slides.
+
+Run the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# we need to reverse code 3 items for the procrastination questionnaire}
+\NormalTok{clean\_mydata}\SpecialCharTok{$}\NormalTok{q5\_3 }\OtherTok{\textless{}{-}} \DecValTok{6} \SpecialCharTok{{-}}\NormalTok{ clean\_mydata}\SpecialCharTok{$}\NormalTok{q5\_3}
+\NormalTok{clean\_mydata}\SpecialCharTok{$}\NormalTok{q5\_5 }\OtherTok{\textless{}{-}} \DecValTok{6} \SpecialCharTok{{-}}\NormalTok{ clean\_mydata}\SpecialCharTok{$}\NormalTok{q5\_5}
+\NormalTok{clean\_mydata}\SpecialCharTok{$}\NormalTok{q5\_6 }\OtherTok{\textless{}{-}} \DecValTok{6} \SpecialCharTok{{-}}\NormalTok{ clean\_mydata}\SpecialCharTok{$}\NormalTok{q5\_6}
+
+\CommentTok{\# we use the number 6 because there were 5 response options}
+\CommentTok{\# if you had a 7 point Likert scale, this should say 8.}
+\CommentTok{\# if you had a 9 point Likert scale, this would say 10.}
+\CommentTok{\#change the number so it is one more than the number of Likert options.}
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{\textbf{8. Calculate the mean scores for the two questionnaires}}{8. Calculate the mean scores for the two questionnaires}}\label{calculate-the-mean-scores-for-the-two-questionnaires}
+
+At the moment we have a cleaned data file with all of the individual question responses.
+However, for each participant we need a \texttt{mean} score for each questionnaire/scale.
+
+For each participant we need:
+
+\begin{itemize}
+\item
+  The overall (\texttt{mean}) academic anxiety questionnaire score.
+\item
+  The overall (\texttt{mean}) procrastination questionnaire score.
+\end{itemize}
+
+We can do this and create new variables for these means using the code below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Select and calculate the anxiety scale score}
+\NormalTok{clean\_mydata }\OtherTok{\textless{}{-}}\NormalTok{ clean\_mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{anxiety =} \FunctionTok{rowMeans}\NormalTok{(}\FunctionTok{select}\NormalTok{(., }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"q4\_"}\NormalTok{)), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+
+\CommentTok{\# Select and calculate the procrastination scale score}
+\NormalTok{clean\_mydata }\OtherTok{\textless{}{-}}\NormalTok{ clean\_mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{procrastination =} \FunctionTok{rowMeans}\NormalTok{(}\FunctionTok{select}\NormalTok{(., }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"q5\_"}\NormalTok{)), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Let's explain this code bit by bit so you can adapt it again in the future:
+
+\texttt{clean\_mydata\ \textless{}-\ clean\_mydata\ \%\textgreater{}\%} to specify which data file to create the new column.
+
+\texttt{mutate()} will add the new column.
+
+\texttt{anxiety\ =} is what you want to call the new column.
+
+\texttt{rowMeans} will calculate the means across items/questions.
+
+\texttt{select} is so we will only do this for a certain number of items.
+
+\texttt{starts\_with("q4\_")} is so any variable that begins with \texttt{q4\_} is counted (e.g., \texttt{q4\_1} through to \texttt{q4\_11}).
+
+\texttt{na.rm\ =\ TRUE} is important as it will tell R to ignore any missing values when calculating the mean.
+
+\section{\texorpdfstring{\textbf{9. Produce basic descriptive statistics for each questionnaire}}{9. Produce basic descriptive statistics for each questionnaire}}\label{produce-basic-descriptive-statistics-for-each-questionnaire}
+
+If you view your data file, you should see at the very end (final two columns) you should have the mean anxiety and procrastination scores for each participant.
+To view the data file, just run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Select and calculate the anxiety scale score}
+\FunctionTok{view}\NormalTok{(clean\_mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+Across our sample, let's just finish by looking at some descriptive statistics.
+
+Run the following code and looks through and interpret the output.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clean\_mydata }\SpecialCharTok{\%\textgreater{}\%}                                     \CommentTok{\# which data file }
+  \FunctionTok{select}\NormalTok{(q1\_age, anxiety, procrastination) }\SpecialCharTok{\%\textgreater{}\%}       \CommentTok{\# select what variables to include}
+  \FunctionTok{describe}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}                                     \CommentTok{\# describe the data}
+  \FunctionTok{select}\NormalTok{(n, mean, sd, se, min, max)                  }\CommentTok{\# describe() will give us some stats}
+
+\CommentTok{\# optional: try removing the first select() function from the code and see what happens}
+\NormalTok{clean\_mydata }\SpecialCharTok{\%\textgreater{}\%}                                     \CommentTok{\# which data file }
+  \FunctionTok{describe}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}                                     \CommentTok{\# describe the data}
+  \FunctionTok{select}\NormalTok{(n, mean, sd, se, min, max)                  }\CommentTok{\# describe() will give us some stats}
+
+\CommentTok{\#hopefully you will see why we used select() as otherwise it will give us values for every single question.}
+\CommentTok{\#it might be useful to look at every single question, but for today we just wanted the mean values for the questionnaires.}
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{\textbf{10. Optional Exercise}}{10. Optional Exercise}}\label{optional-exercise}
+
+Working more with data:
+
+\subsection{\texorpdfstring{\textbf{Optional Exercise One}}{Optional Exercise One}}\label{optional-exercise-one}
+
+\texttt{q2\_uni} asks participants ``Are you a current UK University student?''.
+Let's say our inclusion criteria stated that we want to only use data from current university students, we then need to filter out anyone who answered No.
+No = \texttt{1} and Yes = \texttt{2} for this variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clean\_mydata }\OtherTok{\textless{}{-}}\NormalTok{ clean\_mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(q2\_uni }\SpecialCharTok{==} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{\#filter(q2\_uni ==2) will include ONLY participants who }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Well Done.
+You have reached the end of the workshop
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \bibliography{book.bib,packages.bib}
 
