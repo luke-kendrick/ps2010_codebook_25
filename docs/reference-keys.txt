@@ -118,3 +118,10 @@ calculate-the-mean-scores-for-the-two-questionnaires
 produce-basic-descriptive-statistics-for-each-questionnaire
 optional-exercise
 optional-exercise-one
+workshop-15-factor-analysis-and-reliability-analysis
+exercise-1-import-and-prepare-data-1
+exercise-two
+exercise-three
+exercise-four
+exercise-five
+exercise-six

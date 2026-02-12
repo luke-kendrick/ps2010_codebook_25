@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2026-02-09}
+\date{2026-02-12}
 
 \begin{document}
 \maketitle
@@ -3958,6 +3958,125 @@ No = \texttt{1} and Yes = \texttt{2} for this variable.
   \FunctionTok{filter}\NormalTok{(q2\_uni }\SpecialCharTok{==} \DecValTok{2}\NormalTok{)}
 
 \CommentTok{\#filter(q2\_uni ==2) will include ONLY participants who }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Well Done.
+You have reached the end of the workshop
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Workshop 15: Factor Analysis (and Reliability Analysis)}\label{workshop-15-factor-analysis-and-reliability-analysis}
+
+\textbf{Aims:}
+
+\begin{itemize}
+\tightlist
+\item
+  To practice using factor analysis to determine the number of factors in a data set.
+\item
+  To conduct a reliability analysis using Cronbach's Alpha.
+\end{itemize}
+
+\section{Exercise 1: Import and Prepare Data}\label{exercise-1-import-and-prepare-data-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set the working directory {-}WD{-} so R knows where the data lives. Do this by going Session \textgreater{} Set working directory \textgreater{} Choose directory}
+
+\CommentTok{\# You can check the working directory...}
+
+\FunctionTok{getwd}\NormalTok{()}
+
+\CommentTok{\#Before doing anything, need to make sure the right packages are installed and open. We will use all of these......}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(psych)}
+
+\CommentTok{\#Import the data}
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"study\_perception.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Two}\label{exercise-two}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# Understanding your data}
+\FunctionTok{str}\NormalTok{(mydata) }\CommentTok{\#we can use this to check all of the variables in the file are numeric}
+\CommentTok{\#any categorical/factor variables would need to be removed.}
+
+\DocumentationTok{\#\#\# A quick summary of the data}
+\FunctionTok{summary}\NormalTok{(mydata)}
+
+\CommentTok{\# Let\textquotesingle{}s create a correlation matrix just to get an understanding of our data file}
+\CommentTok{\# we also need to create the correlation matrix to use later}
+\NormalTok{corr\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(mydata, }\AttributeTok{use =} \StringTok{"pairwise.complete.obs"}\NormalTok{), }\DecValTok{3}\NormalTok{)}
+\FunctionTok{view}\NormalTok{(corr\_matrix)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Three}\label{exercise-three}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# Assess the need for factor analysis}
+\DocumentationTok{\#\#\# assumptions}
+\CommentTok{\# Kaiser{-}Meyer{-}Olkin (KMO) Test {-} Measures Sampling Adequacy}
+\NormalTok{kmo\_result }\OtherTok{\textless{}{-}} \FunctionTok{KMO}\NormalTok{(corr\_matrix)}
+\FunctionTok{print}\NormalTok{(kmo\_result)  }\CommentTok{\# KMO should be \textgreater{} 0.6 for FA to be appropriate}
+
+\CommentTok{\# Bartlett’s Test of Sphericity {-} Checks if correlation matrix is an identity matrix}
+\NormalTok{bartlett\_result }\OtherTok{\textless{}{-}} \FunctionTok{cortest.bartlett}\NormalTok{(corr\_matrix, }\AttributeTok{n =} \FunctionTok{nrow}\NormalTok{(mydata))}
+\FunctionTok{print}\NormalTok{(bartlett\_result)  }\CommentTok{\# p{-}value should be \textless{} 0.05 for FA to be suitable}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Four}\label{exercise-four}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# Determine the number of factors.}
+\CommentTok{\# Compute Eigenvalues}
+\NormalTok{eigen\_values }\OtherTok{\textless{}{-}} \FunctionTok{eigen}\NormalTok{(corr\_matrix)}\SpecialCharTok{$}\NormalTok{values}
+\FunctionTok{print}\NormalTok{(eigen\_values)  }\CommentTok{\# Kaiser’s criterion: Keep factors with eigenvalues \textgreater{} 1}
+
+\CommentTok{\# Scree Plot}
+\FunctionTok{fa.parallel}\NormalTok{(mydata, }\AttributeTok{fa =} \StringTok{"fa"}\NormalTok{, }\AttributeTok{n.iter =} \DecValTok{100}\NormalTok{, }\AttributeTok{show.legend =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Five}\label{exercise-five}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\#\# Interpretation of factors.}
+\CommentTok{\# Perform Factor Analysis with Varimax Rotation}
+\NormalTok{fa\_result }\OtherTok{\textless{}{-}} \FunctionTok{fa}\NormalTok{(mydata, }\AttributeTok{nfactors =} \DecValTok{2}\NormalTok{, }\AttributeTok{rotate =} \StringTok{"varimax"}\NormalTok{, }\AttributeTok{fm =} \StringTok{"ml"}\NormalTok{)  }\CommentTok{\# Adjust nfactors}
+\CommentTok{\# Print Factor Loadings (Rotated Component Matrix)}
+\FunctionTok{print}\NormalTok{(fa\_result}\SpecialCharTok{$}\NormalTok{loadings, }\AttributeTok{cutoff =} \FloatTok{0.3}\NormalTok{)  }\CommentTok{\# Show only loadings \textgreater{} 0.3}
+
+\CommentTok{\# Visualizing Loadings}
+\FunctionTok{fa.diagram}\NormalTok{(fa\_result)  }\CommentTok{\# Shows factor structure in a diagram}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Six}\label{exercise-six}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\#  Reliability Analysis}
+\CommentTok{\# select items and put them onto a scale.}
+\CommentTok{\# Group items based on factor loadings}
+\FunctionTok{colnames}\NormalTok{(mydata)}
+\NormalTok{scale\_1 }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"s1\_"}\NormalTok{))}
+\NormalTok{scale\_2  }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"s2\_"}\NormalTok{))}
+
+\CommentTok{\# Compute Cronbach\textquotesingle{}s Alpha}
+\FunctionTok{alpha}\NormalTok{(scale\_1)  }\CommentTok{\# For Factor 1}
+\FunctionTok{alpha}\NormalTok{(scale\_2)  }\CommentTok{\# For Factor 2}
 \end{Highlighting}
 \end{Shaded}
 
