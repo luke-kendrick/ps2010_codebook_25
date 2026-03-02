@@ -125,3 +125,10 @@ exercise-three
 exercise-four
 exercise-five
 exercise-six
+workshop-16-correlations
+exercise-one
+exercise-two-1
+exercise-three-1
+exercise-four-1
+exercise-five-1
+exercise-six-1

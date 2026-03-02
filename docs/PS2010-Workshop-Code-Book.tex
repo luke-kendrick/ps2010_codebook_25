@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2026-02-12}
+\date{2026-03-02}
 
 \begin{document}
 \maketitle
@@ -4077,6 +4077,222 @@ You have reached the end of the workshop
 \CommentTok{\# Compute Cronbach\textquotesingle{}s Alpha}
 \FunctionTok{alpha}\NormalTok{(scale\_1)  }\CommentTok{\# For Factor 1}
 \FunctionTok{alpha}\NormalTok{(scale\_2)  }\CommentTok{\# For Factor 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Well Done.
+You have reached the end of the workshop
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Workshop 16: Correlations}\label{workshop-16-correlations}
+
+\section{Exercise One}\label{exercise-one}
+
+\textbf{Packages and Import Data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Before doing anything, need to make sure the right packages are installed and open. We will use all of these......}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(correlation)}
+\FunctionTok{library}\NormalTok{(gridExtra)}
+\FunctionTok{library}\NormalTok{(ppcor)}
+\FunctionTok{library}\NormalTok{(cocor)}
+
+\CommentTok{\# Remember you can use install.packages("NULL") to install.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Now get R to open our dataset}
+
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"WS\_data\_R\_optimism.csv"}\NormalTok{)}
+
+\CommentTok{\# To check the data have opened ok, you can view the data...}
+
+\FunctionTok{view}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Two}\label{exercise-two-1}
+
+\textbf{Prepare Data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Next, we need to tell R which variables are continuous (as.numeric) and which are categorical (as.factor).}
+
+\CommentTok{\# You can check the names of the variables with this...}
+
+\FunctionTok{names}\NormalTok{(mydata)}
+
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{p\_num }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{p\_num)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{optimism }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{optimism)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{positive\_SC }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{positive\_SC)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{negative\_SC }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{negative\_SC)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{age\_years }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{age\_years)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{extra\_curr }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{extra\_curr)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{reading\_age }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{reading\_age)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Descriptive Statistics}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Before getting into correlations, we might want a summary of our variables. For the continuous variables, we get descriptives. For the categorical/binary variables, we get frequencies.}
+
+\FunctionTok{summary}\NormalTok{(mydata)}
+
+\CommentTok{\# If we want to see the descriptives split for different groups, for example, we want to see the descriptives for optimism for extracurricular activities status separately..}
+
+\NormalTok{descriptives\_bygroup }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# Tell R which data set to use.  \%\textgreater{}\% means "and then" so tells R to move on and do something else}
+  \FunctionTok{group\_by}\NormalTok{(extra\_curr) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# group\_by is telling R to split the data file {-} put the variable to split by in brackets}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_optimism =} \FunctionTok{mean}\NormalTok{(optimism), }\AttributeTok{sd\_optimism =} \FunctionTok{sd}\NormalTok{(optimism)) }\CommentTok{\# Ask for the mean and standard deviation. statistic\_calculated = statistic(variable)}
+
+\CommentTok{\# You then need R to "print" {-} or display {-} the calculated descriptives in the console window.}
+
+\FunctionTok{print}\NormalTok{(descriptives\_bygroup)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Three}\label{exercise-three-1}
+
+\textbf{Run and interpret Pearson's correlations (zero order correlations)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Now we can look at the correlations between these four continuous variables {-} but we want to mainly focus on the correlations with optimism {-} our main variable of interest.}
+
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(optimism, positive\_SC, negative\_SC, age\_years) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{correlation}\NormalTok{(}\AttributeTok{p\_adjust =} \StringTok{"none"}\NormalTok{)}
+
+\CommentTok{\# In addition to giving you the r and p values, it gives the N, so check that this is correct. To write up the correlation, remember that df = N{-}2.}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Four}\label{exercise-four-1}
+
+\textbf{Creating scatterplots with lines of best fit}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# First, let\textquotesingle{}s graph the correlations between "optimism" with life, and the three other continuous variables. You won\textquotesingle{}t see them until after you make them and then ask R to display them. We will make four scatterplots...}
+
+\CommentTok{\# Optimism and positive self compassion}
+
+\NormalTok{plot1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ positive\_SC, }\AttributeTok{y =}\NormalTok{ optimism)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\# Optimism and negative self compassion}
+
+\NormalTok{plot2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ negative\_SC, }\AttributeTok{y =}\NormalTok{ optimism)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\# Optimism and age in years}
+
+\NormalTok{plot3 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ age\_years, }\AttributeTok{y =}\NormalTok{ optimism)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\# To see what the plots look like, we need to arrange them in the "Plot" window. Make sure "gridextra" is ticked in the "Packages" window}
+
+\FunctionTok{grid.arrange}\NormalTok{(plot1, plot2, plot3, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)  }
+
+\CommentTok{\# ncol = 3 tells R to put three next to each other}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Five}\label{exercise-five-1}
+
+\textbf{Run and interpret partial correlations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Next, let\textquotesingle{}s look at partial correlations, so the three main correlations of interest we just ran, but now controlling for reading age.}
+
+\CommentTok{\# You need to have one set of code for each partial correlation, and make sure "ppcor" is ticked in the "Packages" window.}
+
+\FunctionTok{pcor.test}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{optimism, mydata}\SpecialCharTok{$}\NormalTok{positive\_SC,}
+\NormalTok{          mydata}\SpecialCharTok{$}\NormalTok{reading\_age,}
+          \AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+
+\FunctionTok{pcor.test}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{optimism, mydata}\SpecialCharTok{$}\NormalTok{negative\_SC,}
+\NormalTok{          mydata}\SpecialCharTok{$}\NormalTok{reading\_age,}
+          \AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+
+\FunctionTok{pcor.test}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{optimism, mydata}\SpecialCharTok{$}\NormalTok{age\_years,}
+\NormalTok{          mydata}\SpecialCharTok{$}\NormalTok{reading\_age,}
+          \AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Six}\label{exercise-six-1}
+
+\textbf{Statistically comparing correlations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Final thing is comparing correlations across different groups. For example, is the correlation between satisfaction with life and negative life experiences different when comparing people who are single or in a relationship?}
+
+\CommentTok{\# First, we need to tell R which subgroups within our dataset we want to look at {-} so identify 0 and 1 from the "relationship" variable, and name each one.}
+
+\NormalTok{None }\OtherTok{\textless{}{-}}\NormalTok{ mydata[mydata}\SpecialCharTok{$}\NormalTok{extra\_curr }\SpecialCharTok{==} \StringTok{"0"}\NormalTok{, ]}
+\NormalTok{Activities }\OtherTok{\textless{}{-}}\NormalTok{ mydata[mydata}\SpecialCharTok{$}\NormalTok{extra\_curr }\SpecialCharTok{==} \StringTok{"1"}\NormalTok{, ]}
+
+\CommentTok{\# Now we run the two correlations {-} we need to tell R first which subgroup to use from the naming we just did, and which continuous variable to correlate.}
+
+\FunctionTok{cor.test}\NormalTok{(None}\SpecialCharTok{$}\NormalTok{optimism, None}\SpecialCharTok{$}\NormalTok{positive\_SC,}
+         \AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\FunctionTok{cor.test}\NormalTok{(Activities}\SpecialCharTok{$}\NormalTok{optimism, Activities}\SpecialCharTok{$}\NormalTok{positive\_SC,}
+         \AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+
+\CommentTok{\# To compare the correlations statistically, we need the N and the r for each group. The r value is the final value in the output we just created {-} the final line, under corr.}
+\CommentTok{\# To get the N for each group, we ran the "summary" earlier, but you can do it again to save scrolling. }
+
+\FunctionTok{summary}\NormalTok{(mydata)}
+
+\CommentTok{\# Now we can statistically compare our r values. Make a note of which group you consider to be "1" and which is "2". For this, it will be 1 is single and 2 is in a relationship.}
+\CommentTok{\# First, make sure "cocor" is ticked in the "Packages" tab.}
+\CommentTok{\# r1 is the first r{-}value, in this case 0.2009678}
+\CommentTok{\# r2 is the second r{-}value, in this case 0.6345603}
+\CommentTok{\# n1 is the first sample size, in this case 73}
+\CommentTok{\# n2 is the second sample size, in this case 77}
+\CommentTok{\# the code looks like this, so just replace the values as needed... cocor.indep.groups(r1, r2, n1, n2)}
+
+\FunctionTok{cocor.indep.groups}\NormalTok{(}\FloatTok{0.2009678}\NormalTok{, }\FloatTok{0.6345603}\NormalTok{, }\DecValTok{73}\NormalTok{, }\DecValTok{77}\NormalTok{)}
+
+\CommentTok{\# Final thing to do {-} graph these two correlations on the same plot to aid interpretation.}
+
+\NormalTok{plot\_cc }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ positive\_SC, }\AttributeTok{y =}\NormalTok{ optimism, }\AttributeTok{colour =}\NormalTok{ extra\_curr)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{shape =}\NormalTok{ extra\_curr)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{linetype =}\NormalTok{ extra\_curr), }\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Positive self compassion vs Optimism by Extra curricular activities"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Positive self compassion"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Optimism"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"0"} \OtherTok{=} \StringTok{"grey"}\NormalTok{, }\StringTok{"1"} \OtherTok{=} \StringTok{"black "}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_linetype\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"0"} \OtherTok{=} \StringTok{"solid"}\NormalTok{, }\StringTok{"1"} \OtherTok{=} \StringTok{"dashed"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_shape\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"0"} \OtherTok{=} \DecValTok{16}\NormalTok{, }\StringTok{"1"} \OtherTok{=} \DecValTok{3}\NormalTok{))}
+
+                     
+\FunctionTok{print}\NormalTok{(plot\_cc)}
+
+\CommentTok{\# WORKSHOP FINISHED {-} YAY!!!}
 \end{Highlighting}
 \end{Shaded}
 
