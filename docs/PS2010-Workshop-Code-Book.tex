@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2026-03-02}
+\date{2026-03-08}
 
 \begin{document}
 \maketitle
@@ -4293,6 +4293,193 @@ You have reached the end of the workshop
 \FunctionTok{print}\NormalTok{(plot\_cc)}
 
 \CommentTok{\# WORKSHOP FINISHED {-} YAY!!!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Well Done.
+You have reached the end of the workshop
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Workshop 17: Multiple Regression with Continuous Variables}\label{workshop-17-multiple-regression-with-continuous-variables}
+
+\section{Exercise One}\label{exercise-one-1}
+
+\textbf{Packages and Import Data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Before doing any analyses, you need to get everything set up and ready...}
+
+\CommentTok{\# Set the working directory {-}WD{-} so R knows where the data lives. Do this by going Session \textgreater{} Set working directory \textgreater{} Choose directory}
+
+\CommentTok{\# You can check the working directory...}
+
+\FunctionTok{getwd}\NormalTok{()}
+
+\CommentTok{\#Before doing anything, need to make sure the right packages are installed and open. We will use all of these......}
+
+\FunctionTok{install.packages}\NormalTok{(tidyverse)}
+\FunctionTok{install.packages}\NormalTok{(correlation)}
+\FunctionTok{install.packages}\NormalTok{(gridExtra)}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(correlation)}
+\FunctionTok{library}\NormalTok{(gridExtra)}
+
+\CommentTok{\# Once you have done this, you should see them ticked in the "Packages" list {-} you can also manually tick the boxes.}
+\CommentTok{\# If you need to install any of these, the code is install.packages("name of package")}
+\CommentTok{\# Make sure you can then see it in the "Packages" list, and call it using library("name of package") or just tick it in the "Packages" list}
+
+\CommentTok{\# Now get R to open our dataset}
+
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"WS\_data\_R\_optimism.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Two}\label{exercise-two-2}
+
+\textbf{Prepare Data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# To check the data have opened ok, you can view the data...}
+
+\FunctionTok{view}\NormalTok{(mydata)}
+
+\CommentTok{\# You can also check the number of participants (obs) and the number of variables in the "Environment" tab.}
+
+\CommentTok{\# Next, we need to tell R which variables are continuous (as.numeric) and which are categorical (as.factor).}
+
+\CommentTok{\# You can check the names of the variables with this...}
+
+\FunctionTok{names}\NormalTok{(mydata)}
+
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{p\_num }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{p\_num)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{optimism }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{optimism)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{positive\_SC }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{positive\_SC)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{negative\_SC }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{negative\_SC)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{age\_years }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{age\_years)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{extra\_curr }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{extra\_curr)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{reading\_age }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{reading\_age)}
+
+\CommentTok{\# Before getting into correlations, we might want a summary of our variables. For the continuous variables, we get descriptives. For the categorical/binary variables, we get frequencies.}
+
+\FunctionTok{summary}\NormalTok{(mydata)}
+
+\CommentTok{\# We should run the zero order correlations for all continuous variables, the outcome variable and the predictors.}
+
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(optimism, positive\_SC, negative\_SC, age\_years) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{correlation}\NormalTok{(}\AttributeTok{p\_adjust =} \StringTok{"none"}\NormalTok{)}
+
+\CommentTok{\# In addition to giving you the r and p values, it gives the N, so check that this is correct. To write up the correlation, remember that df = N{-}2.}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Three}\label{exercise-three-2}
+
+\textbf{Run, Interpret, and Graph the Regression}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Now, let\textquotesingle{}s run a multiple regression.}
+\CommentTok{\# We have SWL as the outcome variable that we want to predict}
+\CommentTok{\# Then the three wellbeing measures and the number of negative life experiences giving us four continuous predictor variable.}
+
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(optimism }\SpecialCharTok{\textasciitilde{}}\NormalTok{ positive\_SC }\SpecialCharTok{+}\NormalTok{ negative\_SC }\SpecialCharTok{+}\NormalTok{ age\_years, }\AttributeTok{data =}\NormalTok{ mydata)}
+\FunctionTok{summary}\NormalTok{(model)}
+
+\CommentTok{\# We then want to create scatterplots to graphically represent any significant predictors (so three)}
+
+\CommentTok{\# Optimism and positive self compassion}
+
+\NormalTok{plot1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ positive\_SC, }\AttributeTok{y =}\NormalTok{ optimism)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\# Optimism and negative self compassion}
+
+\NormalTok{plot2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ negative\_SC, }\AttributeTok{y =}\NormalTok{ optimism)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\# Optimism and age in years}
+
+\NormalTok{plot3 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ age\_years, }\AttributeTok{y =}\NormalTok{ optimism)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\# To see what the plots look like, we need to arrange them in the "Plot" window. Make sure "gridextra" is ticked in the "Packages" window}
+
+\FunctionTok{grid.arrange}\NormalTok{(plot1, plot2, plot3, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# ncol = 3 tells R to put two next to each other, nrow = 1 tells R to put one above the other}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exercise Four}\label{exercise-four-2}
+
+\textbf{Hierarchical Regression}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Now, let\textquotesingle{}s move on to hierarchical regression {-} exactly what we just did, but adding years of education as a control variable.}
+
+\CommentTok{\# First, let\textquotesingle{}s see if the control variable is significant by building model 1. Make sure it is called "model 1" and you need to run the summary to see the output.}
+
+\NormalTok{model1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(optimism }\SpecialCharTok{\textasciitilde{}}\NormalTok{ reading\_age, }\AttributeTok{data =}\NormalTok{ mydata)}
+\FunctionTok{summary}\NormalTok{(model1)}
+
+\CommentTok{\# Next, build our final model that has all the variables (control and predictor variables). This is "model 2", and again, use the summary to see the output.}
+
+\NormalTok{model2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(optimism }\SpecialCharTok{\textasciitilde{}}\NormalTok{ reading\_age }\SpecialCharTok{+}\NormalTok{ positive\_SC }\SpecialCharTok{+}\NormalTok{ negative\_SC }\SpecialCharTok{+}\NormalTok{ age\_years, }\AttributeTok{data =}\NormalTok{ mydata)}
+\FunctionTok{summary}\NormalTok{(model2)}
+
+\CommentTok{\# Finally, we want to see if adding the predictor variables is significantly "better" than the control variable alone, this has two parts.}
+
+\CommentTok{\# First {-} how much does the variance explained (adjusted R sq) increase?}
+
+\NormalTok{r2\_control }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(model1)}\SpecialCharTok{$}\NormalTok{adj.r.squared  }\CommentTok{\# Adj Rsq of control model}
+\NormalTok{r2\_full }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(model2)}\SpecialCharTok{$}\NormalTok{adj.r.squared     }\CommentTok{\# Adj Rsq of full model}
+
+\NormalTok{r2\_change }\OtherTok{\textless{}{-}}\NormalTok{ r2\_full }\SpecialCharTok{{-}}\NormalTok{ r2\_control  }
+
+\FunctionTok{print}\NormalTok{(r2\_change)  }\CommentTok{\# Print the Adj Rsq change}
+
+\CommentTok{\# Does the model significantly improve?}
+
+\FunctionTok{anova}\NormalTok{(model1,model2)}
+
+\CommentTok{\# We then want to create scatterplots to graphically represent any significant predictors (so two)}
+
+\CommentTok{\# Optimism and positive self compassion}
+
+\NormalTok{plot1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ positive\_SC, }\AttributeTok{y =}\NormalTok{ optimism)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\# Optimism and negative self compassion}
+
+\NormalTok{plot2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ negative\_SC, }\AttributeTok{y =}\NormalTok{ optimism)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+
+\CommentTok{\# To see what the plots look like, we need to arrange them in the "Plot" window. Make sure "gridextra" is ticked in the "Packages" window}
+
+\FunctionTok{grid.arrange}\NormalTok{(plot1, plot2, }\AttributeTok{nrow =} \DecValTok{1}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

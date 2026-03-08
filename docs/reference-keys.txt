@@ -132,3 +132,8 @@ exercise-three-1
 exercise-four-1
 exercise-five-1
 exercise-six-1
+workshop-17-multiple-regression-with-continuous-variables
+exercise-one-1
+exercise-two-2
+exercise-three-2
+exercise-four-2
