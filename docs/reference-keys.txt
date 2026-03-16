@@ -137,3 +137,10 @@ exercise-one-1
 exercise-two-2
 exercise-three-2
 exercise-four-2
+workshop-18-multiple-regression-with-binary-and-interactive-variables
+packages-prepare-and-import-data
+exercise-one-2
+exercise-two-3
+exercise-three-3
+exercise-four-3
+exercise-five-2

@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 12 Workshop 15: Factor Analysis (and Reliability Analysis) | PS2010 Workshop Code Book</title>
+<title>Chapter 15 Workshop 18: Factor Analysis and Cronbach’s Alpha | PS2010 Workshop Code Book</title>
 <meta name="author" content="Luke Kendrick">
 <meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 12 Workshop 15: Factor Analysis (and Reliability Analysis) | PS2010 Workshop Code Book">
+<meta property="og:title" content="Chapter 15 Workshop 18: Factor Analysis and Cronbach’s Alpha | PS2010 Workshop Code Book">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 12 Workshop 15: Factor Analysis (and Reliability Analysis) | PS2010 Workshop Code Book">
+<meta name="twitter:title" content="Chapter 15 Workshop 18: Factor Analysis and Cronbach’s Alpha | PS2010 Workshop Code Book">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -19,9 +19,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="Aims: To practice using factor analysis to determine the number of factors in a data set. To conduct a reliability analysis using Cronbach’s Alpha.  12.1 Exercise 1: Import and Prepare Data # Set...">
-<meta property="og:description" content="Aims: To practice using factor analysis to determine the number of factors in a data set. To conduct a reliability analysis using Cronbach’s Alpha.  12.1 Exercise 1: Import and Prepare Data # Set...">
-<meta name="twitter:description" content="Aims: To practice using factor analysis to determine the number of factors in a data set. To conduct a reliability analysis using Cronbach’s Alpha.  12.1 Exercise 1: Import and Prepare Data # Set...">
+<meta name="description" content="15.1 Packages, Prepare, and Import Data # Set the working directory -WD- so R knows where the data lives. Do this by going Session &gt; Set working directory &gt; Choose directory # You can check the...">
+<meta property="og:description" content="15.1 Packages, Prepare, and Import Data # Set the working directory -WD- so R knows where the data lives. Do this by going Session &gt; Set working directory &gt; Choose directory # You can check the...">
+<meta name="twitter:description" content="15.1 Packages, Prepare, and Import Data # Set the working directory -WD- so R knows where the data lives. Do this by going Session &gt; Set working directory &gt; Choose directory # You can check the...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -55,10 +55,10 @@
 <li><a class="" href="workshop-9-non-parametric-statistics.html"><span class="header-section-number">9</span> Workshop 9: Non-Parametric Statistics</a></li>
 <li><a class="" href="workshop-10-visualising-data.html"><span class="header-section-number">10</span> Workshop 10: Visualising Data</a></li>
 <li><a class="" href="workshop-14-questionnaire-data.html"><span class="header-section-number">11</span> Workshop 14: Questionnaire Data</a></li>
-<li><a class="active" href="workshop-15-factor-analysis-and-reliability-analysis.html"><span class="header-section-number">12</span> Workshop 15: Factor Analysis (and Reliability Analysis)</a></li>
+<li><a class="" href="workshop-15-factor-analysis-and-reliability-analysis.html"><span class="header-section-number">12</span> Workshop 15: Factor Analysis (and Reliability Analysis)</a></li>
 <li><a class="" href="workshop-16-correlations.html"><span class="header-section-number">13</span> Workshop 16: Correlations</a></li>
 <li><a class="" href="workshop-17-multiple-regression-with-continuous-variables.html"><span class="header-section-number">14</span> Workshop 17: Multiple Regression with Continuous Variables</a></li>
-<li><a class="" href="workshop-18-multiple-regression-with-binary-and-interactive-variables.html"><span class="header-section-number">15</span> Workshop 18: Multiple Regression with Binary and Interactive Variables</a></li>
+<li><a class="active" href="workshop-18-factor-analysis-and-cronbachs-alpha.html"><span class="header-section-number">15</span> Workshop 18: Factor Analysis and Cronbach’s Alpha</a></li>
 </ul>
 
         <div class="book-extra">
@@ -66,20 +66,16 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workshop-15-factor-analysis-and-reliability-analysis" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workshop-18-factor-analysis-and-cronbachs-alpha" class="section level1" number="15">
 <h1>
-<span class="header-section-number">12</span> Workshop 15: Factor Analysis (and Reliability Analysis)<a class="anchor" aria-label="anchor" href="#workshop-15-factor-analysis-and-reliability-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15</span> <strong>Workshop 18: Factor Analysis and Cronbach’s Alpha</strong><a class="anchor" aria-label="anchor" href="#workshop-18-factor-analysis-and-cronbachs-alpha"><i class="fas fa-link"></i></a>
 </h1>
-<p><strong>Aims:</strong></p>
-<ul>
-<li>To practice using factor analysis to determine the number of factors in a data set.</li>
-<li>To conduct a reliability analysis using Cronbach’s Alpha.</li>
-</ul>
-<div id="exercise-1-import-and-prepare-data-1" class="section level2" number="12.1">
+<hr>
+<div id="packages-prepare-and-import-data" class="section level2" number="15.1">
 <h2>
-<span class="header-section-number">12.1</span> Exercise 1: Import and Prepare Data<a class="anchor" aria-label="anchor" href="#exercise-1-import-and-prepare-data-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> <strong>Packages, Prepare, and Import Data</strong><a class="anchor" aria-label="anchor" href="#packages-prepare-and-import-data"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set the working directory -WD- so R knows where the data lives. Do this by going Session &gt; Set working directory &gt; Choose directory</span></span>
 <span></span>
 <span><span class="co"># You can check the working directory...</span></span>
@@ -92,14 +88,15 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Import the data</span></span>
-<span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"study_perception.csv"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"study_perception.csv"</span><span class="op">)</span> </span></code></pre></div>
+<hr>
 </div>
-<div id="exercise-two" class="section level2" number="12.2">
+<div id="exercise-one-2" class="section level2" number="15.2">
 <h2>
-<span class="header-section-number">12.2</span> Exercise Two<a class="anchor" aria-label="anchor" href="#exercise-two"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2</span> <strong>Exercise One</strong><a class="anchor" aria-label="anchor" href="#exercise-one-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#### Understanding your data</span></span>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### Exercise 1. Understanding your data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="co">#we can use this to check all of the variables in the file are numeric</span></span>
 <span><span class="co">#any categorical/factor variables would need to be removed.</span></span>
 <span></span>
@@ -111,12 +108,12 @@
 <span><span class="va">corr_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">mydata</span>, use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/view.html">view</a></span><span class="op">(</span><span class="va">corr_matrix</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="exercise-three" class="section level2" number="12.3">
+<div id="exercise-two-3" class="section level2" number="15.3">
 <h2>
-<span class="header-section-number">12.3</span> Exercise Three<a class="anchor" aria-label="anchor" href="#exercise-three"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3</span> <strong>Exercise Two</strong><a class="anchor" aria-label="anchor" href="#exercise-two-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#### Assess the need for factor analysis</span></span>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### Exercise 2. Assess the need for factor analysis</span></span>
 <span><span class="co">### assumptions</span></span>
 <span><span class="co"># Kaiser-Meyer-Olkin (KMO) Test - Measures Sampling Adequacy</span></span>
 <span><span class="va">kmo_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/psych/man/KMO.html">KMO</a></span><span class="op">(</span><span class="va">corr_matrix</span><span class="op">)</span></span>
@@ -126,12 +123,12 @@
 <span><span class="va">bartlett_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/psych/man/cortest.bartlett.html">cortest.bartlett</a></span><span class="op">(</span><span class="va">corr_matrix</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">bartlett_result</span><span class="op">)</span>  <span class="co"># p-value should be &lt; 0.05 for FA to be suitable</span></span></code></pre></div>
 </div>
-<div id="exercise-four" class="section level2" number="12.4">
+<div id="exercise-three-3" class="section level2" number="15.4">
 <h2>
-<span class="header-section-number">12.4</span> Exercise Four<a class="anchor" aria-label="anchor" href="#exercise-four"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4</span> <strong>Exercise Three</strong><a class="anchor" aria-label="anchor" href="#exercise-three-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#### Determine the number of factors.</span></span>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### Exercise 3. Determine the number of factors.</span></span>
 <span><span class="co"># Compute Eigenvalues</span></span>
 <span><span class="va">eigen_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">corr_matrix</span><span class="op">)</span><span class="op">$</span><span class="va">values</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eigen_values</span><span class="op">)</span>  <span class="co"># Kaiser’s criterion: Keep factors with eigenvalues &gt; 1</span></span>
@@ -139,12 +136,12 @@
 <span><span class="co"># Scree Plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/fa.parallel.html">fa.parallel</a></span><span class="op">(</span><span class="va">mydata</span>, fa <span class="op">=</span> <span class="st">"fa"</span>, n.iter <span class="op">=</span> <span class="fl">100</span>, show.legend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="exercise-five" class="section level2" number="12.5">
+<div id="exercise-four-3" class="section level2" number="15.5">
 <h2>
-<span class="header-section-number">12.5</span> Exercise Five<a class="anchor" aria-label="anchor" href="#exercise-five"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.5</span> <strong>Exercise Four</strong><a class="anchor" aria-label="anchor" href="#exercise-four-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">##### Interpretation of factors.</span></span>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##### Exercise 4. Interpretation of factors.</span></span>
 <span><span class="co"># Perform Factor Analysis with Varimax Rotation</span></span>
 <span><span class="va">fa_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/psych/man/fa.html">fa</a></span><span class="op">(</span><span class="va">mydata</span>, nfactors <span class="op">=</span> <span class="fl">2</span>, rotate <span class="op">=</span> <span class="st">"varimax"</span>, fm <span class="op">=</span> <span class="st">"ml"</span><span class="op">)</span>  <span class="co"># Adjust nfactors</span></span>
 <span><span class="co"># Print Factor Loadings (Rotated Component Matrix)</span></span>
@@ -153,12 +150,12 @@
 <span><span class="co"># Visualizing Loadings</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/fa.diagram.html">fa.diagram</a></span><span class="op">(</span><span class="va">fa_result</span><span class="op">)</span>  <span class="co"># Shows factor structure in a diagram</span></span></code></pre></div>
 </div>
-<div id="exercise-six" class="section level2" number="12.6">
+<div id="exercise-five-2" class="section level2" number="15.6">
 <h2>
-<span class="header-section-number">12.6</span> Exercise Six<a class="anchor" aria-label="anchor" href="#exercise-six"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.6</span> <strong>Exercise Five</strong><a class="anchor" aria-label="anchor" href="#exercise-five-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">####  Reliability Analysis</span></span>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### Exercise 5. Reliability Analysis</span></span>
 <span><span class="co"># select items and put them onto a scale.</span></span>
 <span><span class="co"># Group items based on factor loadings</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
@@ -168,25 +165,24 @@
 <span><span class="co"># Compute Cronbach's Alpha</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/alpha.html">alpha</a></span><span class="op">(</span><span class="va">scale_1</span><span class="op">)</span>  <span class="co"># For Factor 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/alpha.html">alpha</a></span><span class="op">(</span><span class="va">scale_2</span><span class="op">)</span>  <span class="co"># For Factor 2</span></span></code></pre></div>
-<hr>
-<p>Well Done.
-You have reached the end of the workshop</p>
-<hr>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># WORKSHOP FINISHED - YAY!!!</span></span></code></pre></div>
+
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="workshop-14-questionnaire-data.html"><span class="header-section-number">11</span> Workshop 14: Questionnaire Data</a></div>
-<div class="next"><a href="workshop-16-correlations.html"><span class="header-section-number">13</span> Workshop 16: Correlations</a></div>
+<div class="prev"><a href="workshop-17-multiple-regression-with-continuous-variables.html"><span class="header-section-number">14</span> Workshop 17: Multiple Regression with Continuous Variables</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#workshop-15-factor-analysis-and-reliability-analysis"><span class="header-section-number">12</span> Workshop 15: Factor Analysis (and Reliability Analysis)</a></li>
-<li><a class="nav-link" href="#exercise-1-import-and-prepare-data-1"><span class="header-section-number">12.1</span> Exercise 1: Import and Prepare Data</a></li>
-<li><a class="nav-link" href="#exercise-two"><span class="header-section-number">12.2</span> Exercise Two</a></li>
-<li><a class="nav-link" href="#exercise-three"><span class="header-section-number">12.3</span> Exercise Three</a></li>
-<li><a class="nav-link" href="#exercise-four"><span class="header-section-number">12.4</span> Exercise Four</a></li>
-<li><a class="nav-link" href="#exercise-five"><span class="header-section-number">12.5</span> Exercise Five</a></li>
-<li><a class="nav-link" href="#exercise-six"><span class="header-section-number">12.6</span> Exercise Six</a></li>
+<li><a class="nav-link" href="#workshop-18-factor-analysis-and-cronbachs-alpha"><span class="header-section-number">15</span> Workshop 18: Factor Analysis and Cronbach’s Alpha</a></li>
+<li><a class="nav-link" href="#packages-prepare-and-import-data"><span class="header-section-number">15.1</span> Packages, Prepare, and Import Data</a></li>
+<li><a class="nav-link" href="#exercise-one-2"><span class="header-section-number">15.2</span> Exercise One</a></li>
+<li><a class="nav-link" href="#exercise-two-3"><span class="header-section-number">15.3</span> Exercise Two</a></li>
+<li><a class="nav-link" href="#exercise-three-3"><span class="header-section-number">15.4</span> Exercise Three</a></li>
+<li><a class="nav-link" href="#exercise-four-3"><span class="header-section-number">15.5</span> Exercise Four</a></li>
+<li><a class="nav-link" href="#exercise-five-2"><span class="header-section-number">15.6</span> Exercise Five</a></li>
 </ul>
 
       <div class="book-extra">
