@@ -157,7 +157,7 @@
 
 \title{PS2010 Workshop Code Book}
 \author{Luke Kendrick}
-\date{2026-03-16}
+\date{2026-03-23}
 
 \begin{document}
 \maketitle
@@ -4683,6 +4683,169 @@ You have reached the end of the workshop
   \FunctionTok{scale\_shape\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"0"} \OtherTok{=} \DecValTok{16}\NormalTok{, }\StringTok{"1"} \OtherTok{=} \DecValTok{3}\NormalTok{))}
 
 \FunctionTok{print}\NormalTok{(plot\_cc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# WORKSHOP FINISHED {-} YAY!!!}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{\texorpdfstring{\textbf{Workshop 19: Multiple Regression: Evaluating Models and Assumptions}}{Workshop 19: Multiple Regression: Evaluating Models and Assumptions}}\label{workshop-19-multiple-regression-evaluating-models-and-assumptions}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{\textbf{Packages, Prepare, and Import Data}}{Packages, Prepare, and Import Data}}\label{packages-prepare-and-import-data-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set the working directory {-}WD{-} so R knows where the data lives. Do this by going Session \textgreater{} Set working directory \textgreater{} Choose directory}
+
+\CommentTok{\# You can check the working directory...}
+
+\FunctionTok{getwd}\NormalTok{()}
+
+\CommentTok{\#Before doing anything, need to make sure the right packages are installed and open. We will use all of these......}
+
+\FunctionTok{install.packages}\NormalTok{(tidyverse)}
+\FunctionTok{install.packages}\NormalTok{(correlation)}
+\FunctionTok{install.packages}\NormalTok{(gridExtra)}
+\FunctionTok{install.packages}\NormalTok{(car)}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(correlation)}
+\FunctionTok{library}\NormalTok{(gridExtra)}
+\FunctionTok{library}\NormalTok{(car)}
+
+\CommentTok{\# Once you have done this, you should see them ticked in the "Packages" list {-} you can also manually tick the boxes.}
+\CommentTok{\# If you need to install any of these, the code is install.packages("name of package")}
+\CommentTok{\# Make sure you can then see it in the "Packages" list, and call it using library("name of package") or just tick it in the "Packages" list}
+
+\CommentTok{\# Now get R to open our dataset}
+
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"WS\_data\_R\_optimism.csv"}\NormalTok{)}
+
+\CommentTok{\# To check the data have opened ok, you can view the data...}
+
+\FunctionTok{view}\NormalTok{(mydata)}
+
+\CommentTok{\# You can also check the number of participants (obs) and the number of variables in the "Environment" tab.}
+
+\CommentTok{\# Next, we need to tell R which variables are continuous (as.numeric) and which are categorical (as.factor).}
+
+\CommentTok{\# You can check the names of the variables with this...}
+
+\FunctionTok{names}\NormalTok{(mydata)}
+
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{p\_num }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{p\_num)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{optimism }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{optimism)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{positive\_SC }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{positive\_SC)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{negative\_SC }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{negative\_SC)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{age\_years }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{age\_years)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{extra\_curr }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{extra\_curr)}
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{reading\_age }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{reading\_age)}
+
+\CommentTok{\# Before getting into correlations, we might want a summary of our variables. For the continuous variables, we get descriptives. For the categorical/binary variables, we get frequencies.}
+
+\FunctionTok{summary}\NormalTok{(mydata)}
+
+\CommentTok{\# We should run the zero order correlations for all continuous variables, the outcome variable and the predictors.}
+
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(optimism, positive\_SC, negative\_SC) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{correlation}\NormalTok{(}\AttributeTok{p\_adjust =} \StringTok{"none"}\NormalTok{)}
+
+\CommentTok{\# In addition to giving you the r and p values, it gives the N, so check that this is correct. To write up the correlation, remember that df = N{-}2.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{\textbf{Exercise One}}{Exercise One}}\label{exercise-one-3}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# EXERCISE ONE {-} running the multiple regression. We will not report it yet, but some of the assumptions need the "model" for its calculations.}
+
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(optimism }\SpecialCharTok{\textasciitilde{}}\NormalTok{ positive\_SC }\SpecialCharTok{+}\NormalTok{ negative\_SC }\SpecialCharTok{+}\NormalTok{ extra\_curr, }\AttributeTok{data =}\NormalTok{ mydata)}
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{\textbf{Exercise Two}}{Exercise Two}}\label{exercise-two-4}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# EXERCISE TWO {-} Looking at multicolinearity in three different ways}
+
+\CommentTok{\# Multicolinearity, looking at r values across all predictor variabless.}
+
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(positive\_SC, negative\_SC) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{correlation}\NormalTok{(}\AttributeTok{p\_adjust =} \StringTok{"none"}\NormalTok{)}
+
+\CommentTok{\# Multicolinearity, calculate VIF.}
+
+\NormalTok{vif\_values }\OtherTok{\textless{}{-}} \FunctionTok{vif}\NormalTok{(model)}
+\FunctionTok{print}\NormalTok{(vif\_values)}
+
+\CommentTok{\# Multicolinearity, calculate tolerance. This is, essentially 1 {-} the R2 (so variance explained).}
+
+\NormalTok{tolerance\_value }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{r.squared}
+\FunctionTok{print}\NormalTok{(tolerance\_value)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{\textbf{Exercise Three}}{Exercise Three}}\label{exercise-three-4}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# EXERCISE THREE {-} Normal distribution of residuals.}
+
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ model}\SpecialCharTok{$}\NormalTok{residuals)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Histogram of Residuals"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Residuals"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{\textbf{Exercise Four}}{Exercise Four}}\label{exercise-four-4}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# EXERCISE FOUR {-} Homoscedasticity.}
+
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ model}\SpecialCharTok{$}\NormalTok{fitted.values, }\AttributeTok{y =}\NormalTok{ model}\SpecialCharTok{$}\NormalTok{residuals)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Residuals vs Fitted Values"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Fitted Values"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Residuals"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{\textbf{Exercise Five}}{Exercise Five}}\label{exercise-five-3}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# EXERCISE FIVE{-}  Outliers.}
+
+\CommentTok{\# Identify outliers using standardized residuals}
+\NormalTok{standardized\_residuals }\OtherTok{\textless{}{-}} \FunctionTok{rstandard}\NormalTok{(model)}
+\CommentTok{\# Print standardized residuals}
+\FunctionTok{print}\NormalTok{(standardized\_residuals)}
+
+\CommentTok{\# Determine the number of outliers (absolute value greater than 2)}
+\NormalTok{outliers }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{abs}\NormalTok{(standardized\_residuals) }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(outliers)}
+
+\CommentTok{\# Calculate the percentage of outliers}
+\NormalTok{percentage\_outliers }\OtherTok{\textless{}{-}}\NormalTok{ (outliers }\SpecialCharTok{/} \FunctionTok{nrow}\NormalTok{(mydata)) }\SpecialCharTok{*} \DecValTok{100}
+\FunctionTok{print}\NormalTok{(percentage\_outliers)}
 \end{Highlighting}
 \end{Shaded}
 

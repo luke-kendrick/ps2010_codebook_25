@@ -144,3 +144,10 @@ exercise-two-3
 exercise-three-3
 exercise-four-3
 exercise-five-2
+workshop-19-multiple-regression-evaluating-models-and-assumptions
+packages-prepare-and-import-data-1
+exercise-one-3
+exercise-two-4
+exercise-three-4
+exercise-four-4
+exercise-five-3

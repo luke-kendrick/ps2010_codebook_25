@@ -1,0 +1,149 @@
+# **Workshop 19: Multiple Regression: Evaluating Models and Assumptions**
+
+------------------------------------------------------------------------
+
+## **Packages, Prepare, and Import Data**
+
+```{r, eval = FALSE}
+# Set the working directory -WD- so R knows where the data lives. Do this by going Session > Set working directory > Choose directory
+
+# You can check the working directory...
+
+getwd()
+
+#Before doing anything, need to make sure the right packages are installed and open. We will use all of these......
+
+install.packages(tidyverse)
+install.packages(correlation)
+install.packages(gridExtra)
+install.packages(car)
+
+library(tidyverse)
+library(correlation)
+library(gridExtra)
+library(car)
+
+# Once you have done this, you should see them ticked in the "Packages" list - you can also manually tick the boxes.
+# If you need to install any of these, the code is install.packages("name of package")
+# Make sure you can then see it in the "Packages" list, and call it using library("name of package") or just tick it in the "Packages" list
+
+# Now get R to open our dataset
+
+mydata <- read_csv("WS_data_R_optimism.csv")
+
+# To check the data have opened ok, you can view the data...
+
+view(mydata)
+
+# You can also check the number of participants (obs) and the number of variables in the "Environment" tab.
+
+# Next, we need to tell R which variables are continuous (as.numeric) and which are categorical (as.factor).
+
+# You can check the names of the variables with this...
+
+names(mydata)
+
+mydata$p_num <- as.numeric(mydata$p_num)
+mydata$optimism <- as.numeric(mydata$optimism)
+mydata$positive_SC <- as.numeric(mydata$positive_SC)
+mydata$negative_SC <- as.numeric(mydata$negative_SC)
+mydata$age_years <- as.numeric(mydata$age_years)
+mydata$extra_curr <- as.factor(mydata$extra_curr)
+mydata$reading_age <- as.numeric(mydata$reading_age)
+
+# Before getting into correlations, we might want a summary of our variables. For the continuous variables, we get descriptives. For the categorical/binary variables, we get frequencies.
+
+summary(mydata)
+
+# We should run the zero order correlations for all continuous variables, the outcome variable and the predictors.
+
+mydata %>%
+  dplyr::select(optimism, positive_SC, negative_SC) %>%
+  correlation(p_adjust = "none")
+
+# In addition to giving you the r and p values, it gives the N, so check that this is correct. To write up the correlation, remember that df = N-2.
+
+```
+
+------------------------------------------------------------------------
+
+## **Exercise One**
+
+```{r, eval = FALSE}
+# EXERCISE ONE - running the multiple regression. We will not report it yet, but some of the assumptions need the "model" for its calculations.
+
+model <- lm(optimism ~ positive_SC + negative_SC + extra_curr, data = mydata)
+summary(model)
+```
+
+## **Exercise Two**
+
+```{r, eval = FALSE}
+# EXERCISE TWO - Looking at multicolinearity in three different ways
+
+# Multicolinearity, looking at r values across all predictor variabless.
+
+mydata %>%
+  dplyr::select(positive_SC, negative_SC) %>%
+  correlation(p_adjust = "none")
+
+# Multicolinearity, calculate VIF.
+
+vif_values <- vif(model)
+print(vif_values)
+
+# Multicolinearity, calculate tolerance. This is, essentially 1 - the R2 (so variance explained).
+
+tolerance_value <- 1 - summary(model)$r.squared
+print(tolerance_value)
+```
+
+## **Exercise Three**
+
+```{r, eval = FALSE}
+# EXERCISE THREE - Normal distribution of residuals.
+
+ggplot(mydata, aes(x = model$residuals)) +
+  geom_histogram(binwidth = 0.5, color = "black", fill = "white") +
+  labs(title = "Histogram of Residuals",
+       x = "Residuals",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+## **Exercise Four**
+
+```{r, eval = FALSE}
+# EXERCISE FOUR - Homoscedasticity.
+
+ggplot(mydata, aes(x = model$fitted.values, y = model$residuals)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(title = "Residuals vs Fitted Values",
+       x = "Fitted Values",
+       y = "Residuals") +
+  theme_minimal()
+```
+
+## **Exercise Five**
+
+```{r, eval = FALSE}
+# EXERCISE FIVE-  Outliers.
+
+# Identify outliers using standardized residuals
+standardized_residuals <- rstandard(model)
+# Print standardized residuals
+print(standardized_residuals)
+
+# Determine the number of outliers (absolute value greater than 2)
+outliers <- sum(abs(standardized_residuals) > 2)
+print(outliers)
+
+# Calculate the percentage of outliers
+percentage_outliers <- (outliers / nrow(mydata)) * 100
+print(percentage_outliers)
+```
+
+```{r, eval = FALSE}
+# WORKSHOP FINISHED - YAY!!!
+```
