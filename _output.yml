@@ -1,7 +1,7 @@
 bookdown::bs4_book:
   css: style.css  # Ensures custom styling is applied
   theme:
-    primary: "#096B72"  # Custom theme color for Bookdown HTML output
+    primary: "#6b077a"  # Custom theme color for Bookdown HTML output
 
 bookdown::pdf_book:
   includes:
